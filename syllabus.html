@@ -23,6 +23,7 @@
       <a href="index.html#lectures">章节与课件</a>
       <a href="index.html#assessment">考核</a>
       <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
       <a href="syllabus.html">课程大纲</a>
       <a class="cta" href="lecture-01.html">第一章课件</a>
     </div>
@@ -65,8 +66,8 @@
 <tr><td>上课地点 Venue</td><td class="lec">四方楼南 106</td></tr>
 <tr><td>授课语言 Language</td><td class="lec">中英双语：课件与阅读材料以英文为主，讲授与讨论中英结合</td></tr>
 <tr><td>先修要求 Prerequisites</td><td class="lec">至少掌握一门编程语言（建议 Python）；线性代数、微积分、概率论与数理统计基础；对数据分析有基本兴趣</td></tr>
-<tr><td>教学平台 Platform</td><td class="lec">课程云盘（讲义、数据、代码模板）；Python 环境；可用 LLM 助手（须按第 8 节声明使用）</td></tr>
-<tr><td>考核方式 Assessment</td><td class="lec">课堂展示 10% + 项目 90%（4 个研究项目选做 3 个，每项 30%；组队不超过 2 人）</td></tr>
+<tr><td>教学平台 Platform</td><td class="lec">课程云盘（讲义、数据、代码模板）；Python 环境；可用 LLM 助手（须按第 10 节课程政策与附录《AI 使用声明》执行）</td></tr>
+<tr><td>考核方式 Assessment</td><td class="lec">出勤 10% + 项目 90%：从四个研究项目中任选 1 项完成（4 选 1）；项目更加开放并鼓励结合 AI 工具；组队不超过 2 人</td></tr>
 </tbody></table></div>
 
     <h3 id="s-5LqM44CB6K56">二、课程简介 Course Description</h3>
@@ -92,15 +93,15 @@
 <tr><td class="week">第 3 周</td><td class="lec">L1 Introduction</td><td>大数据分析全景与 AI 版图：DIKW 与 5V、分析层次（描述/诊断/预测/规范 + 生成式/代理式）、数据管道与现代数据栈、机器学习 1-2-3；2022–2026 AI 大事记（GPT-5、Claude Opus 4.5、Gemini 3、DeepSeek/Qwen 开源前沿）、推理模型与测试时计算、Agentic AI 与 MCP、RAG、算力与能耗、评测危机与幻觉、监管（EU AI Act、中国 AIGC 标识）、课程与 AI 使用规范</td><td>Stanford AI Index 2026；课程 L1（2026 版）讲义；作业 1 布置</td></tr>
 <tr><td class="week">第 4 周</td><td class="lec">L2 Data Sourcing</td><td>数据获取基础：数据类型的区分（数值/类别、截面/时序/面板）、结构化与非结构化、数据来源（内部专有、开放数据、第三方 DaaS、API、爬虫）、一手数据（问卷、访谈、实验、A/B 测试）；2026 更新：数据契约与数据产品、开放表格式（Iceberg/Delta）、向量数据库与嵌入、数据合规（PIPL/GDPR/版权）、合成数据与标注质量、爬虫法律边界</td><td>L2 讲义；Kaggle Learn；作业 1 提交</td></tr>
 <tr><td class="week">第 5 周</td><td class="lec">L3 Data Preparation ＋ L4 Data Description &amp; Visualization（双讲）</td><td>数据准备：5 项数据质量特征、append/merge/join 与连接类型、清洗五步法、缺失机制（MCAR/MAR/MNAR）与插补、异常值检测；可复现预处理管道。数据描述与可视化：元数据标准、描述统计（集中/离散/分布/相关）、图型选择与图表语法、Power BI / Tableau 交互看板；2026 更新：AI 辅助图表（text-to-chart）与误导性图表识别、可访问性与叙事可视化</td><td>McKinney Ch.7–8；Rahlf (2019)；Power BI / Tableau Public 实操</td></tr>
-<tr><td class="week">第 6 周</td><td class="lec">L5 Introduction to Machine Learning</td><td>机器学习基础：监督/无监督/自监督/强化学习；过拟合与正则化、偏差-方差、训练/验证/测试与交叉验证、分类与回归评估指标；2026 更新：AutoML 与基础模型微调的取舍、可解释性（SHAP/PDP）、MLOps 与模型卡、数据泄漏检查清单、成本感知建模</td><td>Géron (2022) Ch.1–3；作业 2 布置</td></tr>
+<tr><td class="week">第 6 周</td><td class="lec">L5 Introduction to Machine Learning</td><td>机器学习基础：监督/无监督/自监督/强化学习；过拟合与正则化、偏差-方差、训练/验证/测试与交叉验证、分类与回归评估指标；2026 更新：AutoML 与基础模型微调的取舍、可解释性（SHAP/PDP）、MLOps 与模型卡、数据泄漏检查清单、成本感知建模</td><td>Géron (2022) Ch.1–3；项目选题说明（一页：问题/数据/方法）</td></tr>
 <tr><td class="week">第 7 周</td><td class="lec">L6 Logistic Regression and Linear Classifier</td><td>线性回归与逻辑回归的数学基础：最小二乘与正规方程、期望损失与经验损失、极大似然估计（似然/对数似然/条件似然、负对数似然损失）、线性分类与 step 函数、0-1 损失的困难（NP-hard）、sigmoid 及其性质、逻辑回归＝带 sigmoid 的 MLE、无闭式解与梯度下降、正则化（LASSO/Ridge/Elastic Net）与概率校准</td><td>Bishop PRML Ch.4；ESL Ch.3–4；手写梯度下降实验</td></tr>
 <tr><td class="week">第 8 周</td><td class="lec">L7 Supervised Learning</td><td>监督学习算法：线性 SVM 与核方法、KNN 与参数选择、CART 决策树、随机森林与梯度提升（XGBoost/LightGBM/CatBoost）、类别不平衡处理、超参调优（随机/贝叶斯搜索）；2026 更新：表格数据仍以 GBDT 为强基线、嵌入+分类头与小模型微调的对比、SHAP 合规审计、AutoML 的生产取舍</td><td>ESL Ch.7–10/15；scikit-learn 文档；案例：投资机会增长、贫困预测</td></tr>
-<tr><td class="week">第 9 周</td><td class="lec">L8 Unsupervised Learning</td><td>无监督学习：主成分分析（特征值分解、方差解释、图像处理）、因子分析与 Fama–French 三因子、聚类（k-means、层次、DBSCAN、高斯混合）与评价指标、异常检测与关联规则；2026 更新：UMAP/t-SNE 嵌入可视化、向量检索与近似最近邻、BERTopic 主题建模、自监督与对比学习</td><td>ESL Ch.14；scikit-learn 2.5；作业 2 提交</td></tr>
+<tr><td class="week">第 9 周</td><td class="lec">L8 Unsupervised Learning</td><td>无监督学习：主成分分析（特征值分解、方差解释、图像处理）、因子分析与 Fama–French 三因子、聚类（k-means、层次、DBSCAN、高斯混合）与评价指标、异常检测与关联规则；2026 更新：UMAP/t-SNE 嵌入可视化、向量检索与近似最近邻、BERTopic 主题建模、自监督与对比学习</td><td>ESL Ch.14；scikit-learn 2.5；项目数据与探索阶段检查</td></tr>
 <tr><td class="week">第 10 周</td><td class="lec">L9 Deep Learning</td><td>深度学习：神经元与多层网络、激活函数、损失与反向传播、优化器与正则化、CNN 与计算机视觉、RNN/LSTM 与 Transformer（自注意力）、预训练-微调与表示学习、训练工程（混合精度、分布式、显存优化）、高效微调（LoRA/QLoRA）、图神经网络简介；2026 更新：基础模型作为通用骨干、端侧小模型与量化、评测与安全对齐、能耗与成本</td><td>Goodfellow《Deep Learning》；Alammar &amp; Grootendorst (2024)；PyTorch 实操</td></tr>
-<tr><td class="week">第 11 周</td><td class="lec">L10 Text Data &amp; NLP ＋ L11 Introduction to ChatGPT（双讲）</td><td>文本与语言：文本作为数据（宏观不确定性、情绪、财报文本）、NLP 三阶段（符号→统计→神经）、预处理与表示（TF-IDF、词向量、上下文嵌入）、分类/情感/主题/NER/摘要任务与评价。大语言模型：GPT 谱系与 ChatGPT、预训练→SFT→RLHF/DPO→RLVR、推理模型与测试时计算、提示工程与结构化输出、工具调用与 Agent（MCP）、RAG、幻觉与评测护栏、成本与合规、AI 伦理与内容标识</td><td>Jurafsky &amp; Martin SLP3；Hapke et al. (2019)；OpenAI 文档；作业 3 布置</td></tr>
-<tr><td class="week">第 12 周</td><td class="lec">L12 Causal Inference</td><td>因果推断：相关与因果（辛普森悖论、混杂）、潜在结果框架与 ATE/ATT/LATE、随机实验与 A/B 测试（功效、序贯检验）、观察数据识别策略（匹配与倾向得分、双重差分 DID、工具变量 IV、断点回归 RDD）、不依从与 LATE、DAG 与后门准则、异质性处理效应；2026 更新：双重机器学习（Double ML）、因果森林、增量测量（incrementality）、高风险决策的合规要求</td><td>Pearl (2009)；Angrist &amp; Pischke；Cunningham《The Mixtape》；作业 3 提交</td></tr>
+<tr><td class="week">第 11 周</td><td class="lec">L10 Text Data &amp; NLP ＋ L11 Introduction to ChatGPT（双讲）</td><td>文本与语言：文本作为数据（宏观不确定性、情绪、财报文本）、NLP 三阶段（符号→统计→神经）、预处理与表示（TF-IDF、词向量、上下文嵌入）、分类/情感/主题/NER/摘要任务与评价。大语言模型：GPT 谱系与 ChatGPT、预训练→SFT→RLHF/DPO→RLVR、推理模型与测试时计算、提示工程与结构化输出、工具调用与 Agent（MCP）、RAG、幻觉与评测护栏、成本与合规、AI 伦理与内容标识</td><td>Jurafsky &amp; Martin SLP3；Hapke et al. (2019)；OpenAI 文档；项目方法与 AI 工具使用说明</td></tr>
+<tr><td class="week">第 12 周</td><td class="lec">L12 Causal Inference</td><td>因果推断：相关与因果（辛普森悖论、混杂）、潜在结果框架与 ATE/ATT/LATE、随机实验与 A/B 测试（功效、序贯检验）、观察数据识别策略（匹配与倾向得分、双重差分 DID、工具变量 IV、断点回归 RDD）、不依从与 LATE、DAG 与后门准则、异质性处理效应；2026 更新：双重机器学习（Double ML）、因果森林、增量测量（incrementality）、高风险决策的合规要求</td><td>Pearl (2009)；Angrist &amp; Pischke；Cunningham《The Mixtape》；项目初稿 / 中期汇报</td></tr>
 <tr><td class="week">第 13 周</td><td class="lec">L13 Big Data in Finance</td><td>金融大数据：资产类别与数据类型（固定收益/债券、股票、衍生品：远期/期货/期权、另类投资）、数据来源（Wind/Bloomberg、交易所、财报与公告）、时间序列建模（趋势、ARIMA、GARCH 波动率）、因子模型、文本与情绪分析、信用风险与反欺诈、智能投顾与组合优化；2026 更新：LLM 投研助手与 RAG 财报解析、回测过拟合与 deflated Sharpe、信贷模型治理与可解释性、图神经网络反欺诈</td><td>Hilpisch (2018)；ESL Ch.3；L13 讲义；项目中期检查</td></tr>
-<tr><td class="week">第 14 周</td><td class="lec">L14 International Trade ＋ L15 Marketing（双讲，含项目汇报）</td><td>国际贸易大数据：国别层（CEPII、UN Comtrade）、行业层（BACI、WIOD/WIOT）、企业层（工业企业与海关匹配数据）、引力模型与估计（固定效应、PPML）、贸易网络与全球价值链、贸易政策效应评估；2026 更新：航运与卫星/AIS 数据、供应链韧性预警、跨境电商数据、贸易文本的 LLM 抽取、地缘政治风险指标。市场营销大数据：问卷设计与测量、联合分析（属性/水平/设计/估计）、客户旅程与归因、推荐系统、定价促销、流失预测与 CLV、A/B 与增量实验；2026 更新：生成式营销内容与品牌安全、隐私新政与第三方 cookie 退场、对话式商务、营销组合模型（MMM）与因果结合</td><td>L14/L15 讲义；Palmatier &amp; Sridhar (2017)；项目报告与展示</td></tr>
+<tr><td class="week">第 14 周</td><td class="lec">L14 International Trade ＋ L15 Marketing（双讲，含项目汇报）</td><td>国际贸易大数据：国别层（CEPII、UN Comtrade）、行业层（BACI、WIOD/WIOT）、企业层（工业企业与海关匹配数据）、引力模型与估计（固定效应、PPML）、贸易网络与全球价值链、贸易政策效应评估；2026 更新：航运与卫星/AIS 数据、供应链韧性预警、跨境电商数据、贸易文本的 LLM 抽取、地缘政治风险指标。市场营销大数据：问卷设计与测量、联合分析（属性/水平/设计/估计）、客户旅程与归因、推荐系统、定价促销、流失预测与 CLV、A/B 与增量实验；2026 更新：生成式营销内容与品牌安全、隐私新政与第三方 cookie 退场、对话式商务、营销组合模型（MMM）与因果结合</td><td>L14/L15 讲义；Palmatier &amp; Sridhar (2017)；项目报告提交与展示</td></tr>
 </tbody></table></div>
 
     <h3 id="s-5LqU44CB56ug">五、章节内容提要 Chapter Details</h3>
@@ -181,14 +182,17 @@
 <li>工具与数据：Qualtrics、Python（pandas、statsmodels、scikit-learn、LightFM）、实验平台数据。</li>
 </ul>
     <h3 id="s-5YWt44CB6ICD">六、考核与评分 Assessment</h3>
-<p>总成绩 = 课堂展示 10% + 项目 90%。项目采用「4 选 3」：从下列四个研究项目中任选三项完成，每项占 30%；组队不超过 2 人。</p>
-<div class="table-wrap"><table><thead><tr><th>项目 1 数据获取与整备</th><th>自选领域数据（商业/金融/贸易/营销），完成数据获取、质量体检、清洗与探索，产出可复现的数据管道与数据说明。</th></tr></thead><tbody>
-<tr><td>项目 2 预测建模</td><td class="lec">在项目 1 的数据上建立监督学习模型（线性模型、树模型或神经网络），完成特征工程、交叉验证、性能评估与误差分析，并解释关键特征。</td></tr>
+<p>总成绩 = 出勤 10% + 项目 90%。项目采用「4 选 1」：从下列四个研究项目中任选一项完成即可。与以往课程相比，本学期项目更加开放——题目与数据可自选、鼓励结合 AI 工具完成（须按第 10 节规范声明与核验），具体项目内容与提交要求将于课堂上公布（待公布）。组队不超过 2 人。</p>
+<div class="table-wrap"><table><tbody>
+<tr><td>项目 1 数据获取与整备</td><td class="lec">自选领域数据（商业/金融/贸易/营销），完成数据获取、质量体检、清洗与探索，产出可复现的数据管道与数据说明。</td></tr>
+<tr><td>项目 2 预测建模</td><td class="lec">自选数据上建立监督学习模型（线性模型、树模型或神经网络），完成特征工程、交叉验证、性能评估与误差分析，并解释关键特征。</td></tr>
 <tr><td>项目 3 文本与大模型应用</td><td class="lec">使用 NLP 或大语言模型完成一项文本分析（情感/主题/信息抽取/问答），须包含自建评测集、幻觉检查与护栏设计，并声明所用模型与提示词。</td></tr>
 <tr><td>项目 4 因果与应用分析</td><td class="lec">针对一个政策或商业干预问题，设计识别策略（实验、DID、IV、RDD 或匹配），估计效应并讨论假设与稳健性；或在金融/贸易/营销场景完成综合分析。</td></tr>
+<tr><td>项目说明（待公布）</td><td class="lec">四个项目的具体题目、数据、任务与评分细则将于课堂上公布；项目较以往课程更加开放，允许自选数据与研究问题，并鼓励使用 AI 工具（须声明与核验）。</td></tr>
 </tbody></table></div>
+<p class="linkrow"><a class="btn btn-ghost" href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期课程项目报告 Past Project Reports（选题与写法参考） ↗</a></p>
 <p>项目报告要求：问题与背景、数据与来源、方法与代码、结果与解释、局限与稳健性、复现说明、AI 使用声明；建议正文不超过 10 页，代码与数据单独提交。</p>
-<h4 id="s-6KE5YiG57u05">评分维度 Rubric（每项满分 100 分）</h4>
+<h4 id="s-6KE5YiG57u05">评分维度 Rubric（项目满分 100 分）</h4>
 <div class="table-wrap"><table><thead><tr><th>维度 Dimension</th><th>权重</th><th>评分要点</th></tr></thead><tbody>
 <tr><td class="week">问题定义与背景</td><td class="lec">15%</td><td>研究问题清晰、有业务或学术意义，指标与目标一致</td></tr>
 <tr><td class="week">数据与方法</td><td class="lec">25%</td><td>数据来源可靠、清洗与特征工程合理、方法选择有依据</td></tr>
@@ -247,7 +251,7 @@
 </ul>
     <h3 id="s-5Y2B44CB6K56">十、课程政策 Course Policies</h3>
 <ul>
-<li>出勤与参与：鼓励全程参与课堂讨论与实操；无故缺席影响课堂展示评分。</li>
+<li>出勤与参与：出勤计入总成绩的 10%；无故缺席按次扣分（缺席累计超过 1/3 按学校规定处理）；课堂讨论与实操鼓励全程参与。</li>
 <li>作业与迟交：每个项目截止后 24 小时内提交扣 5%，之后每 24 小时再扣 5%，最多扣 15%；特殊情况请提前说明。</li>
 <li>学术诚信：禁止抄袭、代写、伪造数据与结果；引用他人数据、代码与文字必须注明来源。</li>
 <li>人工智能使用规范：允许使用 LLM 辅助学习、编码与分析，但必须（1）声明工具名称与版本；（2）保留关键提示词；（3）对模型输出进行人工核验；（4）不得提交未经核验的结论或代码。未声明者按学术不端处理。</li>
