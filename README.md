@@ -1,9 +1,9 @@
 # 大数据分析［2026 国际商务］课程主页
 
 这是深圳大学《大数据分析［2026 国际商务］》（Big Data Analytics）课程主页的完整站点文件。
-推送到 GitHub 仓库 `bigdata` 并开启 Pages 后，访问地址为：
 
-**https://elysium4eva.github.io/bigdata/**
+**已发布上线：https://elysium4eva.github.io/bigdata/**
+（仓库：https://github.com/elysium4eva/bigdata，Pages 源：main 分支根目录，HTTPS 强制开启）
 
 ## 站点结构
 
@@ -25,46 +25,40 @@ website/                     ← 把这个目录的内容放到仓库 bigdata �
 └── publish.ps1              一键初始化仓库并推送（需先安装 Git 并登录 GitHub）
 ```
 
-## 发布步骤（三选一）
+## 更新与发布（两种通道）
 
-### 方式 A：一键脚本（推荐）
+> 本机当前网络**无法直连 github.com**（git over HTTPS 被重置），但 `api.github.com` 与
+> `*.github.io` 可正常访问，因此日常更新请用**方式 A（API 脚本）**。
 
-本目录的 git 仓库**已初始化并暂存全部文件**，remote 已指向
-`https://github.com/elysium4eva/bigdata.git`。你需要做的只有两步：
+### 方式 A：API 脚本（当前网络下可用，推荐）
 
-1. 在 GitHub 上新建仓库 **`bigdata`**（Public，不要勾选初始化 README）。
-2. 在本目录打开 PowerShell 运行：
+站点已通过该脚本发布，更新时重复运行即可（自动提交新版本并覆盖远端）：
 
 ```powershell
-.\publish.ps1          # 提交并推送（首次会要求 GitHub 登录/授权）
+# 1) 改内容（大纲文字、排课、章节要点）
+notepad ..\syllabus-src\syllabus-content.json
+# 2) 重新生成页面并自检
+node ..\website-src\build-site.js
+node ..\website-src\check-links.js
+# 3) 发布（读取 Windows 凭据管理器中的 GitHub 令牌，不打印令牌）
+powershell -ExecutionPolicy Bypass -File ..\website-src\publish-via-api.ps1
 ```
 
-3. 打开仓库的 **Settings → Pages**，Source 选择 **Deploy from a branch**，
-   Branch 选 **main**、目录选 **/(root)**，保存。
-4. 约 1 分钟后访问：https://elysium4eva.github.io/bigdata/
+脚本流程：确保仓库存在 → 上传所有文件为 git blob → 生成一次提交 → 移动 main →
+（如未开启）开启 Pages → 轮询直到站点返回 HTTP 200。
 
-> 若仓库地址不同，用 `.\publish.ps1 -Remote "https://github.com/<用户名>/<仓库>.git"` 覆盖。
-> 脚本会自动补一个仓库级 git 身份（`<用户名>@users.noreply.github.com`）；
-> 想让提交归属到你的账号，可先设置成 GitHub 提供的 noreply 邮箱：
-> `git config user.email "你的ID+elysium4eva@users.noreply.github.com"`
-
-### 方式 B：手动 git 命令
+### 方式 B：git 推送（网络可访问 github.com 时）
 
 ```bash
-cd website
-git init -b main
-git add .
-git commit -m "Course site: syllabus + Lecture 1 courseware"
-git remote add origin https://github.com/elysium4eva/bigdata.git
-git push -u origin main
+git clone https://github.com/elysium4eva/bigdata.git
+# 把本目录内容覆盖到克隆目录，然后
+git add -A && git commit -m "Update course site" && git push
 ```
 
-### 方式 C：网页上传
+仓库已在远端建立，请**先 clone 再修改**（不要在本地另建一套历史），以免推送冲突。
+随附的 `publish.ps1` 适用于这种方式（`.\publish.ps1`）。
 
-在 `bigdata` 仓库页面点击 *Add file → Upload files*，把本目录（含 `assets/`、`files/`）
-整体拖入并提交；再到 Settings → Pages 开启 main 分支。
-
-## 更新内容
+## 更新内容（内容同源）
 
 课程内容与大纲**同源**：网站页面由课程大纲 JSON 自动生成，改一处即可同步。
 
@@ -75,8 +69,8 @@ notepad ..\syllabus-src\syllabus-content.json
 node ..\website-src\build-site.js
 # 3) 检查链接与结构
 node ..\website-src\check-links.js
-# 4) 提交
-git add . ; git commit -m "Update content" ; git push
+# 4) 发布（见上文方式 A；网络可直连 github.com 时改用 git push）
+powershell -ExecutionPolicy Bypass -File ..\website-src\publish-via-api.ps1
 ```
 
 新增某章课件时：把 PDF 放进 `files/`，然后在 `website-src/build-site.js` 的
