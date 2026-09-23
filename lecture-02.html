@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 2 Data Sourcing · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第二章</p>
+    <h1 class="doc-title">Lecture 2　Data Sourcing: Foundations of Data Science</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L02-data-sourcing.pdf">下载课件（2026 版 · 85 页）</a>
+      <a class="btn btn-ghost" href="lecture-01.html">上一讲 Lecture 1</a>
+      <a class="btn btn-gold" href="syllabus.html">课程大纲</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>85</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>9</strong> 页可运行示例</div></div>
+      <div class="card"><div class="k">数据源 Sources</div><div class="v">国际 + 中国（含 Wind/CSMAR/Tushare）</div></div>
+      <div class="card"><div class="k">对应周次 Week</div><div class="v">第 4 周（作业 1 提交）</div></div>
+    </div>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L1 衔接、本讲输出物（数据源清单 + 获取脚本 + 合规检查表）</td></tr>
+        <tr><td class="week">Part 1</td><td>数据类型、结构与测量：测量层级、数值/类别/复合类型、截面/时序/面板、截面关联与空间、结构化与非结构化、宽表与长表、聚合与粒度陷阱、抽样与总体、误差地图（覆盖→抽样→无响应→测量）、拿到数据先问的 10 个问题</td></tr>
+        <tr><td class="week">Part 2</td><td>已有数据来源（国际 + 中国）：来源全景与五维评估、内部数据、开放数据（World Bank/IMF/OECD/Comtrade/Eurostat/FRED；国家统计局/央行/海关/交易所/巨潮/企业信用公示）、第三方 DaaS（Bloomberg/Refinitiv；Wind/iFinD/CSMAR/CNRDS/CEIC）、CSMAR vs Wind、数据集平台（Kaggle/HF/UCI；天池/和鲸）、平台 API 生态与 REST 基础</td></tr>
+        <tr><td class="week">Part 3</td><td>非结构化与实时：PDF/OCR 与表格抽取、表格规范化与多源合并、LLM 结构化抽取、流式与实时（Kafka/Flink/CDC）、替代数据与合规评估、来源选择决策树</td></tr>
+        <tr><td class="week">Part 4</td><td>一手数据采集：问卷设计与偏差、抽样方法、实施方式与成本覆盖、无响应与加权、普查与行政数据、实验设计与 A/B 测试（流程与陷阱）、实验室实验、访谈、卡片分类</td></tr>
+        <tr><td class="week">Part 5</td><td>质量控制与 LLM 辅助：标注一致性（κ/α）、LLM 辅助采集与核验流程、合成数据与隐私增强（差分隐私/联邦学习）、数据体检报告</td></tr>
+        <tr><td class="week">Part 6</td><td>管道·治理·合规：ETL vs ELT、最小可用数据管道、数据契约与数据产品、现代数据栈与开放表格式、元数据与血缘、版本与可复现、数据质量规则、GDPR/CCPA/PIPL、版权许可与安全伦理</td></tr>
+        <tr><td class="week">Part 7</td><td>工作流、作业与结语：研究问题→数据需求、数据源清单模板与失败排查、作业 1 要求与评分、常见错误、参考书、数据源速查表（国际/中国）、术语对照</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（9 页）Code Walkthroughs</h3>
+    <ul>
+      <li><b>REST API 通用骨架</b>：会话、指数退避重试、分页、磁盘缓存、超时与日志；</li>
+      <li><b>World Bank API</b>：按国家与指标批量拉取 → DataFrame → Parquet 落盘；</li>
+      <li><b>金融数据</b>：yfinance 多市场行情（含 A 股/港股代码）与 FRED 宏观序列；</li>
+      <li><b>中国数据源</b>：Tushare Pro（token/积分）与 AKShare（免费）示例；</li>
+      <li><b>PDF 抽取</b>：pdfplumber 文本/表格 + 扫描件 OCR；</li>
+      <li><b>表格规范化</b>：编码、千分位、百分比、类别映射与多源合并去重；</li>
+      <li><b>LLM 结构化抽取</b>：JSON schema 校验 + 抽样人工复核；</li>
+      <li><b>数据体检</b>：缺失、重复、异常（IQR）、时间覆盖；</li>
+      <li><b>最小可用管道</b>：快照 → 断言校验 → 幂等落盘 → 日志。</li>
+    </ul>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L02-data-sourcing.pdf" title="Lecture 2 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 106</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-17
+    </div>
+  </div>
+</footer>
+</body>
+</html>
