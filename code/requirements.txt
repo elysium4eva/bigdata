@@ -1,0 +1,4 @@
+numpy>=1.24          # 数值计算：数组、随机数、矩阵运算
+pandas>=2.0          # 表格数据：DataFrame 读写 CSV、交叉表、时间序列
+matplotlib>=3.7      # 绘图：直方图、箱线图、热力图、频谱图、网络图
+pillow>=9.0          # 图像读写（matplotlib 保存 PNG 依赖）

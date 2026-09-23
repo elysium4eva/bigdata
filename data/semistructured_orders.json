@@ -1,0 +1,40 @@
+[
+  {
+    "order_id": "SO2026001",
+    "buyer": {
+      "name": "林",
+      "vip": true
+    },
+    "items": [
+      {
+        "sku": "A-1",
+        "qty": 2
+      },
+      {
+        "sku": "B-7",
+        "qty": 1
+      }
+    ]
+  },
+  {
+    "order_id": "SO2026002",
+    "buyer": {
+      "name": "陈"
+    },
+    "items": [
+      {
+        "sku": "C-3",
+        "qty": 5
+      }
+    ]
+  },
+  {
+    "order_id": "SO2026003",
+    "buyer": {
+      "name": "王",
+      "vip": false
+    },
+    "items": [],
+    "note": "待补开发票"
+  }
+]
