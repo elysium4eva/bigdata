@@ -11,7 +11,7 @@ table = pd.DataFrame({                                                # 结构�
     "date": ["2026-03-02", "2026-03-02", "2026-03-03", "2026-03-03"],  # 下单日期（可解析为日期型）
     "amount": [1280.50, 640.00, 3980.75, 215.20],                      # 订单金额（浮点型）
     "paid": [True, True, False, True],                                 # 是否已付款（布尔型）
-})
+})                                                                    # 结构化样本表构造结束
 dump_csv(table, "structured_orders.csv")                              # 落盘结构化样本
 
 # ---------------------------------------------------------------- 2) 半结构化：可嵌套、字段可缺省的 JSON
@@ -22,14 +22,14 @@ records = [                                                           # 半结�
      "items": [{"sku": "C-3", "qty": 5}]},                            # 记录 2：数组长度也不同
     {"order_id": "SO2026003", "buyer": {"name": "王", "vip": False},  # 记录 3
      "items": [], "note": "待补开发票"},                               # 记录 3：多出一个 note 字段
-]
+]                                                                     # 半结构化记录列表结束
 (DAT / "semistructured_orders.json").write_text(                      # 把半结构化数据写入仓库
     json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")  # 中文不转义 + 缩进便于阅读
 print("[data]", DAT / "semistructured_orders.json")                   # 打印落盘位置
 
 # ---------------------------------------------------------------- 3) 非结构化：无固定字段的自然语言/波形
-free_text = ("本季度公司在东南亚市场的收入同比增长三成，主要来自跨境电商渠道；"
-             "管理层预计下季度毛利率保持稳定，但需关注汇率波动与海运费上行带来的成本压力。")
+free_text = ("本季度公司在东南亚市场的收入同比增长三成，主要来自跨境电商渠道；"  # 非结构化文本第 1 段
+             "管理层预计下季度毛利率保持稳定，但需关注汇率波动与海运费上行带来的成本压力。")  # 第 2 段
 (DAT / "unstructured_note.txt").write_text(free_text, encoding="utf-8")  # 落盘非结构化文本样本
 wave_sample = np.sin(2 * np.pi * 5 * np.linspace(0, 1, 400))          # 非结构化的另一形态：原始波形
 np.save(DAT / "unstructured_wave.npy", wave_sample)                   # 保存为二进制数组样本
