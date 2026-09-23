@@ -1,0 +1,7 @@
+﻿step,rows_before,rows_after,rows_removed,note
+Step 1a exact duplicate rows,600,600,0,identical rows removed
+Step 1b duplicate business keys,600,582,18,same order_id kept once
+Step 1c irrelevant observations,582,582,0,rows without a key removed
+Step 2 structural errors,582,582,0,"cities/payments normalised, 0 bad dates"
+Step 3 outlier classification,582,582,0,"2 impossible, 31 statistical outliers"
+Step 4 missing handling,582,582,0,"qty filled with median 6.0, indicator column added"

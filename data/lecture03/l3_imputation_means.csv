@@ -1,0 +1,8 @@
+﻿strategy,mean_income
+complete_data,27.33248571428571
+mean,27.33
+median,27.28
+drop,27.33
+regression,27.36
+knn,27.32
+mice,27.34

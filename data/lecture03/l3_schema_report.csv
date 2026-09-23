@@ -1,0 +1,13 @@
+﻿column,rule,ok,detail
+firm_id,present,True,
+firm_id,unique,True,0 duplicates
+firm_id,regex,True,0 non-conforming
+region,present,True,
+region,allowed,True,unexpected: []
+revenue,present,True,
+revenue,min,True,0 below 0.0
+revenue,max,True,0 above 1000000.0
+revenue,not-null,True,0 missing
+log1p,present,True,
+log1p,min,True,0 below 0.0
+log1p,not-null,True,0 missing

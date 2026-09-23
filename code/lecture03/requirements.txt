@@ -1,0 +1,5 @@
+numpy>=1.24          # numerical arrays, random generators and descriptive helper functions
+pandas>=2.1          # tables, joins, reshaping, missing-value handling and pivot tables
+matplotlib>=3.7      # all figures inserted into the Lecture 3 slides
+scikit-learn>=1.3    # KNN and MICE imputation, Isolation Forest, linear regression baselines
+pillow>=9.0          # image backend used when matplotlib writes PNG files

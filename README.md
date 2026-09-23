@@ -13,10 +13,14 @@ website/                     ← 把这个目录的内容放到仓库 bigdata �
 ├── syllabus.html            课程大纲全文（可在线打印或另存 PDF）
 ├── lecture-01.html          第一章课件页（含要点、下载按钮与在线预览）
 ├── lecture-02.html          第二章课件页（数据类型样本页说明、代码走查、在线预览）
-├── code.html                样本数据与可视化程序索引（10 类数据 + 运行方法 + 示例图片）
+├── lecture-03.html          第三章课件页（数据整备：92 帧结构、10 个代码页、样本页、在线预览）
+├── code.html                样本数据与可视化程序索引（L2 数据类型 + L3 数据整备，含运行方法与图片墙）
 ├── code/                    第二章数据类型示例程序（11 个 .py，逐行中文注释）+ requirements.txt + run_all.py
-├── data/                    这些程序生成的样本数据（CSV / JSON / TXT / WAV / NPY，可一键重跑）
-├── figures/                 程序生成的可视化图（PNG，即课件第 10、12、13、15–20、23 帧插入的图）
+├── code/lecture03/          第三章数据整备示例程序（12 个 .py，**逐行英文注释**）+ requirements.txt + run_all.py
+├── data/                    第二章样本数据（CSV / JSON / TXT / WAV / NPY，可一键重跑）
+├── data/lecture03/          第三章样本数据（39 份 CSV，含原 PPT dataset1–4 与面板样例）
+├── figures/                 第二章可视化图（PNG，即课件第 10、12、13、15–20、23 帧插入的图）
+├── figures/lecture03/       第三章可视化图（12 张 PNG，即课件第 15、22、29、30、38、41、46、52、57、62、68、72 帧插入的图）
 ├── assets/
 │   ├── css/style.css        深大配色样式（荔枝红 #8A0C3C + 金 #C9A227）
 │   └── img/                 校徽 szu-logo.jpg、封面背景 background.jpg
@@ -24,6 +28,7 @@ website/                     ← 把这个目录的内容放到仓库 bigdata �
 │   ├── L01-introduction-2026.pdf                        第一章课件（2026 版，82 页，2.3 MB）
 │   ├── L01-introduction-converted.pdf                   第一章课件（原版逐页转换，78 页，34.7 MB）
 │   ├── L02-data-sourcing.pdf                            第二章课件（2026 版，95 页，含 10 页样本可视化）
+│   ├── L03-data-preparation.pdf                         第三章课件（2026 版，92 页，含 10 页样本 + 10 页代码）
 │   ├── L06-logistic-regression-linear-classifier.pdf    第六章课件（Beamer 版，80 页，16.8 MB）
 │   ├── Syllabus-Big-Data-Analytics-2026.pdf             课程大纲 PDF
 │   └── Syllabus-Big-Data-Analytics-2026.docx            课程大纲 Word
@@ -33,17 +38,18 @@ website/                     ← 把这个目录的内容放到仓库 bigdata �
 
 ### 样本数据与可视化程序（`code/` + `data/` + `figures/`）
 
-配合第二章「数据类型」章节的 10 页样本页。每个程序**每一行代码都有中文注释**，随机种子固定
-（20260917），运行结果与课件插图完全一致：
+配合第二章「数据类型」与第三章「数据整备」的样本页。每个程序**每一行代码都有注释**
+（Lecture 2 用中文注释，Lecture 3 用**英文注释**），随机种子固定（L2 为 20260917、L3 为 20260317），
+运行结果与课件插图完全一致：
 
 ```powershell
-pip install -r code/requirements.txt     # numpy / pandas / matplotlib / pillow
-cd code
-python run_all.py                        # 依次生成全部样本与图片
-python 07_datatype_graph.py              # 也可只跑其中一个数据类型
+pip install -r code/requirements.txt              # numpy / pandas / matplotlib / pillow
+pip install -r code/lecture03/requirements.txt    # 另加 scikit-learn
+cd code && python run_all.py                      # Lecture 2：数据类型样本与图
+cd lecture03 && python run_all.py                 # Lecture 3：数据整备样本与图
 ```
 
-样本全部为程序合成（模拟行情、订单、轨迹、语料、网络等），不含真实个人数据。
+样本全部为程序合成（模拟行情、订单、客户、收入、轨迹、语料、网络、城市面板等），不含真实个人数据。
 
 ## 更新与发布（两种通道）
 

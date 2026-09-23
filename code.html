@@ -33,18 +33,18 @@
 
 <main class="doc">
   <div class="wrap">
-    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="lecture-02.html">第二章</a> › 样本数据与可视化程序</p>
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 样本数据与可视化程序</p>
     <h1 class="doc-title">样本数据与可视化程序　Sample Data &amp; Visualisation</h1>
-    <p class="doc-sub">大数据分析［2026 国际商务］ · 配合 Lecture 2 数据类型章节的 10 页样本页 · 2026 秋季学期</p>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · 配合第二章「数据类型」与第三章「数据整备」的样本页 · 2026 秋季学期</p>
 
     <div class="hero-actions no-print">
-      <a class="btn btn-primary" href="lecture-02.html">返回第二章课件</a>
-      <a class="btn btn-ghost" href="code/run_all.py">run_all.py 一键重跑</a>
-      <a class="btn btn-ghost" href="code/requirements.txt">requirements.txt</a>
-      <a class="btn btn-gold" href="files/L02-data-sourcing.pdf">下载课件 PDF</a>
+      <a class="btn btn-primary" href="#lecture02">Lecture 2 · 数据类型</a>
+      <a class="btn btn-primary" href="#lecture03">Lecture 3 · 数据整备</a>
+      <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
+      <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
     </div>
 
-    <h3>样本与程序清单 List</h3>
+    <h3 id="lecture02">Lecture 2 · 数据类型样本（10 个程序，中文注释）</h3>
     <div class="table-wrap"><table>
       <thead><tr><th>课件页</th><th>数据类型</th><th>程序（逐行中文注释）</th><th>样本数据</th></tr></thead>
       <tbody>
@@ -110,19 +110,110 @@
         </tr>
       </tbody>
     </table></div>
+    <p class="note">运行方式：<code>pip install -r code/requirements.txt</code> → <code>cd code &amp;&amp; python run_all.py</code>；
+       样本写入 <code>data/</code>，图片写入 <code>figures/</code>。随机种子固定 20260917，每次运行结果完全一致。</p>
+
+    <h3 id="lecture03">Lecture 3 · 数据整备样本（10 个程序，English comments）</h3>
+    <p class="note">代码注释一律英文（English comments on every line）；样本数据与图片同名对应，可一键重跑。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>课件页</th><th>整备主题</th><th>程序（English comments）</th><th>样本数据</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="week">第 15 帧</td>
+          <td><b>质量画像仪表盘 Quality profile</b><br><span class="note">600 行脏订单：18 个重复主键、城市 7 种写法、支付状态 6 种写法、70 行缺数量，一次量化五项质量特征。</span></td>
+          <td><a href="code/lecture03/l3_01_quality_profile.py">l3_01_quality_profile.py</a></td>
+          <td><a href="data/lecture03/l3_orders_dirty.csv">l3_orders_dirty.csv</a>、<a href="data/lecture03/l3_quality_scorecard.csv">l3_quality_scorecard.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 22 帧</td>
+          <td><b>连接语义对照 Join types</b><br><span class="note">inner 5 · left 6 · right 8 · outer 9 · union 10 行：五种操作的结果表与行数变化；含 validate 报错演示。</span></td>
+          <td><a href="code/lecture03/l3_03_join_types_validate.py">l3_03_join_types_validate.py</a></td>
+          <td><a href="data/lecture03/l3_customers.csv">l3_customers.csv</a>、<a href="data/lecture03/l3_orders.csv">l3_orders.csv</a>、<a href="data/lecture03/l3_dataset1.csv">l3_dataset1.csv</a>、<a href="data/lecture03/l3_dataset2.csv">l3_dataset2.csv</a>、<a href="data/lecture03/l3_dataset3.csv">l3_dataset3.csv</a>、<a href="data/lecture03/l3_dataset4.csv">l3_dataset4.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 26 帧</td>
+          <td><b>concat 与 schema 对齐</b><br><span class="note">两期订单抽取：朴素拼接 9 列（全空洞）→ 对齐后 7 列干净；行数与主键两条断言。</span></td>
+          <td><a href="code/lecture03/l3_02_join_concat.py">l3_02_join_concat.py</a></td>
+          <td><a href="data/lecture03/l3_orders_2026Q1.csv">l3_orders_2026Q1.csv</a>、<a href="data/lecture03/l3_orders_2026Q2.csv">l3_orders_2026Q2.csv</a>、<a href="data/lecture03/l3_orders_combined.csv">l3_orders_combined.csv</a>、<a href="data/lecture03/l3_concat_accounting.csv">l3_concat_accounting.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 29 帧</td>
+          <td><b>透视、交叉表与分箱</b><br><span class="note">crosstab 频数、pivot_table 聚合、cut 等宽分箱与 qcut 等频分箱（6/6/6/6）。</span></td>
+          <td><a href="code/lecture03/l3_04_reshape_toolbox.py">l3_04_reshape_toolbox.py</a></td>
+          <td><a href="data/lecture03/l3_sales_wide.csv">l3_sales_wide.csv</a>、<a href="data/lecture03/l3_sales_long.csv">l3_sales_long.csv</a>、<a href="data/lecture03/l3_sales_pivot.csv">l3_sales_pivot.csv</a>、<a href="data/lecture03/l3_sales_long_enriched.csv">l3_sales_long_enriched.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 30 帧</td>
+          <td><b>宽表 / 长表 / 透视对照</b><br><span class="note">4 门店 × 6 个月的三种摆法，含宽→长→宽往返无损断言。</span></td>
+          <td><a href="code/lecture03/l3_04_reshape_toolbox.py">l3_04_reshape_toolbox.py</a></td>
+          <td><a href="data/lecture03/l3_sales_wide.csv">l3_sales_wide.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 38 帧</td>
+          <td><b>异常值三法</b><br><span class="note">IQR 22 行 / Z 10 行 / 稳健 Z 17 行 / 隔离森林 13 行；四法一致仅 10 行；三种处置对比。</span></td>
+          <td><a href="code/lecture03/l3_06_outliers_iqr_z_iforest.py">l3_06_outliers_iqr_z_iforest.py</a></td>
+          <td><a href="data/lecture03/l3_income_outliers.csv">l3_income_outliers.csv</a>、<a href="data/lecture03/l3_outlier_treatment.csv">l3_outlier_treatment.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 41 帧</td>
+          <td><b>清洗前后对照</b><br><span class="note">600 → 582 行；缺失 70 → 0（中位数填充 + 缺失指示列）；异常值标记而非静默删除。</span></td>
+          <td><a href="code/lecture03/l3_05_cleaning_pipeline.py">l3_05_cleaning_pipeline.py</a></td>
+          <td><a href="data/lecture03/l3_orders_clean.csv">l3_orders_clean.csv</a>、<a href="data/lecture03/l3_cleaning_log.csv">l3_cleaning_log.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 46 帧</td>
+          <td><b>结构错误与类别规范化</b><br><span class="note">城市 7 种写法 → 2 个城市；别名映射表本身也是交付物。</span></td>
+          <td><a href="code/lecture03/l3_05_cleaning_pipeline.py">l3_05_cleaning_pipeline.py</a></td>
+          <td><a href="data/lecture03/l3_city_names_raw.csv">l3_city_names_raw.csv</a>、<a href="data/lecture03/l3_city_names_map.csv">l3_city_names_map.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 52 帧</td>
+          <td><b>缺失矩阵与机制偏差</b><br><span class="note">MCAR / MAR / MNAR 三种机制的缺失矩阵与朴素均值偏差 −0.2% / −10.0% / −3.2%。</span></td>
+          <td><a href="code/lecture03/l3_07_missing_mechanisms.py">l3_07_missing_mechanisms.py</a></td>
+          <td><a href="data/lecture03/l3_missing_bias.csv">l3_missing_bias.csv</a>、<a href="data/lecture03/l3_income_missing_MCAR.csv">l3_income_missing_MCAR.csv</a>、<a href="data/lecture03/l3_income_missing_MAR.csv">l3_income_missing_MAR.csv</a>、<a href="data/lecture03/l3_income_missing_MNAR.csv">l3_income_missing_MNAR.csv</a>、<a href="data/lecture03/l3_panel_missing.csv">l3_panel_missing.csv</a>、<a href="data/lecture03/l3_panel_coverage.csv">l3_panel_coverage.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 57 帧</td>
+          <td><b>插补前后：分布与关系</b><br><span class="note">均值插补把分布压成尖峰；回归 / KNN / MICE 更接近真分布；方差收缩清晰可见。</span></td>
+          <td><a href="code/lecture03/l3_08_imputation_compare.py">l3_08_imputation_compare.py</a></td>
+          <td><a href="data/lecture03/l3_income_complete.csv">l3_income_complete.csv</a>、<a href="data/lecture03/l3_income_missing.csv">l3_income_missing.csv</a>、<a href="data/lecture03/l3_imputation_metrics.csv">l3_imputation_metrics.csv</a>、<a href="data/lecture03/l3_imputation_means.csv">l3_imputation_means.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 62 帧</td>
+          <td><b>平衡面板 T=11, n=2</b><br><span class="note">两家公司 11 个月的营收路径与个体 × 时间热力图（每格都有观测）。</span></td>
+          <td><a href="code/lecture03/l3_09_panel_balance.py">l3_09_panel_balance.py</a></td>
+          <td><a href="data/lecture03/l3_panel_balanced.csv">l3_panel_balanced.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 68 帧</td>
+          <td><b>面板补齐前后热力图</b><br><span class="note">T1=9 / T2=11 / T3=8 与块状缺失 → 按个体插值（2 格）并标注；5 格因期间不存在而无法补齐。</span></td>
+          <td><a href="code/lecture03/l3_09_panel_balance.py">l3_09_panel_balance.py</a></td>
+          <td><a href="data/lecture03/l3_panel_unbalanced.csv">l3_panel_unbalanced.csv</a>、<a href="data/lecture03/l3_panel_repaired.csv">l3_panel_repaired.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 72 帧</td>
+          <td><b>变换与标准化效果</b><br><span class="note">偏度 ≈ 2.7 的营收经 log1p 后接近对称；12 条 schema 断言全部通过。</span></td>
+          <td><a href="code/lecture03/l3_10_transform_assert.py">l3_10_transform_assert.py</a></td>
+          <td><a href="data/lecture03/l3_income_skewed.csv">l3_income_skewed.csv</a>、<a href="data/lecture03/l3_transform_summary.csv">l3_transform_summary.csv</a>、<a href="data/lecture03/l3_schema_report.csv">l3_schema_report.csv</a></td>
+        </tr>
+      </tbody>
+    </table></div>
 
     <h3>如何运行 How to Run</h3>
-    <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+，本课程用 3.9 实测）
+    <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) install the dependencies (Python 3.8+; this course was tested on 3.9)
 pip install -r code/requirements.txt
+pip install -r code/lecture03/requirements.txt
 
-# 2) 一键生成全部样本数据与可视化图片
+# 2) Lecture 2 samples: data types (Chinese comments)
 cd code
 python run_all.py
 
-# 3) 也可以单独运行某一种数据类型（每个脚本都可独立执行）
-python 07_datatype_graph.py</code></pre>
-    <p class="note">运行后：样本写入 <code>data/</code>，图片写入 <code>figures/</code>。随机种子固定为 20260917，
-       因此每次运行得到<b>完全相同</b>的样本与图片，便于课堂复现与作业对照。</p>
+# 3) Lecture 3 samples: data preparation (English comments)
+cd lecture03
+python run_all.py</code></pre>
+    <p class="note">运行后：L2 样本写入 <code>data/</code>、图片写入 <code>figures/</code>；L3 样本写入
+       <code>data/lecture03/</code>、图片写入 <code>figures/lecture03/</code>。两个讲次的随机种子都固定
+       （L2 为 20260917、L3 为 20260317），因此每次运行得到<b>完全相同</b>的样本与图片。</p>
 
     <h3>示例图片 Figures</h3>
       <figure style="margin:0 0 26px">
@@ -165,13 +256,61 @@ python 07_datatype_graph.py</code></pre>
         <a href="figures/fig_structures.png"><img src="figures/fig_structures.png" alt="截面 / 时序 / 面板 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 23 帧 · 截面 / 时序 / 面板 · 程序 <a href="code/09_datastructure_cross_time_panel.py">09_datastructure_cross_time_panel.py</a></figcaption>
       </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_quality_profile.png"><img src="figures/lecture03/fig_quality_profile.png" alt="质量画像仪表盘 Quality profile 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 15 帧 · 质量画像仪表盘 Quality profile · 程序 <a href="code/lecture03/l3_01_quality_profile.py">l3_01_quality_profile.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_join_types.png"><img src="figures/lecture03/fig_join_types.png" alt="连接语义对照 Join types 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 22 帧 · 连接语义对照 Join types · 程序 <a href="code/lecture03/l3_03_join_types_validate.py">l3_03_join_types_validate.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_reshape_bins.png"><img src="figures/lecture03/fig_reshape_bins.png" alt="透视、交叉表与分箱 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 29 帧 · 透视、交叉表与分箱 · 程序 <a href="code/lecture03/l3_04_reshape_toolbox.py">l3_04_reshape_toolbox.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_reshape_wide_long.png"><img src="figures/lecture03/fig_reshape_wide_long.png" alt="宽表 / 长表 / 透视对照 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 30 帧 · 宽表 / 长表 / 透视对照 · 程序 <a href="code/lecture03/l3_04_reshape_toolbox.py">l3_04_reshape_toolbox.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_outliers.png"><img src="figures/lecture03/fig_outliers.png" alt="异常值三法 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 38 帧 · 异常值三法 · 程序 <a href="code/lecture03/l3_06_outliers_iqr_z_iforest.py">l3_06_outliers_iqr_z_iforest.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_cleaning_before_after.png"><img src="figures/lecture03/fig_cleaning_before_after.png" alt="清洗前后对照 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 41 帧 · 清洗前后对照 · 程序 <a href="code/lecture03/l3_05_cleaning_pipeline.py">l3_05_cleaning_pipeline.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_structural_errors.png"><img src="figures/lecture03/fig_structural_errors.png" alt="结构错误与类别规范化 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 46 帧 · 结构错误与类别规范化 · 程序 <a href="code/lecture03/l3_05_cleaning_pipeline.py">l3_05_cleaning_pipeline.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_missing_matrix.png"><img src="figures/lecture03/fig_missing_matrix.png" alt="缺失矩阵与机制偏差 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 52 帧 · 缺失矩阵与机制偏差 · 程序 <a href="code/lecture03/l3_07_missing_mechanisms.py">l3_07_missing_mechanisms.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_imputation_compare.png"><img src="figures/lecture03/fig_imputation_compare.png" alt="插补前后：分布与关系 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 57 帧 · 插补前后：分布与关系 · 程序 <a href="code/lecture03/l3_08_imputation_compare.py">l3_08_imputation_compare.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_panel_balanced.png"><img src="figures/lecture03/fig_panel_balanced.png" alt="平衡面板 T=11, n=2 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 62 帧 · 平衡面板 T=11, n=2 · 程序 <a href="code/lecture03/l3_09_panel_balance.py">l3_09_panel_balance.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_panel_heatmap.png"><img src="figures/lecture03/fig_panel_heatmap.png" alt="面板补齐前后热力图 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 68 帧 · 面板补齐前后热力图 · 程序 <a href="code/lecture03/l3_09_panel_balance.py">l3_09_panel_balance.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture03/fig_transform_scale.png"><img src="figures/lecture03/fig_transform_scale.png" alt="变换与标准化效果 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 72 帧 · 变换与标准化效果 · 程序 <a href="code/lecture03/l3_10_transform_assert.py">l3_10_transform_assert.py</a></figcaption>
+      </figure>
 
     <h3>说明 Notes</h3>
     <ul>
-      <li><b>逐行注释</b>：每个程序的<b>每一行代码</b>都带中文注释，可直接作为课堂讲解与学生模仿的模板；课件中的 11 段代码示例（第 45–48、52–54、77、80 帧）同样<b>逐行注释</b>；</li>
-      <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟行情、订单、轨迹、语料、网络等），不包含任何真实个人数据，可自由用于教学与作业；</li>
-      <li><b>与课件对应</b>：图片即 Lecture 2 第 10、12、13、15–20、23 帧所插入的图，程序与图片同名对应；</li>
-      <li><b>拓展建议</b>：把 <code>01_datatype_numeric.py</code> 的样本换成你自己数据集的列，即可直接得到作业 1 所需的探索性图表。</li>
+      <li><b>逐行注释</b>：Lecture 2 的程序与代码页用<b>中文</b>注释；Lecture 3 的程序与代码页<b>每一行都用英文注释</b>（English comments on every line）；</li>
+      <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
+      <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
+      <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
     </ul>
   </div>
 </main>
@@ -191,6 +330,7 @@ python 07_datatype_graph.py</code></pre>
           <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
           <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
           <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
           <li><a href="code.html">样本数据与可视化程序</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>

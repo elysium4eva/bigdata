@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 3 Data Preparation · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第三章</p>
+    <h1 class="doc-title">Lecture 3　Data Preparation：数据整备与质量</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L03-data-preparation.pdf">下载课件（2026 版 · 92 页）</a>
+      <a class="btn btn-ghost" href="code.html#lecture03">样本数据与程序</a>
+      <a class="btn btn-ghost" href="lecture-02.html">上一讲 Lecture 2</a>
+      <a class="btn btn-gold" href="syllabus.html">课程大纲</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>92</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>10</strong> 页样本 + 12 张可视化图</div></div>
+      <div class="card"><div class="k">对应周次 Week</div><div class="v">第 5 周（与 L4 双讲）</div></div>
+    </div>
+    <p class="note">本讲从原课件（37 页，Stata 为主）重制为 Beamer 双语课件：<b>保留 Stata 命令对照表</b>，
+       同时把每个操作给出 pandas / Python 等价实现；新增 2026 内容（数据契约与断言、pandera / Great Expectations、
+       dbt 与特征存储、LLM 辅助清洗、脱敏与隐私、漂移监控与回滚）。
+       样本数据与程序全部随课程仓库发布，可一键重跑（<a href="code.html#lecture03">样本数据与可视化程序</a>）。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L2 衔接、输出物（数据集 + 脚本 + 质量报告 + AI 声明）、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>数据质量与整备总览：五项质量特征（有效性/准确性/完整性/一致性/单位一致，并说明大纲口径"唯一性"）、特征→检测→处置矩阵、粒度 grain、数据分层与数据契约、清洗 vs 转换 vs 重塑、清洗五步法总览、可复现五原则</td></tr>
+        <tr><td class="week">Part 2</td><td>合并与重塑：append/concat（加观测）、merge/join（加变量）、joinby 组内全组合、四种连接语义 + union、连接基数与行数爆炸、validate 与 indicator 对账、键标准化与实体对齐、宽表↔长表、pivot/pivot_table/crosstab、重塑工具箱与陷阱</td></tr>
+        <tr><td class="week">Part 3</td><td>数据清洗：清洗定义与收益、五步法逐步展开（去重与不相关观测、结构性错误、异常值弃留判断、缺失处理、验证与 QA）、异常值三法（IQR / Z-score / 稳健 Z / 隔离森林）、文本脏数据、近重复与模糊匹配、清洗审计与边界</td></tr>
+        <tr><td class="week">Part 4</td><td>缺失数据：非响应与流失、MCAR / MAR / MNAR 三种机制与模拟偏差、三种处理策略（插补/剔除/免插补分析）、插补方法族与 EM/MI、五种插补方法评分、插补的代价、缺失即信息、时间序列插值与外推、决策树小结</td></tr>
+        <tr><td class="week">Part 5</td><td>面板与平衡性：平衡 vs 非平衡面板定义、T=11/n=2 案例、名义平衡与内含缺失（T1=9, T2=11, T3=8）、非平衡的机制与样本选择、Stata <code>xtset</code> 与 pandas 覆盖体检、<code>drop/gen/ipolate</code> 对照、面板体检与插值补齐、中国地级市人口案例</td></tr>
+        <tr><td class="week">Part 6</td><td>变换、工具与工程化：对数/标准化/归一化/分箱、单位与量纲统一（Uniformity）、变换 + 断言管道、Stata→pandas 命令全表、pandas 速查、Polars 与 DuckDB、pandera / Great Expectations、dbt 与特征存储、LLM 辅助清洗、脱敏与隐私增强、漂移监控与回滚</td></tr>
+        <tr><td class="week">Part 7</td><td>项目与结语：项目 1「数据获取与整备」要求与评分、一页选题说明模板（第 6 周）、数据质量报告模板、30 项清洗清单、工具速查、术语对照、参考书、复现演练</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>质量画像与断言</b>：把五项质量特征翻译为可计算指标，并写成断言；</li>
+      <li><b>append / concat 与 schema 对齐</b>：列改名、类型统一、来源标记、行数守恒；</li>
+      <li><b>安全合并</b>：<code>merge(validate=...)</code> 让基数违规直接报错，<code>indicator</code> 对账；</li>
+      <li><b>重塑工具箱</b>：pivot / melt / stack / explode / get_dummies / cut / factorize；</li>
+      <li><b>清洗五步法</b>：去重、结构纠错、异常分类、缺失填充（带指示列）、断言与审计日志；</li>
+      <li><b>异常值三法</b>：IQR、Z-score、稳健 Z（MAD）、隔离森林，以及删除/缩尾/保留三种处置；</li>
+      <li><b>缺失机制模拟</b>：MCAR / MAR / MNAR 三种缺失的构造与朴素估计偏差；</li>
+      <li><b>插补方法对比</b>：均值、中位数、回归、KNN、MICE 的分布/相关系数/下游系数评估；</li>
+      <li><b>面板体检与插值</b>：覆盖率表、<code>T_i</code>、按个体插值并标注被插补的格子；</li>
+      <li><b>变换 + 断言管道</b>：log1p / 标准化 / 分箱 + 12 条 schema 断言（最小可用数据契约）。</li>
+    </ul>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L03-data-preparation.pdf" title="Lecture 3 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>
