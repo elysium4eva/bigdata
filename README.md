@@ -16,7 +16,7 @@ website/                     ← 把这个目录的内容放到仓库 bigdata �
 ├── lecture-03.html          第三章课件页（数据整备：92 帧结构、10 个代码页、样本页、在线预览）
 ├── code.html                样本数据与可视化程序索引（L2 数据类型 + L3 数据整备，含运行方法与图片墙）
 ├── code/                    第二章数据类型示例程序（11 个 .py，逐行中文注释）+ requirements.txt + run_all.py
-├── code/lecture03/          第三章数据整备示例程序（12 个 .py，**逐行英文注释**）+ requirements.txt + run_all.py
+├── code/lecture03/          第三章数据整备示例程序（12 个 .py，**逐行中文注释**）+ requirements.txt + run_all.py
 ├── data/                    第二章样本数据（CSV / JSON / TXT / WAV / NPY，可一键重跑）
 ├── data/lecture03/          第三章样本数据（39 份 CSV，含原 PPT dataset1–4 与面板样例）
 ├── figures/                 第二章可视化图（PNG，即课件第 10、12、13、15–20、23 帧插入的图）
@@ -39,7 +39,7 @@ website/                     ← 把这个目录的内容放到仓库 bigdata �
 ### 样本数据与可视化程序（`code/` + `data/` + `figures/`）
 
 配合第二章「数据类型」与第三章「数据整备」的样本页。每个程序**每一行代码都有注释**
-（Lecture 2 用中文注释，Lecture 3 用**英文注释**），随机种子固定（L2 为 20260917、L3 为 20260317），
+（Lecture 2 用中文注释，Lecture 3 用**中文注释**），随机种子固定（L2 为 20260917、L3 为 20260317），
 运行结果与课件插图完全一致：
 
 ```powershell

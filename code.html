@@ -44,7 +44,7 @@
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
     </div>
 
-    <h3 id="lecture02">Lecture 2 · 数据类型样本（10 个程序，中文注释）</h3>
+    <h3 id="lecture02">Lecture 2 · 数据类型样本（10 个程序，逐行中文注释）</h3>
     <div class="table-wrap"><table>
       <thead><tr><th>课件页</th><th>数据类型</th><th>程序（逐行中文注释）</th><th>样本数据</th></tr></thead>
       <tbody>
@@ -113,10 +113,53 @@
     <p class="note">运行方式：<code>pip install -r code/requirements.txt</code> → <code>cd code &amp;&amp; python run_all.py</code>；
        样本写入 <code>data/</code>，图片写入 <code>figures/</code>。随机种子固定 20260917，每次运行结果完全一致。</p>
 
-    <h3 id="lecture03">Lecture 3 · 数据整备样本（10 个程序，English comments）</h3>
-    <p class="note">代码注释一律英文（English comments on every line）；样本数据与图片同名对应，可一键重跑。</p>
+    <h4>Lecture 2 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_numeric.png"><img src="figures/fig_numeric.png" alt="数值型数据（连续 / 离散） 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 10 帧 · 数值型数据（连续 / 离散） · 程序 <a href="code/01_datatype_numeric.py">01_datatype_numeric.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_categorical.png"><img src="figures/fig_categorical.png" alt="类别型数据（名义 / 有序） 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 12 帧 · 类别型数据（名义 / 有序） · 程序 <a href="code/02_datatype_categorical.py">02_datatype_categorical.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_structured.png"><img src="figures/fig_structured.png" alt="结构化 / 半结构化 / 非结构化 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 13 帧 · 结构化 / 半结构化 / 非结构化 · 程序 <a href="code/10_datatype_structured_unstructured.py">10_datatype_structured_unstructured.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_text.png"><img src="figures/fig_text.png" alt="文本数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 15 帧 · 文本数据 · 程序 <a href="code/03_datatype_text.py">03_datatype_text.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_image.png"><img src="figures/fig_image.png" alt="图像数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 16 帧 · 图像数据 · 程序 <a href="code/04_datatype_image.py">04_datatype_image.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_audio.png"><img src="figures/fig_audio.png" alt="音频数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 17 帧 · 音频数据 · 程序 <a href="code/05_datatype_audio.py">05_datatype_audio.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_video.png"><img src="figures/fig_video.png" alt="视频数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 18 帧 · 视频数据 · 程序 <a href="code/06_datatype_video.py">06_datatype_video.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_graph.png"><img src="figures/fig_graph.png" alt="图 / 网络数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 19 帧 · 图 / 网络数据 · 程序 <a href="code/07_datatype_graph.py">07_datatype_graph.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_spatiotemporal.png"><img src="figures/fig_spatiotemporal.png" alt="时空轨迹数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 20 帧 · 时空轨迹数据 · 程序 <a href="code/08_datatype_spatiotemporal.py">08_datatype_spatiotemporal.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/fig_structures.png"><img src="figures/fig_structures.png" alt="截面 / 时序 / 面板 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 23 帧 · 截面 / 时序 / 面板 · 程序 <a href="code/09_datastructure_cross_time_panel.py">09_datastructure_cross_time_panel.py</a></figcaption>
+      </figure>
+
+    <h3 id="lecture03">Lecture 3 · 数据整备样本（10 个程序，逐行中文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture03/requirements.txt</code> → <code>cd code/lecture03 &amp;&amp; python run_all.py</code>；
+       样本写入 <code>data/lecture03/</code>，图片写入 <code>figures/lecture03/</code>。随机种子固定 20260317，每次运行结果完全一致。</p>
     <div class="table-wrap"><table>
-      <thead><tr><th>课件页</th><th>整备主题</th><th>程序（English comments）</th><th>样本数据</th></tr></thead>
+      <thead><tr><th>课件页</th><th>整备主题</th><th>程序（逐行中文注释）</th><th>样本数据</th></tr></thead>
       <tbody>
         <tr>
           <td class="week">第 15 帧</td>
@@ -168,9 +211,9 @@
         </tr>
         <tr>
           <td class="week">第 52 帧</td>
-          <td><b>缺失矩阵与机制偏差</b><br><span class="note">MCAR / MAR / MNAR 三种机制的缺失矩阵与朴素均值偏差 −0.2% / −10.0% / −3.2%。</span></td>
+          <td><b>缺失矩阵与机制偏差</b><br><span class="note">MCAR / MAR / MNAR 三种机制的缺失矩阵与朴素均值偏差 −0.9% / −14.4% / −5.6%。</span></td>
           <td><a href="code/lecture03/l3_07_missing_mechanisms.py">l3_07_missing_mechanisms.py</a></td>
-          <td><a href="data/lecture03/l3_missing_bias.csv">l3_missing_bias.csv</a>、<a href="data/lecture03/l3_income_missing_MCAR.csv">l3_income_missing_MCAR.csv</a>、<a href="data/lecture03/l3_income_missing_MAR.csv">l3_income_missing_MAR.csv</a>、<a href="data/lecture03/l3_income_missing_MNAR.csv">l3_income_missing_MNAR.csv</a>、<a href="data/lecture03/l3_panel_missing.csv">l3_panel_missing.csv</a>、<a href="data/lecture03/l3_panel_coverage.csv">l3_panel_coverage.csv</a></td>
+          <td><a href="data/lecture03/l3_missing_bias.csv">l3_missing_bias.csv</a>、<a href="data/lecture03/l3_income_missing_MCAR.csv">l3_income_missing_MCAR.csv</a>、<a href="data/lecture03/l3_income_missing_MAR.csv">l3_income_missing_MAR.csv</a>、<a href="data/lecture03/l3_income_missing_MNAR.csv">l3_income_missing_MNAR.csv</a>、<a href="data/lecture03/l3_missing_panel_sample.csv">l3_missing_panel_sample.csv</a>、<a href="data/lecture03/l3_missing_panel_coverage.csv">l3_missing_panel_coverage.csv</a></td>
         </tr>
         <tr>
           <td class="week">第 57 帧</td>
@@ -199,63 +242,7 @@
       </tbody>
     </table></div>
 
-    <h3>如何运行 How to Run</h3>
-    <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) install the dependencies (Python 3.8+; this course was tested on 3.9)
-pip install -r code/requirements.txt
-pip install -r code/lecture03/requirements.txt
-
-# 2) Lecture 2 samples: data types (Chinese comments)
-cd code
-python run_all.py
-
-# 3) Lecture 3 samples: data preparation (English comments)
-cd lecture03
-python run_all.py</code></pre>
-    <p class="note">运行后：L2 样本写入 <code>data/</code>、图片写入 <code>figures/</code>；L3 样本写入
-       <code>data/lecture03/</code>、图片写入 <code>figures/lecture03/</code>。两个讲次的随机种子都固定
-       （L2 为 20260917、L3 为 20260317），因此每次运行得到<b>完全相同</b>的样本与图片。</p>
-
-    <h3>示例图片 Figures</h3>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_numeric.png"><img src="figures/fig_numeric.png" alt="数值型数据（连续 / 离散） 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 10 帧 · 数值型数据（连续 / 离散） · 程序 <a href="code/01_datatype_numeric.py">01_datatype_numeric.py</a></figcaption>
-      </figure>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_categorical.png"><img src="figures/fig_categorical.png" alt="类别型数据（名义 / 有序） 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 12 帧 · 类别型数据（名义 / 有序） · 程序 <a href="code/02_datatype_categorical.py">02_datatype_categorical.py</a></figcaption>
-      </figure>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_structured.png"><img src="figures/fig_structured.png" alt="结构化 / 半结构化 / 非结构化 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 13 帧 · 结构化 / 半结构化 / 非结构化 · 程序 <a href="code/10_datatype_structured_unstructured.py">10_datatype_structured_unstructured.py</a></figcaption>
-      </figure>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_text.png"><img src="figures/fig_text.png" alt="文本数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 15 帧 · 文本数据 · 程序 <a href="code/03_datatype_text.py">03_datatype_text.py</a></figcaption>
-      </figure>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_image.png"><img src="figures/fig_image.png" alt="图像数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 16 帧 · 图像数据 · 程序 <a href="code/04_datatype_image.py">04_datatype_image.py</a></figcaption>
-      </figure>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_audio.png"><img src="figures/fig_audio.png" alt="音频数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 17 帧 · 音频数据 · 程序 <a href="code/05_datatype_audio.py">05_datatype_audio.py</a></figcaption>
-      </figure>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_video.png"><img src="figures/fig_video.png" alt="视频数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 18 帧 · 视频数据 · 程序 <a href="code/06_datatype_video.py">06_datatype_video.py</a></figcaption>
-      </figure>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_graph.png"><img src="figures/fig_graph.png" alt="图 / 网络数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 19 帧 · 图 / 网络数据 · 程序 <a href="code/07_datatype_graph.py">07_datatype_graph.py</a></figcaption>
-      </figure>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_spatiotemporal.png"><img src="figures/fig_spatiotemporal.png" alt="时空轨迹数据 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 20 帧 · 时空轨迹数据 · 程序 <a href="code/08_datatype_spatiotemporal.py">08_datatype_spatiotemporal.py</a></figcaption>
-      </figure>
-      <figure style="margin:0 0 26px">
-        <a href="figures/fig_structures.png"><img src="figures/fig_structures.png" alt="截面 / 时序 / 面板 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 23 帧 · 截面 / 时序 / 面板 · 程序 <a href="code/09_datastructure_cross_time_panel.py">09_datastructure_cross_time_panel.py</a></figcaption>
-      </figure>
+    <h4>Lecture 3 示例图片 Figures</h4>
       <figure style="margin:0 0 26px">
         <a href="figures/lecture03/fig_quality_profile.png"><img src="figures/lecture03/fig_quality_profile.png" alt="质量画像仪表盘 Quality profile 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 15 帧 · 质量画像仪表盘 Quality profile · 程序 <a href="code/lecture03/l3_01_quality_profile.py">l3_01_quality_profile.py</a></figcaption>
@@ -305,9 +292,24 @@ python run_all.py</code></pre>
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 72 帧 · 变换与标准化效果 · 程序 <a href="code/lecture03/l3_10_transform_assert.py">l3_10_transform_assert.py</a></figcaption>
       </figure>
 
+    <h3>如何运行 How to Run</h3>
+    <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
+pip install -r code/requirements.txt
+pip install -r code/lecture03/requirements.txt
+
+# 2) Lecture 2：数据类型样本（逐行中文注释）
+cd code
+python run_all.py
+
+# 3) Lecture 3：数据整备样本（逐行中文注释）
+cd lecture03
+python run_all.py</code></pre>
+    <p class="note">两个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317），
+       因此每次运行得到<b>完全相同</b>的样本与图片。</p>
+
     <h3>说明 Notes</h3>
     <ul>
-      <li><b>逐行注释</b>：Lecture 2 的程序与代码页用<b>中文</b>注释；Lecture 3 的程序与代码页<b>每一行都用英文注释</b>（English comments on every line）；</li>
+      <li><b>逐行注释</b>：Lecture 2 与 Lecture 3 的程序、以及课件中的代码示例，<b>每一行代码都带中文注释</b>；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>

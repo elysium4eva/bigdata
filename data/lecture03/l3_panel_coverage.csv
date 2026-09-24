@@ -1,7 +1,4 @@
-﻿firm_id,sum,count,coverage_pct
-F01,12,12,100.0
-F02,12,12,100.0
-F03,9,12,75.0
-F04,12,12,100.0
-F05,9,12,75.0
-F06,9,12,75.0
+﻿firm_id,periods,observed,T_i,coverage_pct,balanced
+F1,9,9,9,100.0,False
+F2,11,9,11,81.8,True
+F3,8,8,8,100.0,False
