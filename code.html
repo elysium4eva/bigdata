@@ -294,7 +294,7 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 72 帧 · 变换与标准化效果 · 程序 <a href="code/lecture03/l3_10_transform_assert.py">l3_10_transform_assert.py</a></figcaption>
       </figure>
 
-    <h3 id="lecture04">Lecture 4 · 数据描述与可视化样本（12 个程序，逐行中文注释）</h3>
+    <h3 id="lecture04">Lecture 4 · 数据描述与可视化样本（13 个程序，逐行中文注释）</h3>
     <p class="note">运行方式：<code>pip install -r code/lecture04/requirements.txt</code> → <code>cd code/lecture04 &amp;&amp; python run_all.py</code>；
        样本写入 <code>data/lecture04/</code>，图片写入 <code>figures/lecture04/</code>，交互 HTML 写入 <code>figures/lecture04/interactive/</code>。
        随机种子固定 20260417，每次运行结果完全一致；全部用 Python 完成（不使用 Power BI / Tableau）。</p>
@@ -386,7 +386,25 @@
           <td><a href="data/lecture04/l4_category_counts.csv">l4_category_counts.csv</a>、<a href="data/lecture04/l4_accessibility_report.csv">l4_accessibility_report.csv</a>、<a href="data/lecture04/l4_accessibility_checklist.csv">l4_accessibility_checklist.csv</a></td>
         </tr>
         <tr>
-          <td class="week">第 88 帧</td>
+          <td class="week">第 89 帧</td>
+          <td><b>三种降维投影对照 Projections</b><br><span class="note">同一份 12 维客户数据：PCA（前两成分 21.8% + 10.5%）、t-SNE、UMAP 三种投影，附碎石图与邻域保真度（t-SNE 0.89 / UMAP 0.85 / PCA 0.75）。</span></td>
+          <td><a href="code/lecture04/l4_13_highdim.py">l4_13_highdim.py</a></td>
+          <td><a href="data/lecture04/l4_highdim_customers.csv">l4_highdim_customers.csv</a>、<a href="data/lecture04/l4_highdim_projection_metrics.csv">l4_highdim_projection_metrics.csv</a>　<a href="figures/lecture04/interactive/embedding_3d.html" target="_blank" rel="noopener">三维嵌入（交互） ↗</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 93 帧</td>
+          <td><b>多变量剖面 Parallel &amp; clustered</b><br><span class="note">8 个标准化特征的平行坐标（三个群体均值剖面）、按层次聚类重排的相关热力图、以及只作示意的雷达图。</span></td>
+          <td><a href="code/lecture04/l4_13_highdim.py">l4_13_highdim.py</a></td>
+          <td><a href="data/lecture04/l4_highdim_customers.csv">l4_highdim_customers.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 94 帧</td>
+          <td><b>模型解释性可视化 Interpretability</b><br><span class="note">随机森林预测流失：置换重要性（最近购买距今天数 0.195，10 次重复带误差棒）、PDP 平均边际效应与 60 条 ICE 个体曲线。</span></td>
+          <td><a href="code/lecture04/l4_13_highdim.py">l4_13_highdim.py</a></td>
+          <td><a href="data/lecture04/l4_highdim_importance.csv">l4_highdim_importance.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 98 帧</td>
           <td><b>报告主图与图注 Report pipeline</b><br><span class="note">统计表 + 四联报告图 + 自足图注一次导出：纵轴截断、缺失处理、误差棒与样本量都写在图注里。</span></td>
           <td><a href="code/lecture04/l4_12_report_pipeline.py">l4_12_report_pipeline.py</a></td>
           <td><a href="data/lecture04/report/table1_descriptive.csv">report/table1_descriptive.csv</a>、<a href="data/lecture04/report/table2_channel.csv">report/table2_channel.csv</a>、<a href="data/lecture04/report/captions.md">report/captions.md</a></td>
@@ -452,8 +470,20 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 85 帧 · 色板与灰度可访问性 Palette accessibility · 程序 <a href="code/lecture04/l4_11_accessibility.py">l4_11_accessibility.py</a></figcaption>
       </figure>
       <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_highdim_projections.png"><img src="figures/lecture04/fig_highdim_projections.png" alt="三种降维投影对照 Projections 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 89 帧 · 三种降维投影对照 Projections · 程序 <a href="code/lecture04/l4_13_highdim.py">l4_13_highdim.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_parallel_cluster.png"><img src="figures/lecture04/fig_parallel_cluster.png" alt="多变量剖面 Parallel &amp; clustered 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 93 帧 · 多变量剖面 Parallel &amp; clustered · 程序 <a href="code/lecture04/l4_13_highdim.py">l4_13_highdim.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_interpretability.png"><img src="figures/lecture04/fig_interpretability.png" alt="模型解释性可视化 Interpretability 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 94 帧 · 模型解释性可视化 Interpretability · 程序 <a href="code/lecture04/l4_13_highdim.py">l4_13_highdim.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
         <a href="figures/lecture04/fig_report_panel.png"><img src="figures/lecture04/fig_report_panel.png" alt="报告主图与图注 Report pipeline 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
-        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 88 帧 · 报告主图与图注 Report pipeline · 程序 <a href="code/lecture04/l4_12_report_pipeline.py">l4_12_report_pipeline.py</a></figcaption>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 98 帧 · 报告主图与图注 Report pipeline · 程序 <a href="code/lecture04/l4_12_report_pipeline.py">l4_12_report_pipeline.py</a></figcaption>
       </figure>
 
     <h3>如何运行 How to Run</h3>

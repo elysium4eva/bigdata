@@ -1,0 +1,13 @@
+﻿feature,importance,std
+recency_days,0.1946,0.013
+frequency,0.075,0.0096
+monetary,0.0509,0.0063
+tenure_months,0.0166,0.0008
+avg_session_min,0.0147,0.0016
+return_rate,0.0131,0.0017
+discount_share,0.0126,0.0013
+avg_order_value,0.0111,0.0009
+email_open_rate,0.0095,0.0008
+support_tickets,0.0095,0.0006
+session_count,0.0089,0.0009
+category_breadth,0.0072,0.0008

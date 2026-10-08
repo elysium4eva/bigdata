@@ -24,6 +24,7 @@ SCRIPTS = [                                                        # 运行顺�
     "l4_10_uncertainty.py",                                        # 不确定性表达
     "l4_11_accessibility.py",                                      # 色板与可访问性
     "l4_12_report_pipeline.py",                                    # 报告流水线（表 + 图 + 图注）
+    "l4_13_highdim.py",                                            # 高维可视化（降维投影 / 平行坐标 / 解释性）
 ]                                                                  # 运行清单到此结束
 for name in SCRIPTS:                                               # 逐个执行示例
     started = time.time()                                          # 开始计时

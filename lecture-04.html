@@ -38,23 +38,26 @@
     <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
 
     <div class="hero-actions no-print">
-      <a class="btn btn-primary" href="files/L04-description-visualization.pdf">下载课件（2026 版 · 92 页）</a>
+      <a class="btn btn-primary" href="files/L04-description-visualization.pdf">下载课件（2026 版 · 102 页）</a>
       <a class="btn btn-ghost" href="code.html#lecture04">样本数据与程序</a>
       <a class="btn btn-ghost" href="lecture-03.html">上一讲 Lecture 3</a>
       <a class="btn btn-gold" href="syllabus.html">课程大纲</a>
     </div>
 
     <div class="grid grid-4" style="margin-top:22px">
-      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>92</strong> 帧 · 16:9 详版</div></div>
-      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行中文注释）</div></div>
-      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>13</strong> 页样本 + 15 张图 + <strong>6</strong> 个交互 HTML</div></div>
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>102</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>12</strong> 页（逐行中文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>16</strong> 页样本 + 18 张图 + <strong>7</strong> 个交互 HTML</div></div>
       <div class="card"><div class="k">对应周次 Week</div><div class="v">第 5 周（与 L3 双讲）</div></div>
     </div>
-    <p class="note">本讲从原课件（37 页）重制为 Beamer 双语课件：<b>保留 20 项数据文档清单与"5, 19, 24, 62, 91, 100 → 极差 95"的原始例子</b>，
+    <p class="note">本讲为 Beamer 双语课件（<b>102 帧</b>）：保留 <b>20 项数据文档清单</b>与
+       <b>"5, 19, 24, 62, 91, 100 → 极差 95"</b>的经典例子，
        把图表规范扩成完整的"图的语法 + 选图决策表"，并新增 2026 内容（AI 辅助制图与核验清单、误导性图表识别与修正、
        色盲友好与可访问性、叙事可视化、不确定性表达）。
-       全部示例用 <b>Python 完成</b>（不使用 Power BI / Tableau），并新增<b>地理信息可视化</b>专题：
-       choropleth 分级方法、符号地图、贸易流向图与空间自相关（Moran's I）。
+       全部示例用 <b>Python 完成</b>（不使用 Power BI / Tableau），并包含两个进阶专题：
+       <b>地理信息可视化</b>（choropleth 分级方法、符号地图、贸易流向图与空间自相关 Moran's I）与
+       <b>高维数据可视化</b>（PCA / t-SNE / UMAP 降维投影与邻域保真度、平行坐标与聚类热图、
+       置换重要性 / PDP / ICE 解释性可视化、三维交互嵌入）。
        样本数据与程序随课程仓库发布，可一键重跑（<a href="code.html#lecture04">样本数据与可视化程序</a>）。</p>
 
     <h3>本讲结构 Outline</h3>
@@ -67,11 +70,12 @@
         <tr><td class="week">Part 4</td><td>图型选择与图的语法：数据→几何→通道的三层映射、通道有效性排序、按问题选图决策表、比较与分布、时间类（趋势与权重趋势、脉冲图）、关系类（过绘对策、相关矩阵、热力图）、结构与流程（网络图四条）、图表规范与图注自足性、七类图型总览样本页、图表工厂代码页、坐标轴与刻度、三类色板、选图五步小结</td></tr>
         <tr><td class="week">Part 5</td><td>工具、交互与地理信息：可视化定义、信息可视化 vs 科学可视化、工具全景（统一到 Python，不使用 BI 授权软件）、Stata 能力边界、Python 四件套、R 生态与按图选型资源、plotly 交互代码页、交互 vs 静态样本页、Python 仪表板代码页与设计原则、<b>地理信息可视化专题</b>（数据结构与 CRS、choropleth 三种分级、地图三件套代码页、choropleth vs 符号地图样本页、空间自相关与 Moran 散点样本页、地图四个陷阱）、网络与引文可视化（WITS/Gephi/CiteSpace/SNAP）</td></tr>
         <tr><td class="week">Part 6</td><td>误导、可访问性与叙事：截断坐标轴、面积与体积错觉、双轴与选择性区间、统计与图形联合误导、六种误导与修正样本页、把图形规范写成断言代码页、不确定性表达、自助法与置信带代码页、不确定性四视图样本页、色盲友好与可访问性、色板与灰度检查样本页、叙事可视化与 AI 辅助制图及核验清单</td></tr>
-        <tr><td class="week">Part 7</td><td>项目与结语：可信图表十条检查、项目 1 图表与描述部分（报告主图 + 统计表 + 图注流水线）、常见错误 Top 10、工具与代码速查、术语对照与参考书、只看图复述结论的自检结语</td></tr>
+        <tr><td class="week">Part 7</td><td><b>高维数据可视化（前沿）</b>：维度灾难与三大策略、降维三件套 PCA / t-SNE / UMAP（与 Isomap/MDS 对照）、三种投影对照样本页与邻域保真度（t-SNE 0.89 &gt; UMAP 0.85 &gt; PCA 0.75）、降维投影代码页、投影读法与五条纪律、平行坐标与雷达图、多变量剖面样本页（平行坐标 + 聚类重排热力图 + 雷达图）、模型解释性可视化（置换重要性 / PDP / ICE，最近购买距今天数 0.195）、解释性可视化代码页、前沿拓展（嵌入投影浏览器、三维交互与 grand tour、可解释性与可访问性）与检查清单</td></tr>
+        <tr><td class="week">Part 8</td><td>项目与结语：可信图表十条检查、项目 1 图表与描述部分（报告主图 + 统计表 + 图注流水线）、常见错误 Top 10、工具与代码速查、术语对照与参考书、只看图复述结论的自检结语</td></tr>
       </tbody>
     </table></div>
 
-    <h3>代码示例（10 页，逐行中文注释）Code Walkthroughs</h3>
+    <h3>代码示例（12 页，逐行中文注释）Code Walkthroughs</h3>
     <ul>
       <li><b>自动生成数据字典</b>：字段类型、非空率、取值域、单位与文档要素完成度（<code>l4_01</code>）；</li>
       <li><b>描述统计一条龙</b>：均值/中位数/众数/方差/IQR/MAD/偏度/峰度与稳健性对照（<code>l4_02</code>）；</li>
@@ -83,6 +87,8 @@
       <li><b>地图三件套</b>：GeoJSON 手工绘制 choropleth、符号地图、流向图与空间权重矩阵（<code>l4_08</code>）；</li>
       <li><b>把图形规范写成断言</b>：零点、面积编码、双轴、选择性区间与不确定性检查（<code>l4_09</code>）；</li>
       <li><b>自助法与置信带</b>：B=2000 次重采样、差值区间与扇形预测带（<code>l4_10</code>）。</li>
+      <li><b>降维投影与保真度</b>：PCA / t-SNE / UMAP，标准化、解释方差与邻域保真度评价（<code>l4_13</code>）；</li>
+      <li><b>解释性可视化</b>：置换重要性、PDP 与 ICE，以及可旋转的三维嵌入 HTML（<code>l4_13</code>）。</li>
     </ul>
 
     <h3>在线预览 Preview</h3>
