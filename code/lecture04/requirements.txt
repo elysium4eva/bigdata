@@ -1,0 +1,8 @@
+numpy>=1.24          # 数值计算与随机数（合成样本、自助法）
+pandas>=2.1          # 表格、分组、交叉表与描述统计
+matplotlib>=3.7      # 课件全部静态插图（含手工绘制的 choropleth 与 Moran 散点）
+seaborn>=0.13        # 统计图形（分布、分组对照的快捷接口）
+scipy>=1.10          # 卡方检验、分布函数（偏度/峰度对照曲线）
+plotly>=5.20         # 交互图表、世界 choropleth 与流向图（导出 HTML）
+kaleido>=0.2         # 需要把 plotly 图导出为静态图片时使用（本讲以 matplotlib 出静态图，可选）
+pillow>=9.0          # 图像后端

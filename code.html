@@ -35,13 +35,15 @@
   <div class="wrap">
     <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 样本数据与可视化程序</p>
     <h1 class="doc-title">样本数据与可视化程序　Sample Data &amp; Visualisation</h1>
-    <p class="doc-sub">大数据分析［2026 国际商务］ · 配合第二章「数据类型」与第三章「数据整备」的样本页 · 2026 秋季学期</p>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · 配合第二章「数据类型」、第三章「数据整备」与第四章「数据描述与可视化」的样本页 · 2026 秋季学期</p>
 
     <div class="hero-actions no-print">
       <a class="btn btn-primary" href="#lecture02">Lecture 2 · 数据类型</a>
       <a class="btn btn-primary" href="#lecture03">Lecture 3 · 数据整备</a>
+      <a class="btn btn-primary" href="#lecture04">Lecture 4 · 描述与可视化</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
+      <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
     </div>
 
     <h3 id="lecture02">Lecture 2 · 数据类型样本（10 个程序，逐行中文注释）</h3>
@@ -292,10 +294,173 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 72 帧 · 变换与标准化效果 · 程序 <a href="code/lecture03/l3_10_transform_assert.py">l3_10_transform_assert.py</a></figcaption>
       </figure>
 
+    <h3 id="lecture04">Lecture 4 · 数据描述与可视化样本（12 个程序，逐行中文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture04/requirements.txt</code> → <code>cd code/lecture04 &amp;&amp; python run_all.py</code>；
+       样本写入 <code>data/lecture04/</code>，图片写入 <code>figures/lecture04/</code>，交互 HTML 写入 <code>figures/lecture04/interactive/</code>。
+       随机种子固定 20260417，每次运行结果完全一致；全部用 Python 完成（不使用 Power BI / Tableau）。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>课件页</th><th>可视化主题</th><th>程序（逐行中文注释）</th><th>样本数据 / 交互产物</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="week">第 13 帧</td>
+          <td><b>文档完成度与数据字典 Document coverage</b><br><span class="note">500 行调研样本：20 项文档要素逐项打分（20/20 已填）、字段非空率与自动生成的数据字典（9 个字段）。</span></td>
+          <td><a href="code/lecture04/l4_01_docs_metadata.py">l4_01_docs_metadata.py</a></td>
+          <td><a href="data/lecture04/l4_survey_raw.csv">l4_survey_raw.csv</a>、<a href="data/lecture04/l4_data_dictionary.csv">l4_data_dictionary.csv</a>、<a href="data/lecture04/l4_data_dictionary.md">l4_data_dictionary.md</a>、<a href="data/lecture04/l4_docs_coverage.csv">l4_docs_coverage.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 23 帧</td>
+          <td><b>中心趋势的稳健性 Robust centre</b><br><span class="note">1000 个收入观测加 3 个离群点：均值移动 +12.5%、中位数只移动 +0.7%；均值/中位数/标准差/IQR/MAD 对照。</span></td>
+          <td><a href="code/lecture04/l4_02_descriptive_stats.py">l4_02_descriptive_stats.py</a></td>
+          <td><a href="data/lecture04/l4_income_skewed.csv">l4_income_skewed.csv</a>、<a href="data/lecture04/l4_descriptive_table.csv">l4_descriptive_table.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 24 帧</td>
+          <td><b>离散与分布形状 Dispersion &amp; shape</b><br><span class="note">同均值不同离散、三个离散指标对照、偏度（左偏/对称/右偏）、峰度（厚尾 t(3)/正态/薄尾均匀）。</span></td>
+          <td><a href="code/lecture04/l4_02_descriptive_stats.py">l4_02_descriptive_stats.py</a></td>
+          <td><a href="data/lecture04/l4_descriptive_table.csv">l4_descriptive_table.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 28 帧</td>
+          <td><b>同一变量五种画法 Five univariate charts</b><br><span class="note">城市 GDP 的直方图、箱线图、小提琴图、ECDF 与茎叶图：换图型就换视角，分箱决定观感。</span></td>
+          <td><a href="code/lecture04/l4_05_chart_zoo.py">l4_05_chart_zoo.py</a></td>
+          <td><a href="data/lecture04/l4_city_gdp.csv">l4_city_gdp.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 37 帧</td>
+          <td><b>受限范围与相关系数 Restricted range</b><br><span class="note">引力模型 220 对国家对：全样本 Pearson −0.589 / Spearman −0.606，只留最近 25% 的伙伴后降到 −0.200 / −0.213。</span></td>
+          <td><a href="code/lecture04/l4_03_correlation_crosstab.py">l4_03_correlation_crosstab.py</a></td>
+          <td><a href="data/lecture04/l4_trade_pairs.csv">l4_trade_pairs.csv</a>、<a href="data/lecture04/l4_correlation_pearson.csv">l4_correlation_pearson.csv</a>、<a href="data/lecture04/l4_correlation_spearman.csv">l4_correlation_spearman.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 38 帧</td>
+          <td><b>多变量三视图 Multivariate views</b><br><span class="note">60 家企业 × 8 年面板：相关矩阵热力图、按行业着色的散点、行业营收小多图、各行业 ROA 条件分布。</span></td>
+          <td><a href="code/lecture04/l4_04_multivariate.py">l4_04_multivariate.py</a></td>
+          <td><a href="data/lecture04/l4_firm_panel.csv">l4_firm_panel.csv</a>、<a href="data/lecture04/l4_conditional_roa.csv">l4_conditional_roa.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 52 帧</td>
+          <td><b>七类图型总览 Chart zoo</b><br><span class="note">柱状图、分布图、趋势图、散点图、相关矩阵、条形图、网络图，外加一格&quot;按问题选图&quot;的口诀。</span></td>
+          <td><a href="code/lecture04/l4_05_chart_zoo.py">l4_05_chart_zoo.py</a></td>
+          <td><a href="data/lecture04/l4_city_gdp.csv">l4_city_gdp.csv</a>、<a href="data/lecture04/l4_category_counts.csv">l4_category_counts.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 64 帧</td>
+          <td><b>交互图与静态图 Interactive vs static</b><br><span class="note">132 个月 × 4 类能源：静态图用于定稿汇报，交互 HTML（折线/散点/桑基）用于探索与课堂演示。</span></td>
+          <td><a href="code/lecture04/l4_06_plotly_interactive.py">l4_06_plotly_interactive.py</a></td>
+          <td><a href="data/lecture04/l4_energy.csv">l4_energy.csv</a>　<a href="figures/lecture04/interactive/energy_trend.html" target="_blank" rel="noopener">能耗趋势（交互） ↗</a>　<a href="figures/lecture04/interactive/income_spend.html" target="_blank" rel="noopener">收入散点（交互） ↗</a>　<a href="figures/lecture04/interactive/energy_sankey.html" target="_blank" rel="noopener">桑基图（交互） ↗</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 66 帧</td>
+          <td><b>Python 仪表板 Dashboard</b><br><span class="note">KPI 卡（样本量、满意度、复购率、人均 GDP 中位数）+ 2×2 面板；plotly 子图导出单文件 HTML，替代 BI 工具。</span></td>
+          <td><a href="code/lecture04/l4_07_dashboard.py">l4_07_dashboard.py</a></td>
+          <td><a href="data/lecture04/l4_dashboard_kpi.csv">l4_dashboard_kpi.csv</a>　<a href="figures/lecture04/interactive/dashboard.html" target="_blank" rel="noopener">仪表板（交互） ↗</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 70 帧</td>
+          <td><b>choropleth 与符号地图 Geo maps</b><br><span class="note">31 个省级单位与 24 个经济体：GeoJSON 分级统计图、总量气泡图、世界 choropleth 与贸易流向图。</span></td>
+          <td><a href="code/lecture04/l4_08_geo_maps.py">l4_08_geo_maps.py</a></td>
+          <td><a href="data/lecture04/l4_province_gdp.csv">l4_province_gdp.csv</a>、<a href="data/lecture04/l4_country_indicators.csv">l4_country_indicators.csv</a>、<a href="data/lecture04/china_provinces.geojson">china_provinces.geojson</a>　<a href="figures/lecture04/interactive/map_world_choropleth.html" target="_blank" rel="noopener">世界 choropleth（交互） ↗</a>　<a href="figures/lecture04/interactive/map_trade_flows.html" target="_blank" rel="noopener">贸易流向图（交互） ↗</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 72 帧</td>
+          <td><b>空间自相关 Moran 散点</b><br><span class="note">4 近邻权重矩阵：Moran's I = 0.659，HH 16 / LL 13 / LH 2——人均 GDP 存在明显的正向空间聚集。</span></td>
+          <td><a href="code/lecture04/l4_08_geo_maps.py">l4_08_geo_maps.py</a></td>
+          <td><a href="data/lecture04/l4_moran.csv">l4_moran.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 79 帧</td>
+          <td><b>六种误导手法与修正</b><br><span class="note">截断纵轴、气泡按半径、双轴伪相关、选择性区间、饼图讲相近占比、丢掉不确定性：上排误导、下排修正。</span></td>
+          <td><a href="code/lecture04/l4_09_misleading.py">l4_09_misleading.py</a></td>
+          <td><a href="data/lecture04/l4_ab_test.csv">l4_ab_test.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 83 帧</td>
+          <td><b>不确定性四视图 Uncertainty</b><br><span class="note">B=2000 次自助重采样：误差棒、差值分布与区间（[−0.0056, +0.0456] 跨 0）、时间序列置信带、扇形预测带。</span></td>
+          <td><a href="code/lecture04/l4_10_uncertainty.py">l4_10_uncertainty.py</a></td>
+          <td><a href="data/lecture04/l4_ab_test.csv">l4_ab_test.csv</a>、<a href="data/lecture04/l4_uncertainty_summary.csv">l4_uncertainty_summary.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 85 帧</td>
+          <td><b>色板与灰度可访问性 Palette accessibility</b><br><span class="note">三套色板的原色/灰度对照、感知亮度分布与 WCAG 对比度矩阵（≥4.5 达标），附 12 项可访问性清单。</span></td>
+          <td><a href="code/lecture04/l4_11_accessibility.py">l4_11_accessibility.py</a></td>
+          <td><a href="data/lecture04/l4_category_counts.csv">l4_category_counts.csv</a>、<a href="data/lecture04/l4_accessibility_report.csv">l4_accessibility_report.csv</a>、<a href="data/lecture04/l4_accessibility_checklist.csv">l4_accessibility_checklist.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 88 帧</td>
+          <td><b>报告主图与图注 Report pipeline</b><br><span class="note">统计表 + 四联报告图 + 自足图注一次导出：纵轴截断、缺失处理、误差棒与样本量都写在图注里。</span></td>
+          <td><a href="code/lecture04/l4_12_report_pipeline.py">l4_12_report_pipeline.py</a></td>
+          <td><a href="data/lecture04/report/table1_descriptive.csv">report/table1_descriptive.csv</a>、<a href="data/lecture04/report/table2_channel.csv">report/table2_channel.csv</a>、<a href="data/lecture04/report/captions.md">report/captions.md</a></td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 4 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_docs_coverage.png"><img src="figures/lecture04/fig_docs_coverage.png" alt="文档完成度与数据字典 Document coverage 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 13 帧 · 文档完成度与数据字典 Document coverage · 程序 <a href="code/lecture04/l4_01_docs_metadata.py">l4_01_docs_metadata.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_central_tendency.png"><img src="figures/lecture04/fig_central_tendency.png" alt="中心趋势的稳健性 Robust centre 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 23 帧 · 中心趋势的稳健性 Robust centre · 程序 <a href="code/lecture04/l4_02_descriptive_stats.py">l4_02_descriptive_stats.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_dispersion_shape.png"><img src="figures/lecture04/fig_dispersion_shape.png" alt="离散与分布形状 Dispersion &amp; shape 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 24 帧 · 离散与分布形状 Dispersion &amp; shape · 程序 <a href="code/lecture04/l4_02_descriptive_stats.py">l4_02_descriptive_stats.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_univariate_zoo.png"><img src="figures/lecture04/fig_univariate_zoo.png" alt="同一变量五种画法 Five univariate charts 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 28 帧 · 同一变量五种画法 Five univariate charts · 程序 <a href="code/lecture04/l4_05_chart_zoo.py">l4_05_chart_zoo.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_restricted_range.png"><img src="figures/lecture04/fig_restricted_range.png" alt="受限范围与相关系数 Restricted range 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 37 帧 · 受限范围与相关系数 Restricted range · 程序 <a href="code/lecture04/l4_03_correlation_crosstab.py">l4_03_correlation_crosstab.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_multivariate.png"><img src="figures/lecture04/fig_multivariate.png" alt="多变量三视图 Multivariate views 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 38 帧 · 多变量三视图 Multivariate views · 程序 <a href="code/lecture04/l4_04_multivariate.py">l4_04_multivariate.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_chart_zoo.png"><img src="figures/lecture04/fig_chart_zoo.png" alt="七类图型总览 Chart zoo 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 52 帧 · 七类图型总览 Chart zoo · 程序 <a href="code/lecture04/l4_05_chart_zoo.py">l4_05_chart_zoo.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_interactive_vs_static.png"><img src="figures/lecture04/fig_interactive_vs_static.png" alt="交互图与静态图 Interactive vs static 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 64 帧 · 交互图与静态图 Interactive vs static · 程序 <a href="code/lecture04/l4_06_plotly_interactive.py">l4_06_plotly_interactive.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_dashboard.png"><img src="figures/lecture04/fig_dashboard.png" alt="Python 仪表板 Dashboard 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 66 帧 · Python 仪表板 Dashboard · 程序 <a href="code/lecture04/l4_07_dashboard.py">l4_07_dashboard.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_map_choropleth_vs_symbol.png"><img src="figures/lecture04/fig_map_choropleth_vs_symbol.png" alt="choropleth 与符号地图 Geo maps 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 70 帧 · choropleth 与符号地图 Geo maps · 程序 <a href="code/lecture04/l4_08_geo_maps.py">l4_08_geo_maps.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_moran_scatter.png"><img src="figures/lecture04/fig_moran_scatter.png" alt="空间自相关 Moran 散点 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 72 帧 · 空间自相关 Moran 散点 · 程序 <a href="code/lecture04/l4_08_geo_maps.py">l4_08_geo_maps.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_misleading_pairs.png"><img src="figures/lecture04/fig_misleading_pairs.png" alt="六种误导手法与修正 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 79 帧 · 六种误导手法与修正 · 程序 <a href="code/lecture04/l4_09_misleading.py">l4_09_misleading.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_uncertainty.png"><img src="figures/lecture04/fig_uncertainty.png" alt="不确定性四视图 Uncertainty 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 83 帧 · 不确定性四视图 Uncertainty · 程序 <a href="code/lecture04/l4_10_uncertainty.py">l4_10_uncertainty.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_palette_accessibility.png"><img src="figures/lecture04/fig_palette_accessibility.png" alt="色板与灰度可访问性 Palette accessibility 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 85 帧 · 色板与灰度可访问性 Palette accessibility · 程序 <a href="code/lecture04/l4_11_accessibility.py">l4_11_accessibility.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_report_panel.png"><img src="figures/lecture04/fig_report_panel.png" alt="报告主图与图注 Report pipeline 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 88 帧 · 报告主图与图注 Report pipeline · 程序 <a href="code/lecture04/l4_12_report_pipeline.py">l4_12_report_pipeline.py</a></figcaption>
+      </figure>
+
     <h3>如何运行 How to Run</h3>
     <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
 pip install -r code/requirements.txt
 pip install -r code/lecture03/requirements.txt
+pip install -r code/lecture04/requirements.txt
 
 # 2) Lecture 2：数据类型样本（逐行中文注释）
 cd code
@@ -303,13 +468,18 @@ python run_all.py
 
 # 3) Lecture 3：数据整备样本（逐行中文注释）
 cd lecture03
+python run_all.py
+
+# 4) Lecture 4：描述统计与可视化样本（逐行中文注释）
+cd ../lecture04
 python run_all.py</code></pre>
-    <p class="note">两个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317），
-       因此每次运行得到<b>完全相同</b>的样本与图片。</p>
+    <p class="note">三个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417），
+       因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 4 的省级边界文件在首次运行时自动下载并缓存到
+       <code>data/lecture04/china_provinces.geojson</code>；若网络不可用，地图自动退化为中心点气泡图，流程不会中断。</p>
 
     <h3>说明 Notes</h3>
     <ul>
-      <li><b>逐行注释</b>：Lecture 2 与 Lecture 3 的程序、以及课件中的代码示例，<b>每一行代码都带中文注释</b>；</li>
+      <li><b>逐行注释</b>：Lecture 2、Lecture 3 与 Lecture 4 的程序、以及课件中的代码示例，<b>每一行代码都带中文注释</b>；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -333,6 +503,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
           <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
           <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
           <li><a href="code.html">样本数据与可视化程序</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>

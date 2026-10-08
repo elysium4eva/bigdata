@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 4 Data Description and Visualization · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第四章</p>
+    <h1 class="doc-title">Lecture 4　Data Description and Visualization</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L04-description-visualization.pdf">下载课件（2026 版 · 92 页）</a>
+      <a class="btn btn-ghost" href="code.html#lecture04">样本数据与程序</a>
+      <a class="btn btn-ghost" href="lecture-03.html">上一讲 Lecture 3</a>
+      <a class="btn btn-gold" href="syllabus.html">课程大纲</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>92</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行中文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>13</strong> 页样本 + 15 张图 + <strong>6</strong> 个交互 HTML</div></div>
+      <div class="card"><div class="k">对应周次 Week</div><div class="v">第 5 周（与 L3 双讲）</div></div>
+    </div>
+    <p class="note">本讲从原课件（37 页）重制为 Beamer 双语课件：<b>保留 20 项数据文档清单与"5, 19, 24, 62, 91, 100 → 极差 95"的原始例子</b>，
+       把图表规范扩成完整的"图的语法 + 选图决策表"，并新增 2026 内容（AI 辅助制图与核验清单、误导性图表识别与修正、
+       色盲友好与可访问性、叙事可视化、不确定性表达）。
+       全部示例用 <b>Python 完成</b>（不使用 Power BI / Tableau），并新增<b>地理信息可视化</b>专题：
+       choropleth 分级方法、符号地图、贸易流向图与空间自相关（Moran's I）。
+       样本数据与程序随课程仓库发布，可一键重跑（<a href="code.html#lecture04">样本数据与可视化程序</a>）。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L3 衔接、本讲输出物（数据文档 + 描述统计表 + 图表清单 + 可信图表检查单）、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>文档与元数据：四类应用场景（投研/学位论文/科研/咨询）、为什么开工即写文档、<b>20 项数据文档清单</b>（原表分两帧）、元数据与 codebook、六个元数据标准、文档完成度体检样本页、自动生成数据字典代码页、文档与数据契约、验收标准</td></tr>
+        <tr><td class="week">Part 2</td><td>单变量描述统计：描述 vs 推断、集中趋势（均值/中位数/众数）、离散程度（极差 95 原例 + IQR/MAD/方差）、频数分布与三概念区分、偏度、峰度（lepto/platy/meso）、中心趋势稳健性样本页（+12.5% vs +0.7%）、离散与形状四联图、描述统计一条龙代码页、单变量图型五件套、分布形状怎么读、单变量陷阱、中心·离散·形状小结</td></tr>
+        <tr><td class="week">Part 3</td><td>双变量与多变量：四项内容总览、列联表与卡方/Cramér's V、Pearson vs Spearman 使用边界、协方差与标准化斜率、对数变换、受限取值范围削弱相关、受限范围实验样本页（−0.589 → −0.200）、多变量三视图样本页、相关与列联表代码页、分组与小多图、条件分布与辛普森悖论、相关三问小结</td></tr>
+        <tr><td class="week">Part 4</td><td>图型选择与图的语法：数据→几何→通道的三层映射、通道有效性排序、按问题选图决策表、比较与分布、时间类（趋势与权重趋势、脉冲图）、关系类（过绘对策、相关矩阵、热力图）、结构与流程（网络图四条）、图表规范与图注自足性、七类图型总览样本页、图表工厂代码页、坐标轴与刻度、三类色板、选图五步小结</td></tr>
+        <tr><td class="week">Part 5</td><td>工具、交互与地理信息：可视化定义、信息可视化 vs 科学可视化、工具全景（统一到 Python，不使用 BI 授权软件）、Stata 能力边界、Python 四件套、R 生态与按图选型资源、plotly 交互代码页、交互 vs 静态样本页、Python 仪表板代码页与设计原则、<b>地理信息可视化专题</b>（数据结构与 CRS、choropleth 三种分级、地图三件套代码页、choropleth vs 符号地图样本页、空间自相关与 Moran 散点样本页、地图四个陷阱）、网络与引文可视化（WITS/Gephi/CiteSpace/SNAP）</td></tr>
+        <tr><td class="week">Part 6</td><td>误导、可访问性与叙事：截断坐标轴、面积与体积错觉、双轴与选择性区间、统计与图形联合误导、六种误导与修正样本页、把图形规范写成断言代码页、不确定性表达、自助法与置信带代码页、不确定性四视图样本页、色盲友好与可访问性、色板与灰度检查样本页、叙事可视化与 AI 辅助制图及核验清单</td></tr>
+        <tr><td class="week">Part 7</td><td>项目与结语：可信图表十条检查、项目 1 图表与描述部分（报告主图 + 统计表 + 图注流水线）、常见错误 Top 10、工具与代码速查、术语对照与参考书、只看图复述结论的自检结语</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行中文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>自动生成数据字典</b>：字段类型、非空率、取值域、单位与文档要素完成度（<code>l4_01</code>）；</li>
+      <li><b>描述统计一条龙</b>：均值/中位数/众数/方差/IQR/MAD/偏度/峰度与稳健性对照（<code>l4_02</code>）；</li>
+      <li><b>相关与列联表</b>：Pearson/Spearman、相关矩阵、卡方与 Cramér's V、受限范围实验（<code>l4_03</code>）；</li>
+      <li><b>多变量三视图</b>：相关热力图、分组散点、小多图与条件分布（<code>l4_04</code>）；</li>
+      <li><b>图表工厂</b>：统一标题、轴标签、色板与图内注释的批量出图函数族（<code>l4_05</code>）；</li>
+      <li><b>交互图表</b>：plotly 折线/散点/桑基，导出单文件 HTML（<code>l4_06</code>）；</li>
+      <li><b>Python 仪表板</b>：KPI 卡 + 2×2 面板，替代 Power BI / Tableau（<code>l4_07</code>）；</li>
+      <li><b>地图三件套</b>：GeoJSON 手工绘制 choropleth、符号地图、流向图与空间权重矩阵（<code>l4_08</code>）；</li>
+      <li><b>把图形规范写成断言</b>：零点、面积编码、双轴、选择性区间与不确定性检查（<code>l4_09</code>）；</li>
+      <li><b>自助法与置信带</b>：B=2000 次重采样、差值区间与扇形预测带（<code>l4_10</code>）。</li>
+    </ul>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L04-description-visualization.pdf" title="Lecture 4 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

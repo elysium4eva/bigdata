@@ -1,0 +1,7 @@
+﻿变量,gdp_exporter,gdp_importer,distance_km,trade_usd,log_trade,log_distance
+gdp_exporter,1.0,0.023,-0.134,0.785,0.536,-0.208
+gdp_importer,0.023,1.0,-0.004,0.249,0.428,-0.026
+distance_km,-0.134,-0.004,1.0,-0.198,-0.481,0.851
+trade_usd,0.785,0.249,-0.198,1.0,0.579,-0.306
+log_trade,0.536,0.428,-0.481,0.579,1.0,-0.589
+log_distance,-0.208,-0.026,0.851,-0.306,-0.589,1.0

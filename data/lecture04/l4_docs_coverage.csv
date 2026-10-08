@@ -1,0 +1,21 @@
+﻿文档要素,内容,状态
+Title 标题,l4_survey_raw.csv 消费者满意度和复购调研（2026 春）,已填
+Creator 创建者,大数据分析课程组（教学用合成数据）,已填
+Identifier 标识符,SZU-BDA-2026-L4-SURVEY-01,已填
+Subject 主题词,"消费者满意度, 复购意愿, 渠道差异",已填
+Funders 资助方,无（课程自建）,已填
+Rights 权利,教学使用；不含真实个人信息,已填
+Access 获取方式,课程仓库 website/data/lecture04/,已填
+Language 语言,中文（字段名）,已填
+Dates 日期,采集期 2026-03；发布于 2026-03-20,已填
+Location 空间范围,中国 8 个城市（见 city 字段）,已填
+Methodology 方法,配额抽样，线上/门店/电话三渠道，问卷 12 题,已填
+Data processing 处理,缺失值标记；收入上限截尾 1%；未插补,已填
+Sources 来源,课程合成样本（结构参考电商消费者调研）,已填
+File list 文件清单,"l4_survey_raw.csv, l4_data_dictionary.csv",已填
+File formats 格式,CSV（UTF-8-SIG）,已填
+File structure 结构,一行 = 一位受访者（长表）,已填
+Variable list 变量清单,见 l4_data_dictionary.csv,已填
+Code lists 编码表,"satisfaction 1—5；channel={线上,门店,电话}",已填
+Versions 版本,v1.0（2026-03-20）,已填
+Checksums 校验和,SHA-256 见发布包 README,已填

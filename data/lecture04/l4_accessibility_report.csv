@@ -1,0 +1,4 @@
+﻿色板,最小灰度间距,与白底最低对比度,正文达标(≥4.5),可用作文字色
+matplotlib 默认,0.005,1.55,False,False
+深大主题色,0.006,1.55,False,False
+Okabe–Ito（色盲友好）,0.016,1.19,False,False
