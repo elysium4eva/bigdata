@@ -1,41 +1,41 @@
-"""01_datatype_numeric.py —— 数值型数据（连续 vs 离散）：样本生成 + 可视化。"""  # 模块注释
-import numpy as np                                                    # 数值计算
-import pandas as pd                                                   # 表格数据处理
-import matplotlib.pyplot as plt                                       # 绘图
-from _common import RNG, save, dump_csv                               # 复用公共工具（随机种子/保存/落盘）
+"""01_datatype_numeric.py -- numeric data (continuous vs discrete): samples and plots."""  # module comment
+import numpy as np                                                    # numeric computation
+import pandas as pd                                                   # tabular data handling
+import matplotlib.pyplot as plt                                       # plotting
+from _common import RNG, save, dump_csv                               # reuse shared helpers (seed / save / dump)
 
-# ---------------------------------------------------------------- 1) 生成样本
-n = 800                                                               # 连续变量的样本量：800 个交易日
-mu, sigma = 0.0004, 0.018                                             # 日收益率的均值与波动率（对数收益）
-ret = RNG.normal(mu, sigma, n)                                        # 生成连续型样本：日对数收益率（近似正态）
-volume = RNG.lognormal(mean=14.0, sigma=0.5, size=n)                  # 生成连续型样本：成交量（对数正态，右偏）
-orders = RNG.poisson(lam=12, size=n)                                  # 生成离散型样本：每日订单数（泊松计数）
+# ---------------------------------------------------------------- 1) generate samples
+n = 800                                                               # sample size: 800 trading days
+mu, sigma = 0.0004, 0.018                                             # mean and volatility of daily log returns
+ret = RNG.normal(mu, sigma, n)                                        # continuous sample: daily log return, roughly normal
+volume = RNG.lognormal(mean=14.0, sigma=0.5, size=n)                  # continuous sample: trading volume, lognormal and right skewed
+orders = RNG.poisson(lam=12, size=n)                                  # discrete sample: daily order count, Poisson
 
-df = pd.DataFrame({"day": np.arange(1, n + 1),                       # 组装为一张表：第几交易日
-                   "log_return": ret,                                 # 连续变量①：日对数收益率
-                   "volume": volume,                                  # 连续变量②：成交量（右偏长尾）
-                   "orders": orders})                                 # 离散变量：订单数（非负整数）
-dump_csv(df, "numeric_samples.csv")                                   # 把样本写进仓库 data/ 目录
+df = pd.DataFrame({"day": np.arange(1, n + 1),                       # assemble a table: trading day index
+                   "log_return": ret,                                 # continuous variable 1: daily log return
+                   "volume": volume,                                  # continuous variable 2: volume, long right tail
+                   "orders": orders})                                 # discrete variable: order count, non-negative integer
+dump_csv(df, "numeric_samples.csv")                                   # dump the samples into the repo data/ folder
 
-# ---------------------------------------------------------------- 2) 可视化
-fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.9))                   # 一行三列：直方图 / 箱线图 / 计数条形图
-axes[0].hist(ret, bins=40, color="#8A0C3C", alpha=0.85)               # 左图：连续变量直方图（看分布形状）
-axes[0].set_title("连续：日对数收益率分布")                            # 设置左图标题
-axes[0].set_xlabel("收益率")                                          # 设置左图横轴含义
-axes[0].set_ylabel("频数")                                            # 设置左图纵轴含义
-axes[0].axvline(ret.mean(), color="#C9A227", lw=1.6,                 # 画一条均值参考线（金色）
-                label="均值 %.4f" % ret.mean())                       # 图例中给出均值数值
-axes[0].legend(fontsize=8)                                            # 显示图例
+# ---------------------------------------------------------------- 2) visualization
+fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.9))                   # one row, three columns: histogram / boxplot / bar chart
+axes[0].hist(ret, bins=40, color="#8A0C3C", alpha=0.85)               # left: histogram of a continuous variable
+axes[0].set_title("连续：日对数收益率分布")                            # set the left panel title
+axes[0].set_xlabel("收益率")                                          # set the left panel x label
+axes[0].set_ylabel("频数")                                            # set the left panel y label
+axes[0].axvline(ret.mean(), color="#C9A227", lw=1.6,                 # draw a mean reference line (gold)
+                label="均值 %.4f" % ret.mean())                       # show the mean value in the legend
+axes[0].legend(fontsize=8)                                            # show the legend
 
-axes[1].boxplot([ret, np.log(volume)], showfliers=True,               # 中图：箱线图对比两个连续变量
-                patch_artist=True,                                    # 允许自定义箱体填充色
-                boxprops=dict(facecolor="#8A0C3C", alpha=0.35))       # 箱体颜色与透明度
-axes[1].set_xticklabels(["收益率", "log 成交量"])                       # 给两组箱线图加上可读标签
-axes[1].set_title("连续：箱线图（离群点）")                             # 设置中图标题
+axes[1].boxplot([ret, np.log(volume)], showfliers=True,               # middle: boxplot comparing two continuous variables
+                patch_artist=True,                                    # allow a custom box fill colour
+                boxprops=dict(facecolor="#8A0C3C", alpha=0.35))       # box colour and transparency
+axes[1].set_xticklabels(["收益率", "log 成交量"])                       # readable labels for the two boxplots
+axes[1].set_title("连续：箱线图（离群点）")                             # set the middle panel title
 
-axes[2].bar(np.arange(1, 26), [np.sum(orders == k) for k in range(1, 26)],  # 右图：离散计数分布（1~25 单）
-            color="#66717D", width=0.8)                               # 用灰色柱表示每个取值的频数
-axes[2].set_title("离散：每日订单数（计数）")                           # 设置右图标题
-axes[2].set_xlabel("订单数（整数取值）")                                # 设置右图横轴含义
-plt.tight_layout()                                                    # 自动调整子图间距，避免重叠
-save(fig, "fig_numeric.png")                                          # 保存图片到 website/figures/
+axes[2].bar(np.arange(1, 26), [np.sum(orders == k) for k in range(1, 26)],  # right: discrete count distribution, 1 to 25 orders
+            color="#66717D", width=0.8)                               # grey bars give the frequency of each value
+axes[2].set_title("离散：每日订单数（计数）")                           # set the right panel title
+axes[2].set_xlabel("订单数（整数取值）")                                # set the right panel x label
+plt.tight_layout()                                                    # tighten subplot spacing to avoid overlap
+save(fig, "fig_numeric.png")                                          # save the figure into website/figures/

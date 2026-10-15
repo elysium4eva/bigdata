@@ -1,108 +1,108 @@
-"""l3_10_transform_assert.py —— 驯服右偏分布的几种变换，以及一份 schema 断言报告。
+"""l3_10_transform_assert.py —— tame right-skewed distributions with transforms, plus a schema assertion report.
 
-收入类变量通常右偏，少数极大值会主导模型与检验。脚本比较常见的几种变换，
-量化它们对偏度与峰度的影响，最后用一份轻量的（pandera 风格的）schema 校验，
-在发布数据前把关——这正是生产管道会做的事。
+Income-like variables are usually right skewed, and a few extreme values dominate models and tests. The script compares common transforms,
+quantifies their effect on skewness and kurtosis, and finishes with a light (pandera-style) schema check
+that gates the data before publication -- exactly what a production pipeline does.
 """
-import numpy as np                                                 # 对数与描述统计
-import pandas as pd                                                # 表格与分位分箱
-import matplotlib.pyplot as plt                                    # 分布对照图
-from _common_l3 import RNG, save, dump                             # 复用公共种子、出图与落盘函数
+import numpy as np                                                 # logs and descriptive statistics
+import pandas as pd                                                # tables and quantile binning
+import matplotlib.pyplot as plt                                    # distribution comparison figure
+from _common_l3 import RNG, save, dump                             # reuse shared seed, plot and dump helpers
 
-# ---------------------------------------------------------------- 1) 一个右偏变量
-N = 900                                                            # 企业数量
-revenue = RNG.lognormal(mean=4.6, sigma=0.9, size=N)                # 强烈右偏的营收
-region = RNG.choice(["East", "Central", "West"], N, p=[0.5, 0.3, 0.2])   # 一列类别变量
-raw = pd.DataFrame({"firm_id": [f"F{i:04d}" for i in range(N)],     # 企业主键
-                    "region": region,                              # 地区（类别）
-                    "revenue": np.round(revenue, 2)})              # 营收（右偏数值）
-dump(raw, "l3_income_skewed.csv")                                  # 落盘原始样本
+# ---------------------------------------------------------------- 1) a right-skewed variable
+N = 900                                                            # number of firms
+revenue = RNG.lognormal(mean=4.6, sigma=0.9, size=N)                # strongly right-skewed revenue
+region = RNG.choice(["East", "Central", "West"], N, p=[0.5, 0.3, 0.2])   # a categorical column
+raw = pd.DataFrame({"firm_id": [f"F{i:04d}" for i in range(N)],     # firm primary key
+                    "region": region,                              # region (categorical)
+                    "revenue": np.round(revenue, 2)})              # revenue (right skewed)
+dump(raw, "l3_income_skewed.csv")                                  # save the raw sample
 
-# ---------------------------------------------------------------- 2) 五种变换
-transformed = raw.copy()                                           # 在副本上做变换，保留原始表
-transformed["log1p"] = np.log1p(transformed["revenue"])             # log(1+x)：处理零值并压缩右尾
-transformed["sqrt"] = np.sqrt(transformed["revenue"])               # 平方根：比对数更温和
-transformed["zscore"] = ((transformed["revenue"] - transformed["revenue"].mean())   # 先中心化
-                         / transformed["revenue"].std(ddof=0))      # 再缩放：均值 0、标准差 1
-transformed["minmax"] = ((transformed["revenue"] - transformed["revenue"].min())    # 平移到从 0 开始
-                         / (transformed["revenue"].max() - transformed["revenue"].min()))   # 缩放到 [0,1]
-transformed["quartile"] = pd.qcut(transformed["revenue"], 4, labels=["Q1", "Q2", "Q3", "Q4"])   # 等频分箱
-transformed["decile"] = pd.qcut(transformed["revenue"], 10, labels=False)   # 十分位（整数编码）
-summary = pd.DataFrame([                                          # 变换前后的形状对比
-    {"variable": name, "mean": round(transformed[name].mean(), 3),   # 位置
-     "sd": round(transformed[name].std(), 3),                      # 离散度
-     "skew": round(transformed[name].skew(), 3),                   # 偏度：0 表示对称
-     "kurtosis": round(transformed[name].kurt(), 3)}               # 超额峰度：0 接近正态
-    for name in ["revenue", "log1p", "sqrt", "zscore", "minmax"]])  # 五个可比的列
-print(summary.to_string(index=False))                               # 终端打印每种变换的效果
-dump(summary, "l3_transform_summary.csv")                           # 落盘对比表
-print("quartile counts:", transformed["quartile"].value_counts().sort_index().to_dict())   # 等频分箱计数
-print("decile means (revenue):\n",                               # 十分位常用于业务分组汇报
-      transformed.groupby("decile")["revenue"].mean().round(1).to_string())   # 各十分位的营收均值
+# ---------------------------------------------------------------- 2) five transforms
+transformed = raw.copy()                                           # transform a copy, keep the original
+transformed["log1p"] = np.log1p(transformed["revenue"])             # log(1+x): handles zeros, shrinks tail
+transformed["sqrt"] = np.sqrt(transformed["revenue"])               # square root: gentler than the log
+transformed["zscore"] = ((transformed["revenue"] - transformed["revenue"].mean())   # centre first
+                         / transformed["revenue"].std(ddof=0))      # then scale: mean 0, sd 1
+transformed["minmax"] = ((transformed["revenue"] - transformed["revenue"].min())    # shift so it starts at 0
+                         / (transformed["revenue"].max() - transformed["revenue"].min()))   # scale to [0,1]
+transformed["quartile"] = pd.qcut(transformed["revenue"], 4, labels=["Q1", "Q2", "Q3", "Q4"])   # equal-frequency binning
+transformed["decile"] = pd.qcut(transformed["revenue"], 10, labels=False)   # deciles as integer codes
+summary = pd.DataFrame([                                          # shape comparison before and after
+    {"variable": name, "mean": round(transformed[name].mean(), 3),   # location
+     "sd": round(transformed[name].std(), 3),                      # spread
+     "skew": round(transformed[name].skew(), 3),                   # skewness: 0 means symmetric
+     "kurtosis": round(transformed[name].kurt(), 3)}               # excess kurtosis: 0 is normal-like
+    for name in ["revenue", "log1p", "sqrt", "zscore", "minmax"]])  # the five comparable columns
+print(summary.to_string(index=False))                               # print the effect of each transform
+dump(summary, "l3_transform_summary.csv")                           # save the comparison table
+print("quartile counts:", transformed["quartile"].value_counts().sort_index().to_dict())   # equal-frequency bin counts
+print("decile means (revenue):\n",                               # deciles are common in reporting
+      transformed.groupby("decile")["revenue"].mean().round(1).to_string())   # mean revenue per decile
 
-# ---------------------------------------------------------------- 3) 发布前的 schema 断言
-RULES = {                                                          # 一份最小化的 schema 契约
-    "firm_id": {"dtype": "object", "unique": True, "regex": r"^F\d{4}$"},   # 主键：唯一且有格式
-    "region": {"dtype": "object", "allowed": ["East", "Central", "West"]},   # 类别：取值域封闭
-    "revenue": {"dtype": "float64", "min": 0.0, "max": 1_000_000.0, "nullable": False},   # 数值范围
-    "log1p": {"dtype": "float64", "min": 0.0, "nullable": False},   # 派生列非负
-}                                                                  # 契约定义到此结束
-def check(table, rules):                                           # 逐条跑契约并收集违规项
-    """返回一份违规明细，而不是遇到第一个问题就中断。"""                 # 函数约定
-    report = []                                                    # 每条规则一行
-    for column, spec in rules.items():                             # 遍历声明的列
-        present = column in table.columns                          # 列不存在本身就是违规
-        report.append({"column": column, "rule": "present",        # 记录存在性检查
-                       "ok": present, "detail": "" if present else "missing column"})   # 失败时写明原因
-        if not present:                                            # 列不存在就跳过其余规则
-            continue                                               # 处理下一列
-        series = table[column]                                     # 待检查的列
-        if spec.get("unique"):                                     # 唯一性规则
-            dup = int(series.duplicated().sum())                   # 重复值个数
-            report.append({"column": column, "rule": "unique", "ok": dup == 0,   # 唯一性检查结果
-                           "detail": f"{dup} duplicates"})         # 写明重复数量
-        if spec.get("regex"):                                      # 标识符格式规则
-            bad = int((~series.astype(str).str.match(spec["regex"])).sum())   # 不合格式的值
-            report.append({"column": column, "rule": "regex", "ok": bad == 0,   # 格式检查结果
-                           "detail": f"{bad} non-conforming"})     # 写明不合规数量
-        if spec.get("allowed"):                                    # 取值域规则
-            extra = sorted(set(series.dropna()) - set(spec["allowed"]))   # 出现过的意外类别
-            report.append({"column": column, "rule": "allowed", "ok": not extra,   # 取值域检查结果
-                           "detail": f"unexpected: {extra}"})      # 写明越界取值
-        if spec.get("min") is not None:                            # 下界规则
-            below = int((series < spec["min"]).sum())              # 小于下界的值
-            report.append({"column": column, "rule": "min", "ok": below == 0,   # 下界检查结果
-                           "detail": f"{below} below {spec['min']}"})   # 写明越界数量
-        if spec.get("max") is not None:                            # 上界规则
-            above = int((series > spec["max"]).sum())              # 大于上界的值
-            report.append({"column": column, "rule": "max", "ok": above == 0,   # 上界检查结果
-                           "detail": f"{above} above {spec['max']}"})   # 写明越界数量
-        if spec.get("nullable") is False:                          # 非空规则
-            miss = int(series.isna().sum())                        # 缺失值个数
-            report.append({"column": column, "rule": "not-null", "ok": miss == 0,   # 非空检查结果
-                           "detail": f"{miss} missing"})           # 写明缺失数量
-    return pd.DataFrame(report)                                    # 返回明细表供页面展示
-report = check(transformed, RULES)                                 # 对变换后的表执行校验
-print("schema checks passed:", int(report["ok"].sum()), "of", len(report))   # 打印通过条数
-print(report[~report["ok"]].to_string(index=False))                # 只打印失败的条目
-dump(report, "l3_schema_report.csv")                               # 落盘校验报告
-assert report["ok"].all(), "schema contract failed: fix the table before publishing it"   # 未通过就让管道停下
+# ---------------------------------------------------------------- 3) schema assertions before publishing
+RULES = {                                                          # a minimal schema contract
+    "firm_id": {"dtype": "object", "unique": True, "regex": r"^F\d{4}$"},   # key: unique with a format
+    "region": {"dtype": "object", "allowed": ["East", "Central", "West"]},   # category: closed value domain
+    "revenue": {"dtype": "float64", "min": 0.0, "max": 1_000_000.0, "nullable": False},   # numeric range
+    "log1p": {"dtype": "float64", "min": 0.0, "nullable": False},   # derived column is non-negative
+}                                                                  # end of the contract definition
+def check(table, rules):                                           # run each rule and collect violations
+    """Return a violation report instead of stopping at the first problem."""   # function contract
+    report = []                                                    # one row per rule
+    for column, spec in rules.items():                             # walk the declared columns
+        present = column in table.columns                          # a missing column is itself a violation
+        report.append({"column": column, "rule": "present",        # record the presence check
+                       "ok": present, "detail": "" if present else "missing column"})   # state the reason on failure
+        if not present:                                            # skip the rest if the column is absent
+            continue                                               # move to the next column
+        series = table[column]                                     # the column to check
+        if spec.get("unique"):                                     # uniqueness rule
+            dup = int(series.duplicated().sum())                   # number of duplicated values
+            report.append({"column": column, "rule": "unique", "ok": dup == 0,   # uniqueness check result
+                           "detail": f"{dup} duplicates"})         # state the duplicate count
+        if spec.get("regex"):                                      # identifier format rule
+            bad = int((~series.astype(str).str.match(spec["regex"])).sum())   # non-conforming values
+            report.append({"column": column, "rule": "regex", "ok": bad == 0,   # format check result
+                           "detail": f"{bad} non-conforming"})     # state the non-conforming count
+        if spec.get("allowed"):                                    # allowed values rule
+            extra = sorted(set(series.dropna()) - set(spec["allowed"]))   # unexpected categories seen
+            report.append({"column": column, "rule": "allowed", "ok": not extra,   # value domain check result
+                           "detail": f"unexpected: {extra}"})      # state the out-of-range values
+        if spec.get("min") is not None:                            # lower bound rule
+            below = int((series < spec["min"]).sum())              # values below the bound
+            report.append({"column": column, "rule": "min", "ok": below == 0,   # lower bound check result
+                           "detail": f"{below} below {spec['min']}"})   # state the out-of-range count
+        if spec.get("max") is not None:                            # upper bound rule
+            above = int((series > spec["max"]).sum())              # values above the bound
+            report.append({"column": column, "rule": "max", "ok": above == 0,   # upper bound check result
+                           "detail": f"{above} above {spec['max']}"})   # state the out-of-range count
+        if spec.get("nullable") is False:                          # not-null rule
+            miss = int(series.isna().sum())                        # number of missing values
+            report.append({"column": column, "rule": "not-null", "ok": miss == 0,   # not-null check result
+                           "detail": f"{miss} missing"})           # state the missing count
+    return pd.DataFrame(report)                                    # return the detail table for the page
+report = check(transformed, RULES)                                 # validate the transformed table
+print("schema checks passed:", int(report["ok"].sum()), "of", len(report))   # print the number passed
+print(report[~report["ok"]].to_string(index=False))                # print only the failures
+dump(report, "l3_schema_report.csv")                               # save the validation report
+assert report["ok"].all(), "schema contract failed: fix the table before publishing it"   # stop the pipeline on failure
 
-# ---------------------------------------------------------------- 图：变换前后
-fig, axes = plt.subplots(1, 3, figsize=(11.0, 3.9))                 # 原始 / 变换后 / 形状指标
-axes[0].hist(transformed["revenue"], bins=40, color="#8A0C3C", alpha=0.85)   # 原始分布：强烈右偏
-axes[0].set_title(f"raw revenue (skew = {transformed['revenue'].skew():.2f})")   # 偏度写进标题
-axes[0].set_xlabel("revenue")                                       # 横轴含义
-axes[1].hist(transformed["log1p"], bins=40, color="#C9A227", alpha=0.9)   # log1p 之后
-axes[1].set_title(f"log1p (skew = {transformed['log1p'].skew():.2f})")   # 偏度写进标题
-axes[1].set_xlabel("log(1 + revenue)")                              # 横轴含义
-metrics = summary.set_index("variable")[["skew", "kurtosis"]]       # 各变换的形状指标
-x = np.arange(len(metrics))                                         # 柱状图横坐标
-axes[2].bar(x - 0.2, metrics["skew"], width=0.4, label="skew", color="#8A0C3C")   # 偏度对比
-axes[2].bar(x + 0.2, metrics["kurtosis"], width=0.4, label="kurtosis", color="#66717D")   # 峰度对比
-axes[2].axhline(0, color="#1E2630", lw=1.0)                         # 零线：对称且接近正态
-axes[2].set_xticks(x, metrics.index, rotation=20, fontsize=8.5)     # 变换名称
-axes[2].set_title("shape metrics after transformation")             # 子图标题
-axes[2].legend(fontsize=8.5)                                        # 图例
-plt.tight_layout()                                                  # 调整三个子图
-save(fig, "fig_transform_scale.png")                                # 保存：变换一页用图
+# ---------------------------------------------------------------- figure: before and after transform
+fig, axes = plt.subplots(1, 3, figsize=(11.0, 3.9))                 # raw / transformed / shape metrics
+axes[0].hist(transformed["revenue"], bins=40, color="#8A0C3C", alpha=0.85)   # raw distribution: strongly skewed
+axes[0].set_title(f"raw revenue (skew = {transformed['revenue'].skew():.2f})")   # skewness in the title
+axes[0].set_xlabel("revenue")                                       # what the x axis means
+axes[1].hist(transformed["log1p"], bins=40, color="#C9A227", alpha=0.9)   # after log1p
+axes[1].set_title(f"log1p (skew = {transformed['log1p'].skew():.2f})")   # skewness in the title
+axes[1].set_xlabel("log(1 + revenue)")                              # what the x axis means
+metrics = summary.set_index("variable")[["skew", "kurtosis"]]       # shape metrics per transform
+x = np.arange(len(metrics))                                         # x positions of the bars
+axes[2].bar(x - 0.2, metrics["skew"], width=0.4, label="skew", color="#8A0C3C")   # skewness comparison
+axes[2].bar(x + 0.2, metrics["kurtosis"], width=0.4, label="kurtosis", color="#66717D")   # kurtosis comparison
+axes[2].axhline(0, color="#1E2630", lw=1.0)                         # zero line: symmetric, near normal
+axes[2].set_xticks(x, metrics.index, rotation=20, fontsize=8.5)     # transform names
+axes[2].set_title("shape metrics after transformation")             # subplot title
+axes[2].legend(fontsize=8.5)                                        # legend
+plt.tight_layout()                                                  # adjust the three subplots
+save(fig, "fig_transform_scale.png")                                # save: transform slide figure

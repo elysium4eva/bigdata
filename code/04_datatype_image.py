@@ -1,53 +1,53 @@
-"""04_datatype_image.py —— 图像型数据：合成样本图片 + 像素级可视化。"""  # 模块注释
-import numpy as np                                                    # 数值计算（图像就是矩阵）
-import matplotlib.pyplot as plt                                       # 绘图
-from _common import FIG, DAT, save                                    # 公共工具（需要直接写图片样本）
+"""04_datatype_image.py -- image data: synthetic sample images and pixel-level plots."""  # module comment
+import numpy as np                                                    # numeric computation, an image is a matrix
+import matplotlib.pyplot as plt                                       # plotting
+from _common import FIG, DAT, save                                    # shared helpers, we write image samples directly
 
-# ---------------------------------------------------------------- 1) 生成三类合成图像（32×32 灰度）
-H = W = 32                                                            # 图像高度与宽度（32 像素，便于课堂展示）
-yy, xx = np.mgrid[0:H, 0:W]                                           # 生成像素坐标网格
-cy, cx = (H - 1) / 2, (W - 1) / 2                                      # 计算图像中心坐标
-circle = (((yy - cy) ** 2 + (xx - cx) ** 2) < 9 ** 2).astype(float)    # 类别 0：半径 9 的实心圆
-square = ((np.abs(yy - cy) <= 8) & (np.abs(xx - cx) <= 8)).astype(float)  # 类别 1：边长 17 的正方形
-triangle = ((xx >= yy) & (xx <= W - 1 - yy)).astype(float)             # 类别 2：等腰三角形（上尖下宽）
-protos = [circle, square, triangle]                                    # 三个类别的原型图案
-labels = ["circle", "square", "triangle"]                              # 三个类别的名称
+# ---------------------------------------------------------------- 1) build three classes of synthetic 32x32 grey images
+H = W = 32                                                            # image height and width: 32 pixels for the lecture
+yy, xx = np.mgrid[0:H, 0:W]                                           # build the pixel coordinate grid
+cy, cx = (H - 1) / 2, (W - 1) / 2                                      # compute the image centre coordinates
+circle = (((yy - cy) ** 2 + (xx - cx) ** 2) < 9 ** 2).astype(float)    # class 0: solid circle of radius 9
+square = ((np.abs(yy - cy) <= 8) & (np.abs(xx - cx) <= 8)).astype(float)  # class 1: square with side 17
+triangle = ((xx >= yy) & (xx <= W - 1 - yy)).astype(float)             # class 2: isosceles triangle, pointed top
+protos = [circle, square, triangle]                                    # prototype pattern of each class
+labels = ["circle", "square", "triangle"]                              # names of the three classes
 
-imgs, lab = [], []                                                     # 初始化样本列表与标签列表
-for i, p in enumerate(protos):                                         # 遍历三个类别
-    for k in range(4):                                                 # 每个类别生成 4 张样本
-        noise = np.random.default_rng(100 + i * 10 + k).normal(0, 0.08, (H, W))  # 加入噪声模拟真实拍摄
-        imgs.append(np.clip(p + noise, 0, 1))                          # 叠加噪声并裁剪到 [0,1]
-        lab.append(i)                                                  # 记录该样本的类别编号
-imgs = np.stack(imgs)                                                  # 堆叠成 (12, 32, 32) 的样本张量
-np.save(DAT / "image_samples.npy", imgs)                               # 保存为 npy 样本（机器学习常用格式）
-np.save(DAT / "image_labels.npy", np.array(lab))                       # 保存标签数组
+imgs, lab = [], []                                                     # initialise the image and label lists
+for i, p in enumerate(protos):                                         # loop over the three classes
+    for k in range(4):                                                 # generate 4 samples per class
+        noise = np.random.default_rng(100 + i * 10 + k).normal(0, 0.08, (H, W))  # add noise to mimic real capture
+        imgs.append(np.clip(p + noise, 0, 1))                          # add the noise and clip into [0,1]
+        lab.append(i)                                                  # record the class index of this sample
+imgs = np.stack(imgs)                                                  # stack into a (12, 32, 32) tensor
+np.save(DAT / "image_samples.npy", imgs)                               # save as npy, a common machine learning format
+np.save(DAT / "image_labels.npy", np.array(lab))                       # save the label array
 
-grid = imgs.reshape(3, 4, H, W).transpose(0, 2, 1, 3).reshape(3 * H, 4 * W)  # 拼成 3 行 4 列的马赛克大图
-plt.imsave(FIG / "fig_image_montage_raw.png", grid, cmap="gray")       # 把马赛克另存为一张 PNG 样本
+grid = imgs.reshape(3, 4, H, W).transpose(0, 2, 1, 3).reshape(3 * H, 4 * W)  # tile into a 3 by 4 montage
+plt.imsave(FIG / "fig_image_montage_raw.png", grid, cmap="gray")       # also save the montage as a PNG sample
 
-# ---------------------------------------------------------------- 2) 彩色图像与通道分解
-rgb = np.zeros((H, W, 3))                                              # 初始化一张彩色图（RGB 三通道）
-rgb[..., 0] = xx / (W - 1)                                             # 红通道：从左到右线性增加
-rgb[..., 1] = yy / (H - 1)                                             # 绿通道：从上到下线性增加
-rgb[..., 2] = 0.8 * circle                                             # 蓝通道：只在圆内为高亮
+# ---------------------------------------------------------------- 2) colour image and channel decomposition
+rgb = np.zeros((H, W, 3))                                              # initialise a colour image with RGB channels
+rgb[..., 0] = xx / (W - 1)                                             # red channel rises from left to right
+rgb[..., 1] = yy / (H - 1)                                             # green channel rises from top to bottom
+rgb[..., 2] = 0.8 * circle                                             # blue channel is bright only inside the circle
 
-# ---------------------------------------------------------------- 3) 可视化
-fig, axes = plt.subplots(1, 4, figsize=(11.4, 3.9))                    # 一行四列：灰度样本/原色/通道/RGB 直方图
-axes[0].imshow(grid, cmap="gray")                                      # 左一：灰度样本马赛克（3 类 × 4 张）
-axes[0].set_title("灰度图像样本 32×32（3 类 × 4 张）")                   # 左一标题
-axes[0].set_xticks([]); axes[0].set_yticks([])                          # 隐藏坐标刻度，更像“图片”
-axes[0].grid(False)                                                    # 关闭网格
-axes[1].imshow(rgb)                                                    # 左二：彩色图像
-axes[1].set_title("彩色图像 = R/G/B 三个矩阵")                          # 左二标题
-axes[1].set_xticks([]); axes[1].set_yticks([])                          # 隐藏刻度
-axes[1].grid(False)                                                    # 关闭网格
-axes[2].imshow(circle, cmap="gray")                                    # 左三：单个通道（灰度矩阵）
-axes[2].set_title("单通道 I(x, y) ∈ [0, 255]")                         # 左三标题
-axes[2].set_xticks([]); axes[2].set_yticks([])                          # 隐藏刻度
-axes[2].grid(False)                                                    # 关闭网格
-axes[3].hist((imgs * 255).ravel(), bins=32, color="#8A0C3C", alpha=0.85)  # 右一：像素灰度直方图
-axes[3].set_title("像素强度分布")                                       # 右一标题
-axes[3].set_xlabel("灰度值")                                           # 右一横轴含义
-plt.tight_layout()                                                     # 调整布局
-save(fig, "fig_image.png")                                             # 保存图片
+# ---------------------------------------------------------------- 3) visualization
+fig, axes = plt.subplots(1, 4, figsize=(11.4, 3.9))                    # one row, four columns: grey / colour / channel / histogram
+axes[0].imshow(grid, cmap="gray")                                      # first: grey montage, 3 classes by 4 images
+axes[0].set_title("灰度图像样本 32×32（3 类 × 4 张）")                   # first panel title
+axes[0].set_xticks([]); axes[0].set_yticks([])                          # hide ticks so it looks like a picture
+axes[0].grid(False)                                                    # turn off the grid
+axes[1].imshow(rgb)                                                    # second: the colour image
+axes[1].set_title("彩色图像 = R/G/B 三个矩阵")                          # second panel title
+axes[1].set_xticks([]); axes[1].set_yticks([])                          # hide the ticks
+axes[1].grid(False)                                                    # turn off the grid
+axes[2].imshow(circle, cmap="gray")                                    # third: a single channel, a grey matrix
+axes[2].set_title("单通道 I(x, y) ∈ [0, 255]")                         # third panel title
+axes[2].set_xticks([]); axes[2].set_yticks([])                          # hide the ticks
+axes[2].grid(False)                                                    # turn off the grid
+axes[3].hist((imgs * 255).ravel(), bins=32, color="#8A0C3C", alpha=0.85)  # fourth: histogram of pixel intensities
+axes[3].set_title("像素强度分布")                                       # fourth panel title
+axes[3].set_xlabel("灰度值")                                           # fourth panel x label
+plt.tight_layout()                                                     # adjust the layout
+save(fig, "fig_image.png")                                             # save the figure

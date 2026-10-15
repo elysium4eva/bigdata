@@ -1,24 +1,24 @@
-"""run_all.py —— 一键运行全部数据类型示例：生成样本数据与可视化图片。"""  # 模块注释
-import runpy                                                          # 用 runpy 以“脚本方式”执行其他 .py 文件
-import sys                                                            # 用于修改模块搜索路径
-import time                                                           # 用于统计每个脚本耗时
-from pathlib import Path                                              # 路径工具
+"""run_all.py -- run every data type example in one go: sample data and figures."""  # module comment
+import runpy                                                          # use runpy to execute other .py files as scripts
+import sys                                                            # used to change the module search path
+import time                                                           # used to time each script
+from pathlib import Path                                              # path helper
 
-HERE = Path(__file__).resolve().parent                                # 当前脚本所在目录：website/code
-sys.path.insert(0, str(HERE))                                         # 保证子脚本能 import _common
-SCRIPTS = ["01_datatype_numeric.py",                                  # 数值型（连续/离散）
-           "02_datatype_categorical.py",                              # 类别型（名义/有序）
-           "03_datatype_text.py",                                     # 文本型
-           "04_datatype_image.py",                                    # 图像型
-           "05_datatype_audio.py",                                    # 音频型
-           "06_datatype_video.py",                                    # 视频型
-           "07_datatype_graph.py",                                    # 图 / 网络型
-           "08_datatype_spatiotemporal.py",                           # 时空型
-           "09_datastructure_cross_time_panel.py",                    # 截面 / 时序 / 面板
-           "10_datatype_structured_unstructured.py"]                  # 结构化 / 半结构化 / 非结构化
-for name in SCRIPTS:                                                  # 依次执行每个脚本（顺序即讲解顺序）
-    t0 = time.time()                                                  # 记录起始时间
-    print("\n===== run", name, "=====")                               # 打印当前脚本名，便于观察进度
-    runpy.run_path(str(HERE / name), run_name="__main__")             # 以主程序身份运行该脚本
-    print("----- done %s in %.2fs" % (name, time.time() - t0))        # 打印耗时
-print("\n全部完成：样本在 website/data/，图片在 website/figures/")      # 收尾提示输出位置
+HERE = Path(__file__).resolve().parent                                # folder of this script: website/code
+sys.path.insert(0, str(HERE))                                         # make sure the child scripts can import _common
+SCRIPTS = ["01_datatype_numeric.py",                                  # numeric data, continuous and discrete
+           "02_datatype_categorical.py",                              # categorical data, nominal and ordinal
+           "03_datatype_text.py",                                     # text data
+           "04_datatype_image.py",                                    # image data
+           "05_datatype_audio.py",                                    # audio data
+           "06_datatype_video.py",                                    # video data
+           "07_datatype_graph.py",                                    # graph and network data
+           "08_datatype_spatiotemporal.py",                           # spatiotemporal data
+           "09_datastructure_cross_time_panel.py",                    # cross section / time series / panel
+           "10_datatype_structured_unstructured.py"]                  # structured / semi-structured / unstructured
+for name in SCRIPTS:                                                  # run each script in turn, the lecture order
+    t0 = time.time()                                                  # record the start time
+    print("\n===== run", name, "=====")                               # print the script name to follow the progress
+    runpy.run_path(str(HERE / name), run_name="__main__")             # run the script as the main program
+    print("----- done %s in %.2fs" % (name, time.time() - t0))        # print the elapsed time
+print("\n全部完成：样本在 website/data/，图片在 website/figures/")      # closing note with the output locations

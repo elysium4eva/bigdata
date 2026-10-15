@@ -1,61 +1,61 @@
-"""07_datatype_graph.py —— 图/网络型数据：生成无标度网络 + 布局可视化。"""  # 模块注释
-import numpy as np                                                    # 数值计算
-import pandas as pd                                                   # 导出边表与点表
-import matplotlib.pyplot as plt                                       # 绘图
-from _common import RNG, DAT, save, dump_csv                          # 公共工具
+"""07_datatype_graph.py -- graph and network data: build a scale-free network and plot it."""  # module comment
+import numpy as np                                                    # numeric computation
+import pandas as pd                                                   # export the edge and node tables
+import matplotlib.pyplot as plt                                       # plotting
+from _common import RNG, DAT, save, dump_csv                          # shared helpers
 
-N, M = 60, 2                                                          # 节点数 60，每新增一个节点连 2 条边（BA 模型）
-edges = []                                                            # 初始化边列表
-targets = [0, 1]                                                      # 初始核心：节点 0 与 1 已相连
-edges.append((0, 1))                                                  # 记录核心边
-for v in range(2, N):                                                 # 从节点 2 开始逐个加入网络（优先连接）
-    deg = np.zeros(v)                                                 # 统计已有 v 个节点的度数
-    for a, b in edges:                                                # 遍历已有边累加度数
-        deg[a] += 1                                                   # 起点度数 +1
-        deg[b] += 1                                                   # 终点度数 +1
-    prob = (deg + 1) / (deg + 1).sum()                                # 连接概率 ∝ 度数（+1 平滑，避免零概率）
-    chosen = RNG.choice(v, size=M, replace=False, p=prob)             # 按概率无放回抽取 M 个邻居
-    for c in chosen:                                                  # 遍历抽中的邻居
-        edges.append((int(c), v))                                     # 连一条新边（形成“富者更富”结构）
-adj = np.zeros((N, N))                                                # 初始化邻接矩阵
-for a, b in edges:                                                    # 用边表填充邻接矩阵
-    adj[a, b] = adj[b, a] = 1                                         # 无向图：矩阵对称置 1
-deg = adj.sum(axis=1)                                                 # 每个节点的度 = 该行之和
+N, M = 60, 2                                                          # 60 nodes, each new node links 2 edges, BA model
+edges = []                                                            # initialise the edge list
+targets = [0, 1]                                                      # seed core: nodes 0 and 1 are already linked
+edges.append((0, 1))                                                  # record the core edge
+for v in range(2, N):                                                 # add nodes from 2 upward with preferential attachment
+    deg = np.zeros(v)                                                 # degrees of the v existing nodes
+    for a, b in edges:                                                # accumulate degrees over the existing edges
+        deg[a] += 1                                                   # increment the source degree
+        deg[b] += 1                                                   # increment the target degree
+    prob = (deg + 1) / (deg + 1).sum()                                # link probability rises with degree, plus 1 smoothing
+    chosen = RNG.choice(v, size=M, replace=False, p=prob)             # draw M neighbours without replacement
+    for c in chosen:                                                  # loop over the chosen neighbours
+        edges.append((int(c), v))                                     # add a new edge, the rich get richer
+adj = np.zeros((N, N))                                                # initialise the adjacency matrix
+for a, b in edges:                                                    # fill the adjacency matrix from the edge list
+    adj[a, b] = adj[b, a] = 1                                         # undirected graph: set the matrix symmetric to 1
+deg = adj.sum(axis=1)                                                 # degree of a node equals its row sum
 
-# ---------------------------------------------------------------- 力导向布局（Fruchterman–Reingold 简化版）
-pos = RNG.uniform(0, 1, (N, 2))                                       # 随机初始化节点坐标
-for it in range(120):                                                 # 迭代 120 轮让布局收敛
-    delta = pos[:, None, :] - pos[None, :, :]                         # 任意两点之间的位移向量
-    dist = np.sqrt((delta ** 2).sum(-1)) + 1e-9                       # 两点距离（加极小值防止除零）
-    rep = (delta / dist[..., None]) / dist[..., None] ** 2            # 所有点对之间的斥力（库仑式，反比于距离平方）
-    np.fill_diagonal(rep[:, :, 0], 0); np.fill_diagonal(rep[:, :, 1], 0)  # 自身与自身无斥力
-    attr = -(delta / dist[..., None]) * dist[..., None] * adj[..., None]  # 相邻点之间的引力（沿连线方向）
-    step = (rep.sum(1) + attr.sum(1)) * 0.002                         # 合力 × 步长 = 每轮位移
-    pos = pos + np.clip(step, -0.02, 0.02)                            # 限制单步位移，避免震荡
-pos = (pos - pos.min(0)) / (pos.max(0) - pos.min(0) + 1e-9)           # 归一化到 [0,1] 方便绘图
+# ---------------------------------------------------------------- force-directed layout, simplified Fruchterman–Reingold
+pos = RNG.uniform(0, 1, (N, 2))                                       # random initial node coordinates
+for it in range(120):                                                 # run 120 iterations to settle the layout
+    delta = pos[:, None, :] - pos[None, :, :]                         # displacement vectors between all point pairs
+    dist = np.sqrt((delta ** 2).sum(-1)) + 1e-9                       # pairwise distances, tiny value avoids division by zero
+    rep = (delta / dist[..., None]) / dist[..., None] ** 2            # repulsion between all pairs, inverse square of distance
+    np.fill_diagonal(rep[:, :, 0], 0); np.fill_diagonal(rep[:, :, 1], 0)  # a point does not repel itself
+    attr = -(delta / dist[..., None]) * dist[..., None] * adj[..., None]  # attraction between linked nodes along the edge
+    step = (rep.sum(1) + attr.sum(1)) * 0.002                         # net force times step size gives the shift
+    pos = pos + np.clip(step, -0.02, 0.02)                            # clip the single step to avoid oscillation
+pos = (pos - pos.min(0)) / (pos.max(0) - pos.min(0) + 1e-9)           # rescale into [0,1] for plotting
 
-dump_csv(pd.DataFrame({"src": [a for a, _ in edges],                  # 边表：起点
-                       "dst": [b for _, b in edges]}),                # 边表：终点
-         "graph_edges.csv")                                           # 落盘边表
-dump_csv(pd.DataFrame({"node": range(N), "degree": deg}),             # 点表：节点编号
-         "graph_nodes.csv")                                           # 落盘点表（含度数）
+dump_csv(pd.DataFrame({"src": [a for a, _ in edges],                  # edge table: source node
+                       "dst": [b for _, b in edges]}),                # edge table: target node
+         "graph_edges.csv")                                           # dump the edge table
+dump_csv(pd.DataFrame({"node": range(N), "degree": deg}),             # node table: node index
+         "graph_nodes.csv")                                           # dump the node table with degrees
 
-# ---------------------------------------------------------------- 可视化
-fig, axes = plt.subplots(1, 2, figsize=(9.0, 3.9))                    # 一行两列：网络图 / 度分布
-for a, b in edges:                                                    # 逐条边画连线
-    axes[0].plot([pos[a, 0], pos[b, 0]], [pos[a, 1], pos[b, 1]],      # 连接两端点坐标
-                 color="#B9BFC7", lw=0.8, zorder=1)                   # 灰色细线，画在节点下层
-axes[0].scatter(pos[:, 0], pos[:, 1], s=20 + 9 * deg,                 # 节点大小随度数增大
-                c=deg, cmap="RdPu", edgecolors="#711426", zorder=2)  # 颜色也表示度数，便于识别枢纽
-axes[0].set_title("网络图（%d 节点 / %d 边，BA 无标度）" % (N, len(edges)))  # 左图标题
-axes[0].set_xticks([]); axes[0].set_yticks([])                        # 隐藏刻度
-axes[0].grid(False)                                                   # 关闭网格
-axes[0].set_aspect("equal")                                           # 等比例显示，避免图形拉伸
+# ---------------------------------------------------------------- visualization
+fig, axes = plt.subplots(1, 2, figsize=(9.0, 3.9))                    # one row, two columns: network plot / degree distribution
+for a, b in edges:                                                    # draw one line per edge
+    axes[0].plot([pos[a, 0], pos[b, 0]], [pos[a, 1], pos[b, 1]],      # connect the coordinates of both endpoints
+                 color="#B9BFC7", lw=0.8, zorder=1)                   # thin grey lines, drawn below the nodes
+axes[0].scatter(pos[:, 0], pos[:, 1], s=20 + 9 * deg,                 # node size grows with the degree
+                c=deg, cmap="RdPu", edgecolors="#711426", zorder=2)  # colour also shows the degree, to spot hubs
+axes[0].set_title("网络图（%d 节点 / %d 边，BA 无标度）" % (N, len(edges)))  # left panel title
+axes[0].set_xticks([]); axes[0].set_yticks([])                        # hide the ticks
+axes[0].grid(False)                                                   # turn off the grid
+axes[0].set_aspect("equal")                                           # equal aspect so the graph is not stretched
 
-vals, cnt = np.unique(deg, return_counts=True)                        # 统计度分布（度数 → 节点个数）
-axes[1].loglog(vals, cnt, "o", color="#8A0C3C", ms=6)                 # 右图：双对数坐标下画度分布（近似直线）
-axes[1].set_title("度分布（双对数：幂律特征）")                        # 右图标题
-axes[1].set_xlabel("节点度 k")                                        # 右图横轴含义
-axes[1].set_ylabel("度为 k 的节点数 P(k)")                            # 右图纵轴含义
-plt.tight_layout()                                                    # 调整布局
-save(fig, "fig_graph.png")                                            # 保存图片
+vals, cnt = np.unique(deg, return_counts=True)                        # degree distribution: degree to node count
+axes[1].loglog(vals, cnt, "o", color="#8A0C3C", ms=6)                 # right: degree distribution on log-log axes, nearly a line
+axes[1].set_title("度分布（双对数：幂律特征）")                        # right panel title
+axes[1].set_xlabel("节点度 k")                                        # right panel x label
+axes[1].set_ylabel("度为 k 的节点数 P(k)")                            # right panel y label
+plt.tight_layout()                                                    # adjust the layout
+save(fig, "fig_graph.png")                                            # save the figure
