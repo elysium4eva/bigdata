@@ -1,0 +1,7 @@
+﻿model,split,accuracy,roc_auc,flag_rate,train_seconds
+dummy (majority),train,0.7328,0.5,0.0,0.004
+dummy (majority),validation,0.7317,0.5,0.0,0.004
+dummy (majority),test,0.7333,0.5,0.0,0.004
+logistic regression,train,0.7911,0.8218,0.185,0.009
+logistic regression,validation,0.8183,0.8566,0.1667,0.009
+logistic regression,test,0.8083,0.8398,0.1617,0.009

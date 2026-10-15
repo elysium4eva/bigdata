@@ -1,0 +1,5 @@
+﻿model,test_rmse,non_zero_coefs,n_features,alpha,fit_seconds,sparsity_pct
+OLS,23.71,139,164,0.0,0.022,15.2
+Ridge (CV),22.5,139,164,6.5097,0.596,15.2
+Lasso (CV),21.44,22,164,0.5151,3.354,86.6
+ElasticNet (CV),22.32,102,164,0.0408,7.383,37.8

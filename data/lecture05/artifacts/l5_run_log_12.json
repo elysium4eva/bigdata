@@ -1,0 +1,18 @@
+{
+  "lecture": "L5",
+  "script": "l5_12_interpretability_modelcard.py",
+  "seed": 20260506,
+  "model": "HistGradientBoostingClassifier(max_iter=320, lr=0.07)",
+  "metrics": {
+    "roc_auc": 0.8092,
+    "brier": 0.1579
+  },
+  "top_features": [
+    "pay_status_3",
+    "pay_status_2"
+  ],
+  "artifacts": [
+    "model_card_l5_credit.md",
+    "l5_model_importance.csv"
+  ]
+}

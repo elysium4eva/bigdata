@@ -1,0 +1,165 @@
+﻿feature,OLS,Ridge,Lasso
+area,93.7426,84.2574,112.5751
+rooms,17.0672,20.1987,19.2361
+age,-10.729,-14.3492,-14.7151
+dist_cbd,9.7797,-7.0561,-7.0798
+floor,0.6617,0.3535,2.9101
+district_futian,0.263,-0.6072,0.0
+district_longgang,-0.6462,-1.0416,-0.0
+district_nanshan,-5.3757,-3.8232,0.0
+area^2,158.4026,48.9244,51.9714
+area rooms,-81.458,20.5206,0.0
+area age,-26.2799,10.9512,-0.0
+area dist_cbd,-37.7186,13.156,-0.0
+area floor,-17.432,13.1551,0.0
+area district_futian,8.2077,4.5854,0.0
+area district_longgang,6.0885,3.5148,-0.0
+area district_nanshan,14.5255,7.7482,0.0
+rooms^2,17.7835,6.9917,0.0
+rooms age,21.896,-0.3891,-0.0
+rooms dist_cbd,48.9337,4.7575,-0.0
+rooms floor,10.2882,3.0355,2.5189
+rooms district_futian,-7.0883,-0.9907,0.0
+rooms district_longgang,-3.6572,-0.538,-0.0
+rooms district_nanshan,-4.0842,0.7584,0.0
+age^2,2.407,-5.249,-0.0
+age dist_cbd,-21.5351,-8.6731,-2.7716
+age floor,-5.0041,-5.0674,-0.0
+age district_futian,6.3871,2.698,0.4643
+age district_longgang,5.2423,1.076,-0.0
+age district_nanshan,2.1035,-1.1953,0.0
+dist_cbd^2,-21.6921,-6.3675,-0.0
+dist_cbd floor,-3.1774,-2.9602,-0.0
+dist_cbd district_futian,-13.1018,-6.0647,0.0
+dist_cbd district_longgang,-10.4588,-5.5589,-1.0807
+dist_cbd district_nanshan,-2.0422,0.1601,0.0
+floor^2,15.9448,0.6979,0.0
+floor district_futian,3.1142,-0.4674,0.0
+floor district_longgang,6.339,3.7748,0.0
+floor district_nanshan,11.6171,5.3478,0.0
+district_futian^2,0.263,-0.6072,0.0
+district_futian district_longgang,-0.0,0.0,0.0
+district_futian district_nanshan,0.0,0.0,0.0
+district_longgang^2,-0.6462,-1.0416,-0.0
+district_longgang district_nanshan,0.0,0.0,0.0
+district_nanshan^2,-5.3757,-3.8232,0.0
+area^3,-179.5079,8.173,0.0
+area^2 rooms,330.3794,-3.3868,0.0
+area^2 age,32.6567,5.4877,0.0
+area^2 dist_cbd,33.8372,-0.2444,0.0
+area^2 floor,23.7786,0.8331,0.0
+area^2 district_futian,4.2909,0.3825,0.0
+area^2 district_longgang,-17.5358,-0.53,-0.0
+area^2 district_nanshan,-45.1318,-1.3035,0.8067
+area rooms^2,-268.6425,-5.4076,0.0
+area rooms age,7.9178,-4.5912,-0.0
+area rooms dist_cbd,-73.0656,-6.2949,-0.0
+area rooms floor,-31.4187,-5.9289,0.0
+area rooms district_futian,-28.7526,-4.0927,0.0
+area rooms district_longgang,9.8064,-2.6904,-0.0
+area rooms district_nanshan,57.0891,-1.6151,3.6404
+area age^2,-3.3349,0.3089,-0.0
+area age dist_cbd,-8.4795,-4.7885,-0.0
+area age floor,-3.6631,-2.9073,-0.0
+area age district_futian,-4.0695,0.0734,0.0
+area age district_longgang,-0.6522,0.5749,-0.0
+area age district_nanshan,0.3163,2.0882,0.0
+area dist_cbd^2,40.1221,2.1158,-0.0
+area dist_cbd floor,5.3512,-3.7812,-0.0
+area dist_cbd district_futian,11.0055,3.655,0.1917
+area dist_cbd district_longgang,16.3404,4.265,-0.0
+area dist_cbd district_nanshan,8.4836,-1.123,0.0
+area floor^2,3.7093,0.7353,0.0
+area floor district_futian,0.8594,-0.5269,1.0069
+area floor district_longgang,-3.6252,-3.5306,-0.0
+area floor district_nanshan,-1.1547,-1.3843,0.4963
+area district_futian^2,8.2077,4.5854,0.0
+area district_futian district_longgang,-0.0,0.0,0.0
+area district_futian district_nanshan,-0.0,0.0,0.0
+area district_longgang^2,6.0885,3.5148,-0.0
+area district_longgang district_nanshan,-0.0,0.0,0.0
+area district_nanshan^2,14.5255,7.7482,0.0
+rooms^3,101.0269,0.4815,0.0
+rooms^2 age,-38.2389,-6.1813,-0.0
+rooms^2 dist_cbd,24.0391,-2.453,-0.0
+rooms^2 floor,11.271,-1.5031,0.0
+rooms^2 district_futian,16.9805,-1.5446,0.0
+rooms^2 district_longgang,-0.1268,-1.9342,-0.6373
+rooms^2 district_nanshan,-23.4537,-1.4605,0.0
+rooms age^2,3.8886,-0.2749,-0.0
+rooms age dist_cbd,7.1054,-0.1771,-0.0
+rooms age floor,3.5,2.6576,-0.0
+rooms age district_futian,1.7141,-1.3073,0.0
+rooms age district_longgang,-0.4644,0.6837,-0.0
+rooms age district_nanshan,4.6032,1.6595,0.0
+rooms dist_cbd^2,-20.2967,0.747,-0.0
+rooms dist_cbd floor,-15.4095,-2.3225,-0.0
+rooms dist_cbd district_futian,10.7317,5.0271,0.7491
+rooms dist_cbd district_longgang,-1.9527,3.0282,-0.0
+rooms dist_cbd district_nanshan,-4.3913,-0.1323,0.0
+rooms floor^2,10.2364,2.541,0.0
+rooms floor district_futian,-1.3896,-0.6429,0.0
+rooms floor district_longgang,-2.8989,-3.3869,-0.0
+rooms floor district_nanshan,-3.8603,-1.9549,0.0
+rooms district_futian^2,-7.0883,-0.9907,0.0
+rooms district_futian district_longgang,-0.0,0.0,0.0
+rooms district_futian district_nanshan,0.0,0.0,0.0
+rooms district_longgang^2,-3.6572,-0.538,-0.0
+rooms district_longgang district_nanshan,-0.0,0.0,0.0
+rooms district_nanshan^2,-4.0842,0.7584,0.0
+age^3,-1.2508,1.0949,-0.0
+age^2 dist_cbd,5.8109,4.3218,-0.0
+age^2 floor,-0.4581,0.5182,-0.0
+age^2 district_futian,-3.2935,-0.1346,0.2464
+age^2 district_longgang,-5.7671,-2.3976,-0.51
+age^2 district_nanshan,-5.3029,-0.403,-0.0
+age dist_cbd^2,10.0276,4.3274,-0.0
+age dist_cbd floor,10.1079,4.7518,-0.0
+age dist_cbd district_futian,-0.7443,-0.7686,0.0
+age dist_cbd district_longgang,-1.8514,-1.295,-0.0
+age dist_cbd district_nanshan,-4.2838,-2.9931,-0.0
+age floor^2,-2.0607,-2.1994,-0.0
+age floor district_futian,-3.4614,-0.9459,0.0
+age floor district_longgang,-0.6664,1.2889,-0.0
+age floor district_nanshan,2.3574,3.559,0.0
+age district_futian^2,6.3871,2.698,0.0302
+age district_futian district_longgang,0.0,0.0,0.0
+age district_futian district_nanshan,0.0,0.0,0.0
+age district_longgang^2,5.2423,1.076,-0.0
+age district_longgang district_nanshan,0.0,0.0,0.0
+age district_nanshan^2,2.1035,-1.1953,0.0
+dist_cbd^3,-10.0492,-3.9549,-0.0
+dist_cbd^2 floor,2.2848,1.7205,-0.0
+dist_cbd^2 district_futian,4.7073,3.6633,0.0
+dist_cbd^2 district_longgang,1.4592,0.6593,-0.0
+dist_cbd^2 district_nanshan,0.9338,1.5699,-0.0
+dist_cbd floor^2,-2.6145,-0.5144,-0.0
+dist_cbd floor district_futian,4.6843,3.2559,0.1169
+dist_cbd floor district_longgang,4.3067,2.777,0.0
+dist_cbd floor district_nanshan,0.7506,0.3522,0.0
+dist_cbd district_futian^2,-13.1018,-6.0647,0.0
+dist_cbd district_futian district_longgang,0.0,0.0,0.0
+dist_cbd district_futian district_nanshan,0.0,0.0,0.0
+dist_cbd district_longgang^2,-10.4588,-5.5589,-0.0557
+dist_cbd district_longgang district_nanshan,0.0,0.0,0.0
+dist_cbd district_nanshan^2,-2.0422,0.1601,0.0
+floor^3,-12.1963,-1.6709,0.0
+floor^2 district_futian,-2.8008,1.9503,0.0
+floor^2 district_longgang,-5.7157,-1.8615,0.0
+floor^2 district_nanshan,-14.6692,-6.9905,0.0
+floor district_futian^2,3.1142,-0.4674,0.0
+floor district_futian district_longgang,0.0,0.0,0.0
+floor district_futian district_nanshan,0.0,0.0,0.0
+floor district_longgang^2,6.339,3.7748,0.0
+floor district_longgang district_nanshan,0.0,0.0,0.0
+floor district_nanshan^2,11.6171,5.3478,0.0
+district_futian^3,0.263,-0.6072,0.0
+district_futian^2 district_longgang,0.0,0.0,0.0
+district_futian^2 district_nanshan,0.0,0.0,0.0
+district_futian district_longgang^2,0.0,0.0,0.0
+district_futian district_longgang district_nanshan,0.0,0.0,0.0
+district_futian district_nanshan^2,0.0,0.0,0.0
+district_longgang^3,-0.6462,-1.0416,-0.0
+district_longgang^2 district_nanshan,0.0,0.0,0.0
+district_longgang district_nanshan^2,0.0,0.0,0.0
+district_nanshan^3,-5.3757,-3.8232,0.0

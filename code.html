@@ -41,9 +41,11 @@
       <a class="btn btn-primary" href="#lecture02">Lecture 2 · 数据类型</a>
       <a class="btn btn-primary" href="#lecture03">Lecture 3 · 数据整备</a>
       <a class="btn btn-primary" href="#lecture04">Lecture 4 · 描述与可视化</a>
+      <a class="btn btn-primary" href="#lecture05">Lecture 5 · 机器学习入门</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
       <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
+      <a class="btn btn-ghost" href="files/L05-introduction-to-machine-learning.pdf">课件 PDF（L5）</a>
     </div>
 
     <h3 id="lecture02">Lecture 2 · 数据类型样本（10 个程序，逐行中文注释）</h3>
@@ -486,11 +488,165 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 98 帧 · 报告主图与图注 Report pipeline · 程序 <a href="code/lecture04/l4_12_report_pipeline.py">l4_12_report_pipeline.py</a></figcaption>
       </figure>
 
+    <h3 id="lecture05">Lecture 5 · 机器学习入门样本（12 个程序，逐行英文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture05/requirements.txt</code> → <code>cd code/lecture05 &amp;&amp; python run_all.py</code>；
+       样本写入 <code>data/lecture05/</code>，图片写入 <code>figures/lecture05/</code>，
+       模型卡与运行记录写入 <code>data/lecture05/artifacts/</code>。
+       随机种子固定 20260506，每次运行结果完全一致；示例使用 scikit-learn、XGBoost 与 LightGBM。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>课件页</th><th>机器学习主题</th><th>程序（逐行英文注释）</th><th>样本数据 / 模型卡</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="week">第 28 帧</td>
+          <td><b>端到端流水线与基线 Pipeline and baseline</b><br><span class="note">3,000 笔账户、正类 26.7%：多数类基线准确率 73.3% 但 ROC-AUC 只有 0.500；逻辑回归测试集 AUC 0.840、准确率 80.8%。</span></td>
+          <td><a href="code/lecture05/l5_01_pipeline_baseline.py">l5_01_pipeline_baseline.py</a></td>
+          <td><a href="data/lecture05/l5_credit_default.csv">l5_credit_default.csv</a>、<a href="data/lecture05/l5_baseline_scores.csv">l5_baseline_scores.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 30 帧</td>
+          <td><b>四种协议与数据泄漏 Leakage protocols</b><br><span class="note">同一模型：诚实流水线 0.824、先选特征再切分 0.825、目标泄漏 1.000、重复行 0.828；诚实留出集 0.865。</span></td>
+          <td><a href="code/lecture05/l5_02_cv_and_leakage.py">l5_02_cv_and_leakage.py</a></td>
+          <td><a href="data/lecture05/l5_cv_results.csv">l5_cv_results.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 33 帧</td>
+          <td><b>三种复杂度 Under/over-fitting</b><br><span class="note">房价样本 1,200 行：多项式次数 1（欠拟合）、2（最佳）、12（过拟合）；训练误差单调下降而测试误差先降后升。</span></td>
+          <td><a href="code/lecture05/l5_03_overfitting_curves.py">l5_03_overfitting_curves.py</a></td>
+          <td><a href="data/lecture05/l5_housing.csv">l5_housing.csv</a>、<a href="data/lecture05/l5_complexity_table.csv">l5_complexity_table.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 36 帧</td>
+          <td><b>学习曲线诊断 Learning curves</b><br><span class="note">三种模型的训练误差与交叉验证误差随样本量变化：高偏差两线都高且靠近，高方差留下大缺口。</span></td>
+          <td><a href="code/lecture05/l5_03_overfitting_curves.py">l5_03_overfitting_curves.py</a></td>
+          <td><a href="data/lecture05/l5_complexity_table.csv">l5_complexity_table.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 39 帧</td>
+          <td><b>正则化路径 Shrinkage vs sparsity</b><br><span class="note">164 个三次展开特征、900 行训练数据：Ridge 整体收缩、Lasso 逐个归零；惩罚后样本外误差更低。</span></td>
+          <td><a href="code/lecture05/l5_05_regularized_regression.py">l5_05_regularized_regression.py</a></td>
+          <td><a href="data/lecture05/l5_regression_scores.csv">l5_regression_scores.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 43 帧</td>
+          <td><b>指标、阈值与校准 Metrics and thresholds</b><br><span class="note">测试集 ROC-AUC 0.857、平均精度 0.704；漏判代价为误报 5 倍时最优阈值 0.26；随机森林 Brier 0.146 经等渗校准降到 0.143。</span></td>
+          <td><a href="code/lecture05/l5_04_metrics_thresholds.py">l5_04_metrics_thresholds.py</a></td>
+          <td><a href="data/lecture05/l5_threshold_table.csv">l5_threshold_table.csv</a>、<a href="data/lecture05/l5_credit_default.csv">l5_credit_default.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 50 帧</td>
+          <td><b>回归族对照 Regression family</b><br><span class="note">OLS / Ridge / Lasso / Elastic Net 的稀疏性、系数与残差分布对照：稀疏性的价值在于可解释与部署成本。</span></td>
+          <td><a href="code/lecture05/l5_05_regularized_regression.py">l5_05_regularized_regression.py</a></td>
+          <td><a href="data/lecture05/l5_regression_scores.csv">l5_regression_scores.csv</a>、<a href="data/lecture05/l5_coefficients.csv">l5_coefficients.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 54 帧</td>
+          <td><b>KNN 与 SVM 决策边界 Boundaries</b><br><span class="note">双月牙样本：k=1（0.839）、k=15（0.911）、k=99（0.861）；网格搜索选出 k=15，交叉验证 0.921、测试 0.911。</span></td>
+          <td><a href="code/lecture05/l5_06_knn_svm_tuning.py">l5_06_knn_svm_tuning.py</a></td>
+          <td><a href="data/lecture05/l5_two_moons.csv">l5_two_moons.csv</a>、<a href="data/lecture05/l5_tuning_results.csv">l5_tuning_results.csv</a>、<a href="data/lecture05/l5_svm_tuning.csv">l5_svm_tuning.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 57 帧</td>
+          <td><b>树与集成 Trees and ensembles</b><br><span class="note">单树 0.790 → 随机森林 0.822 / 梯度提升 0.831 / XGBoost 0.822（0.29 s）/ LightGBM 0.809（0.19 s）；重要性首位是还款状态。</span></td>
+          <td><a href="code/lecture05/l5_07_trees_ensembles.py">l5_07_trees_ensembles.py</a></td>
+          <td><a href="data/lecture05/l5_ensemble_scores.csv">l5_ensemble_scores.csv</a>、<a href="data/lecture05/l5_feature_importance.csv">l5_feature_importance.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 64 帧</td>
+          <td><b>PCA 与潜在因子 PCA and factors</b><br><span class="note">240 个月 × 8 个宏观序列（真实结构 3 个因子）：前三个成分解释 50.9% + 18.2% + 15.9%，五个累计 92.2%。</span></td>
+          <td><a href="code/lecture05/l5_08_pca_factors.py">l5_08_pca_factors.py</a></td>
+          <td><a href="data/lecture05/l5_macro_panel.csv">l5_macro_panel.csv</a>、<a href="data/lecture05/l5_pca_loadings.csv">l5_pca_loadings.csv</a>、<a href="data/lecture05/l5_pca_reconstruction.csv">l5_pca_reconstruction.csv</a>、<a href="data/lecture05/l5_pca_scores.csv">l5_pca_scores.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 71 帧</td>
+          <td><b>聚类三法对照 Clustering families</b><br><span class="note">830 个客户（含 30 个离群点）：k-means 与 Ward 恢复 4 组（ARI 1.00 / 0.99）；DBSCAN 单一 eps 只得 2 组 + 25 个噪声点。</span></td>
+          <td><a href="code/lecture05/l5_09_clustering.py">l5_09_clustering.py</a></td>
+          <td><a href="data/lecture05/l5_customers_behavior.csv">l5_customers_behavior.csv</a>、<a href="data/lecture05/l5_cluster_k_table.csv">l5_cluster_k_table.csv</a>、<a href="data/lecture05/l5_cluster_labels.csv">l5_cluster_labels.csv</a>、<a href="data/lecture05/l5_cluster_scores.csv">l5_cluster_scores.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 78 帧</td>
+          <td><b>两层网络训练 MLP training</b><br><span class="note">纯 NumPy 手写前向/反向 + mini-batch 梯度下降：测试准确率 0.929，与 scikit-learn 同宽度网络 0.933 几乎一致。</span></td>
+          <td><a href="code/lecture05/l5_10_mlp_numpy.py">l5_10_mlp_numpy.py</a></td>
+          <td><a href="data/lecture05/l5_mlp_history.csv">l5_mlp_history.csv</a>、<a href="data/lecture05/l5_two_moons.csv">l5_two_moons.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 84 帧</td>
+          <td><b>Q-learning 网格世界 Reinforcement learning</b><br><span class="note">6×6 网格、五个障碍、ε-贪心：最后 20 回合平均回报 5.20、10 步到达目标，贪心路径长度 11。</span></td>
+          <td><a href="code/lecture05/l5_11_rl_gridworld.py">l5_11_rl_gridworld.py</a></td>
+          <td><a href="data/lecture05/l5_rl_returns.csv">l5_rl_returns.csv</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 89 帧</td>
+          <td><b>解释性可视化与模型卡 Interpretability</b><br><span class="note">置换重要性（还款状态 0.094 / 0.092 / 0.090）、PDP、ICE 与二维交互面；配套自动生成的模型卡与运行记录。</span></td>
+          <td><a href="code/lecture05/l5_12_interpretability_modelcard.py">l5_12_interpretability_modelcard.py</a></td>
+          <td><a href="data/lecture05/l5_model_importance.csv">l5_model_importance.csv</a>、<a href="data/lecture05/l5_credit_default.csv">l5_credit_default.csv</a>、<a href="data/lecture05/artifacts/model_card_l5_credit.md">artifacts/model_card_l5_credit.md</a>、<a href="data/lecture05/artifacts/l5_run_log_12.json">artifacts/l5_run_log_12.json</a></td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 5 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_ml_pipeline.png"><img src="figures/lecture05/fig_ml_pipeline.png" alt="端到端流水线与基线 Pipeline and baseline 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 28 帧 · 端到端流水线与基线 Pipeline and baseline · 程序 <a href="code/lecture05/l5_01_pipeline_baseline.py">l5_01_pipeline_baseline.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_cv_leakage.png"><img src="figures/lecture05/fig_cv_leakage.png" alt="四种协议与数据泄漏 Leakage protocols 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 30 帧 · 四种协议与数据泄漏 Leakage protocols · 程序 <a href="code/lecture05/l5_02_cv_and_leakage.py">l5_02_cv_and_leakage.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_complexity_fit.png"><img src="figures/lecture05/fig_complexity_fit.png" alt="三种复杂度 Under/over-fitting 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 33 帧 · 三种复杂度 Under/over-fitting · 程序 <a href="code/lecture05/l5_03_overfitting_curves.py">l5_03_overfitting_curves.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_learning_curve.png"><img src="figures/lecture05/fig_learning_curve.png" alt="学习曲线诊断 Learning curves 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 36 帧 · 学习曲线诊断 Learning curves · 程序 <a href="code/lecture05/l5_03_overfitting_curves.py">l5_03_overfitting_curves.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_regularization_paths.png"><img src="figures/lecture05/fig_regularization_paths.png" alt="正则化路径 Shrinkage vs sparsity 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 39 帧 · 正则化路径 Shrinkage vs sparsity · 程序 <a href="code/lecture05/l5_05_regularized_regression.py">l5_05_regularized_regression.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_metrics_thresholds.png"><img src="figures/lecture05/fig_metrics_thresholds.png" alt="指标、阈值与校准 Metrics and thresholds 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 43 帧 · 指标、阈值与校准 Metrics and thresholds · 程序 <a href="code/lecture05/l5_04_metrics_thresholds.py">l5_04_metrics_thresholds.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_regression_family.png"><img src="figures/lecture05/fig_regression_family.png" alt="回归族对照 Regression family 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 50 帧 · 回归族对照 Regression family · 程序 <a href="code/lecture05/l5_05_regularized_regression.py">l5_05_regularized_regression.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_knn_svm.png"><img src="figures/lecture05/fig_knn_svm.png" alt="KNN 与 SVM 决策边界 Boundaries 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 54 帧 · KNN 与 SVM 决策边界 Boundaries · 程序 <a href="code/lecture05/l5_06_knn_svm_tuning.py">l5_06_knn_svm_tuning.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_ensembles.png"><img src="figures/lecture05/fig_ensembles.png" alt="树与集成 Trees and ensembles 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 57 帧 · 树与集成 Trees and ensembles · 程序 <a href="code/lecture05/l5_07_trees_ensembles.py">l5_07_trees_ensembles.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_pca_factors.png"><img src="figures/lecture05/fig_pca_factors.png" alt="PCA 与潜在因子 PCA and factors 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 64 帧 · PCA 与潜在因子 PCA and factors · 程序 <a href="code/lecture05/l5_08_pca_factors.py">l5_08_pca_factors.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_clustering.png"><img src="figures/lecture05/fig_clustering.png" alt="聚类三法对照 Clustering families 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 71 帧 · 聚类三法对照 Clustering families · 程序 <a href="code/lecture05/l5_09_clustering.py">l5_09_clustering.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_mlp_training.png"><img src="figures/lecture05/fig_mlp_training.png" alt="两层网络训练 MLP training 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 78 帧 · 两层网络训练 MLP training · 程序 <a href="code/lecture05/l5_10_mlp_numpy.py">l5_10_mlp_numpy.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_rl_gridworld.png"><img src="figures/lecture05/fig_rl_gridworld.png" alt="Q-learning 网格世界 Reinforcement learning 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 84 帧 · Q-learning 网格世界 Reinforcement learning · 程序 <a href="code/lecture05/l5_11_rl_gridworld.py">l5_11_rl_gridworld.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_interpretability.png"><img src="figures/lecture05/fig_interpretability.png" alt="解释性可视化与模型卡 Interpretability 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 89 帧 · 解释性可视化与模型卡 Interpretability · 程序 <a href="code/lecture05/l5_12_interpretability_modelcard.py">l5_12_interpretability_modelcard.py</a></figcaption>
+      </figure>
+
     <h3>如何运行 How to Run</h3>
     <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
 pip install -r code/requirements.txt
 pip install -r code/lecture03/requirements.txt
 pip install -r code/lecture04/requirements.txt
+pip install -r code/lecture05/requirements.txt
 
 # 2) Lecture 2：数据类型样本（逐行中文注释）
 cd code
@@ -502,14 +658,19 @@ python run_all.py
 
 # 4) Lecture 4：描述统计与可视化样本（逐行中文注释）
 cd ../lecture04
+python run_all.py
+
+# 5) Lecture 5：机器学习入门样本（逐行英文注释）
+cd ../lecture05
 python run_all.py</code></pre>
-    <p class="note">三个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417），
-       因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 4 的省级边界文件在首次运行时自动下载并缓存到
-       <code>data/lecture04/china_provinces.geojson</code>；若网络不可用，地图自动退化为中心点气泡图，流程不会中断。</p>
+    <p class="note">四个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506），
+       因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 5 的梯度提升同时使用 XGBoost 与 LightGBM；
+       若未安装这两个包，程序会打印提示并跳过对应模型，其余流程不受影响。</p>
 
     <h3>说明 Notes</h3>
     <ul>
-      <li><b>逐行注释</b>：Lecture 2、Lecture 3 与 Lecture 4 的程序、以及课件中的代码示例，<b>每一行代码都带中文注释</b>；</li>
+      <li><b>逐行注释</b>：Lecture 2、Lecture 3 与 Lecture 4 的程序为<b>逐行中文注释</b>；
+          Lecture 5 的机器学习程序为<b>逐行英文注释</b>，便于与 scikit-learn 官方文档和英文术语对照；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -534,6 +695,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
           <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
           <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
           <li><a href="code.html">样本数据与可视化程序</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>

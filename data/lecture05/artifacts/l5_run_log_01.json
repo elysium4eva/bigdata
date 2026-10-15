@@ -1,0 +1,18 @@
+{
+  "lecture": "L5",
+  "script": "l5_01_pipeline_baseline.py",
+  "seed": 20260506,
+  "dataset": {
+    "file": "l5_credit_default.csv",
+    "rows": 3000,
+    "positive_rate": 0.2673
+  },
+  "metrics": {
+    "test_roc_auc": 0.8398,
+    "test_accuracy": 0.8083,
+    "train_seconds": 0.009
+  },
+  "artifacts": [
+    "l5_baseline_scores.csv"
+  ]
+}

@@ -1,0 +1,7 @@
+﻿model,test_auc,test_accuracy,train_seconds
+gradient boosting,0.8308,0.8022,1.526
+random forest,0.822,0.7956,1.18
+xgboost,0.8217,0.8,0.29
+hist gradient boosting,0.8108,0.7956,2.488
+lightgbm,0.8093,0.8011,0.185
+single tree (depth 4),0.7904,0.7867,0.008

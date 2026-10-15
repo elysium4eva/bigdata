@@ -1,0 +1,5 @@
+﻿protocol,cv_auc_mean,cv_auc_std,holdout_auc
+A clean pipeline,0.8237,0.0084,0.8646
+B selection leak,0.8248,0.0073,
+C target leak,1.0,0.0,
+D duplicate rows,0.8284,0.0039,

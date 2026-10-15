@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 5 Introduction to Machine Learning · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第五章</p>
+    <h1 class="doc-title">Lecture 5　Introduction to Machine Learning</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L05-introduction-to-machine-learning.pdf">下载课件（2026 版 · 104 页）</a>
+      <a class="btn btn-ghost" href="code.html#lecture05">样本、程序与模型卡</a>
+      <a class="btn btn-ghost" href="lecture-04.html">上一讲 Lecture 4</a>
+      <a class="btn btn-gold" href="syllabus.html">课程大纲</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>104</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>14</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">对应周次 Week</div><div class="v">第 6 周（含项目选题说明）</div></div>
+    </div>
+    <p class="note">本讲是<b>机器学习总览课</b>：四类学习范式（监督 / 无监督 / 自监督 / 强化）、
+       训练-验证-测试与交叉验证、偏差-方差与三类误差、回归与分类指标（含阈值、代价敏感与概率校准）、
+       监督算法族（线性与惩罚回归、KNN、SVM、CART、随机森林、梯度提升 XGBoost / LightGBM）、
+       无监督算法族（PCA 与因子、k-means、层次聚类、DBSCAN、GMM/EM、异常检测与关联规则）、
+       神经网络与强化学习（前向传播、激活函数、反向传播、Q-learning），
+       以及 2026 内容（AutoML 取舍、可解释性 SHAP/PDP/ICE、模型卡与 MLOps、数据泄漏清单、公平性与合规、成本与延迟）。
+       全部示例用 Python 完成，<b>每一行代码都带英文注释</b>，一条 <code>run_all.py</code> 即可重建样本、图表与实验记录。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L4 衔接、本讲输出物（基线模型与评估协议 + 数据泄漏清单 + 模型卡与运行记录）、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>概念与版图：三个问题切入、Mitchell (1997) 的 E/T/P 定义、AI·ML·DL·生成式 AI 版图、金融七类应用与投研文档分析、"找模式用模式"、监督 / 无监督 / 深度与强化总述、<b>监督与无监督对照表</b></td></tr>
+        <tr><td class="week">Part 2</td><td>流程、划分与评估协议：预测问题与因果问题、两种自省（说的与做的）、ML 与计量经济学三处差别、P≫N 会发生什么、计量经济学的关键教训、ML 1-2-3、训练/验证/测试、五种划分器与交叉验证、端到端流水线与基线样本页、划分与交叉验证代码页、<b>四种协议与数据泄漏</b>样本页</td></tr>
+        <tr><td class="week">Part 3</td><td>泛化、偏差-方差与评估：过拟合与欠拟合、三种复杂度样本页、复杂度扫描代码页、偏差²+方差+噪声分解、学习曲线诊断与两种含义、防过拟合两原则与奥卡姆剃刀、正则化路径样本页、泛化误差与归纳偏置、回归指标、分类指标、指标/阈值/校准样本页、代价敏感与阈值、指标与校准代码页、概率校准与不确定性</td></tr>
+        <tr><td class="week">Part 4</td><td>监督学习算法族：算法族地图、线性与多元回归、Ridge/Lasso/Elastic Net、回归族对照与正则化路径（样本 + 代码）、KNN、SVM、KNN/SVM 边界样本页、CART 与集成、梯度提升族（XGBoost / LightGBM / CatBoost 实测计时）、树与集成样本页与代码页、朴素贝叶斯与 LDA、相似度学习与向量检索、<b>选型决策表</b>、scikit-learn 估计器地图</td></tr>
+        <tr><td class="week">Part 5</td><td>无监督学习算法族：用途与评估困境、PCA（碎石图/载荷/重构）、PCA 与因子样本页与代码页、因子分析与 Fama-French、非线性降维与嵌入、聚类四族总览、k-means 与常见误用、层次聚类/DBSCAN/GMM 与 EM、聚类三法样本页与 k 选择代码页、聚类评估/异常检测/关联规则</td></tr>
+        <tr><td class="week">Part 6</td><td>神经网络与强化学习：为什么需要神经网络、从多元回归到单隐层网络、单节点机制与激活函数、结构即超参数、MLP 训练样本页、前向传播、<b>纯 NumPy 前向与反向传播代码页</b>、训练循环与优化器、深度学习网、强化学习设定、Q-learning 网格世界样本页与代码页、自监督/迁移/微调、2026 取舍（自建 / AutoML / 微调 / 提示+检索）</td></tr>
+        <tr><td class="week">Part 7</td><td>可信、可解释与工程化：可解释性三类方法、解释性可视化样本页与模型卡代码页、<b>数据泄漏清单</b>、公平性与偏差指标、模型卡六要素、MLOps 四件事（版本/跟踪/监控/回滚）、AutoML 的成本与风险、成本与延迟预算、指标被优化之后的评测危机、高风险场景合规与教育红线、交付前自查清单</td></tr>
+        <tr><td class="week">Part 8</td><td>工具、项目与结语：工具栈（scikit-learn / XGBoost / LightGBM / Optuna / MLflow）、<b>第 6 周项目选题说明模板</b>（问题/数据/方法/产出）、常见错误 Top 10、术语对照与参考书（Géron Ch.1–3、ESL、Mitchell、Athey）、三句话讲清你的模型</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>端到端流水线与基线</b>：划分、预处理、多数类基线与逻辑回归、运行记录 JSON（<code>l5_01</code>）；</li>
+      <li><b>划分与交叉验证</b>：分层 K 折、交叉验证分数、四种泄漏协议对照（<code>l5_02</code>）；</li>
+      <li><b>复杂度扫描与学习曲线</b>：多项式次数、Ridge 惩罚、<code>learning_curve</code> 诊断（<code>l5_03</code>）；</li>
+      <li><b>指标、阈值与校准</b>：ROC/PR 曲线、阈值—代价曲线、等渗校准（<code>l5_04</code>）；</li>
+      <li><b>正则化回归</b>：OLS/RidgeCV/LassoCV/ElasticNetCV 与系数路径（<code>l5_05</code>）；</li>
+      <li><b>KNN、SVM 与调参</b>：k 与核参数、GridSearchCV、交叉验证对照（<code>l5_06</code>）；</li>
+      <li><b>树与集成</b>：单树深度扫描、随机森林、梯度提升、XGBoost/LightGBM 计时与置换重要性（<code>l5_07</code>）；</li>
+      <li><b>PCA 与重构误差</b>：碎石图、载荷、投影与重构曲线（<code>l5_08</code>）；</li>
+      <li><b>聚类与 k 选择</b>：inertia/silhouette/Calinski-Harabasz、k-means/层次/DBSCAN 与 ARI（<code>l5_09</code>）；</li>
+      <li><b>神经网络与强化学习</b>：纯 NumPy 前向/反向传播（<code>l5_10</code>）、Q-learning 网格世界（<code>l5_11</code>）、解释性与模型卡（<code>l5_12</code>）。</li>
+    </ul>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L05-introduction-to-machine-learning.pdf" title="Lecture 5 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

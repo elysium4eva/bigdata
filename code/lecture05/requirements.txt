@@ -1,0 +1,8 @@
+numpy>=1.24          # arrays, the hand-written neural network and the grid world
+pandas>=2.1          # tabular samples, score tables and the experiment log
+matplotlib>=3.7      # every static figure in the deck
+scipy>=1.10          # hierarchical clustering linkage and statistical helpers
+scikit-learn>=1.3    # pipelines, models, metrics, calibration and inspection tools
+xgboost>=2.0         # gradient boosting back end used in lesson 5.7
+lightgbm>=4.0        # second boosting back end for the timing comparison
+pillow>=9.0          # image back end for matplotlib

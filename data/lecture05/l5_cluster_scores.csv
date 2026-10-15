@@ -1,0 +1,4 @@
+﻿algorithm,clusters,noise_points,silhouette,ARI_vs_truth
+kmeans,4,0,0.4999,1.0
+hierarchical,4,0,0.4955,0.9903
+dbscan,2,25,0.5936,0.4993
