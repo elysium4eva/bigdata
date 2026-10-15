@@ -116,7 +116,7 @@
     <div class="section-head">
       <h3>章节与课件 <small>Lectures &amp; Courseware</small></h3>
       <p>课件采用 XeLaTeX + Beamer（深圳大学主题：荔枝红 #8A0C3C + 校徽）制作。
-         第 1 章与第 6 章课件已上线，其余章节将陆续发布；每章的详细内容与阅读要求见课程大纲。</p>
+         第 1–6 讲课件已上线（含样本数据与可运行程序），其余章节将陆续发布；每章的详细内容与阅读要求见课程大纲。</p>
     </div>
     <div class="lectures">
     <article class="lecture is-live">
@@ -248,7 +248,8 @@
     <div class="section-head">
       <h3>考核与评分 <small>Assessment</small></h3>
       <p>总成绩 = <b>出勤 10%</b> + <b>项目 90%</b>；项目为「<b>4 选 1</b>」：从四个研究项目中任选一项完成，
-         项目较以往课程更加开放并鼓励结合 AI 工具（<a href="projects.html">项目内容与评分规则已公布</a>），组队不超过 2 人。</p>
+         项目较以往课程更加开放并鼓励结合 AI 工具（<a href="projects.html">项目内容与评分规则已公布</a>），
+         组队不超过 2 人、可取队名，<b>学期末</b>提交组队学号与选题。</p>
       <div class="hero-actions" style="margin-top:10px">
         <a class="btn btn-primary" href="projects.html">查看四个项目与评分规则 →</a>
         <a class="btn btn-ghost" href="files/Course-Projects-2026-Guidelines.docx">下载指南 Word</a>
@@ -274,6 +275,57 @@
 <tr><td class="week">表达与规范</td><td class="lec">15%</td><td>报告结构清楚、图表规范、引用与 AI 使用声明合规</td></tr>
 </tbody></table></div>
 
+
+    <h4 style="margin-top:26px">课程项目（4 选 1）<small style="color:#66717d;font-weight:400"> Projects</small></h4>
+    <div class="table-wrap"><table>
+      <thead><tr><th>项目</th><th>主题</th><th>简要内容</th><th>关键交付</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="lec">项目一</td>
+          <td><b>出海爆款产品市场需求分析</b></td>
+          <td>在全球性事件（厄尔尼诺、中东原油危机、中美贸易战等）影响下，用动态预测找出一款<b>尚未被市场证实</b>的出海潜力产品并完成需求分析；已被市场证实的产品不可选。</td>
+          <td>目标市场、宏观分析、微观需求、竞品、产品设计建议、预期市场结果</td>
+        </tr>
+        <tr>
+          <td class="lec">项目二</td>
+          <td><b>跨境电商快消品营销方案</b></td>
+          <td>用跨境电商平台数据挖掘识别出口快消产品，尽调其主流营销手段（直播、内容营销等），提出并用 AI 赋能新策略，再验证策略是否更有效。</td>
+          <td>挖掘算法、营销尽调、AI 赋能新策略、有效性验证</td>
+        </tr>
+        <tr>
+          <td class="lec">项目三</td>
+          <td><b>地缘政治风险因子与交易策略</b></td>
+          <td>利用国际地缘政治冲突构建中国上市企业的风险暴露因子，据此设计基于价值投资的交易策略，并回测、优化与同类策略对比（数据自 2017 年贸易战开始后）。</td>
+          <td>因子构建方法、2017 年后数据、交易策略、回撤与同类对比</td>
+        </tr>
+        <tr>
+          <td class="lec">项目四</td>
+          <td><b>出海法律合规风险平台</b></td>
+          <td>做一个可自动更新全球企业出海法律合规风险的网站或微信小程序：输入企业名称与经营范围，输出各风险维度（贸易合规、地缘政治、物流航运、合同法务、资本流动及结算）的风险系数。</td>
+          <td>自动更新数据库、风险维度地图、交互界面、文本→风险系数、法务咨询报告</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><div class="k">交付与提交 Deliverables</div>
+        <div class="v" style="font-size:14px;line-height:1.7">
+          纸质 <b>PDF 报告（10 页以内）</b> → <b>学校信箱</b>；<br>
+          电子材料（<b>源代码、AI Prompt 记录、Markdown 文档</b> + <b>网页 / 视频</b>等展示结果）→ 邮箱或线上（推荐 <b>GitHub</b>）。
+        </div></div>
+      <div class="card"><div class="k">评分构成 Rubric（100 分）</div>
+        <div class="v" style="font-size:14px;line-height:1.7">
+          方法与技术实现 <b>25</b> · 结果与验证 <b>20</b> · 数据获取与合规 <b>15</b> · 报告质量 <b>15</b> ·
+          问题与选题价值 <b>10</b> · 交付完整性与过程留痕 <b>10</b> · AI 使用合规与学术诚信 <b>5</b>。
+        </div></div>
+      <div class="card"><div class="k">共同要求 Requirements</div>
+        <div class="v" style="font-size:14px;line-height:1.7">
+          ① 解决企业 / 产品<b>出海</b>中的实际问题；② 允许 AI 辅助，<b>禁止用 AI 完成概念构想与流程设计等创造性过程</b>；
+          ③ 报告仿照营销方案 / 项目报告格式；④ 合规引用文献与知识产权、<b>明确文献与数据来源</b>。
+        </div></div>
+    </div>
+    <p class="note">以上仅为项目框架，可对背景进行充实丰富以提高实操性与专业性；完整内容、风险维度表与评分细则见
+       <a href="projects.html">课程项目指南与评分规则</a>。本页不提供各项目的求解与作答。</p>
   </div>
 </section>
 
