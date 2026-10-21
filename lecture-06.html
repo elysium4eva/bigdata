@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 6 Logistic Regression and Linear Classifier · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="projects.html">课程项目</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第六章</p>
+    <h1 class="doc-title">Lecture 6　Logistic Regression and Linear Classifier</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L06-logistic-regression-2026.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-ghost" href="files/L06-glossary.docx">术语表 Word</a>
+      <a class="btn btn-ghost" href="files/L06-glossary.xlsx">术语表 Excel</a>
+      <a class="btn btn-ghost" href="code.html#lecture06">样本、程序与术语表</a>
+      <a class="btn btn-ghost" href="lecture-05.html">上一讲 Lecture 5</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>14</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>79</strong> 条中英对照</div></div>
+    </div>
+    <p class="note">本讲是<b>推导课</b>：最小二乘与正规方程（含投影几何）、极大似然与损失函数的来源
+       （<b>l₂ ＝ 高斯 ＋ MLE</b>）、线性分类与 sigmoid 的三条性质、<b>逻辑回归 ＝ sigmoid ＋ 交叉熵</b>、
+       交叉熵损失梯度的推导、手写梯度下降与 PyTorch 自动求导对账、softmax 多分类、类别不平衡与代价敏感阈值、
+       概率校准（等渗回归 / Platt）、LASSO / Ridge / Elastic Net 与交叉验证、偏差-方差分解，
+       以及一张 <b>79 条术语表</b>。全部示例用 Python 完成，<b>每一行代码都带英文注释</b>。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L5 衔接、本讲输出物（四条推导 + 手写梯度下降对账 + 术语表）、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>从任务到数学形式：三类任务与核心术语、图像分类与多分类、聚类、颜色直方图到特征向量、<b>形式化六步</b>（假设类 → 同分布 → i.i.d. → 期望损失 → 0-1/l₂ 损失 → 经验损失）、泛化差距、机器学习 1-2-3、表征学习、1-2-3 的边界与非 i.i.d.</td></tr>
+        <tr><td class="week">Part 2</td><td>线性回归与正规方程：前列腺数据、假设类与 MSE、矩阵形式、<b>正规方程推导</b>、投影几何样本页、增广技巧、三种实现代码页、为什么是 l₂、共线性与条件数、数值稳定样本页与代码页（lstsq / QR / 伪逆）、评估与外推</td></tr>
+        <tr><td class="week">Part 3</td><td>极大似然与损失函数：分布族与参数、似然与联合似然、对数似然、负对数似然、条件似然（判别式 vs 生成式）、<b>l₂ ＝ 高斯 ＋ MLE 推导</b>、伯努利似然样本页、交叉熵与 KL 散度、一维 NLL 曲面样本页、MLE 代码页、下溢与 log-sum-exp 样本/代码页</td></tr>
+        <tr><td class="week">Part 4</td><td>线性分类与逻辑回归：超平面与间隔、step ＋ 0-1 损失的三重困难（NP-hard）、回归当分类的缺陷、离群点样本页、三条曲线样本页、<b>sigmoid 三性质与推导</b>、sigmoid 样本页、<b>逻辑回归＝sigmoid＋MLE</b>、对数几率与几率比、无闭式解、<b>梯度推导</b>、手写梯度下降代码页、收敛与学习率样本页、PyTorch 自动求导代码页、优化器与早停、标准化、softmax 与代码页、softmax 区域样本页、类别不平衡样本页、阈值与代价、校准与 ROC/PR 样本页</td></tr>
+        <tr><td class="week">Part 5</td><td>正则化与监督学习结构：为什么正则化、惩罚回归、LASSO / Ridge / Elastic Net、正则化路径样本页、交叉验证代码页、1-SE 规则、偏差-方差分解、近似-过拟合样本页、预测问题统一框架、<b>计量经济学 vs 机器学习术语对照</b>、平方误差案例、混淆矩阵与 ROC 代码页、监督学习者三要素、线性模型家族</td></tr>
+        <tr><td class="week">Part 6</td><td>工具、术语与结语：工具栈分工、statsmodels 推断代码页（系数/标准误/p 值/区间/几率比）、<b>术语表三帧（79 条）</b>、常见错误 Top 10、与 L7/L9/L12 的衔接、三句话讲清一个线性模型</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>正规方程三实现</b>：NumPy 手写、sklearn、statsmodels 对账与残差正交性检验（<code>l6_01</code>）；</li>
+      <li><b>数值稳定</b>：lstsq / QR / 伪逆、条件数与系数误差的扫描（<code>l6_02</code>）；</li>
+      <li><b>MLE 拟合高斯</b>：闭式解与数值优化互验、NLL 曲面（<code>l6_03</code>）；</li>
+      <li><b>log-sum-exp</b>：下溢与溢出的实测对照、稳定 softmax（<code>l6_04</code>）；</li>
+      <li><b>手写梯度下降</b>：三行核心（概率/损失/梯度）、学习率敏感性、与 sklearn 对比（<code>l6_05</code>）；</li>
+      <li><b>PyTorch 自动求导</b>：autograd 与解析梯度差 2.8e-17、系数完全一致（<code>l6_06</code>）；</li>
+      <li><b>softmax 回归</b>：手写梯度下降与 <code>multi_class="multinomial"</code> 对照（<code>l6_07</code>）；</li>
+      <li><b>正则化三族</b>：RidgeCV / LassoCV / ElasticNetCV 与系数路径（<code>l6_08</code>）；</li>
+      <li><b>指标与校准</b>：混淆矩阵、阈值扫描、PR/ROC、等渗校准与 Brier 分数（<code>l6_09</code>）；</li>
+      <li><b>推断视角</b>：OLS 与 Logit 的系数、标准误、p 值、置信区间与几率比（<code>l6_10</code>）。</li>
+    </ul>
+
+    <h3 id="glossary">术语表 Glossary（79 条中英对照）</h3>
+    <p class="note">按课件顺序分五组；每条含中文、English、符号与公式、一句话解释。
+       可直接在本页 <kbd>Ctrl+F</kbd> 检索，或下载 <a href="files/L06-glossary.docx">Word</a> /
+       <a href="files/L06-glossary.xlsx">Excel</a> 版本打印背诵。机器可读版本：<code>data/lecture06/l6_glossary.csv</code>。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>中文</th><th>English</th><th>符号 / 公式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、基本概念 Concepts</td></tr>
+<tr><td class="lec">机器学习</td><td><span lang="en">machine learning</span></td><td class="num"></td><td>从数据中学习函数以完成预测或决策</td></tr>
+<tr><td class="lec">监督学习</td><td><span lang="en">supervised learning</span></td><td class="num"></td><td>训练数据带标签 (x_i, y_i)</td></tr>
+<tr><td class="lec">无监督学习</td><td><span lang="en">unsupervised learning</span></td><td class="num"></td><td>训练数据无标签，发现结构</td></tr>
+<tr><td class="lec">二分类</td><td><span lang="en">binary classification</span></td><td class="num"></td><td>输出两个类别，如欺诈/正常</td></tr>
+<tr><td class="lec">多分类</td><td><span lang="en">multi-class classification</span></td><td class="num"></td><td>输出三个及以上类别</td></tr>
+<tr><td class="lec">训练数据</td><td><span lang="en">training data</span></td><td class="num"></td><td>用于学习函数的数据</td></tr>
+<tr><td class="lec">测试数据</td><td><span lang="en">test data</span></td><td class="num"></td><td>用于评估的未见数据</td></tr>
+<tr><td class="lec">特征向量</td><td><span lang="en">feature vector</span></td><td class="num">$x_i$</td><td>一个样本的输入表示</td></tr>
+<tr><td class="lec">标签</td><td><span lang="en">label</span></td><td class="num">$y_i$</td><td>样本的目标值</td></tr>
+<tr><td class="lec">假设类</td><td><span lang="en">hypothesis class</span></td><td class="num">$\mathcal{H}$</td><td>候选函数的集合，决定模型族</td></tr>
+<tr><td class="lec">独立同分布</td><td><span lang="en">independent and identically distributed (i.i.d.)</span></td><td class="num"></td><td>训练与测试同分布且相互独立</td></tr>
+<tr><td class="lec">期望损失</td><td><span lang="en">expected loss / risk</span></td><td class="num">$L(f)$ $E_{x,y\sim D}[l(f,x,y)]$</td><td>对数据分布的期望误差</td></tr>
+<tr><td class="lec">经验损失</td><td><span lang="en">empirical loss / empirical risk</span></td><td class="num">$\hat L(f)$ $\frac1n\sum_i l(f,x_i,y_i)$</td><td>样本平均误差</td></tr>
+<tr><td class="lec">0-1 损失</td><td><span lang="en">0-1 loss</span></td><td class="num">$\mathbb{I}[f(x)\ne y]$</td><td>误分类即 1，否则 0</td></tr>
+<tr><td class="lec">平方损失</td><td><span lang="en">squared loss / $l_2$ loss</span></td><td class="num">$(f(x)-y)^2$</td><td>回归的默认损失</td></tr>
+<tr><td class="lec">泛化差距</td><td><span lang="en">generalization gap</span></td><td class="num"></td><td>期望损失与经验损失之差</td></tr>
+<tr><td class="lec">过拟合</td><td><span lang="en">overfitting</span></td><td class="num"></td><td>拟合训练噪声，样本外变差</td></tr>
+<tr><td class="lec">表征学习</td><td><span lang="en">representation learning</span></td><td class="num"></td><td>自动学习特征表示</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、线性回归 Linear Regression</td></tr>
+<tr><td class="lec">线性回归</td><td><span lang="en">linear regression</span></td><td class="num">$f_w(x)=w^\top x$</td><td>线性假设类 + 平方损失</td></tr>
+<tr><td class="lec">均方误差</td><td><span lang="en">mean squared error (MSE)</span></td><td class="num">$\frac1n\sum_i(w^\top x_i-y_i)^2$</td><td>平方损失的平均</td></tr>
+<tr><td class="lec">正规方程</td><td><span lang="en">normal equation</span></td><td class="num">$w=(X^\top X)^{-1}X^\top y$</td><td>梯度为零得到的闭式解</td></tr>
+<tr><td class="lec">设计矩阵</td><td><span lang="en">design matrix</span></td><td class="num">$X$</td><td>第 i 行为 $x_i^	op$ 的矩阵</td></tr>
+<tr><td class="lec">截距</td><td><span lang="en">intercept / bias</span></td><td class="num">$b$</td><td>常数项，可用增广列实现</td></tr>
+<tr><td class="lec">增广技巧</td><td><span lang="en">augmented trick</span></td><td class="num">$x'=(x,1)$</td><td>把截距并入权重向量</td></tr>
+<tr><td class="lec">投影</td><td><span lang="en">projection</span></td><td class="num"></td><td>最小二乘解是 y 在列空间的投影</td></tr>
+<tr><td class="lec">条件数</td><td><span lang="en">condition number</span></td><td class="num">$\kappa$</td><td>输入微小扰动引起的解的相对变化</td></tr>
+<tr><td class="lec">多重共线性</td><td><span lang="en">multicollinearity</span></td><td class="num"></td><td>特征高度线性相关，$X^	op X$ 病态</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、极大似然与损失 Likelihood and Loss</td></tr>
+<tr><td class="lec">极大似然估计</td><td><span lang="en">maximum likelihood estimation (MLE)</span></td><td class="num">$\hat\theta_{ML}$ $\arg\max_\theta\prod_i P_\theta(x_i,y_i)$</td><td>选让数据最可能的参数</td></tr>
+<tr><td class="lec">似然</td><td><span lang="en">likelihood</span></td><td class="num">$P_\theta(x_i,y_i)$</td><td>参数对数据的拟合程度</td></tr>
+<tr><td class="lec">对数似然</td><td><span lang="en">log-likelihood</span></td><td class="num">$\sum_i\log P_\theta(x_i,y_i)$</td><td>把乘积变求和，数值更稳</td></tr>
+<tr><td class="lec">负对数似然</td><td><span lang="en">negative log-likelihood (NLL)</span></td><td class="num">$-\sum_i\log P_\theta(x_i,y_i)$</td><td>常用作损失函数</td></tr>
+<tr><td class="lec">条件似然</td><td><span lang="en">conditional likelihood</span></td><td class="num">$P_\theta(y\mid x)$</td><td>判别式建模，只关心 y 给定 x</td></tr>
+<tr><td class="lec">判别式模型</td><td><span lang="en">discriminative model</span></td><td class="num">$P(y\mid x)$</td><td>直接建模条件分布</td></tr>
+<tr><td class="lec">生成式模型</td><td><span lang="en">generative model</span></td><td class="num">$P(x,y)$</td><td>建模联合分布</td></tr>
+<tr><td class="lec">交叉熵</td><td><span lang="en">cross-entropy</span></td><td class="num">$-\sum_i[y_i\log p_i+(1-y_i)\log(1-p_i)]$</td><td>分类的 NLL 形式</td></tr>
+<tr><td class="lec">KL 散度</td><td><span lang="en">Kullback-Leibler divergence</span></td><td class="num">$D_{KL}(p\Vert q)$</td><td>两个分布的差异，交叉熵减熵</td></tr>
+<tr><td class="lec">下溢</td><td><span lang="en">underflow</span></td><td class="num"></td><td>概率连乘趋近于 0，需取对数</td></tr>
+<tr><td class="lec">对数求和指数</td><td><span lang="en">log-sum-exp</span></td><td class="num">$\log\sum_k e^{z_k}$</td><td>稳定计算对数概率和的技巧</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、线性分类与逻辑回归 Classification</td></tr>
+<tr><td class="lec">线性分类器</td><td><span lang="en">linear classifier</span></td><td class="num">$w^\top x=0$</td><td>用超平面划分两类</td></tr>
+<tr><td class="lec">超平面</td><td><span lang="en">hyperplane</span></td><td class="num">$w^\top x+b=0$</td><td>线性决策边界</td></tr>
+<tr><td class="lec">间隔</td><td><span lang="en">margin</span></td><td class="num"></td><td>样本到决策边界的距离</td></tr>
+<tr><td class="lec">阶跃函数</td><td><span lang="en">step function</span></td><td class="num">$\mathrm{step}(z)=\mathbb{I}[z&gt;0]$</td><td>硬分类器，不可导</td></tr>
+<tr><td class="lec">sigmoid 函数</td><td><span lang="en">sigmoid function</span></td><td class="num">$\sigma(z)$ $1/(1+e^{-z})$</td><td>把实数压到 (0,1)</td></tr>
+<tr><td class="lec">逻辑回归</td><td><span lang="en">logistic regression</span></td><td class="num">$P(y=1\mid x)=\sigma(w^\top x)$</td><td>sigmoid + 交叉熵（MLE）</td></tr>
+<tr><td class="lec">对数几率</td><td><span lang="en">log-odds</span></td><td class="num">$\log\frac{p}{1-p}=w^\top x$</td><td>系数解释为对数几率的变化</td></tr>
+<tr><td class="lec">几率比</td><td><span lang="en">odds ratio</span></td><td class="num">$e^{w_j}$</td><td>特征增加一单位对几率的倍数</td></tr>
+<tr><td class="lec">梯度下降</td><td><span lang="en">gradient descent</span></td><td class="num">$w\leftarrow w-\eta\nabla L$</td><td>沿负梯度迭代下降</td></tr>
+<tr><td class="lec">学习率</td><td><span lang="en">learning rate</span></td><td class="num">$\eta$</td><td>步长，过大发散、过小慢</td></tr>
+<tr><td class="lec">批量</td><td><span lang="en">batch</span></td><td class="num"></td><td>一次更新使用的样本数</td></tr>
+<tr><td class="lec">自动微分</td><td><span lang="en">automatic differentiation</span></td><td class="num"></td><td>由计算图自动求梯度（如 PyTorch）</td></tr>
+<tr><td class="lec">凸函数</td><td><span lang="en">convex function</span></td><td class="num"></td><td>局部最优即全局最优</td></tr>
+<tr><td class="lec">softmax</td><td><span lang="en">softmax</span></td><td class="num">$e^{z_k}/\sum_j e^{z_j}$</td><td>多分类的概率输出</td></tr>
+<tr><td class="lec">类别不平衡</td><td><span lang="en">class imbalance</span></td><td class="num"></td><td>正类稀少，准确率会误导</td></tr>
+<tr><td class="lec">阈值</td><td><span lang="en">threshold</span></td><td class="num"></td><td>概率转硬标签的临界值</td></tr>
+<tr><td class="lec">第一类错误</td><td><span lang="en">Type I error (false positive)</span></td><td class="num"></td><td>误报：把负例判为正</td></tr>
+<tr><td class="lec">第二类错误</td><td><span lang="en">Type II error (false negative)</span></td><td class="num"></td><td>漏判：把正例判为负</td></tr>
+<tr><td class="lec">混淆矩阵</td><td><span lang="en">confusion matrix</span></td><td class="num"></td><td>TP/FP/FN/TN 四格表</td></tr>
+<tr><td class="lec">ROC 曲线</td><td><span lang="en">ROC curve</span></td><td class="num"></td><td>不同阈值下的 TPR 与 FPR</td></tr>
+<tr><td class="lec">AUC</td><td><span lang="en">area under the ROC curve</span></td><td class="num"></td><td>排序能力的单一指标</td></tr>
+<tr><td class="lec">精确率</td><td><span lang="en">precision</span></td><td class="num">$TP/(TP+FP)$</td><td>预测为正中有多少真的正</td></tr>
+<tr><td class="lec">召回率</td><td><span lang="en">recall / sensitivity</span></td><td class="num">$TP/(TP+FN)$</td><td>真的正中有多少被找到</td></tr>
+<tr><td class="lec">概率校准</td><td><span lang="en">probability calibration</span></td><td class="num"></td><td>预测概率与实际频率一致</td></tr>
+<tr><td class="lec">等渗回归</td><td><span lang="en">isotonic regression</span></td><td class="num"></td><td>单调校准方法</td></tr>
+<tr><td class="lec">Platt 缩放</td><td><span lang="en">Platt scaling</span></td><td class="num"></td><td>用逻辑回归做校准</td></tr>
+<tr><td class="lec">布里尔分数</td><td><span lang="en">Brier score</span></td><td class="num">$\frac1n\sum(p_i-y_i)^2$</td><td>概率预测的均方误差</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、正则化与推断 Regularisation and Inference</td></tr>
+<tr><td class="lec">正则化</td><td><span lang="en">regularization</span></td><td class="num"></td><td>用惩罚项控制模型复杂度</td></tr>
+<tr><td class="lec">惩罚回归</td><td><span lang="en">penalized regression</span></td><td class="num">$\text{RSS}+\lambda\,\Omega(w)$</td><td>损失加惩罚项</td></tr>
+<tr><td class="lec">L1 惩罚</td><td><span lang="en">L1 penalty / LASSO</span></td><td class="num">$\lambda\sum_j|w_j|$</td><td>产生稀疏解，自动选择特征</td></tr>
+<tr><td class="lec">L2 惩罚</td><td><span lang="en">L2 penalty / Ridge</span></td><td class="num">$\lambda\sum_j w_j^2$</td><td>向零收缩但不为零</td></tr>
+<tr><td class="lec">弹性网</td><td><span lang="en">elastic net</span></td><td class="num">$\lambda(\alpha\sum|w_j|+(1-\alpha)\sum w_j^2)$</td><td>L1 与 L2 的混合</td></tr>
+<tr><td class="lec">超参数</td><td><span lang="en">hyper-parameter</span></td><td class="num">$\lambda$</td><td>学习前需设定的参数</td></tr>
+<tr><td class="lec">稀疏解</td><td><span lang="en">sparse solution</span></td><td class="num"></td><td>多数系数恰为零</td></tr>
+<tr><td class="lec">收缩</td><td><span lang="en">shrinkage</span></td><td class="num"></td><td>系数向零靠拢</td></tr>
+<tr><td class="lec">偏差-方差分解</td><td><span lang="en">bias-variance decomposition</span></td><td class="num">$E[(y-\hat f)^2]=\text{Bias}^2+\text{Var}+\sigma^2$</td><td>期望误差的三个来源</td></tr>
+<tr><td class="lec">近似误差</td><td><span lang="en">approximation error</span></td><td class="num"></td><td>函数类表达能力的限制</td></tr>
+<tr><td class="lec">交叉验证</td><td><span lang="en">cross-validation</span></td><td class="num"></td><td>轮流留出验证折评估模型</td></tr>
+<tr><td class="lec">标准误</td><td><span lang="en">standard error</span></td><td class="num">$\hat\sigma/\sqrt n$</td><td>估计量的抽样波动</td></tr>
+<tr><td class="lec">置信区间</td><td><span lang="en">confidence interval</span></td><td class="num"></td><td>参数的区间估计</td></tr>
+<tr><td class="lec">p 值</td><td><span lang="en">p-value</span></td><td class="num"></td><td>在原假设下观测到该统计量的概率</td></tr>
+</tbody></table></div>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L06-logistic-regression-2026.pdf" title="Lecture 6 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="projects.html">课程项目指南与评分规则</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.docx">项目指南 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.pdf">项目指南 PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

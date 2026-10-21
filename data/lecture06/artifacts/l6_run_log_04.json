@@ -1,0 +1,5 @@
+{
+  "log_product": -1381.5510557964274,
+  "stable_logsumexp": 802.4076059644444,
+  "note": "naive products underflow, naive softmax overflows"
+}

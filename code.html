@@ -43,6 +43,7 @@
       <a class="btn btn-primary" href="#lecture03">Lecture 3 · 数据整备</a>
       <a class="btn btn-primary" href="#lecture04">Lecture 4 · 描述与可视化</a>
       <a class="btn btn-primary" href="#lecture05">Lecture 5 · 机器学习入门</a>
+      <a class="btn btn-primary" href="#lecture06">Lecture 6 · 逻辑回归</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
       <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
@@ -642,6 +643,91 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 89 帧 · 解释性可视化与模型卡 Interpretability · 程序 <a href="code/lecture05/l5_12_interpretability_modelcard.py">l5_12_interpretability_modelcard.py</a></figcaption>
       </figure>
 
+
+    <h3 id="lecture06">Lecture 6 · 逻辑回归与线性分类器样本（12 个程序，逐行英文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture06/requirements.txt</code> →
+       <code>cd code/lecture06 &amp;&amp; python run_all.py</code>；
+       样本写入 <code>data/lecture06/</code>，图片写入 <code>figures/lecture06/</code>，
+       推断摘录与运行记录写入 <code>data/lecture06/artifacts/</code>。
+       本讲需要 <code>statsmodels</code>（推断视角）与 <code>torch</code>（自动求导对照）。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>帧</th><th>主题</th><th>程序</th><th>数据</th></tr></thead>
+      <tbody>
+        <tr><td class="num">27</td><td>正规方程的几何：投影 Projection</td><td><code>l6_01_linreg_normal_equation.py</code></td><td><code>l6_prostate.csv</code> <code>l6_coef_compare.csv</code></td></tr>
+        <tr><td class="num">29</td><td>前列腺数据：拟合与残差 Fit and residuals</td><td><code>l6_01_linreg_normal_equation.py</code></td><td><code>l6_prostate.csv</code> <code>l6_coef_compare.csv</code></td></tr>
+        <tr><td class="num">33</td><td>数值稳定性：正态方程 vs QR</td><td><code>l6_02_numerical_stability.py</code></td><td><code>l6_stability.csv</code> <code>l6_illconditioned.csv</code></td></tr>
+        <tr><td class="num">44</td><td>伯努利似然与逻辑损失</td><td><code>l6_03_mle_gaussian.py</code></td><td><code>l6_spam.csv</code></td></tr>
+        <tr><td class="num">46</td><td>一维负对数似然曲面 NLL surface</td><td><code>l6_03_mle_gaussian.py</code></td><td><code>l6_nll_surface.csv</code></td></tr>
+        <tr><td class="num">55</td><td>离群点如何破坏回归分类器 Outliers</td><td><code>l6_05_linreg_vs_sigmoid.py</code></td><td><code>l6_two_class.csv</code></td></tr>
+        <tr><td class="num">56</td><td>step、线性与 sigmoid 三条曲线</td><td><code>l6_05_linreg_vs_sigmoid.py</code></td><td><code>l6_two_class.csv</code></td></tr>
+        <tr><td class="num">58</td><td>sigmoid 的形状、导数与对称性</td><td><code>l6_05_linreg_vs_sigmoid.py</code></td><td>—</td></tr>
+        <tr><td class="num">64</td><td>收敛曲线与学习率敏感性</td><td><code>l6_05_linreg_vs_sigmoid.py</code></td><td><code>l6_two_class.csv</code> <code>l6_gd_history.csv</code></td></tr>
+        <tr><td class="num">69</td><td>softmax 决策区域与概率面</td><td><code>l6_07_softmax_regression.py</code></td><td><code>l6_three_class.csv</code> <code>l6_softmax_history.csv</code></td></tr>
+        <tr><td class="num">71</td><td>类别不平衡与重加权 Imbalance</td><td><code>l6_09_metrics_roc.py</code></td><td><code>l6_imbalanced.csv</code> <code>l6_threshold_metrics.csv</code></td></tr>
+        <tr><td class="num">73</td><td>概率校准与 ROC/PR</td><td><code>l6_09_metrics_roc.py</code></td><td><code>l6_metrics_summary.csv</code></td></tr>
+        <tr><td class="num">80</td><td>正则化路径与交叉验证选 λ</td><td><code>l6_08_regularization_cv.py</code></td><td><code>l6_regularization_scores.csv</code></td></tr>
+        <tr><td class="num">85</td><td>近似—过拟合与偏差-方差分解</td><td><code>l6_11_overfit_curves.py</code></td><td><code>l6_poly_sample.csv</code> <code>l6_overfit_curve.csv</code> <code>l6_bias_variance.csv</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 6 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_projection.png"><img src="figures/lecture06/fig_projection.png" alt="正规方程的几何：投影 Projection 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 27 帧 · 正规方程的几何：投影 Projection · 程序 <a href="code/lecture06/l6_01_linreg_normal_equation.py">l6_01_linreg_normal_equation.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_prostate_fit.png"><img src="figures/lecture06/fig_prostate_fit.png" alt="前列腺数据：拟合与残差 Fit and residuals 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 29 帧 · 前列腺数据：拟合与残差 Fit and residuals · 程序 <a href="code/lecture06/l6_01_linreg_normal_equation.py">l6_01_linreg_normal_equation.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_condition_number.png"><img src="figures/lecture06/fig_condition_number.png" alt="数值稳定性：正态方程 vs QR 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 33 帧 · 数值稳定性：正态方程 vs QR · 程序 <a href="code/lecture06/l6_02_numerical_stability.py">l6_02_numerical_stability.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_bernoulli_nll.png"><img src="figures/lecture06/fig_bernoulli_nll.png" alt="伯努利似然与逻辑损失 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 44 帧 · 伯努利似然与逻辑损失 · 程序 <a href="code/lecture06/l6_03_mle_gaussian.py">l6_03_mle_gaussian.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_nll_surface.png"><img src="figures/lecture06/fig_nll_surface.png" alt="一维负对数似然曲面 NLL surface 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 46 帧 · 一维负对数似然曲面 NLL surface · 程序 <a href="code/lecture06/l6_03_mle_gaussian.py">l6_03_mle_gaussian.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_outlier_effect.png"><img src="figures/lecture06/fig_outlier_effect.png" alt="离群点如何破坏回归分类器 Outliers 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 55 帧 · 离群点如何破坏回归分类器 Outliers · 程序 <a href="code/lecture06/l6_05_linreg_vs_sigmoid.py">l6_05_linreg_vs_sigmoid.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_three_curves.png"><img src="figures/lecture06/fig_three_curves.png" alt="step、线性与 sigmoid 三条曲线 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 56 帧 · step、线性与 sigmoid 三条曲线 · 程序 <a href="code/lecture06/l6_05_linreg_vs_sigmoid.py">l6_05_linreg_vs_sigmoid.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_sigmoid_props.png"><img src="figures/lecture06/fig_sigmoid_props.png" alt="sigmoid 的形状、导数与对称性 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 58 帧 · sigmoid 的形状、导数与对称性 · 程序 <a href="code/lecture06/l6_05_linreg_vs_sigmoid.py">l6_05_linreg_vs_sigmoid.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_gd_convergence.png"><img src="figures/lecture06/fig_gd_convergence.png" alt="收敛曲线与学习率敏感性 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 64 帧 · 收敛曲线与学习率敏感性 · 程序 <a href="code/lecture06/l6_05_linreg_vs_sigmoid.py">l6_05_linreg_vs_sigmoid.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_softmax_regions.png"><img src="figures/lecture06/fig_softmax_regions.png" alt="softmax 决策区域与概率面 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 69 帧 · softmax 决策区域与概率面 · 程序 <a href="code/lecture06/l6_07_softmax_regression.py">l6_07_softmax_regression.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_class_imbalance.png"><img src="figures/lecture06/fig_class_imbalance.png" alt="类别不平衡与重加权 Imbalance 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 71 帧 · 类别不平衡与重加权 Imbalance · 程序 <a href="code/lecture06/l6_09_metrics_roc.py">l6_09_metrics_roc.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_calibration.png"><img src="figures/lecture06/fig_calibration.png" alt="概率校准与 ROC/PR 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 73 帧 · 概率校准与 ROC/PR · 程序 <a href="code/lecture06/l6_09_metrics_roc.py">l6_09_metrics_roc.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_regularization_paths.png"><img src="figures/lecture06/fig_regularization_paths.png" alt="正则化路径与交叉验证选 λ 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 80 帧 · 正则化路径与交叉验证选 λ · 程序 <a href="code/lecture06/l6_08_regularization_cv.py">l6_08_regularization_cv.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture06/fig_approx_overfit.png"><img src="figures/lecture06/fig_approx_overfit.png" alt="近似—过拟合与偏差-方差分解 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 85 帧 · 近似—过拟合与偏差-方差分解 · 程序 <a href="code/lecture06/l6_11_overfit_curves.py">l6_11_overfit_curves.py</a></figcaption>
+      </figure>
+
     <h3>如何运行 How to Run</h3>
     <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
 pip install -r code/requirements.txt
@@ -663,15 +749,21 @@ python run_all.py
 
 # 5) Lecture 5：机器学习入门样本（逐行英文注释）
 cd ../lecture05
+python run_all.py
+
+# 6) Lecture 6：逻辑回归与线性分类器样本（逐行英文注释）
+cd ../lecture06
 python run_all.py</code></pre>
-    <p class="note">四个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506），
+    <p class="note">五个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603），
        因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 5 的梯度提升同时使用 XGBoost 与 LightGBM；
        若未安装这两个包，程序会打印提示并跳过对应模型，其余流程不受影响。</p>
 
     <h3>说明 Notes</h3>
     <ul>
       <li><b>逐行注释</b>：Lecture 2、Lecture 3 与 Lecture 4 的程序为<b>逐行英文注释</b>；
-          Lecture 5 的机器学习程序为<b>逐行英文注释</b>，便于与 scikit-learn 官方文档和英文术语对照；</li>
+          Lecture 5 的机器学习程序为<b>逐行英文注释</b>，便于与 scikit-learn 官方文档和英文术语对照；
+          Lecture 6 的线性模型程序同样是<b>逐行英文注释</b>，术语中英对照见
+          <a href="lecture-06.html#glossary">Lecture 6 术语表（79 条）</a>；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -697,6 +789,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
           <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
           <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
           <li><a href="projects.html">课程项目指南与评分规则</a></li>
           <li><a href="code.html">样本数据与可视化程序</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>

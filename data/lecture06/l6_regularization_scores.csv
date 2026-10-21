@@ -1,0 +1,4 @@
+﻿model,alpha,test_rmse,nonzero_coefs,max_abs_coef
+Ridge,7.64794,0.5759,14,0.5174
+Lasso,0.0153,0.5846,13,0.5672
+ElasticNet,0.01315,0.5907,13,0.5699

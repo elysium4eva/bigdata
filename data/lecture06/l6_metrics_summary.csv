@@ -1,0 +1,4 @@
+﻿model,auc,average_precision,brier
+plain,0.8955,0.6626,0.0658
+class_weight=balanced,0.8954,0.6623,0.1329
+isotonic,0.894,0.6508,0.0659

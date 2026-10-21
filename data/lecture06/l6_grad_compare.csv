@@ -1,0 +1,3 @@
+﻿parameter,numpy_gd,torch_autograd,sklearn
+bias,-0.048589,-0.048589,-0.050201
+slope,1.275318,1.275318,1.215322

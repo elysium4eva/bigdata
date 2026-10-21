@@ -1,0 +1,4 @@
+﻿case,naive_value,stable_value
+product of 300 p=0.01,0.0,0.0
+logit 1000/1001/1002,,
+logsumexp 800/801/802,inf,802.4076059644444
