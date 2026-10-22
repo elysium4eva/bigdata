@@ -1,0 +1,4 @@
+﻿model,weights_mb,grads_mb,adam_mb,total_mb
+this toy model,0.26,0.26,0.52,1.04
+7B model (fp16),13351.44,13351.44,26702.88,53405.76
+7B model (4-bit weights),3337.86,3337.86,6675.72,13351.44

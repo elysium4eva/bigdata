@@ -1,0 +1,5 @@
+﻿optimizer,final_loss,epochs_to_0.1,final_accuracy
+SGD,0.04298,102,0.9875
+Momentum,0.03508,60,0.99
+RMSProp,0.03142,21,0.9875
+Adam,0.02343,41,0.99

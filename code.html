@@ -46,6 +46,7 @@
       <a class="btn btn-primary" href="#lecture06">Lecture 6 · 逻辑回归</a>
       <a class="btn btn-primary" href="#lecture07">Lecture 7 · 监督学习算法族</a>
       <a class="btn btn-primary" href="#lecture08">Lecture 8 · 无监督学习</a>
+      <a class="btn btn-primary" href="#lecture09">Lecture 9 · 深度学习</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
       <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
@@ -910,6 +911,91 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 94 帧 · NMF 与 LDA：主题词与纯度 · 程序 <a href="code/lecture08/l8_13_topics.py">l8_13_topics.py</a></figcaption>
       </figure>
 
+
+    <h3 id="lecture09">Lecture 9 · 深度学习样本（11 个程序，逐行英文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture09/requirements.txt</code> →
+       <code>cd code/lecture09 &amp;&amp; python run_all.py</code>；
+       样本写入 <code>data/lecture09/</code>，图片写入 <code>figures/lecture09/</code>。
+       本讲需要 <code>torch</code>、<code>transformers</code>、<code>peft</code>（LoRA 示例用
+       <code>BertConfig</code> 从零构造迷你 BERT，<b>不下载任何权重</b>）。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>帧</th><th>主题</th><th>程序</th><th>数据</th></tr></thead>
+      <tbody>
+        <tr><td class="num">23</td><td>五大挑战长什么样 Five challenges</td><td><code>l9_01_knn_images.py</code></td><td><code>l9_shapes.npz</code></td></tr>
+        <tr><td class="num">27</td><td>k-NN 在合成图像上的准确率</td><td><code>l9_01_knn_images.py</code></td><td><code>l9_shapes.npz</code> <code>l9_knn_sweep.csv</code></td></tr>
+        <tr><td class="num">28</td><td>最近邻长什么样</td><td><code>l9_01_knn_images.py</code></td><td><code>l9_shapes.npz</code></td></tr>
+        <tr><td class="num">36</td><td>损失曲面与梯度</td><td><code>l9_02_linear_softmax.py</code></td><td><code>l9_linear_history.csv</code></td></tr>
+        <tr><td class="num">37</td><td>softmax 与温度</td><td><code>l9_02_linear_softmax.py</code></td><td>—</td></tr>
+        <tr><td class="num">42</td><td>激活函数与导数</td><td><code>l9_03_mlp_numpy.py</code></td><td>—</td></tr>
+        <tr><td class="num">47</td><td>MLP 在双月牙上的决策边界</td><td><code>l9_03_mlp_numpy.py</code></td><td><code>l9_moons.csv</code></td></tr>
+        <tr><td class="num">49</td><td>学习率：太小、正好、太大</td><td><code>l9_04_torch_autograd.py</code></td><td><code>l9_lr_histories.csv</code></td></tr>
+        <tr><td class="num">59</td><td>卷积核与特征图</td><td><code>l9_06_cnn_pytorch.py</code></td><td><code>l9_cnn_confusion.csv</code></td></tr>
+        <tr><td class="num">62</td><td>CNN 的训练与混淆矩阵</td><td><code>l9_06_cnn_pytorch.py</code></td><td><code>l9_cnn_history.csv</code></td></tr>
+        <tr><td class="num">74</td><td>RNN 与 LSTM 的记忆</td><td><code>l9_07_rnn_lstm.py</code></td><td><code>l9_rnn_lstm.csv</code> <code>l9_rnn_lstm_histories.csv</code></td></tr>
+        <tr><td class="num">79</td><td>注意力权重长什么样</td><td><code>l9_08_attention.py</code></td><td><code>l9_attention_weights.csv</code></td></tr>
+        <tr><td class="num">88</td><td>参数量与效果的对照</td><td><code>l9_09_finetune_lora.py</code></td><td><code>l9_finetune_modes.csv</code></td></tr>
+        <tr><td class="num">92</td><td>图神经网络与强化学习的定位</td><td><code>l9_09_finetune_lora.py</code></td><td>—</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 9 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_challenges.png"><img src="figures/lecture09/fig_challenges.png" alt="五大挑战长什么样 Five challenges 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 23 帧 · 五大挑战长什么样 Five challenges · 程序 <a href="code/lecture09/l9_01_knn_images.py">l9_01_knn_images.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_knn_images.png"><img src="figures/lecture09/fig_knn_images.png" alt="k-NN 在合成图像上的准确率 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 27 帧 · k-NN 在合成图像上的准确率 · 程序 <a href="code/lecture09/l9_01_knn_images.py">l9_01_knn_images.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_knn_neighbours.png"><img src="figures/lecture09/fig_knn_neighbours.png" alt="最近邻长什么样 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 28 帧 · 最近邻长什么样 · 程序 <a href="code/lecture09/l9_01_knn_images.py">l9_01_knn_images.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_loss_surface.png"><img src="figures/lecture09/fig_loss_surface.png" alt="损失曲面与梯度 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 36 帧 · 损失曲面与梯度 · 程序 <a href="code/lecture09/l9_02_linear_softmax.py">l9_02_linear_softmax.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_softmax_temperature.png"><img src="figures/lecture09/fig_softmax_temperature.png" alt="softmax 与温度 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 37 帧 · softmax 与温度 · 程序 <a href="code/lecture09/l9_02_linear_softmax.py">l9_02_linear_softmax.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_activations.png"><img src="figures/lecture09/fig_activations.png" alt="激活函数与导数 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 42 帧 · 激活函数与导数 · 程序 <a href="code/lecture09/l9_03_mlp_numpy.py">l9_03_mlp_numpy.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_mlp_boundary.png"><img src="figures/lecture09/fig_mlp_boundary.png" alt="MLP 在双月牙上的决策边界 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 47 帧 · MLP 在双月牙上的决策边界 · 程序 <a href="code/lecture09/l9_03_mlp_numpy.py">l9_03_mlp_numpy.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_lr_curves.png"><img src="figures/lecture09/fig_lr_curves.png" alt="学习率：太小、正好、太大 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 49 帧 · 学习率：太小、正好、太大 · 程序 <a href="code/lecture09/l9_04_torch_autograd.py">l9_04_torch_autograd.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_cnn_training.png"><img src="figures/lecture09/fig_cnn_training.png" alt="卷积核与特征图 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 59 帧 · 卷积核与特征图 · 程序 <a href="code/lecture09/l9_06_cnn_pytorch.py">l9_06_cnn_pytorch.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_cnn_training.png"><img src="figures/lecture09/fig_cnn_training.png" alt="CNN 的训练与混淆矩阵 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 62 帧 · CNN 的训练与混淆矩阵 · 程序 <a href="code/lecture09/l9_06_cnn_pytorch.py">l9_06_cnn_pytorch.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_rnn_lstm.png"><img src="figures/lecture09/fig_rnn_lstm.png" alt="RNN 与 LSTM 的记忆 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 74 帧 · RNN 与 LSTM 的记忆 · 程序 <a href="code/lecture09/l9_07_rnn_lstm.py">l9_07_rnn_lstm.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_attention.png"><img src="figures/lecture09/fig_attention.png" alt="注意力权重长什么样 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 79 帧 · 注意力权重长什么样 · 程序 <a href="code/lecture09/l9_08_attention.py">l9_08_attention.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_lora_params.png"><img src="figures/lecture09/fig_lora_params.png" alt="参数量与效果的对照 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 88 帧 · 参数量与效果的对照 · 程序 <a href="code/lecture09/l9_09_finetune_lora.py">l9_09_finetune_lora.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture09/fig_gnn_rl.png"><img src="figures/lecture09/fig_gnn_rl.png" alt="图神经网络与强化学习的定位 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 92 帧 · 图神经网络与强化学习的定位 · 程序 <a href="code/lecture09/l9_09_finetune_lora.py">l9_09_finetune_lora.py</a></figcaption>
+      </figure>
+
     <h3>如何运行 How to Run</h3>
     <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
 pip install -r code/requirements.txt
@@ -943,8 +1029,12 @@ python run_all.py
 
 # 8) Lecture 8：无监督学习样本（逐行英文注释）
 cd ../lecture08
+python run_all.py
+
+# 9) Lecture 9：深度学习样本（逐行英文注释）
+cd ../lecture09
 python run_all.py</code></pre>
-    <p class="note">七个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909），
+    <p class="note">八个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909、L9 为 20261010），
        因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 5 的梯度提升同时使用 XGBoost 与 LightGBM；
        若未安装这两个包，程序会打印提示并跳过对应模型，其余流程不受影响。</p>
 
@@ -959,7 +1049,10 @@ python run_all.py</code></pre>
           <a href="files/Glossary-L6-L7.docx">L6+L7 合并术语总表（151 条）</a>；
           Lecture 8 的无监督程序也是<b>逐行英文注释</b>，术语见
           <a href="lecture-08.html#glossary8">Lecture 8 术语表（72 条）</a>与
-          <a href="files/Glossary-L6-L8.docx">L6–L8 合并术语总表（223 条）</a>；</li>
+          <a href="files/Glossary-L6-L8.docx">L6–L8 合并术语总表（223 条）</a>；
+          Lecture 9 的深度学习程序也是<b>逐行英文注释</b>，术语见
+          <a href="lecture-09.html#glossary9">Lecture 9 术语表（77 条）</a>与
+          <a href="files/Glossary-L6-L9.docx">L6–L9 合并术语总表（300 条）</a>；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -988,6 +1081,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
           <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
           <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
+          <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
           <li><a href="projects.html">课程项目指南与评分规则</a></li>
           <li><a href="code.html">样本数据与可视化程序</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>

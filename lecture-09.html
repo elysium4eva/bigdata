@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 9 Deep Learning in Business Analytics · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="projects.html">课程项目</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第九章</p>
+    <h1 class="doc-title">Lecture 9　Deep Learning in Business Analytics</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L09-deep-learning.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-ghost" href="files/L09-glossary.docx">术语表 Word</a>
+      <a class="btn btn-ghost" href="files/L09-glossary.xlsx">术语表 Excel</a>
+      <a class="btn btn-ghost" href="files/Glossary-L6-L9.docx">L6–L9 合并术语表</a>
+      <a class="btn btn-ghost" href="code.html#lecture09">样本、程序与术语表</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>14</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>77</strong> 条（合并版 300 条）</div></div>
+    </div>
+    <p class="note">本讲是<b>从第一性原理到工程</b>的一条线：
+       <b>视觉简史</b>（暗箱→Marr→SIFT→Viola-Jones→ImageNet 22K/14M）→
+       <b>图像分类的五大挑战</b>与 k-NN 基线（为什么它在图像上从不用）→
+       <b>参数化方法</b>与线性分类器（softmax + 交叉熵 + 梯度检验）→
+       <b>多层网络与反向传播</b>（链式法则、计算图、autograd、优化器、正则化）→
+       <b>CNN</b>（卷积三个先验、感受野、残差、迁移学习）→
+       <b>序列与 Transformer</b>（RNN 瓶颈、注意力、自注意力、BERT vs GPT）→
+       <b>预训练-微调</b>（线性探测 / 全量微调 / LoRA 2,178 参数拿到 1.000）→
+       <b>训练工程</b>（批大小、梯度累积、显存账）→ <b>2026</b>（量化端侧、对齐与成本）。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L6–L8 衔接、输出物、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>从计算机视觉到深度学习：为什么从视觉讲起、视觉简史两帧、ImageNet 的规模、从手工特征到端到端、为什么是 GPU、从识别到理解、2026 任务版图、<b>商业应用与成本门槛</b>、三个最小可运行、贯穿样本、工程现实、两个支柱</td></tr>
+        <tr><td class="week">Part 2</td><td>从 kNN 到线性分类器：图像分类与<b>五大挑战</b>、数据驱动、最近邻、kNN 代码页与样本页、<b>为什么 k-NN 在图像上从不使用</b>、k-NN 的遗产、参数化方法、线性分类器、四像素三类、代码页、损失曲面、softmax 与温度、三个难例</td></tr>
+        <tr><td class="week">Part 3</td><td>神经网络与反向传播：一层到多层、神经元与层、激活函数家族与样本页、损失与数值稳定、<b>链式法则</b>、计算图与 autograd、<b>MLP 从零</b>代码页、决策边界样本页、PyTorch autograd 代码页、学习率样本页、优化器与代码页、正则化、dropout、BatchNorm/初始化、训练循环六要素</td></tr>
+        <tr><td class="week">Part 4</td><td>CNN：卷积三个先验、卷积运算与输出尺寸、卷积特征图样本页、池化与感受野、CNN 代码页、训练与混淆矩阵、经典架构、<b>残差连接</b>、迁移学习、数据增强、检测与分割、GAN 与扩散、视觉评测</td></tr>
+        <tr><td class="week">Part 5</td><td>序列与 Transformer：序列特点、RNN 与梯度消失、RNN/LSTM 代码页与样本页、Seq2Seq、注意力、<b>自注意力公式</b>、代码页、注意力样本页、多头与位置编码、Transformer 块、BERT vs GPT、预训练-微调</td></tr>
+        <tr><td class="week">Part 6</td><td>微调与工程：迁移的原因与边界、<b>三种用法</b>（线性探测/微调/提示）、代码页、参数量样本页、<b>LoRA/QLoRA</b>、该不该上深度模型、批量与显存代码页、GNN/RL 定位、2026 量化与端侧、安全对齐与成本</td></tr>
+        <tr><td class="week">Part 7</td><td>工具、术语与结语：工具栈、<b>术语表两帧（77 条）</b>、常见错误 Top 10、后续衔接、结语</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>k-NN 基线</b>：距离度量、k 曲线与最近邻检索（<code>l9_01</code>）；</li>
+      <li><b>线性分类器</b>：softmax、交叉熵、解析梯度与梯度检验（<code>l9_02</code>）；</li>
+      <li><b>MLP 从零</b>：前向、手写反向、梯度检验 $10^{-12}$（<code>l9_03</code>）；</li>
+      <li><b>PyTorch autograd</b>：同一网络 + 学习率窗口（<code>l9_04</code>）；</li>
+      <li><b>优化器对比</b>：SGD / Momentum / RMSProp / Adam（<code>l9_05</code>）；</li>
+      <li><b>CNN</b>：卷积、池化、参数量与混淆矩阵（<code>l9_06</code>）；</li>
+      <li><b>RNN 与 LSTM</b>：延迟回忆任务（<code>l9_07</code>）；</li>
+      <li><b>自注意力</b>：scaled dot-product 与多头（<code>l9_08</code>）；</li>
+      <li><b>微调三模式</b>：线性探测 / 全量微调 / LoRA（<code>l9_09</code>）；</li>
+      <li><b>训练工程</b>：批大小、梯度累积与显存账（<code>l9_10</code>）。</li>
+    </ul>
+
+    <h3 id="glossary9">术语表 Glossary（77 条中英对照）</h3>
+    <p class="note">按课件顺序分六组；每条含中文、English、符号与公式、一句话解释。
+       可下载 <a href="files/L09-glossary.docx">Word</a> / <a href="files/L09-glossary.xlsx">Excel</a>，
+       跨讲复习见 <a href="files/Glossary-L6-L9.docx">L6–L9 合并术语表（300 条）</a>；
+       机器可读版本：<code>data/lecture09/l9_glossary.csv</code>。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>中文</th><th>English</th><th>符号 / 公式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、历史与版图 Landscape</td></tr>
+<tr><td class="lec">深度学习</td><td><span lang="en">deep learning</span></td><td class="num"></td><td>多层可微网络的表示学习</td></tr>
+<tr><td class="lec">表示学习</td><td><span lang="en">representation learning</span></td><td class="num"></td><td>自动从原始输入学特征</td></tr>
+<tr><td class="lec">端到端</td><td><span lang="en">end-to-end</span></td><td class="num"></td><td>从原始输入直接优化到输出</td></tr>
+<tr><td class="lec">计算机视觉</td><td><span lang="en">computer vision</span></td><td class="num"></td><td>让机器理解图像与视频</td></tr>
+<tr><td class="lec">图像分类</td><td><span lang="en">image classification</span></td><td class="num"></td><td>给整张图一个类别</td></tr>
+<tr><td class="lec">目标检测</td><td><span lang="en">object detection</span></td><td class="num"></td><td>定位并分类多个物体</td></tr>
+<tr><td class="lec">语义分割</td><td><span lang="en">semantic segmentation</span></td><td class="num"></td><td>给每个像素一个类别</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、从 kNN 到线性分类器 Classification</td></tr>
+<tr><td class="lec">数据驱动</td><td><span lang="en">data-driven approach</span></td><td class="num"></td><td>用数据学函数，而非手写规则</td></tr>
+<tr><td class="lec">最近邻</td><td><span lang="en">nearest neighbour</span></td><td class="num"></td><td>取距离最近的训练样本的标签</td></tr>
+<tr><td class="lec">k 近邻</td><td><span lang="en">k-nearest neighbours (k-NN)</span></td><td class="num"></td><td>取最近 k 个投票或平均</td></tr>
+<tr><td class="lec">距离度量</td><td><span lang="en">distance metric</span></td><td class="num"></td><td>L1/L2/余弦；决定什么算相近</td></tr>
+<tr><td class="lec">维度灾难</td><td><span lang="en">curse of dimensionality</span></td><td class="num">$\mathrm{nn}/\mathrm{fn}\to1$</td><td>高维下距离失去区分度</td></tr>
+<tr><td class="lec">超参数</td><td><span lang="en">hyper-parameter</span></td><td class="num"></td><td>训练前设定，例如 k、学习率</td></tr>
+<tr><td class="lec">验证集</td><td><span lang="en">validation set</span></td><td class="num"></td><td>选超参数用，不能是测试集</td></tr>
+<tr><td class="lec">参数化方法</td><td><span lang="en">parametric approach</span></td><td class="num"></td><td>用参数概括数据，不存全部样本</td></tr>
+<tr><td class="lec">线性分类器</td><td><span lang="en">linear classifier</span></td><td class="num">$s=Wx+b$</td><td>用线性打分做分类</td></tr>
+<tr><td class="lec">得分函数</td><td><span lang="en">score function</span></td><td class="num">$s=Wx$</td><td>把输入映射到各类得分</td></tr>
+<tr><td class="lec">softmax</td><td><span lang="en">softmax</span></td><td class="num">$e^{z_k}/\sum_j e^{z_j}$</td><td>把得分变成概率</td></tr>
+<tr><td class="lec">交叉熵</td><td><span lang="en">cross-entropy</span></td><td class="num">$-\sum_k y_k\log p_k$</td><td>分类的负对数似然</td></tr>
+<tr><td class="lec">温度</td><td><span lang="en">temperature</span></td><td class="num">$T$</td><td>softmax 的锐度旋钮</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、神经网络与反向传播 Networks</td></tr>
+<tr><td class="lec">激活函数</td><td><span lang="en">activation function</span></td><td class="num">$h=\phi(Wx+b)$</td><td>引入非线性</td></tr>
+<tr><td class="lec">sigmoid</td><td><span lang="en">sigmoid</span></td><td class="num">$1/(1+e^{-z})$</td><td>压到 (0,1)，易饱和</td></tr>
+<tr><td class="lec">ReLU</td><td><span lang="en">rectified linear unit (ReLU)</span></td><td class="num">$\max(0,z)$</td><td>不饱和、计算便宜</td></tr>
+<tr><td class="lec">GELU</td><td><span lang="en">Gaussian error linear unit (GELU)</span></td><td class="num"></td><td>Transformer 常用激活</td></tr>
+<tr><td class="lec">反向传播</td><td><span lang="en">backpropagation</span></td><td class="num">$\partial L/\partial w$</td><td>用链式法则从输出往输入求梯度</td></tr>
+<tr><td class="lec">链式法则</td><td><span lang="en">chain rule</span></td><td class="num"></td><td>复合函数的求导规则</td></tr>
+<tr><td class="lec">计算图</td><td><span lang="en">computational graph</span></td><td class="num"></td><td>把运算记成图，便于自动求导</td></tr>
+<tr><td class="lec">自动微分</td><td><span lang="en">automatic differentiation</span></td><td class="num"></td><td>由计算图自动算梯度（autograd）</td></tr>
+<tr><td class="lec">梯度消失</td><td><span lang="en">vanishing gradient</span></td><td class="num"></td><td>深层网络梯度趋近 0</td></tr>
+<tr><td class="lec">梯度爆炸</td><td><span lang="en">exploding gradient</span></td><td class="num"></td><td>梯度爆炸导致发散</td></tr>
+<tr><td class="lec">学习率</td><td><span lang="en">learning rate</span></td><td class="num">$\eta$</td><td>步长；过大发散、过小慢</td></tr>
+<tr><td class="lec">动量</td><td><span lang="en">momentum</span></td><td class="num">$v_t=\beta v_{t-1}+g_t$</td><td>累积惯性抑制震荡</td></tr>
+<tr><td class="lec">Adam</td><td><span lang="en">Adam</span></td><td class="num"></td><td>自适应步长 + 偏差校正</td></tr>
+<tr><td class="lec">权重衰减</td><td><span lang="en">weight decay</span></td><td class="num">$\lambda$</td><td>L2 正则的等价写法</td></tr>
+<tr><td class="lec">dropout</td><td><span lang="en">dropout</span></td><td class="num"></td><td>训练时随机丢弃神经元</td></tr>
+<tr><td class="lec">早停</td><td><span lang="en">early stopping</span></td><td class="num"></td><td>验证损失不再下降就停</td></tr>
+<tr><td class="lec">批归一化</td><td><span lang="en">batch normalisation</span></td><td class="num"></td><td>按批标准化激活，稳定训练</td></tr>
+<tr><td class="lec">初始化</td><td><span lang="en">initialisation</span></td><td class="num"></td><td>Xavier/He 控制初始方差</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、卷积神经网络 CNN</td></tr>
+<tr><td class="lec">卷积</td><td><span lang="en">convolution</span></td><td class="num">$(f*g)(t)$</td><td>局部加权求和，参数共享</td></tr>
+<tr><td class="lec">卷积核</td><td><span lang="en">kernel / filter</span></td><td class="num"></td><td>可学习的小模板</td></tr>
+<tr><td class="lec">步长</td><td><span lang="en">stride</span></td><td class="num"></td><td>滑动步幅</td></tr>
+<tr><td class="lec">填充</td><td><span lang="en">padding</span></td><td class="num"></td><td>边界补零以保持尺寸</td></tr>
+<tr><td class="lec">通道</td><td><span lang="en">channel</span></td><td class="num"></td><td>特征图的深度</td></tr>
+<tr><td class="lec">感受野</td><td><span lang="en">receptive field</span></td><td class="num"></td><td>一个输出能看到的输入范围</td></tr>
+<tr><td class="lec">池化</td><td><span lang="en">pooling</span></td><td class="num"></td><td>下采样，扩大感受野</td></tr>
+<tr><td class="lec">残差连接</td><td><span lang="en">residual connection</span></td><td class="num">$y=x+F(x)$</td><td>恒等捷径，缓解深层退化</td></tr>
+<tr><td class="lec">迁移学习</td><td><span lang="en">transfer learning</span></td><td class="num"></td><td>用预训练权重做新任务</td></tr>
+<tr><td class="lec">数据增强</td><td><span lang="en">data augmentation</span></td><td class="num"></td><td>翻转/裁剪/扰动，免费的正则</td></tr>
+<tr><td class="lec">生成对抗网络</td><td><span lang="en">generative adversarial network (GAN)</span></td><td class="num"></td><td>生成器与判别器对抗</td></tr>
+<tr><td class="lec">扩散模型</td><td><span lang="en">diffusion model</span></td><td class="num"></td><td>学去噪过程来生成样本</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、序列与 Transformer Sequences</td></tr>
+<tr><td class="lec">循环神经网络</td><td><span lang="en">recurrent neural network (RNN)</span></td><td class="num"></td><td>按时间步递归处理序列</td></tr>
+<tr><td class="lec">长短期记忆</td><td><span lang="en">long short-term memory (LSTM)</span></td><td class="num"></td><td>门控结构，缓解梯度消失</td></tr>
+<tr><td class="lec">序列到序列</td><td><span lang="en">sequence to sequence (seq2seq)</span></td><td class="num"></td><td>编码器-解码器结构</td></tr>
+<tr><td class="lec">注意力</td><td><span lang="en">attention</span></td><td class="num">$\alpha=\mathrm{softmax}(q^\top k)$</td><td>按相关性加权求和</td></tr>
+<tr><td class="lec">自注意力</td><td><span lang="en">self-attention</span></td><td class="num">$\mathrm{softmax}(QK^\top/\sqrt{d})V$</td><td>序列内部互相看</td></tr>
+<tr><td class="lec">多头注意力</td><td><span lang="en">multi-head attention</span></td><td class="num"></td><td>多组投影并行，学不同关系</td></tr>
+<tr><td class="lec">位置编码</td><td><span lang="en">positional encoding</span></td><td class="num"></td><td>给序列注入顺序信息</td></tr>
+<tr><td class="lec">Transformer</td><td><span lang="en">Transformer</span></td><td class="num"></td><td>纯注意力架构，可并行</td></tr>
+<tr><td class="lec">编码器-解码器</td><td><span lang="en">encoder-decoder</span></td><td class="num"></td><td>编码输入、解码输出</td></tr>
+<tr><td class="lec">掩码语言模型</td><td><span lang="en">masked language model</span></td><td class="num"></td><td>预测被遮住的词（BERT）</td></tr>
+<tr><td class="lec">自回归</td><td><span lang="en">autoregressive</span></td><td class="num"></td><td>按前面预测下一个（GPT）</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、微调与工程 Fine-tuning</td></tr>
+<tr><td class="lec">预训练</td><td><span lang="en">pretraining</span></td><td class="num"></td><td>在大规模无标注数据上训练表示</td></tr>
+<tr><td class="lec">微调</td><td><span lang="en">fine-tuning</span></td><td class="num"></td><td>在预训练模型上继续训练</td></tr>
+<tr><td class="lec">线性探测</td><td><span lang="en">linear probing</span></td><td class="num"></td><td>冻结主干、只训练分类头</td></tr>
+<tr><td class="lec">提示学习</td><td><span lang="en">prompting</span></td><td class="num"></td><td>用提示词调用模型，不改参数</td></tr>
+<tr><td class="lec">LoRA</td><td><span lang="en">low-rank adaptation (LoRA)</span></td><td class="num">$W+BA$</td><td>低秩适配器，只训练少数参数</td></tr>
+<tr><td class="lec">QLoRA</td><td><span lang="en">quantised LoRA (QLoRA)</span></td><td class="num"></td><td>主干量化到 4-bit 再挂 LoRA</td></tr>
+<tr><td class="lec">混合精度</td><td><span lang="en">mixed precision</span></td><td class="num"></td><td>fp16/bf16 与 fp32 混用</td></tr>
+<tr><td class="lec">梯度累积</td><td><span lang="en">gradient accumulation</span></td><td class="num"></td><td>多个小批累积后再更新</td></tr>
+<tr><td class="lec">量化</td><td><span lang="en">quantisation</span></td><td class="num"></td><td>用低比特表示权重/激活</td></tr>
+<tr><td class="lec">知识蒸馏</td><td><span lang="en">knowledge distillation</span></td><td class="num"></td><td>用大模型指导小模型</td></tr>
+<tr><td class="lec">图神经网络</td><td><span lang="en">graph neural network (GNN)</span></td><td class="num"></td><td>在图上做消息传递</td></tr>
+<tr><td class="lec">强化学习</td><td><span lang="en">reinforcement learning (RL)</span></td><td class="num"></td><td>通过交互与回报学习策略</td></tr>
+<tr><td class="lec">对齐</td><td><span lang="en">alignment</span></td><td class="num"></td><td>让模型行为符合人类意图与规范</td></tr>
+<tr><td class="lec">红队测试</td><td><span lang="en">red teaming</span></td><td class="num"></td><td>主动攻击以发现模型缺陷</td></tr>
+<tr><td class="lec">灾难性遗忘</td><td><span lang="en">catastrophic forgetting</span></td><td class="num"></td><td>微调后丢失原有能力</td></tr>
+<tr><td class="lec">上下文长度</td><td><span lang="en">context length</span></td><td class="num"></td><td>模型一次能处理的 token 数</td></tr>
+</tbody></table></div>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L09-deep-learning.pdf" title="Lecture 9 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
+          <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
+          <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
+          <li><a href="projects.html">课程项目指南与评分规则</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.docx">项目指南 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.pdf">项目指南 PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

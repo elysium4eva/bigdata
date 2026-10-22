@@ -1,0 +1,5 @@
+﻿micro_batch,accum_steps,effective_batch,seconds_per_epoch
+16,8,128,0.44
+32,4,128,0.235
+64,2,128,0.146
+128,1,128,0.078

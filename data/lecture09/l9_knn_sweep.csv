@@ -1,0 +1,11 @@
+﻿metric,k,test_accuracy
+euclidean,1,0.8611
+euclidean,3,0.8194
+euclidean,5,0.7778
+euclidean,10,0.7917
+euclidean,20,0.8056
+manhattan,1,0.8611
+manhattan,3,0.8194
+manhattan,5,0.7639
+manhattan,10,0.7639
+manhattan,20,0.7917

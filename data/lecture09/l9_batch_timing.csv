@@ -1,0 +1,6 @@
+﻿batch_size,seconds_per_epoch,steps_per_epoch
+16,0.528,512
+32,0.25,256
+64,0.148,128
+128,0.085,64
+256,0.048,32

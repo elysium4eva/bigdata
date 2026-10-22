@@ -1,0 +1,3 @@
+﻿model,final_accuracy,final_loss
+RNN,0.89,0.273
+LSTM,0.9917,0.0164
