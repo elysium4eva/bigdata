@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 10 Text Data and NLP · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="projects.html">课程项目</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第十章</p>
+    <h1 class="doc-title">Lecture 10　Text Data and Natural Language Processing</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L10-text-data-nlp.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-ghost" href="files/L10-glossary.docx">术语表 Word</a>
+      <a class="btn btn-ghost" href="files/L10-glossary.xlsx">术语表 Excel</a>
+      <a class="btn btn-ghost" href="files/Glossary-L6-L10.docx">L6–L10 合并术语表</a>
+      <a class="btn btn-ghost" href="code.html#lecture10">样本、程序与术语表</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>14</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>81</strong> 条（合并版 381 条）</div></div>
+    </div>
+    <p class="note">本讲把<b>非结构化文本</b>变成可分析的数据：
+       <b>文本作为数据</b>（宏观不确定性、情绪、财报、研报四类问题）→
+       <b>NLP 的历史与难点</b>（符号→统计→神经；音系→形态→词性→句法→语义→语篇；歧义/稀疏/变体）→
+       <b>预处理</b>（中文分词、领域词典、停用词的取舍、n-gram 与平滑）→
+       <b>表示</b>（词袋、TF-IDF、共现矩阵、SVD）→
+       <b>词向量</b>（分布假设、word2vec 目标与负采样、GloVe 的比值论证、内在/外在评估）→
+       <b>下游任务</b>（情感、主题、NER、摘要、翻译、问答）→
+       <b>LLM 与 2026</b>（少样本、标注一致性 kappa、RAG 与引用溯源、提示词版本管理、领域词表、隐私成本）。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L8/L9 衔接、输出物、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>文本作为数据：为什么文本是数据、<b>四类研究问题</b>、文本的四个特点、语料概览、文本流水线、评价的特殊性、隐私合规、中英差别、语料来源、工程现实</td></tr>
+        <tr><td class="week">Part 2</td><td>历史、层级与难点：<b>三次历史阶段</b>、四个经典任务、<b>语言学六层</b>（每层配商务例子）、<b>歧义/规模/稀疏/变体/表达力</b>、两次范式转换、符号 vs 概率 vs 连接主义、方法地图、模型期望、三范式对照</td></tr>
+        <tr><td class="week">Part 3</td><td>预处理与表示：预处理管线、<b>中文分词</b>（最大匹配/HMM/jieba）、分词代码、归一化、<b>停用词的取舍</b>、<b>n-gram 与平滑</b>、词袋、<b>TF-IDF</b>、稀疏与哈希、TF-IDF 基线代码</td></tr>
+        <tr><td class="week">Part 4</td><td>词向量：<b>one-hot 的三个问题</b>、<b>分布假设</b>、<b>word2vec 目标函数</b>、训练与参数、<b>负采样</b>、训练代码、<b>共现矩阵</b>与 SVD、<b>GloVe 的比值论证</b>、计数 vs 预测、<b>词向量空间</b>、内在评估、<b>类比评估</b>、外在评估、一词多义与上下文嵌入</td></tr>
+        <tr><td class="week">Part 5</td><td>下游任务：任务地图、TF-IDF 基线为何强、<b>情感两种表示</b>、<b>序列标注与 BIO</b>、NER 规则抽取、主题模型与中文 LDA、摘要与翻译（BLEU/ROUGE 的局限）、问答与检索、评价与标注、<b>一致性</b>、<b>文本特有的泄漏</b></td></tr>
+        <tr><td class="week">Part 6</td><td>LLM 与 2026：指令微调与少样本、<b>LLM 标注一致性</b>、<b>RAG 与引用溯源</b>、<b>提示词版本管理</b>、<b>领域词表与分词</b>、隐私与成本</td></tr>
+        <tr><td class="week">Part 7</td><td>工具、术语与结语：工具栈、<b>术语表两帧（81 条）</b>、结语</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>中文分词与预处理</b>：jieba、停用词、领域词典、n-gram（<code>l10_01</code>）；</li>
+      <li><b>TF-IDF 基线</b>：词袋 vs TF-IDF + 逻辑回归（<code>l10_02</code>）；</li>
+      <li><b>训练词向量</b>：gensim skip-gram、近邻与类比（<code>l10_03</code>）；</li>
+      <li><b>共现矩阵与 SVD</b>：手算窗口共现、截断 SVD、GloVe 动机（<code>l10_04</code>）；</li>
+      <li><b>情感两种表示</b>：TF-IDF+LR vs 词向量平均+MLP（<code>l10_05</code>）；</li>
+      <li><b>NER 规则抽取</b>：正则 + 词表 + 逐字 BIO 标注（<code>l10_06</code>）；</li>
+      <li><b>中文主题模型</b>：jieba + LDA + 纯度（<code>l10_07</code>）；</li>
+      <li><b>LLM 标注一致性</b>：温度扫描 + Cohen's kappa + 重复采样（<code>l10_08</code>）；</li>
+      <li><b>RAG 与引用溯源</b>：TF-IDF 检索 + 阈值 + 引用拼接（<code>l10_09</code>）；</li>
+      <li><b>领域词表</b>：默认词典 vs 加入领域词的分词对比（<code>l10_10</code>）。</li>
+    </ul>
+
+    <h3 id="glossary10">术语表 Glossary（81 条中英对照）</h3>
+    <p class="note">按课件顺序分六组；每条含中文、English、符号与公式、一句话解释。
+       可下载 <a href="files/L10-glossary.docx">Word</a> / <a href="files/L10-glossary.xlsx">Excel</a>，
+       跨讲复习见 <a href="files/Glossary-L6-L10.docx">L6–L10 合并术语表（381 条）</a>；
+       机器可读版本：<code>data/lecture10/l10_glossary.csv</code>。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>中文</th><th>English</th><th>符号 / 公式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、文本作为数据 Text as Data</td></tr>
+<tr><td class="lec">文本分析</td><td><span lang="en">text analytics</span></td><td class="num"></td><td>从非结构化文本中提取结构化信息</td></tr>
+<tr><td class="lec">文本作为数据</td><td><span lang="en">text as data</span></td><td class="num"></td><td>把语言当作可测量的变量</td></tr>
+<tr><td class="lec">语料库</td><td><span lang="en">corpus</span></td><td class="num"></td><td>按用途组织的大量文本</td></tr>
+<tr><td class="lec">标注</td><td><span lang="en">annotation</span></td><td class="num"></td><td>人工给出的标签或结构</td></tr>
+<tr><td class="lec">标注一致性</td><td><span lang="en">inter annotator agreement</span></td><td class="num"></td><td>多人标注之间的吻合程度</td></tr>
+<tr><td class="lec">分词</td><td><span lang="en">word segmentation</span></td><td class="num"></td><td>把连续文本切成词（中文必需）</td></tr>
+<tr><td class="lec">归一化</td><td><span lang="en">normalisation</span></td><td class="num"></td><td>统一大小写、全半角、繁简等</td></tr>
+<tr><td class="lec">停用词</td><td><span lang="en">stopword</span></td><td class="num"></td><td>高频但信息量低的词</td></tr>
+<tr><td class="lec">词干提取</td><td><span lang="en">stemming</span></td><td class="num"></td><td>粗暴截断词尾（英文）</td></tr>
+<tr><td class="lec">词形还原</td><td><span lang="en">lemmatisation</span></td><td class="num"></td><td>还原到词典原形</td></tr>
+<tr><td class="lec">未登录词</td><td><span lang="en">out-of-vocabulary (OOV)</span></td><td class="num"></td><td>词表里没有的词</td></tr>
+<tr><td class="lec">隐私</td><td><span lang="en">privacy</span></td><td class="num"></td><td>文本中的个人信息与脱敏</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、语言学层级与难点 Linguistics</td></tr>
+<tr><td class="lec">音系学</td><td><span lang="en">phonetics and phonology</span></td><td class="num"></td><td>语言的声音层面</td></tr>
+<tr><td class="lec">形态学</td><td><span lang="en">morphology</span></td><td class="num"></td><td>词的内部结构</td></tr>
+<tr><td class="lec">词性标注</td><td><span lang="en">part-of-speech tagging</span></td><td class="num"></td><td>给每个词标词类</td></tr>
+<tr><td class="lec">句法</td><td><span lang="en">syntax</span></td><td class="num"></td><td>词如何组成句子</td></tr>
+<tr><td class="lec">依存句法</td><td><span lang="en">dependency parsing</span></td><td class="num"></td><td>词与词之间的依存关系</td></tr>
+<tr><td class="lec">语义学</td><td><span lang="en">semantics</span></td><td class="num"></td><td>词与句子的意义</td></tr>
+<tr><td class="lec">语篇</td><td><span lang="en">discourse</span></td><td class="num"></td><td>跨句子的结构与指代</td></tr>
+<tr><td class="lec">歧义</td><td><span lang="en">ambiguity</span></td><td class="num"></td><td>同一形式多种解释</td></tr>
+<tr><td class="lec">稀疏</td><td><span lang="en">sparsity</span></td><td class="num"></td><td>语言组合无限，数据永远覆盖不全</td></tr>
+<tr><td class="lec">变体</td><td><span lang="en">variation</span></td><td class="num"></td><td>同义表达、方言、错别字</td></tr>
+<tr><td class="lec">符号主义</td><td><span lang="en">symbolic approach</span></td><td class="num"></td><td>规则与语法驱动</td></tr>
+<tr><td class="lec">统计方法</td><td><span lang="en">statistical approach</span></td><td class="num"></td><td>语料 + 概率模型</td></tr>
+<tr><td class="lec">连接主义</td><td><span lang="en">connectionist approach</span></td><td class="num"></td><td>神经网络 + 表示学习</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、预处理与表示 Representation</td></tr>
+<tr><td class="lec">n 元语法</td><td><span lang="en">n-gram</span></td><td class="num"></td><td>连续 n 个词作为一个单位</td></tr>
+<tr><td class="lec">词袋</td><td><span lang="en">bag of words</span></td><td class="num"></td><td>只统计词频，忽略顺序</td></tr>
+<tr><td class="lec">TF-IDF</td><td><span lang="en">term frequency-inverse document frequency</span></td><td class="num">$\mathrm{tf}\cdot\log\frac{N}{\mathrm{df}}$</td><td>词频乘以逆文档频率</td></tr>
+<tr><td class="lec">文档-词矩阵</td><td><span lang="en">document-term matrix</span></td><td class="num"></td><td>行为文档、列为词的稀疏矩阵</td></tr>
+<tr><td class="lec">哈希技巧</td><td><span lang="en">hashing trick</span></td><td class="num"></td><td>用哈希函数省去词表</td></tr>
+<tr><td class="lec">one-hot</td><td><span lang="en">one-hot encoding</span></td><td class="num"></td><td>每个词一个正交向量</td></tr>
+<tr><td class="lec">分布假设</td><td><span lang="en">distributional hypothesis</span></td><td class="num"></td><td>上下文相似则词义相似</td></tr>
+<tr><td class="lec">词向量</td><td><span lang="en">word vector / embedding</span></td><td class="num"></td><td>把词映射到稠密向量</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、词向量 Word Vectors</td></tr>
+<tr><td class="lec">Word2vec</td><td><span lang="en">word2vec</span></td><td class="num"></td><td>用上下文预测训练词向量</td></tr>
+<tr><td class="lec">跳字模型</td><td><span lang="en">skip-gram</span></td><td class="num"></td><td>用中心词预测上下文</td></tr>
+<tr><td class="lec">连续词袋</td><td><span lang="en">continuous bag of words (CBOW)</span></td><td class="num"></td><td>用上下文预测中心词</td></tr>
+<tr><td class="lec">负采样</td><td><span lang="en">negative sampling</span></td><td class="num">$U^{3/4}$</td><td>用少数负例替代全词表 softmax</td></tr>
+<tr><td class="lec">共现矩阵</td><td><span lang="en">co-occurrence matrix</span></td><td class="num"></td><td>窗口内词对的计数矩阵</td></tr>
+<tr><td class="lec">奇异值分解</td><td><span lang="en">singular value decomposition (SVD)</span></td><td class="num">$X=U\Sigma V^\top$</td><td>降维得到稠密向量</td></tr>
+<tr><td class="lec">GloVe</td><td><span lang="en">global vectors (GloVe)</span></td><td class="num"></td><td>用共现概率的比值编码语义</td></tr>
+<tr><td class="lec">余弦相似度</td><td><span lang="en">cosine similarity</span></td><td class="num">$\frac{a\cdot b}{\lVert a\rVert\lVert b\rVert}$</td><td>向量夹角的余弦</td></tr>
+<tr><td class="lec">类比</td><td><span lang="en">analogy</span></td><td class="num">$a-b+c$</td><td>用向量运算检验语义关系</td></tr>
+<tr><td class="lec">内在评估</td><td><span lang="en">intrinsic evaluation</span></td><td class="num"></td><td>只评表示本身（相似度/类比）</td></tr>
+<tr><td class="lec">外在评估</td><td><span lang="en">extrinsic evaluation</span></td><td class="num"></td><td>把表示放进下游任务评效果</td></tr>
+<tr><td class="lec">一词多义</td><td><span lang="en">polysemy</span></td><td class="num"></td><td>同一个词多个义项</td></tr>
+<tr><td class="lec">上下文嵌入</td><td><span lang="en">contextual embedding</span></td><td class="num"></td><td>同一个词在不同语境下向量不同</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、下游任务 Downstream Tasks</td></tr>
+<tr><td class="lec">文本分类</td><td><span lang="en">text classification</span></td><td class="num"></td><td>给整段文本一个标签</td></tr>
+<tr><td class="lec">情感分析</td><td><span lang="en">sentiment analysis</span></td><td class="num"></td><td>判断正负中性</td></tr>
+<tr><td class="lec">主题模型</td><td><span lang="en">topic model</span></td><td class="num"></td><td>从文档集合中提主题</td></tr>
+<tr><td class="lec">潜在狄利克雷分配</td><td><span lang="en">latent Dirichlet allocation (LDA)</span></td><td class="num"></td><td>生成式主题模型</td></tr>
+<tr><td class="lec">命名实体识别</td><td><span lang="en">named entity recognition (NER)</span></td><td class="num"></td><td>识别人名/机构/金额/日期</td></tr>
+<tr><td class="lec">BIO 标注</td><td><span lang="en">BIO tagging</span></td><td class="num"></td><td>B-开始 / I-内部 / O-外部</td></tr>
+<tr><td class="lec">序列标注</td><td><span lang="en">sequence labelling</span></td><td class="num"></td><td>给序列每个位置打标签</td></tr>
+<tr><td class="lec">摘要</td><td><span lang="en">summarisation</span></td><td class="num"></td><td>抽取式或生成式压缩文本</td></tr>
+<tr><td class="lec">机器翻译</td><td><span lang="en">machine translation</span></td><td class="num"></td><td>跨语言转换</td></tr>
+<tr><td class="lec">问答</td><td><span lang="en">question answering</span></td><td class="num"></td><td>根据问题找答案</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、LLM 与 2026 实践 LLM Practice</td></tr>
+<tr><td class="lec">检索增强生成</td><td><span lang="en">retrieval-augmented generation (RAG)</span></td><td class="num"></td><td>先检索再生成</td></tr>
+<tr><td class="lec">引用溯源</td><td><span lang="en">citation tracing</span></td><td class="num"></td><td>答案标注来源片段</td></tr>
+<tr><td class="lec">提示</td><td><span lang="en">prompt</span></td><td class="num"></td><td>给模型的指令与上下文</td></tr>
+<tr><td class="lec">少样本</td><td><span lang="en">few-shot</span></td><td class="num"></td><td>在提示里给几个示例</td></tr>
+<tr><td class="lec">指令微调</td><td><span lang="en">instruction tuning</span></td><td class="num"></td><td>用指令-回答数据微调</td></tr>
+<tr><td class="lec">提示版本管理</td><td><span lang="en">prompt versioning</span></td><td class="num"></td><td>把提示当代码管理</td></tr>
+<tr><td class="lec">Cohen's kappa</td><td><span lang="en">Cohen's kappa</span></td><td class="num"></td><td>扣除随机一致的标注一致性</td></tr>
+<tr><td class="lec">领域词典</td><td><span lang="en">domain lexicon</span></td><td class="num"></td><td>自定义词表，改善分词与抽取</td></tr>
+<tr><td class="lec">BIO 序列</td><td><span lang="en">BIO sequence</span></td><td class="num"></td><td>标签序列的表示</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、下游任务 Downstream Tasks</td></tr>
+<tr><td class="lec">泄漏</td><td><span lang="en">leakage</span></td><td class="num"></td><td>训练与测试共享信息</td></tr>
+<tr><td class="lec">交叉验证</td><td><span lang="en">cross-validation</span></td><td class="num"></td><td>轮换留出验证集</td></tr>
+<tr><td class="lec">F1 分数</td><td><span lang="en">F1 score</span></td><td class="num">$2PR/(P+R)$</td><td>精确率与召回率的调和平均</td></tr>
+<tr><td class="lec">BLEU</td><td><span lang="en">BLEU</span></td><td class="num"></td><td>翻译的 n-gram 重合度</td></tr>
+<tr><td class="lec">ROUGE</td><td><span lang="en">ROUGE</span></td><td class="num"></td><td>摘要的召回导向重合度</td></tr>
+<tr><td class="lec">信息抽取</td><td><span lang="en">information extraction</span></td><td class="num"></td><td>从文本中抽出结构化字段</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、词向量 Word Vectors</td></tr>
+<tr><td class="lec">多原型</td><td><span lang="en">multiple prototypes</span></td><td class="num"></td><td>一个词学多个向量以表示多义</td></tr>
+<tr><td class="lec">窗口</td><td><span lang="en">context window</span></td><td class="num"></td><td>共现统计或预测时看的邻域大小</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、预处理与表示 Representation</td></tr>
+<tr><td class="lec">降维</td><td><span lang="en">dimensionality reduction</span></td><td class="num"></td><td>把高维表示压到低维</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、词向量 Word Vectors</td></tr>
+<tr><td class="lec">嵌入矩阵</td><td><span lang="en">embedding matrix</span></td><td class="num"></td><td>词表 × 维度的参数矩阵</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、LLM 与 2026 实践 LLM Practice</td></tr>
+<tr><td class="lec">预训练</td><td><span lang="en">pretraining</span></td><td class="num"></td><td>在大规模语料上先训练表示</td></tr>
+<tr><td class="lec">微调</td><td><span lang="en">fine-tuning</span></td><td class="num"></td><td>在预训练模型上适配下游</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、文本作为数据 Text as Data</td></tr>
+<tr><td class="lec">中文分词歧义</td><td><span lang="en">segmentation ambiguity</span></td><td class="num"></td><td>不同切法改变语义</td></tr>
+<tr><td class="lec">全半角</td><td><span lang="en">full-width and half-width</span></td><td class="num"></td><td>字符宽度差异需归一化</td></tr>
+<tr><td class="lec">繁简转换</td><td><span lang="en">traditional-simplified conversion</span></td><td class="num"></td><td>统一字形</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、LLM 与 2026 实践 LLM Practice</td></tr>
+<tr><td class="lec">脱敏</td><td><span lang="en">de-identification</span></td><td class="num"></td><td>去除可识别个人的信息</td></tr>
+</tbody></table></div>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L10-text-data-nlp.pdf" title="Lecture 10 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
+          <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
+          <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
+          <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
+          <li><a href="projects.html">课程项目指南与评分规则</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.docx">项目指南 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.pdf">项目指南 PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

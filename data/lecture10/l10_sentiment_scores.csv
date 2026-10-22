@@ -1,0 +1,3 @@
+﻿model,accuracy,macro_f1
+TF-IDF + LR,0.9667,0.9534
+w2v 平均 + MLP,0.9667,0.9534

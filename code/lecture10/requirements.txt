@@ -1,0 +1,8 @@
+numpy>=1.24          # arrays and the co-occurrence matrix
+pandas>=2.1          # corpora, tables and the glossary
+matplotlib>=3.7      # every static figure in the deck
+scikit-learn>=1.3    # TF-IDF, LDA, metrics and the MLP
+seaborn>=0.13        # heatmaps
+jieba>=0.42          # Chinese word segmentation
+gensim>=4.3          # word2vec training
+pillow>=9.0          # image back end for matplotlib

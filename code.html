@@ -47,6 +47,7 @@
       <a class="btn btn-primary" href="#lecture07">Lecture 7 · 监督学习算法族</a>
       <a class="btn btn-primary" href="#lecture08">Lecture 8 · 无监督学习</a>
       <a class="btn btn-primary" href="#lecture09">Lecture 9 · 深度学习</a>
+      <a class="btn btn-primary" href="#lecture10">Lecture 10 · 文本与 NLP</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
       <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
@@ -996,6 +997,91 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 92 帧 · 图神经网络与强化学习的定位 · 程序 <a href="code/lecture09/l9_09_finetune_lora.py">l9_09_finetune_lora.py</a></figcaption>
       </figure>
 
+
+    <h3 id="lecture10">Lecture 10 · 文本与 NLP 样本（11 个程序，逐行英文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture10/requirements.txt</code> →
+       <code>cd code/lecture10 &amp;&amp; python run_all.py</code>；
+       语料写入 <code>data/lecture10/</code>，图片写入 <code>figures/lecture10/</code>。
+       本讲需要 <code>jieba</code> 与 <code>gensim</code>（都<b>不需要下载模型</b>）；
+       NER 用正则 + 词表实现，<b>没有安装 spaCy</b>。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>帧</th><th>主题</th><th>程序</th><th>数据</th></tr></thead>
+      <tbody>
+        <tr><td class="num">13</td><td>合成语料概览 Corpus overview</td><td><code>l10_01_preprocess.py</code></td><td><code>l10_reviews.csv</code> <code>l10_ngram_coverage.csv</code></td></tr>
+        <tr><td class="num">29</td><td>语言学六层配商务例子</td><td><code>l10_01_preprocess.py</code></td><td>—</td></tr>
+        <tr><td class="num">31</td><td>分词歧义会改变特征</td><td><code>l10_01_preprocess.py</code></td><td><code>l10_segmentation_demo.csv</code></td></tr>
+        <tr><td class="num">41</td><td>同一任务三种做法的成本与效果</td><td><code>l10_02_tfidf_baseline.py</code></td><td>—</td></tr>
+        <tr><td class="num">53</td><td>词袋与 TF-IDF 几乎打平</td><td><code>l10_02_tfidf_baseline.py</code></td><td><code>l10_baseline_scores.csv</code></td></tr>
+        <tr><td class="num">63</td><td>共现矩阵：计数也能得到向量</td><td><code>l10_04_cooccurrence.py</code></td><td><code>l10_cooccurrence.csv</code> <code>l10_svd_variance.csv</code></td></tr>
+        <tr><td class="num">66</td><td>计数派与预测派</td><td><code>l10_04_cooccurrence.py</code></td><td><code>l10_cooccurrence_similarity.csv</code></td></tr>
+        <tr><td class="num">67</td><td>词向量空间：相似词挨在一起</td><td><code>l10_03_word2vec.py</code></td><td><code>l10_w2v_vocab.csv</code> <code>l10_word_neighbours.csv</code></td></tr>
+        <tr><td class="num">69</td><td>类比评估：小语料上的成败</td><td><code>l10_03_word2vec.py</code></td><td><code>l10_analogies.csv</code></td></tr>
+        <tr><td class="num">76</td><td>情感分类：混淆矩阵与置信度</td><td><code>l10_05_sentiment.py</code></td><td><code>l10_sentiment_scores.csv</code> <code>l10_sentiment_errors.csv</code></td></tr>
+        <tr><td class="num">79</td><td>实体抽取的结果</td><td><code>l10_06_ner_rules.py</code></td><td><code>l10_ner_results.csv</code> <code>l10_bio_example.csv</code></td></tr>
+        <tr><td class="num">82</td><td>主题词与文档分布</td><td><code>l10_07_topics_zh.py</code></td><td><code>l10_topics_zh.csv</code> <code>l10_doc_topics_zh.csv</code></td></tr>
+        <tr><td class="num">91</td><td>LLM 标注的一致性曲线</td><td><code>l10_08_llm_agreement.py</code></td><td><code>l10_llm_agreement.csv</code> <code>l10_llm_pairwise_kappa.csv</code></td></tr>
+        <tr><td class="num">93</td><td>RAG 的检索分数与引用</td><td><code>l10_09_rag_citation.py</code></td><td><code>l10_rag_answers.csv</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 10 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_text_uses.png"><img src="figures/lecture10/fig_text_uses.png" alt="合成语料概览 Corpus overview 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 13 帧 · 合成语料概览 Corpus overview · 程序 <a href="code/lecture10/l10_01_preprocess.py">l10_01_preprocess.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_levels.png"><img src="figures/lecture10/fig_levels.png" alt="语言学六层配商务例子 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 29 帧 · 语言学六层配商务例子 · 程序 <a href="code/lecture10/l10_01_preprocess.py">l10_01_preprocess.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_ambiguity.png"><img src="figures/lecture10/fig_ambiguity.png" alt="分词歧义会改变特征 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 31 帧 · 分词歧义会改变特征 · 程序 <a href="code/lecture10/l10_01_preprocess.py">l10_01_preprocess.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_paradigms.png"><img src="figures/lecture10/fig_paradigms.png" alt="同一任务三种做法的成本与效果 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 41 帧 · 同一任务三种做法的成本与效果 · 程序 <a href="code/lecture10/l10_02_tfidf_baseline.py">l10_02_tfidf_baseline.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_bow_tfidf.png"><img src="figures/lecture10/fig_bow_tfidf.png" alt="词袋与 TF-IDF 几乎打平 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 53 帧 · 词袋与 TF-IDF 几乎打平 · 程序 <a href="code/lecture10/l10_02_tfidf_baseline.py">l10_02_tfidf_baseline.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_cooccurrence.png"><img src="figures/lecture10/fig_cooccurrence.png" alt="共现矩阵：计数也能得到向量 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 63 帧 · 共现矩阵：计数也能得到向量 · 程序 <a href="code/lecture10/l10_04_cooccurrence.py">l10_04_cooccurrence.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_count_vs_prediction.png"><img src="figures/lecture10/fig_count_vs_prediction.png" alt="计数派与预测派 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 66 帧 · 计数派与预测派 · 程序 <a href="code/lecture10/l10_04_cooccurrence.py">l10_04_cooccurrence.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_word_vectors.png"><img src="figures/lecture10/fig_word_vectors.png" alt="词向量空间：相似词挨在一起 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 67 帧 · 词向量空间：相似词挨在一起 · 程序 <a href="code/lecture10/l10_03_word2vec.py">l10_03_word2vec.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_analogy.png"><img src="figures/lecture10/fig_analogy.png" alt="类比评估：小语料上的成败 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 69 帧 · 类比评估：小语料上的成败 · 程序 <a href="code/lecture10/l10_03_word2vec.py">l10_03_word2vec.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_sentiment.png"><img src="figures/lecture10/fig_sentiment.png" alt="情感分类：混淆矩阵与置信度 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 76 帧 · 情感分类：混淆矩阵与置信度 · 程序 <a href="code/lecture10/l10_05_sentiment.py">l10_05_sentiment.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_ner.png"><img src="figures/lecture10/fig_ner.png" alt="实体抽取的结果 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 79 帧 · 实体抽取的结果 · 程序 <a href="code/lecture10/l10_06_ner_rules.py">l10_06_ner_rules.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_topics_zh.png"><img src="figures/lecture10/fig_topics_zh.png" alt="主题词与文档分布 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 82 帧 · 主题词与文档分布 · 程序 <a href="code/lecture10/l10_07_topics_zh.py">l10_07_topics_zh.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_llm_agreement.png"><img src="figures/lecture10/fig_llm_agreement.png" alt="LLM 标注的一致性曲线 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 91 帧 · LLM 标注的一致性曲线 · 程序 <a href="code/lecture10/l10_08_llm_agreement.py">l10_08_llm_agreement.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture10/fig_rag.png"><img src="figures/lecture10/fig_rag.png" alt="RAG 的检索分数与引用 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 93 帧 · RAG 的检索分数与引用 · 程序 <a href="code/lecture10/l10_09_rag_citation.py">l10_09_rag_citation.py</a></figcaption>
+      </figure>
+
     <h3>如何运行 How to Run</h3>
     <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
 pip install -r code/requirements.txt
@@ -1033,8 +1119,12 @@ python run_all.py
 
 # 9) Lecture 9：深度学习样本（逐行英文注释）
 cd ../lecture09
+python run_all.py
+
+# 10) Lecture 10：文本与 NLP 样本（逐行英文注释）
+cd ../lecture10
 python run_all.py</code></pre>
-    <p class="note">八个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909、L9 为 20261010），
+    <p class="note">八个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909、L9 为 20261010、L10 为 20261111），
        因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 5 的梯度提升同时使用 XGBoost 与 LightGBM；
        若未安装这两个包，程序会打印提示并跳过对应模型，其余流程不受影响。</p>
 
@@ -1052,7 +1142,10 @@ python run_all.py</code></pre>
           <a href="files/Glossary-L6-L8.docx">L6–L8 合并术语总表（223 条）</a>；
           Lecture 9 的深度学习程序也是<b>逐行英文注释</b>，术语见
           <a href="lecture-09.html#glossary9">Lecture 9 术语表（77 条）</a>与
-          <a href="files/Glossary-L6-L9.docx">L6–L9 合并术语总表（300 条）</a>；</li>
+          <a href="files/Glossary-L6-L9.docx">L6–L9 合并术语总表（300 条）</a>；
+          Lecture 10 的文本程序同样是<b>逐行英文注释</b>，术语见
+          <a href="lecture-10.html#glossary10">Lecture 10 术语表（81 条）</a>与
+          <a href="files/Glossary-L6-L10.docx">L6–L10 合并术语总表（381 条）</a>；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -1082,6 +1175,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
           <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
           <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
+          <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
           <li><a href="projects.html">课程项目指南与评分规则</a></li>
           <li><a href="code.html">样本数据与可视化程序</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>

@@ -1,0 +1,3 @@
+﻿representation,vocab,nnz_per_doc,accuracy,macro_f1
+词袋 BoW,155,6.8,0.963,0.9474
+TF-IDF,155,6.8,0.9667,0.9534

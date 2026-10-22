@@ -1,0 +1,5 @@
+﻿a,b,c,expected,got,score,hit
+国王,男人,女人,女王,-,0.0,False
+北京,中国,日本,东京,-,0.0,False
+手机,苹果,电脑,微软,-,0.0,False
+好评,满意,差评,失望,-,0.0,False
