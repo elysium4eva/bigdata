@@ -1,0 +1,5 @@
+﻿model,clusters,silhouette,calinski_harabasz,davies_bouldin,adjusted_rand,nmi
+k-means (k=4),4,0.4873,854.9,0.747,0.7453,0.7668
+wards (k=4),4,0.4634,773.4,0.7856,0.7301,0.7378
+GMM (k=4),4,0.5075,636.0,0.8634,0.5925,0.7355
+DBSCAN,1,,,,0.0,0.0

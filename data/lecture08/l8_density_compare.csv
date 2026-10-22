@@ -1,0 +1,4 @@
+﻿method,clusters,noise_share
+dbscan,5,0.052
+hdbscan,4,0.072
+kmeans,3,0.0

@@ -1,0 +1,5 @@
+﻿shape,kmeans_inertia,silhouette
+non-spherical (rings),1496.01,0.4424
+unequal sizes,488.58,0.8501
+different density,888.54,0.6201
+with outliers,1266.06,0.7886

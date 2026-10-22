@@ -1,0 +1,4 @@
+﻿method,trustworthiness
+PCA,0.0604
+t-SNE,0.2633
+UMAP,0.1812

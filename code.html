@@ -45,6 +45,7 @@
       <a class="btn btn-primary" href="#lecture05">Lecture 5 · 机器学习入门</a>
       <a class="btn btn-primary" href="#lecture06">Lecture 6 · 逻辑回归</a>
       <a class="btn btn-primary" href="#lecture07">Lecture 7 · 监督学习算法族</a>
+      <a class="btn btn-primary" href="#lecture08">Lecture 8 · 无监督学习</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
       <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
@@ -814,6 +815,101 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 94 帧 · SHAP 摘要与依赖图 · 程序 <a href="code/lecture07/l7_09_shap_audit.py">l7_09_shap_audit.py</a></figcaption>
       </figure>
 
+
+    <h3 id="lecture08">Lecture 8 · 无监督学习样本（14 个程序，逐行英文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture08/requirements.txt</code> →
+       <code>cd code/lecture08 &amp;&amp; python run_all.py</code>；
+       样本写入 <code>data/lecture08/</code>，图片写入 <code>figures/lecture08/</code>，
+       FAISS 基准与词表写入 <code>data/lecture08/artifacts/</code>。
+       本讲需要 <code>umap-learn</code> 与 <code>faiss-cpu</code>。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>帧</th><th>主题</th><th>程序</th><th>数据</th></tr></thead>
+      <tbody>
+        <tr><td class="num">27</td><td>二维 PCA：手机的两个主成分</td><td><code>l8_01_pca_basics.py</code></td><td><code>l8_smartphone.csv</code> <code>l8_pca_variance.csv</code></td></tr>
+        <tr><td class="num">30</td><td>标准化前后：主成分方向完全不同</td><td><code>l8_01_pca_basics.py</code></td><td><code>l8_pca_variance.csv</code></td></tr>
+        <tr><td class="num">33</td><td>碎石图与累计方差</td><td><code>l8_01_pca_basics.py</code></td><td><code>l8_pca_variance.csv</code></td></tr>
+        <tr><td class="num">37</td><td>图像压缩：k 从 2 到 32</td><td><code>l8_02_pca_images.py</code></td><td><code>l8_pca_image_errors.csv</code></td></tr>
+        <tr><td class="num">41</td><td>因子载荷：手机参数背后的两个因子</td><td><code>l8_03_factor_fama.py</code></td><td><code>l8_factor_loadings.csv</code></td></tr>
+        <tr><td class="num">49</td><td>三因子回归：暴露、拟合与残差</td><td><code>l8_03_factor_fama.py</code></td><td><code>l8_ff3.csv</code> <code>l8_ff3_regression.csv</code></td></tr>
+        <tr><td class="num">55</td><td>感知图：12 个品牌的定位</td><td><code>l8_04_perceptual_map.py</code></td><td><code>l8_brands.csv</code> <code>l8_perceptual_coords.csv</code></td></tr>
+        <tr><td class="num">59</td><td>k-means 的 Voronoi 单元与失效形状</td><td><code>l8_05_kmeans.py</code></td><td><code>l8_blobs.csv</code> <code>l8_kmeans_sweep.csv</code></td></tr>
+        <tr><td class="num">65</td><td>四种 linkage 的树状图</td><td><code>l8_06_hierarchical.py</code></td><td><code>l8_chain.csv</code> <code>l8_linkage_compare.csv</code></td></tr>
+        <tr><td class="num">67</td><td>k 的选择：肘部与轮廓给出不同答案</td><td><code>l8_05_kmeans.py</code></td><td><code>l8_kmeans_sweep.csv</code> <code>l8_kmeans_failures.csv</code></td></tr>
+        <tr><td class="num">72</td><td>GMM 的软分配与 EM 轨迹</td><td><code>l8_08_gmm_em.py</code></td><td><code>l8_gmm.csv</code> <code>l8_em_trace.csv</code></td></tr>
+        <tr><td class="num">73</td><td>DBSCAN 的密度结构、噪声与 k-means 的失败</td><td><code>l8_07_dbscan.py</code></td><td><code>l8_density.csv</code> <code>l8_dbscan_grid.csv</code></td></tr>
+        <tr><td class="num">80</td><td>四种算法、两种指标</td><td><code>l8_09_metrics.py</code></td><td><code>l8_cluster_metrics.csv</code> <code>l8_metric_trap.csv</code></td></tr>
+        <tr><td class="num">85</td><td>异常分数与最强规则</td><td><code>l8_10_anomaly_rules.py</code></td><td><code>l8_anomaly.csv</code> <code>l8_rules.csv</code></td></tr>
+        <tr><td class="num">90</td><td>嵌入空间：PCA / t-SNE / UMAP</td><td><code>l8_11_embeddings.py</code></td><td><code>l8_highdim.csv</code> <code>l8_embedding_compare.csv</code></td></tr>
+        <tr><td class="num">94</td><td>NMF 与 LDA：主题词与纯度</td><td><code>l8_13_topics.py</code></td><td><code>l8_topics.csv</code> <code>l8_doc_topics.csv</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 8 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_pca_2d.png"><img src="figures/lecture08/fig_pca_2d.png" alt="二维 PCA：手机的两个主成分 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 27 帧 · 二维 PCA：手机的两个主成分 · 程序 <a href="code/lecture08/l8_01_pca_basics.py">l8_01_pca_basics.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_pca_scaling.png"><img src="figures/lecture08/fig_pca_scaling.png" alt="标准化前后：主成分方向完全不同 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 30 帧 · 标准化前后：主成分方向完全不同 · 程序 <a href="code/lecture08/l8_01_pca_basics.py">l8_01_pca_basics.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_pca_scree.png"><img src="figures/lecture08/fig_pca_scree.png" alt="碎石图与累计方差 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 33 帧 · 碎石图与累计方差 · 程序 <a href="code/lecture08/l8_01_pca_basics.py">l8_01_pca_basics.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_pca_image.png"><img src="figures/lecture08/fig_pca_image.png" alt="图像压缩：k 从 2 到 32 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 37 帧 · 图像压缩：k 从 2 到 32 · 程序 <a href="code/lecture08/l8_02_pca_images.py">l8_02_pca_images.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_factor_loadings.png"><img src="figures/lecture08/fig_factor_loadings.png" alt="因子载荷：手机参数背后的两个因子 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 41 帧 · 因子载荷：手机参数背后的两个因子 · 程序 <a href="code/lecture08/l8_03_factor_fama.py">l8_03_factor_fama.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_ff3.png"><img src="figures/lecture08/fig_ff3.png" alt="三因子回归：暴露、拟合与残差 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 49 帧 · 三因子回归：暴露、拟合与残差 · 程序 <a href="code/lecture08/l8_03_factor_fama.py">l8_03_factor_fama.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_perceptual_map.png"><img src="figures/lecture08/fig_perceptual_map.png" alt="感知图：12 个品牌的定位 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 55 帧 · 感知图：12 个品牌的定位 · 程序 <a href="code/lecture08/l8_04_perceptual_map.py">l8_04_perceptual_map.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_kmeans.png"><img src="figures/lecture08/fig_kmeans.png" alt="k-means 的 Voronoi 单元与失效形状 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 59 帧 · k-means 的 Voronoi 单元与失效形状 · 程序 <a href="code/lecture08/l8_05_kmeans.py">l8_05_kmeans.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_dendrogram.png"><img src="figures/lecture08/fig_dendrogram.png" alt="四种 linkage 的树状图 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 65 帧 · 四种 linkage 的树状图 · 程序 <a href="code/lecture08/l8_06_hierarchical.py">l8_06_hierarchical.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_k_choice.png"><img src="figures/lecture08/fig_k_choice.png" alt="k 的选择：肘部与轮廓给出不同答案 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 67 帧 · k 的选择：肘部与轮廓给出不同答案 · 程序 <a href="code/lecture08/l8_05_kmeans.py">l8_05_kmeans.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_gmm.png"><img src="figures/lecture08/fig_gmm.png" alt="GMM 的软分配与 EM 轨迹 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 72 帧 · GMM 的软分配与 EM 轨迹 · 程序 <a href="code/lecture08/l8_08_gmm_em.py">l8_08_gmm_em.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_dbscan.png"><img src="figures/lecture08/fig_dbscan.png" alt="DBSCAN 的密度结构、噪声与 k-means 的失败 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 73 帧 · DBSCAN 的密度结构、噪声与 k-means 的失败 · 程序 <a href="code/lecture08/l8_07_dbscan.py">l8_07_dbscan.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_cluster_metrics.png"><img src="figures/lecture08/fig_cluster_metrics.png" alt="四种算法、两种指标 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 80 帧 · 四种算法、两种指标 · 程序 <a href="code/lecture08/l8_09_metrics.py">l8_09_metrics.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_anomaly.png"><img src="figures/lecture08/fig_anomaly.png" alt="异常分数与最强规则 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 85 帧 · 异常分数与最强规则 · 程序 <a href="code/lecture08/l8_10_anomaly_rules.py">l8_10_anomaly_rules.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_embedding.png"><img src="figures/lecture08/fig_embedding.png" alt="嵌入空间：PCA / t-SNE / UMAP 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 90 帧 · 嵌入空间：PCA / t-SNE / UMAP · 程序 <a href="code/lecture08/l8_11_embeddings.py">l8_11_embeddings.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_topics.png"><img src="figures/lecture08/fig_topics.png" alt="NMF 与 LDA：主题词与纯度 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 94 帧 · NMF 与 LDA：主题词与纯度 · 程序 <a href="code/lecture08/l8_13_topics.py">l8_13_topics.py</a></figcaption>
+      </figure>
+
     <h3>如何运行 How to Run</h3>
     <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
 pip install -r code/requirements.txt
@@ -843,8 +939,12 @@ python run_all.py
 
 # 7) Lecture 7：监督学习算法族样本（逐行英文注释）
 cd ../lecture07
+python run_all.py
+
+# 8) Lecture 8：无监督学习样本（逐行英文注释）
+cd ../lecture08
 python run_all.py</code></pre>
-    <p class="note">六个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708），
+    <p class="note">七个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909），
        因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 5 的梯度提升同时使用 XGBoost 与 LightGBM；
        若未安装这两个包，程序会打印提示并跳过对应模型，其余流程不受影响。</p>
 
@@ -856,7 +956,10 @@ python run_all.py</code></pre>
           <a href="lecture-06.html#glossary">Lecture 6 术语表（79 条）</a>；
           Lecture 7 的算法族程序也是<b>逐行英文注释</b>，术语见
           <a href="lecture-07.html#glossary7">Lecture 7 术语表（72 条）</a>与
-          <a href="files/Glossary-L6-L7.docx">L6+L7 合并术语总表（151 条）</a>；</li>
+          <a href="files/Glossary-L6-L7.docx">L6+L7 合并术语总表（151 条）</a>；
+          Lecture 8 的无监督程序也是<b>逐行英文注释</b>，术语见
+          <a href="lecture-08.html#glossary8">Lecture 8 术语表（72 条）</a>与
+          <a href="files/Glossary-L6-L8.docx">L6–L8 合并术语总表（223 条）</a>；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -884,6 +987,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
           <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
           <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
+          <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
           <li><a href="projects.html">课程项目指南与评分规则</a></li>
           <li><a href="code.html">样本数据与可视化程序</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>

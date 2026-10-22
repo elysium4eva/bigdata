@@ -1,0 +1,3 @@
+﻿detector,precision,recall
+isolation forest,0.704,0.76
+LOF,0.741,0.8
