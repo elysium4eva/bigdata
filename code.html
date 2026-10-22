@@ -316,6 +316,18 @@
           <td><a href="data/lecture04/l4_survey_raw.csv">l4_survey_raw.csv</a>、<a href="data/lecture04/l4_data_dictionary.csv">l4_data_dictionary.csv</a>、<a href="data/lecture04/l4_data_dictionary.md">l4_data_dictionary.md</a>、<a href="data/lecture04/l4_docs_coverage.csv">l4_docs_coverage.csv</a></td>
         </tr>
         <tr>
+          <td class="week">第 48 帧</td>
+          <td><b>今天的 A 股行业热力树图 A-share treemap</b><br><span class="note">2026-10-22 收盘真实数据：5568 只中取成交额前 697 只，按申万一级行业成 31 组；6 个行业上涨、环保 -7.1%、通信 -6.8% 最深；个股中位数 -3.54%，指数 -1.48%。</span></td>
+          <td><a href="code/lecture04/ashare_generate_heatmap.py">ashare_generate_heatmap.py</a></td>
+          <td><a href="data/lecture04/heatmap_industry.json">heatmap_industry.json</a>　<a href="figures/lecture04/interactive/ashare_heatmap.html" target="_blank" rel="noopener">交互版热力图（可切换分组与 Top-N） ↗</a></td>
+        </tr>
+        <tr>
+          <td class="week">第 49 帧</td>
+          <td><b>同一批数据的两种读法 Two readings</b><br><span class="note">左：31 个行业的加权涨跌幅；右：697 只个股涨跌幅的分布（中位数 -3.5%）。树图看结构与量级，直方图看分布与尾部。</span></td>
+          <td><a href="code/lecture04/ashare_render_heatmap.py">ashare_render_heatmap.py</a></td>
+          <td><a href="data/lecture04/heatmap_industry.json">heatmap_industry.json</a></td>
+        </tr>
+        <tr>
           <td class="week">第 23 帧</td>
           <td><b>中心趋势的稳健性 Robust centre</b><br><span class="note">1000 个收入观测加 3 个离群点：均值移动 +12.5%、中位数只移动 +0.7%；均值/中位数/标准差/IQR/MAD 对照。</span></td>
           <td><a href="code/lecture04/l4_02_descriptive_stats.py">l4_02_descriptive_stats.py</a></td>
@@ -424,6 +436,14 @@
       <figure style="margin:0 0 26px">
         <a href="figures/lecture04/fig_docs_coverage.png"><img src="figures/lecture04/fig_docs_coverage.png" alt="文档完成度与数据字典 Document coverage 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 13 帧 · 文档完成度与数据字典 Document coverage · 程序 <a href="code/lecture04/l4_01_docs_metadata.py">l4_01_docs_metadata.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_ashare_heatmap.png"><img src="figures/lecture04/fig_ashare_heatmap.png" alt="今天的 A 股行业热力树图 A-share treemap 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 48 帧 · 今天的 A 股行业热力树图 A-share treemap · 程序 <a href="code/lecture04/ashare_generate_heatmap.py">ashare_generate_heatmap.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture04/fig_ashare_distribution.png"><img src="figures/lecture04/fig_ashare_distribution.png" alt="同一批数据的两种读法 Two readings 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 49 帧 · 同一批数据的两种读法 Two readings · 程序 <a href="code/lecture04/ashare_render_heatmap.py">ashare_render_heatmap.py</a></figcaption>
       </figure>
       <figure style="margin:0 0 26px">
         <a href="figures/lecture04/fig_central_tendency.png"><img src="figures/lecture04/fig_central_tendency.png" alt="中心趋势的稳健性 Robust centre 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
