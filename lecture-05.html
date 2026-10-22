@@ -59,6 +59,16 @@
        以及 2026 内容（AutoML 取舍、可解释性 SHAP/PDP/ICE、模型卡与 MLOps、数据泄漏清单、公平性与合规、成本与延迟）。
        全部示例用 Python 完成，<b>每一行代码都带英文注释</b>，一条 <code>run_all.py</code> 即可重建样本、图表与实验记录。</p>
 
+    <p class="note"><b>2026-10-22 现场案例（帧 48–49）</b>：用仓库
+       <a href="https://github.com/dxawdc/stock-heatmap" target="_blank" rel="noopener">dxawdc/stock-heatmap</a>
+       抓取当天全市场快照（腾讯行情 + 申万一级行业成分），再静态渲染成树图：
+       5,568 只股票中取成交额前 697 只、按 31 个申万一级行业分组，<b>面积=成交额、颜色=涨跌幅</b>。
+       当日上证 A 股指数 <b>−1.48%</b>，个股中位数 <b>−3.54%</b>，31 个行业 <b>6 涨 25 跌</b>
+       （家电 +1.1%、石油石化 +0.5%；环保 −7.1%、通信 −6.8%）。
+       可打开 <a href="figures/lecture04/interactive/ashare_heatmap.html">交互版热力图</a>（页面内切换分组、Top-N 与筛选）。
+       这张图正是帧 43「通道有效性」与帧 44「按问题选图」在真实数据上的一次落地：
+       位置分组、面积表量级、颜色表方向，三个通道叠在一张图里。</p>
+
     <h3>本讲结构 Outline</h3>
     <div class="table-wrap"><table>
       <tbody>

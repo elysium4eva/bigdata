@@ -48,7 +48,7 @@
     <div class="grid grid-4" style="margin-top:22px">
       <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>104</strong> 帧 · 16:9 详版</div></div>
       <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>12</strong> 页（逐行英文注释）</div></div>
-      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>16</strong> 页样本 + 18 张图 + <strong>7</strong> 个交互 HTML</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>18</strong> 页样本 + 20 张图 + <strong>8</strong> 个交互 HTML</div></div>
       <div class="card"><div class="k">对应周次 Week</div><div class="v">第 5 周（与 L3 双讲）</div></div>
     </div>
     <p class="note">本讲为 Beamer 双语课件（<b>104 帧</b>）：保留 <b>20 项数据文档清单</b>与
@@ -61,6 +61,16 @@
        置换重要性 / PDP / ICE 解释性可视化、三维交互嵌入）。
        样本数据与程序随课程仓库发布，可一键重跑（<a href="code.html#lecture04">样本数据与可视化程序</a>）。</p>
 
+    <p class="note"><b>2026-10-22 现场案例（帧 48–49）</b>：用仓库
+       <a href="https://github.com/dxawdc/stock-heatmap" target="_blank" rel="noopener">dxawdc/stock-heatmap</a>
+       抓取当天全市场快照（腾讯行情 + 申万一级行业成分），再静态渲染成树图：
+       5,568 只股票中取成交额前 697 只、按 31 个申万一级行业分组，<b>面积=成交额、颜色=涨跌幅</b>。
+       当日上证 A 股指数 <b>−1.48%</b>，个股中位数 <b>−3.54%</b>，31 个行业 <b>6 涨 25 跌</b>
+       （家电 +1.1%、石油石化 +0.5%；环保 −7.1%、通信 −6.8%）。
+       可打开 <a href="figures/lecture04/interactive/ashare_heatmap.html">交互版热力图</a>（页面内切换分组、Top-N 与筛选）。
+       这张图正是帧 43「通道有效性」与帧 44「按问题选图」在真实数据上的一次落地：
+       位置分组、面积表量级、颜色表方向，三个通道叠在一张图里。</p>
+
     <h3>本讲结构 Outline</h3>
     <div class="table-wrap"><table>
       <tbody>
@@ -68,7 +78,7 @@
         <tr><td class="week">Part 1</td><td>文档与元数据：四类应用场景（投研/学位论文/科研/咨询）、为什么开工即写文档、<b>20 项数据文档清单</b>（原表分两帧）、元数据与 codebook、六个元数据标准、文档完成度体检样本页、自动生成数据字典代码页、文档与数据契约、验收标准</td></tr>
         <tr><td class="week">Part 2</td><td>单变量描述统计：描述 vs 推断、集中趋势（均值/中位数/众数）、离散程度（极差 95 原例 + IQR/MAD/方差）、频数分布与三概念区分、偏度、峰度（lepto/platy/meso）、中心趋势稳健性样本页（+12.5% vs +0.7%）、离散与形状四联图、描述统计一条龙代码页、单变量图型五件套、分布形状怎么读、单变量陷阱、中心·离散·形状小结</td></tr>
         <tr><td class="week">Part 3</td><td>双变量与多变量：四项内容总览、列联表与卡方/Cramér's V、Pearson vs Spearman 使用边界、协方差与标准化斜率、对数变换、受限取值范围削弱相关、受限范围实验样本页（−0.589 → −0.200）、多变量三视图样本页、相关与列联表代码页、分组与小多图、条件分布与辛普森悖论、相关三问小结</td></tr>
-        <tr><td class="week">Part 4</td><td>图型选择与图的语法：数据→几何→通道的三层映射、通道有效性排序、按问题选图决策表、比较与分布、时间类（趋势与权重趋势、脉冲图）、关系类（过绘对策、相关矩阵、热力图）、结构与流程（网络图四条）、图表规范与图注自足性、七类图型总览样本页、图表工厂代码页、坐标轴与刻度、三类色板、选图五步小结</td></tr>
+        <tr><td class="week">Part 4</td><td>图型选择与图的语法：数据→几何→通道的三层映射、通道有效性排序、按问题选图决策表、比较与分布、时间类（趋势与权重趋势、脉冲图）、关系类（过绘对策、相关矩阵、热力图）、<b>案例：当日 A 股行业热力树图与分布图</b>（真实数据）、结构与流程（网络图四条）、图表规范与图注自足性、七类图型总览样本页、图表工厂代码页、坐标轴与刻度、三类色板、选图五步小结</td></tr>
         <tr><td class="week">Part 5</td><td>工具、交互与地理信息：可视化定义、信息可视化 vs 科学可视化、工具全景（统一到 Python，不使用 BI 授权软件）、Stata 能力边界、Python 四件套、R 生态与按图选型资源、plotly 交互代码页、交互 vs 静态样本页、Python 仪表板代码页与设计原则、<b>地理信息可视化专题</b>（数据结构与 CRS、choropleth 三种分级、地图三件套代码页、choropleth vs 符号地图样本页、空间自相关与 Moran 散点样本页、地图四个陷阱）、网络与引文可视化（WITS/Gephi/CiteSpace/SNAP）</td></tr>
         <tr><td class="week">Part 6</td><td>误导、可访问性与叙事：截断坐标轴、面积与体积错觉、双轴与选择性区间、统计与图形联合误导、六种误导与修正样本页、把图形规范写成断言代码页、不确定性表达、自助法与置信带代码页、不确定性四视图样本页、色盲友好与可访问性、色板与灰度检查样本页、叙事可视化与 AI 辅助制图及核验清单</td></tr>
         <tr><td class="week">Part 7</td><td><b>高维数据可视化（前沿）</b>：维度灾难与三大策略、降维三件套 PCA / t-SNE / UMAP（与 Isomap/MDS 对照）、三种投影对照样本页与邻域保真度（t-SNE 0.89 &gt; UMAP 0.85 &gt; PCA 0.75）、降维投影代码页、投影读法与五条纪律、平行坐标与雷达图、多变量剖面样本页（平行坐标 + 聚类重排热力图 + 雷达图）、模型解释性可视化（置换重要性 / PDP / ICE，最近购买距今天数 0.195）、解释性可视化代码页、前沿拓展（嵌入投影浏览器、三维交互与 grand tour、可解释性与可访问性）与检查清单</td></tr>
