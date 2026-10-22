@@ -44,6 +44,7 @@
       <a class="btn btn-primary" href="#lecture04">Lecture 4 · 描述与可视化</a>
       <a class="btn btn-primary" href="#lecture05">Lecture 5 · 机器学习入门</a>
       <a class="btn btn-primary" href="#lecture06">Lecture 6 · 逻辑回归</a>
+      <a class="btn btn-primary" href="#lecture07">Lecture 7 · 监督学习算法族</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
       <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
@@ -728,6 +729,91 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 85 帧 · 近似—过拟合与偏差-方差分解 · 程序 <a href="code/lecture06/l6_11_overfit_curves.py">l6_11_overfit_curves.py</a></figcaption>
       </figure>
 
+
+    <h3 id="lecture07">Lecture 7 · 监督学习算法族样本（12 个程序，逐行英文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture07/requirements.txt</code> →
+       <code>cd code/lecture07 &amp;&amp; python run_all.py</code>；
+       样本写入 <code>data/lecture07/</code>，图片写入 <code>figures/lecture07/</code>，
+       SHAP 审计与运行记录写入 <code>data/lecture07/artifacts/</code>。
+       本讲需要 <code>xgboost</code>、<code>lightgbm</code>、<code>catboost</code>、<code>optuna</code>、<code>shap</code>。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>帧</th><th>主题</th><th>程序</th><th>数据</th></tr></thead>
+      <tbody>
+        <tr><td class="num">27</td><td>软间隔与惩罚参数 C Soft margin</td><td><code>l7_01_svm_margin.py</code></td><td><code>l7_two_class.csv</code> <code>l7_svm_margin.csv</code></td></tr>
+        <tr><td class="num">33</td><td>四种核的决策边界 Four kernels</td><td><code>l7_02_svm_kernels.py</code></td><td><code>l7_svm_kernels.csv</code></td></tr>
+        <tr><td class="num">37</td><td>支持向量与间隔带 Support vectors</td><td><code>l7_01_svm_margin.py</code></td><td><code>l7_svm_margin.csv</code></td></tr>
+        <tr><td class="num">43</td><td>1-NN 与 5-NN 分类地图</td><td><code>l7_03_knn_k_curve.py</code></td><td><code>l7_knn_sample.csv</code></td></tr>
+        <tr><td class="num">49</td><td>k 与准确率：一条曲线讲完</td><td><code>l7_03_knn_k_curve.py</code></td><td><code>l7_knn_k_curve.csv</code></td></tr>
+        <tr><td class="num">51</td><td>维度灾难：距离集中</td><td><code>l7_04_curse_dimensionality.py</code></td><td><code>l7_dim_curse.csv</code></td></tr>
+        <tr><td class="num">63</td><td>贫困瞄准：回归树怎么切</td><td><code>l7_05_tree_poverty.py</code></td><td><code>l7_poverty.csv</code> <code>l7_tree_depth.csv</code> <code>l7_tree_pruning.csv</code></td></tr>
+        <tr><td class="num">65</td><td>OLS 与树：拟合与泛化</td><td><code>l7_05_tree_poverty.py</code></td><td><code>l7_tree_depth.csv</code></td></tr>
+        <tr><td class="num">71</td><td>OLS / 单树 / 随机森林 三对照</td><td><code>l7_06_random_forest_oob.py</code></td><td><code>l7_ensemble_scores.csv</code></td></tr>
+        <tr><td class="num">77</td><td>树的数量与 OOB 误差</td><td><code>l7_06_random_forest_oob.py</code></td><td><code>l7_rf_curve.csv</code> <code>l7_ensemble_scores.csv</code></td></tr>
+        <tr><td class="num">85</td><td>学习率 × 树数：二维调参面</td><td><code>l7_07_gbdt_compare.py</code></td><td><code>l7_gbdt_compare.csv</code> <code>l7_gbdt_curve.csv</code></td></tr>
+        <tr><td class="num">88</td><td>Optuna 搜索轨迹与参数重要性</td><td><code>l7_08_optuna_search.py</code></td><td><code>l7_optuna_trials.csv</code></td></tr>
+        <tr><td class="num">92</td><td>类别不平衡与代价敏感阈值</td><td><code>l7_10_imbalance_cost.py</code></td><td><code>l7_imbalanced.csv</code> <code>l7_cost_thresholds.csv</code></td></tr>
+        <tr><td class="num">94</td><td>SHAP 摘要与依赖图</td><td><code>l7_09_shap_audit.py</code></td><td><code>l7_shap_audit.csv</code> <code>l7_shap_single.csv</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 7 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_svm_margin.png"><img src="figures/lecture07/fig_svm_margin.png" alt="软间隔与惩罚参数 C Soft margin 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 27 帧 · 软间隔与惩罚参数 C Soft margin · 程序 <a href="code/lecture07/l7_01_svm_margin.py">l7_01_svm_margin.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_svm_kernels.png"><img src="figures/lecture07/fig_svm_kernels.png" alt="四种核的决策边界 Four kernels 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 33 帧 · 四种核的决策边界 Four kernels · 程序 <a href="code/lecture07/l7_02_svm_kernels.py">l7_02_svm_kernels.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_svm_support.png"><img src="figures/lecture07/fig_svm_support.png" alt="支持向量与间隔带 Support vectors 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 37 帧 · 支持向量与间隔带 Support vectors · 程序 <a href="code/lecture07/l7_01_svm_margin.py">l7_01_svm_margin.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_knn_maps.png"><img src="figures/lecture07/fig_knn_maps.png" alt="1-NN 与 5-NN 分类地图 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 43 帧 · 1-NN 与 5-NN 分类地图 · 程序 <a href="code/lecture07/l7_03_knn_k_curve.py">l7_03_knn_k_curve.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_knn_k_curve.png"><img src="figures/lecture07/fig_knn_k_curve.png" alt="k 与准确率：一条曲线讲完 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 49 帧 · k 与准确率：一条曲线讲完 · 程序 <a href="code/lecture07/l7_03_knn_k_curve.py">l7_03_knn_k_curve.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_dim_curse.png"><img src="figures/lecture07/fig_dim_curse.png" alt="维度灾难：距离集中 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 51 帧 · 维度灾难：距离集中 · 程序 <a href="code/lecture07/l7_04_curse_dimensionality.py">l7_04_curse_dimensionality.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_tree_poverty.png"><img src="figures/lecture07/fig_tree_poverty.png" alt="贫困瞄准：回归树怎么切 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 63 帧 · 贫困瞄准：回归树怎么切 · 程序 <a href="code/lecture07/l7_05_tree_poverty.py">l7_05_tree_poverty.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_ols_vs_tree.png"><img src="figures/lecture07/fig_ols_vs_tree.png" alt="OLS 与树：拟合与泛化 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 65 帧 · OLS 与树：拟合与泛化 · 程序 <a href="code/lecture07/l7_05_tree_poverty.py">l7_05_tree_poverty.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_ols_tree_forest.png"><img src="figures/lecture07/fig_ols_tree_forest.png" alt="OLS / 单树 / 随机森林 三对照 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 71 帧 · OLS / 单树 / 随机森林 三对照 · 程序 <a href="code/lecture07/l7_06_random_forest_oob.py">l7_06_random_forest_oob.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_rf_oob.png"><img src="figures/lecture07/fig_rf_oob.png" alt="树的数量与 OOB 误差 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 77 帧 · 树的数量与 OOB 误差 · 程序 <a href="code/lecture07/l7_06_random_forest_oob.py">l7_06_random_forest_oob.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_gbdt_tuning.png"><img src="figures/lecture07/fig_gbdt_tuning.png" alt="学习率 × 树数：二维调参面 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 85 帧 · 学习率 × 树数：二维调参面 · 程序 <a href="code/lecture07/l7_07_gbdt_compare.py">l7_07_gbdt_compare.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_optuna.png"><img src="figures/lecture07/fig_optuna.png" alt="Optuna 搜索轨迹与参数重要性 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 88 帧 · Optuna 搜索轨迹与参数重要性 · 程序 <a href="code/lecture07/l7_08_optuna_search.py">l7_08_optuna_search.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_imbalance_cost.png"><img src="figures/lecture07/fig_imbalance_cost.png" alt="类别不平衡与代价敏感阈值 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 92 帧 · 类别不平衡与代价敏感阈值 · 程序 <a href="code/lecture07/l7_10_imbalance_cost.py">l7_10_imbalance_cost.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture07/fig_shap.png"><img src="figures/lecture07/fig_shap.png" alt="SHAP 摘要与依赖图 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 94 帧 · SHAP 摘要与依赖图 · 程序 <a href="code/lecture07/l7_09_shap_audit.py">l7_09_shap_audit.py</a></figcaption>
+      </figure>
+
     <h3>如何运行 How to Run</h3>
     <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
 pip install -r code/requirements.txt
@@ -753,8 +839,12 @@ python run_all.py
 
 # 6) Lecture 6：逻辑回归与线性分类器样本（逐行英文注释）
 cd ../lecture06
+python run_all.py
+
+# 7) Lecture 7：监督学习算法族样本（逐行英文注释）
+cd ../lecture07
 python run_all.py</code></pre>
-    <p class="note">五个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603），
+    <p class="note">六个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708），
        因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 5 的梯度提升同时使用 XGBoost 与 LightGBM；
        若未安装这两个包，程序会打印提示并跳过对应模型，其余流程不受影响。</p>
 
@@ -763,7 +853,10 @@ python run_all.py</code></pre>
       <li><b>逐行注释</b>：Lecture 2、Lecture 3 与 Lecture 4 的程序为<b>逐行英文注释</b>；
           Lecture 5 的机器学习程序为<b>逐行英文注释</b>，便于与 scikit-learn 官方文档和英文术语对照；
           Lecture 6 的线性模型程序同样是<b>逐行英文注释</b>，术语中英对照见
-          <a href="lecture-06.html#glossary">Lecture 6 术语表（79 条）</a>；</li>
+          <a href="lecture-06.html#glossary">Lecture 6 术语表（79 条）</a>；
+          Lecture 7 的算法族程序也是<b>逐行英文注释</b>，术语见
+          <a href="lecture-07.html#glossary7">Lecture 7 术语表（72 条）</a>与
+          <a href="files/Glossary-L6-L7.docx">L6+L7 合并术语总表（151 条）</a>；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -790,6 +883,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
           <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
           <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
           <li><a href="projects.html">课程项目指南与评分规则</a></li>
           <li><a href="code.html">样本数据与可视化程序</a></li>
           <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>

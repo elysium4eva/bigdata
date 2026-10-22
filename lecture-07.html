@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 7 Supervised Learning Algorithms · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="projects.html">课程项目</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第七章</p>
+    <h1 class="doc-title">Lecture 7　Supervised Learning Algorithms</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L07-supervised-learning-algorithms.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-ghost" href="files/L07-glossary.docx">术语表 Word</a>
+      <a class="btn btn-ghost" href="files/L07-glossary.xlsx">术语表 Excel</a>
+      <a class="btn btn-ghost" href="files/Glossary-L6-L7.docx">L6+L7 合并术语表</a>
+      <a class="btn btn-ghost" href="code.html#lecture07">样本、程序与术语表</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>14</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>72</strong> 条（合并版 151 条）</div></div>
+    </div>
+    <p class="note">本讲把 L6 的"函数类 / 正则项 / 优化算法"框架兑现成四种具体的函数类：
+       <b>间隔最大化</b>（SVM，含核技巧与 $gamma$/$C$ 的意义）、<b>局部平均</b>（KNN，含 $k$ 的偏差-方差与维度灾难）、
+       <b>分段常数</b>（CART，含基尼/信息增益、贪心分裂与代价复杂度剪枝，配贫困瞄准案例）、
+       <b>组合</b>（随机森林与梯度提升：OOB、XGBoost / LightGBM / CatBoost 三库实测、为什么 GBDT 是表格基线）；
+       再补 2026 的三块：<b>Optuna 调参</b>、<b>SHAP 解释与合规审计</b>、<b>GBDT / 嵌入+分类头 / 微调的选型判据</b>。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L6 衔接（三要素框架）、输出物、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>共同框架与算法地图：函数类/正则项/优化算法、三者各决定什么、三句话（灵活—限制—学会限制多少）、<b>防火墙原则</b>、调参三法、ML 练习结构、研究者四个选择、<b>从 LASSO 到神经网络的对照表</b>、算法网格、统一评测口径</td></tr>
+        <tr><td class="week">Part 2</td><td>支持向量机：最大间隔直觉、超平面与距离、<b>正规化后的优化问题</b>、硬/软间隔代码页、对偶与内积、支持向量、软间隔与 C 样本页、核技巧、四种核、核与 γ/C 网格代码页、γ 的作用、sklearn 优缺点、四核样本页、概率校准（Platt）、规模边界、选型判据、支持向量样本页、业务读法、标准化陷阱</td></tr>
+        <tr><td class="week">Part 3</td><td>K 近邻：投票与平均、Fix &amp; Hodges / Cover、<b>1NN vs 5NN 地图</b>、统计设定与距离度量、度量影响、k 的选择、k 曲线代码页、偏差-方差视角、k 曲线样本页、<b>维度灾难</b>与距离集中样本页、缩放与加权、数据约简与 (k,r)NN 类别离群点</td></tr>
+        <tr><td class="week">Part 4</td><td>决策树 CART：递归 if-else、树的表示、基尼不纯度与信息增益、回归树的平方误差、<b>贪心分裂</b>、预剪枝与<b>代价复杂度剪枝</b>、单树+剪枝路径代码页、树的偏差-方差、<b>贫困瞄准回归树样本页</b>、OLS 参照、OLS vs 树样本页、可解释性、单树为什么不够、<b>从零实现 AdaBoost</b></td></tr>
+        <tr><td class="week">Part 5</td><td>集成与梯度提升：三个臭皮匠、OLS/树/森林样本页、bagging 与随机森林、RF 的偏差-方差与 OOB、组合方式（平均/加权/投票/stacking）、RF+OOB 代码页、boosting 与学习率、树数量样本页、AdaBoost→GBDT 谱系、四个旋钮、三库对比、三库对照代码页、<b>为什么 GBDT 是表格基线</b>、五个坑、重要性与 SHAP、GBDT 调参面样本页</td></tr>
+        <tr><td class="week">Part 6</td><td>调参与解释：Optuna 代码页、搜索轨迹样本页、调参纪律、收益递减、SHAP 审计代码页、不平衡与代价敏感样本页、<b>2026 三方案取舍</b>（GBDT / 嵌入+分类头 / 微调）、SHAP 摘要样本页、贝叶斯正则化与衔接</td></tr>
+        <tr><td class="week">Part 7</td><td>工具、术语与结语：工具栈分工（sklearn / XGBoost / LightGBM / CatBoost / Optuna / SHAP）、<b>术语表两帧（72 条）</b>、三句话结语与自检</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>SVM 硬/软间隔</b>：三个 $C$ 的间隔、支持向量与准确率（<code>l7_01</code>）；</li>
+      <li><b>核与网格搜索</b>：四种核的交叉验证、$gamma$ 与 $C$ 联合搜索（<code>l7_02</code>）；</li>
+      <li><b>KNN 的 k 曲线</b>：$k=1..40$ 的交叉验证与留出对照（<code>l7_03</code>）；</li>
+      <li><b>维度灾难</b>：最近邻/最远邻距离随维度收敛（<code>l7_04</code>）；</li>
+      <li><b>CART 与剪枝</b>：深度扫描、代价复杂度剪枝路径（<code>l7_05</code>）；</li>
+      <li><b>从零 AdaBoost</b>：权重更新与分阶段误差（<code>l7_11</code>）；</li>
+      <li><b>随机森林与 OOB</b>：树数量曲线、OOB 当验证集（<code>l7_06</code>）；</li>
+      <li><b>三库对照</b>：XGBoost / LightGBM / CatBoost 同数据同指标计时（<code>l7_07</code>）；</li>
+      <li><b>Optuna 调参</b>：TPE 搜索、试验日志、参数重要性（<code>l7_08</code>）；</li>
+      <li><b>SHAP 审计</b>：TreeExplainer、摘要与依赖、单样本分解（<code>l7_09</code>）；</li>
+      <li><b>代价敏感</b>：成本曲线与最优阈值（<code>l7_10</code>）。</li>
+    </ul>
+
+    <h3 id="glossary7">术语表 Glossary（72 条中英对照）</h3>
+    <p class="note">按课件顺序分六组；每条含中文、English、符号与公式、一句话解释。
+       可下载 <a href="files/L07-glossary.docx">Word</a> / <a href="files/L07-glossary.xlsx">Excel</a>，
+       跨讲复习见 <a href="files/Glossary-L6-L7.docx">L6+L7 合并术语表（151 条）</a>；
+       机器可读版本：<code>data/lecture07/l7_glossary.csv</code>。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>中文</th><th>English</th><th>符号 / 公式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、共同框架 Framework</td></tr>
+<tr><td class="lec">监督学习</td><td><span lang="en">supervised learning</span></td><td class="num"></td><td>从带标签数据学习映射</td></tr>
+<tr><td class="lec">函数类</td><td><span lang="en">function class</span></td><td class="num">$\mathcal{H}$</td><td>候选函数的集合，决定表达能力</td></tr>
+<tr><td class="lec">正则项</td><td><span lang="en">regularizer</span></td><td class="num">$\Omega(w)$</td><td>惩罚复杂度，限制表达能力</td></tr>
+<tr><td class="lec">优化算法</td><td><span lang="en">optimizer</span></td><td class="num"></td><td>在函数类里找最优解的手段</td></tr>
+<tr><td class="lec">归纳偏置</td><td><span lang="en">inductive bias</span></td><td class="num"></td><td>模型对未见数据的先验假设</td></tr>
+<tr><td class="lec">留出样本</td><td><span lang="en">hold-out sample</span></td><td class="num"></td><td>不参与训练、只用于评价的数据</td></tr>
+<tr><td class="lec">交叉验证</td><td><span lang="en">cross-validation</span></td><td class="num"></td><td>轮流留出一折做验证</td></tr>
+<tr><td class="lec">防火墙原则</td><td><span lang="en">firewall principle</span></td><td class="num"></td><td>训练与评价样本必须隔离</td></tr>
+<tr><td class="lec">超参数</td><td><span lang="en">hyper-parameter</span></td><td class="num"></td><td>训练前设定、不通过梯度学习的参数</td></tr>
+<tr><td class="lec">调参</td><td><span lang="en">hyper-parameter tuning</span></td><td class="num"></td><td>用验证集选超参数</td></tr>
+<tr><td class="lec">网格搜索</td><td><span lang="en">grid search</span></td><td class="num"></td><td>穷举离散组合</td></tr>
+<tr><td class="lec">随机搜索</td><td><span lang="en">random search</span></td><td class="num"></td><td>随机采样组合，更省预算</td></tr>
+<tr><td class="lec">贝叶斯优化</td><td><span lang="en">Bayesian optimisation</span></td><td class="num"></td><td>用代理模型指导下一次试验（Optuna 的 TPE）</td></tr>
+<tr><td class="lec">基线</td><td><span lang="en">baseline</span></td><td class="num"></td><td>先跑通的最简单参照模型</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、支持向量机 Support Vector Machine</td></tr>
+<tr><td class="lec">支持向量机</td><td><span lang="en">support vector machine (SVM)</span></td><td class="num"></td><td>以最大间隔划分两类的线性/核方法</td></tr>
+<tr><td class="lec">超平面</td><td><span lang="en">hyperplane</span></td><td class="num">$w^\top x+b=0$</td><td>线性决策边界</td></tr>
+<tr><td class="lec">间隔</td><td><span lang="en">margin</span></td><td class="num">$2/\lVert w\rVert$</td><td>两类样本到边界的距离带</td></tr>
+<tr><td class="lec">最大间隔</td><td><span lang="en">maximum margin</span></td><td class="num">$\min\frac12\lVert w\rVert^2$</td><td>SVM 的优化目标</td></tr>
+<tr><td class="lec">支持向量</td><td><span lang="en">support vector</span></td><td class="num"></td><td>决定边界的那几个样本</td></tr>
+<tr><td class="lec">软间隔</td><td><span lang="en">soft margin</span></td><td class="num">$\xi_i\ge0$</td><td>允许少量样本越过间隔</td></tr>
+<tr><td class="lec">惩罚参数</td><td><span lang="en">penalty parameter</span></td><td class="num">$C$</td><td>C 越大对误分类惩罚越重</td></tr>
+<tr><td class="lec">核函数</td><td><span lang="en">kernel function</span></td><td class="num">$K(x,z)$</td><td>把内积换成相似度，隐式升维</td></tr>
+<tr><td class="lec">核技巧</td><td><span lang="en">kernel trick</span></td><td class="num"></td><td>不用显式计算高维映射</td></tr>
+<tr><td class="lec">多项式核</td><td><span lang="en">polynomial kernel</span></td><td class="num">$(\gamma x^\top z+r)^d$</td><td>常用核之一</td></tr>
+<tr><td class="lec">径向基核</td><td><span lang="en">radial basis function (RBF) kernel</span></td><td class="num">$e^{-\gamma\lVert x-z\rVert^2}$</td><td>最常用的核</td></tr>
+<tr><td class="lec">拉格朗日对偶</td><td><span lang="en">Lagrangian dual</span></td><td class="num"></td><td>把约束优化转成只含内积的形式</td></tr>
+<tr><td class="lec">稀疏性</td><td><span lang="en">sparsity</span></td><td class="num"></td><td>只有少数样本/系数起作用</td></tr>
+<tr><td class="lec">概率校准</td><td><span lang="en">probability calibration</span></td><td class="num"></td><td>让输出概率与实际频率一致（Platt）</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、K 近邻 K-Nearest Neighbours</td></tr>
+<tr><td class="lec">k 近邻</td><td><span lang="en">k-nearest neighbours (k-NN)</span></td><td class="num"></td><td>按最近的 k 个样本投票或取平均</td></tr>
+<tr><td class="lec">非参数方法</td><td><span lang="en">non-parametric method</span></td><td class="num"></td><td>不假设固定函数形式、参数随数据增长</td></tr>
+<tr><td class="lec">距离度量</td><td><span lang="en">distance metric</span></td><td class="num"></td><td>欧氏/L1/余弦等，决定近邻是谁</td></tr>
+<tr><td class="lec">余弦相似度</td><td><span lang="en">cosine similarity</span></td><td class="num">$\frac{x^\top z}{\lVert x\rVert\lVert z\rVert}$</td><td>文本与稀疏数据常用</td></tr>
+<tr><td class="lec">维度灾难</td><td><span lang="en">curse of dimensionality</span></td><td class="num"></td><td>高维下距离集中，近邻失去意义</td></tr>
+<tr><td class="lec">原型</td><td><span lang="en">prototype</span></td><td class="num"></td><td>数据约简后保留的代表点</td></tr>
+<tr><td class="lec">被吸收点</td><td><span lang="en">absorbed point</span></td><td class="num"></td><td>可被原型正确分类、因而可删除的点</td></tr>
+<tr><td class="lec">类别离群点</td><td><span lang="en">class outlier</span></td><td class="num"></td><td>被异类包围的样本，会制造噪声</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、决策树 CART</td></tr>
+<tr><td class="lec">决策树</td><td><span lang="en">decision tree</span></td><td class="num"></td><td>递归二分形成的规则模型</td></tr>
+<tr><td class="lec">分类回归树</td><td><span lang="en">classification and regression tree (CART)</span></td><td class="num"></td><td>可做分类也可做回归的树</td></tr>
+<tr><td class="lec">基尼不纯度</td><td><span lang="en">Gini impurity</span></td><td class="num">$1-\sum_k p_k^2$</td><td>分类分裂准则</td></tr>
+<tr><td class="lec">信息增益</td><td><span lang="en">information gain</span></td><td class="num">$H(p)-\sum\frac{n_k}{n}H(p_k)$</td><td>熵的下降量</td></tr>
+<tr><td class="lec">熵</td><td><span lang="en">entropy</span></td><td class="num">$-\sum_k p_k\log p_k$</td><td>不确定性的度量</td></tr>
+<tr><td class="lec">分裂准则</td><td><span lang="en">splitting criterion</span></td><td class="num"></td><td>每个节点选哪一刀的依据</td></tr>
+<tr><td class="lec">贪心分裂</td><td><span lang="en">greedy splitting</span></td><td class="num"></td><td>每步只选当下最优，非全局最优</td></tr>
+<tr><td class="lec">剪枝</td><td><span lang="en">pruning</span></td><td class="num"></td><td>砍掉不带来增益的分支</td></tr>
+<tr><td class="lec">预剪枝</td><td><span lang="en">pre-pruning</span></td><td class="num"></td><td>生长时提前停止（深度、叶大小）</td></tr>
+<tr><td class="lec">后剪枝</td><td><span lang="en">post-pruning</span></td><td class="num"></td><td>先长满再回剪</td></tr>
+<tr><td class="lec">代价复杂度剪枝</td><td><span lang="en">cost-complexity pruning</span></td><td class="num">$R_\alpha(T)=R(T)+\alpha|T|$</td><td>用 alpha 控制树的大小</td></tr>
+<tr><td class="lec">叶节点</td><td><span lang="en">leaf</span></td><td class="num"></td><td>树的终端结点，输出预测值</td></tr>
+<tr><td class="lec">分段常数</td><td><span lang="en">piecewise constant</span></td><td class="num"></td><td>树的函数形式：每个叶一个常数</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、集成与梯度提升 Ensembles</td></tr>
+<tr><td class="lec">集成学习</td><td><span lang="en">ensemble learning</span></td><td class="num"></td><td>组合多个模型的预测</td></tr>
+<tr><td class="lec">袋装</td><td><span lang="en">bagging</span></td><td class="num"></td><td>自助抽样并行训练，再平均/投票</td></tr>
+<tr><td class="lec">自助抽样</td><td><span lang="en">bootstrap</span></td><td class="num"></td><td>有放回抽样构造训练子集</td></tr>
+<tr><td class="lec">袋外样本</td><td><span lang="en">out-of-bag (OOB)</span></td><td class="num"></td><td>没被抽到的样本，可当免费验证集</td></tr>
+<tr><td class="lec">随机森林</td><td><span lang="en">random forest</span></td><td class="num"></td><td>树 + 自助抽样 + 特征子采样</td></tr>
+<tr><td class="lec">特征子采样</td><td><span lang="en">feature subsampling</span></td><td class="num"></td><td>每次分裂只看部分特征，降低相关性</td></tr>
+<tr><td class="lec">提升</td><td><span lang="en">boosting</span></td><td class="num"></td><td>串行训练，每轮纠正前面的错误</td></tr>
+<tr><td class="lec">梯度提升</td><td><span lang="en">gradient boosting</span></td><td class="num"></td><td>在函数空间做梯度下降</td></tr>
+<tr><td class="lec">学习率</td><td><span lang="en">learning rate (shrinkage)</span></td><td class="num">$\eta$</td><td>每棵树的贡献权重，越小越稳</td></tr>
+<tr><td class="lec">早停</td><td><span lang="en">early stopping</span></td><td class="num"></td><td>验证误差不再下降就停</td></tr>
+<tr><td class="lec">弱学习器</td><td><span lang="en">weak learner</span></td><td class="num"></td><td>比随机猜略好的模型（如树桩）</td></tr>
+<tr><td class="lec">堆叠</td><td><span lang="en">stacking</span></td><td class="num"></td><td>用元模型组合多个基模型</td></tr>
+<tr><td class="lec">置换重要性</td><td><span lang="en">permutation importance</span></td><td class="num"></td><td>打乱某特征后误差的上升量</td></tr>
+<tr><td class="lec">SHAP 值</td><td><span lang="en">SHAP value</span></td><td class="num"></td><td>基于 Shapley 值的特征贡献分解</td></tr>
+<tr><td class="lec">摘要图</td><td><span lang="en">summary plot</span></td><td class="num"></td><td>SHAP 的全局重要性可视化</td></tr>
+<tr><td class="lec">依赖图</td><td><span lang="en">dependence plot</span></td><td class="num"></td><td>某特征取值与其 SHAP 值的关系</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、调参与取舍 Tuning and Choices</td></tr>
+<tr><td class="lec">代价敏感学习</td><td><span lang="en">cost-sensitive learning</span></td><td class="num">$C_{FN}FN+C_{FP}FP$</td><td>按错误代价加权训练/决策</td></tr>
+<tr><td class="lec">类别不平衡</td><td><span lang="en">class imbalance</span></td><td class="num"></td><td>正类稀少，准确率会误导</td></tr>
+<tr><td class="lec">阈值</td><td><span lang="en">threshold</span></td><td class="num"></td><td>概率转硬标签的临界值</td></tr>
+<tr><td class="lec">表格数据</td><td><span lang="en">tabular data</span></td><td class="num"></td><td>行列结构的数据，GBDT 的主场</td></tr>
+<tr><td class="lec">嵌入</td><td><span lang="en">embeddings</span></td><td class="num"></td><td>把高维输入映射为稠密向量</td></tr>
+<tr><td class="lec">微调</td><td><span lang="en">fine-tuning</span></td><td class="num"></td><td>在预训练模型上继续训练</td></tr>
+<tr><td class="lec">线性探测</td><td><span lang="en">linear probing</span></td><td class="num"></td><td>冻结主干、只训练分类头</td></tr>
+</tbody></table></div>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L07-supervised-learning-algorithms.pdf" title="Lecture 7 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
+          <li><a href="projects.html">课程项目指南与评分规则</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.docx">项目指南 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.pdf">项目指南 PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

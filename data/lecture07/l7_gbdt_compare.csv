@@ -1,0 +1,4 @@
+﻿library,seconds,train_r2,test_r2,test_rmse
+XGBoost,0.49,0.9491,0.8303,0.7837
+LightGBM,1.36,0.9768,0.7997,0.8513
+CatBoost,0.69,0.9011,0.848,0.7417

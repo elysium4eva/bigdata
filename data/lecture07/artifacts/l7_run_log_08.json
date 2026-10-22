@@ -1,0 +1,15 @@
+{
+  "best_value": 0.8317,
+  "test_r2": 0.825,
+  "default_test_r2": 0.7997,
+  "n_trials": 40,
+  "best_params": {
+    "n_estimators": 500,
+    "learning_rate": 0.044549637699124935,
+    "num_leaves": 8,
+    "min_child_samples": 5,
+    "subsample": 0.8938195847837012,
+    "colsample_bytree": 0.8931452906567763,
+    "reg_lambda": 0.29988007930763905
+  }
+}

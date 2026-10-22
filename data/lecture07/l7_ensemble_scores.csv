@@ -1,0 +1,4 @@
+﻿model,train_r2,test_r2,test_rmse,oob_r2
+OLS,0.7638,0.7388,0.9303,
+Single tree,0.66,0.4235,1.382,
+Random forest,0.8641,0.6563,1.0671,0.6649
