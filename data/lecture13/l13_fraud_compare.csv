@@ -1,0 +1,3 @@
+﻿model,auc,recall_at_5pct
+GNN (1 layer),0.8119,0.2581
+features only,0.998,0.4194

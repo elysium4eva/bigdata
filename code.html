@@ -50,6 +50,7 @@
       <a class="btn btn-primary" href="#lecture10">Lecture 10 · 文本与 NLP</a>
       <a class="btn btn-primary" href="#lecture15">Lecture 15 · 营销中的大数据</a>
       <a class="btn btn-primary" href="#lecture14">Lecture 14 · 国际贸易中的大数据</a>
+      <a class="btn btn-primary" href="#lecture13">Lecture 13 · 金融中的大数据</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
       <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
@@ -1275,6 +1276,101 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 82 帧 · 地缘政治风险与贸易 GPR index · 程序 <a href="code/lecture14/l14_10_gpr.py">l14_10_gpr.py</a></figcaption>
       </figure>
 
+
+    <h3 id="lecture13">Lecture 13 · 金融中的大数据样本（11 个程序，逐行英文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture13/requirements.txt</code> →
+       <code>cd code/lecture13 &amp;&amp; python run_all.py</code>；
+       数据写入 <code>data/lecture13/</code>，图片写入 <code>figures/lecture13/</code>。
+       本讲<b>不新增依赖</b>（statsmodels / scipy / scikit-learn 已装）；
+       GARCH 与组合优化都手写，<code>arch</code> / <code>PyPortfolioOpt</code> 只作工具栈介绍。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>帧</th><th>主题</th><th>程序</th><th>数据</th></tr></thead>
+      <tbody>
+        <tr><td class="num">12</td><td>收益率曲线与倒挂 Yield curve</td><td><code>l13_01_data.py</code></td><td><code>l13_yield_curve.csv</code></td></tr>
+        <tr><td class="num">15</td><td>收益率分布与厚尾 Return distribution</td><td><code>l13_01_data.py</code></td><td><code>l13_prices.csv</code></td></tr>
+        <tr><td class="num">20</td><td>隐含波动率微笑 IV smile</td><td><code>l13_02_arima.py</code></td><td><code>l13_option_chain.csv</code> <code>l13_option_chain_iv.csv</code></td></tr>
+        <tr><td class="num">28</td><td>数据质量四缺陷 Data quality</td><td><code>l13_01_data.py</code></td><td><code>l13_prices.csv</code></td></tr>
+        <tr><td class="num">40</td><td>ACF/PACF 三种过程 ACF and PACF</td><td><code>l13_02_arima.py</code></td><td>—</td></tr>
+        <tr><td class="num">43</td><td>ARIMA 预测与置信带 ARIMA forecast</td><td><code>l13_02_arima.py</code></td><td><code>l13_arima_orders.csv</code> <code>l13_market.csv</code></td></tr>
+        <tr><td class="num">48</td><td>单位根与伪回归 Unit root</td><td><code>l13_03_unit_root.py</code></td><td><code>l13_adf.csv</code> <code>l13_spurious.csv</code></td></tr>
+        <tr><td class="num">55</td><td>波动聚类与 GARCH 拟合 GARCH fit</td><td><code>l13_04_garch.py</code></td><td><code>l13_garch_params.csv</code> <code>l13_garch_vol.csv</code></td></tr>
+        <tr><td class="num">60</td><td>协整与配对价差 Cointegration</td><td><code>l13_05_var_coint.py</code></td><td><code>l13_spread.csv</code> <code>l13_var_params.csv</code></td></tr>
+        <tr><td class="num">65</td><td>因子暴露 beta exposure</td><td><code>l13_06_portfolio.py</code></td><td><code>l13_factor.csv</code></td></tr>
+        <tr><td class="num">69</td><td>有效前沿与约束 Efficient frontier</td><td><code>l13_06_portfolio.py</code></td><td><code>l13_efficient_frontier.csv</code></td></tr>
+        <tr><td class="num">75</td><td>回测净值与回撤 Equity curve</td><td><code>l13_07_backtest.py</code></td><td><code>l13_backtest_stats.csv</code> <code>l13_backtest_returns.csv</code></td></tr>
+        <tr><td class="num">82</td><td>情绪分组与 deflated Sharpe</td><td><code>l13_10_deflated_sharpe.py</code></td><td><code>l13_sentiment_groups.csv</code> <code>l13_deflated_sharpe.csv</code></td></tr>
+        <tr><td class="num">85</td><td>信用评分卡 Scorecard</td><td><code>l13_08_credit.py</code></td><td><code>l13_credit.csv</code> <code>l13_credit_metrics.csv</code> <code>l13_credit_scorecard.csv</code></td></tr>
+        <tr><td class="num">88</td><td>欺诈图与检测 Fraud graph</td><td><code>l13_09_gnn_fraud.py</code></td><td><code>l13_fraud_nodes.csv</code> <code>l13_fraud_compare.csv</code></td></tr>
+        <tr><td class="num">91</td><td>RAG 答案与引用 RAG answer</td><td><code>l13_10_deflated_sharpe.py</code></td><td><code>l13_filings.csv</code> <code>l13_rag_answer.csv</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 13 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_yield_curve.png"><img src="figures/lecture13/fig_yield_curve.png" alt="收益率曲线与倒挂 Yield curve 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 12 帧 · 收益率曲线与倒挂 Yield curve · 程序 <a href="code/lecture13/l13_01_data.py">l13_01_data.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_return_dist.png"><img src="figures/lecture13/fig_return_dist.png" alt="收益率分布与厚尾 Return distribution 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 15 帧 · 收益率分布与厚尾 Return distribution · 程序 <a href="code/lecture13/l13_01_data.py">l13_01_data.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_iv_smile.png"><img src="figures/lecture13/fig_iv_smile.png" alt="隐含波动率微笑 IV smile 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 20 帧 · 隐含波动率微笑 IV smile · 程序 <a href="code/lecture13/l13_02_arima.py">l13_02_arima.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_data_quality.png"><img src="figures/lecture13/fig_data_quality.png" alt="数据质量四缺陷 Data quality 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 28 帧 · 数据质量四缺陷 Data quality · 程序 <a href="code/lecture13/l13_01_data.py">l13_01_data.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_acf_pacf.png"><img src="figures/lecture13/fig_acf_pacf.png" alt="ACF/PACF 三种过程 ACF and PACF 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 40 帧 · ACF/PACF 三种过程 ACF and PACF · 程序 <a href="code/lecture13/l13_02_arima.py">l13_02_arima.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_arima_forecast.png"><img src="figures/lecture13/fig_arima_forecast.png" alt="ARIMA 预测与置信带 ARIMA forecast 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 43 帧 · ARIMA 预测与置信带 ARIMA forecast · 程序 <a href="code/lecture13/l13_02_arima.py">l13_02_arima.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_unit_root.png"><img src="figures/lecture13/fig_unit_root.png" alt="单位根与伪回归 Unit root 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 48 帧 · 单位根与伪回归 Unit root · 程序 <a href="code/lecture13/l13_03_unit_root.py">l13_03_unit_root.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_garch_fit.png"><img src="figures/lecture13/fig_garch_fit.png" alt="波动聚类与 GARCH 拟合 GARCH fit 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 55 帧 · 波动聚类与 GARCH 拟合 GARCH fit · 程序 <a href="code/lecture13/l13_04_garch.py">l13_04_garch.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_cointegration.png"><img src="figures/lecture13/fig_cointegration.png" alt="协整与配对价差 Cointegration 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 60 帧 · 协整与配对价差 Cointegration · 程序 <a href="code/lecture13/l13_05_var_coint.py">l13_05_var_coint.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_factor_exposure.png"><img src="figures/lecture13/fig_factor_exposure.png" alt="因子暴露 beta exposure 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 65 帧 · 因子暴露 beta exposure · 程序 <a href="code/lecture13/l13_06_portfolio.py">l13_06_portfolio.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_efficient_frontier.png"><img src="figures/lecture13/fig_efficient_frontier.png" alt="有效前沿与约束 Efficient frontier 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 69 帧 · 有效前沿与约束 Efficient frontier · 程序 <a href="code/lecture13/l13_06_portfolio.py">l13_06_portfolio.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_equity_curve.png"><img src="figures/lecture13/fig_equity_curve.png" alt="回测净值与回撤 Equity curve 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 75 帧 · 回测净值与回撤 Equity curve · 程序 <a href="code/lecture13/l13_07_backtest.py">l13_07_backtest.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_sentiment_groups.png"><img src="figures/lecture13/fig_sentiment_groups.png" alt="情绪分组与 deflated Sharpe 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 82 帧 · 情绪分组与 deflated Sharpe · 程序 <a href="code/lecture13/l13_10_deflated_sharpe.py">l13_10_deflated_sharpe.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_credit_scorecard.png"><img src="figures/lecture13/fig_credit_scorecard.png" alt="信用评分卡 Scorecard 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 85 帧 · 信用评分卡 Scorecard · 程序 <a href="code/lecture13/l13_08_credit.py">l13_08_credit.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_fraud_gnn.png"><img src="figures/lecture13/fig_fraud_gnn.png" alt="欺诈图与检测 Fraud graph 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 88 帧 · 欺诈图与检测 Fraud graph · 程序 <a href="code/lecture13/l13_09_gnn_fraud.py">l13_09_gnn_fraud.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture13/fig_rag_answer.png"><img src="figures/lecture13/fig_rag_answer.png" alt="RAG 答案与引用 RAG answer 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 91 帧 · RAG 答案与引用 RAG answer · 程序 <a href="code/lecture13/l13_10_deflated_sharpe.py">l13_10_deflated_sharpe.py</a></figcaption>
+      </figure>
+
     <h3>如何运行 How to Run</h3>
     <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
 pip install -r code/requirements.txt
@@ -1324,8 +1420,12 @@ python run_all.py
 
 # 14) Lecture 14：国际贸易中的大数据样本（逐行英文注释）
 cd ../lecture14
+python run_all.py
+
+# 13) Lecture 13：金融中的大数据样本（逐行英文注释）
+cd ../lecture13
 python run_all.py</code></pre>
-    <p class="note">八个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909、L9 为 20261010、L10 为 20261111、L15 为 20261216、L14 为 20270113），
+    <p class="note">八个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909、L9 为 20261010、L10 为 20261111、L15 为 20261216、L14 为 20270113、L13 为 20270220），
        因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 5 的梯度提升同时使用 XGBoost 与 LightGBM；
        若未安装这两个包，程序会打印提示并跳过对应模型，其余流程不受影响。</p>
 
@@ -1350,7 +1450,9 @@ python run_all.py</code></pre>
           Lecture 15 的营销程序同样是<b>逐行英文注释</b>，术语见
           <a href="lecture-15.html#glossary15">Lecture 15 术语表（85 条）</a>；
           Lecture 14 的贸易程序同样是<b>逐行英文注释</b>，术语见
-          <a href="lecture-14.html#glossary14">Lecture 14 术语表（84 条）</a>；</li>
+          <a href="lecture-14.html#glossary14">Lecture 14 术语表（84 条）</a>；
+          Lecture 13 的金融程序同样是<b>逐行英文注释</b>，术语见
+          <a href="lecture-13.html#glossary13">Lecture 13 术语表（82 条）</a>；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -1381,6 +1483,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
           <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
           <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
+          <li><a href="lecture-13.html">第十三章课件（Lecture 13 Big Data in Finance）</a></li>
           <li><a href="lecture-14.html">第十四章课件（Lecture 14 Big Data in International Trade）</a></li>
           <li><a href="lecture-15.html">第十五章课件（Lecture 15 Big Data in Marketing）</a></li>
           <li><a href="projects.html">课程项目指南与评分规则</a></li>

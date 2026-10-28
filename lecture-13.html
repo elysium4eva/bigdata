@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 13 Big Data in Finance · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="projects.html">课程项目</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第十三章</p>
+    <h1 class="doc-title">Lecture 13　Big Data in Finance</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L13-finance.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-ghost" href="files/L13-glossary.docx">术语表 Word</a>
+      <a class="btn btn-ghost" href="files/L13-glossary.xlsx">术语表 Excel</a>
+      <a class="btn btn-ghost" href="code.html#lecture13">样本、程序与术语表</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>15</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>16</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>82</strong> 条中英对照</div></div>
+    </div>
+    <p class="note">一条主线：<b>资产 → 数据 → 建模 → 组合 → 交易 → 风控</b>。
+       <b>资产与数据</b>（久期与凸性、收益率曲线、总回报、厚尾、期权与隐含波动率微笑、复权与时点对齐）→
+       <b>时间序列</b>（平稳性、ACF/PACF、ARIMA、随机游走、单位根与伪回归、季节）→
+       <b>波动率与因子</b>（GARCH 手写 MLE、已实现波动率、状态切换、VAR 与协整、CAPM 与多因子）→
+       <b>组合与回测</b>（均值—方差与有效前沿、风险预算、交易成本、诚实的回测器、业绩评价、七个陷阱）→
+       <b>风控与 2026</b>（文本情绪、PD/LGD、评分卡、GNN 反欺诈、LLM 与 RAG、Deflated Sharpe、模型治理）。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L5–L14 衔接、输出物、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>金融资产与数据类型：四个特征、<b>资产地图</b>、YTM、<b>久期与凸性</b>、<b>收益率曲线与倒挂</b>、总回报、收益率两种算法、<b>厚尾与 QQ</b>、衍生品四类、远期期货、<b>期权与 IV</b>、<b>IV 微笑</b>、另类投资</td></tr>
+        <tr><td class="week">Part 2</td><td>数据来源与获取：全景、Wind/Bloomberg、交易所接口、财报与披露、<b>抓取与清洗</b>、<b>数据质量四缺陷</b>、复权、<b>时间戳与前视偏差</b>、另类数据</td></tr>
+        <tr><td class="week">Part 3</td><td>时间序列建模：三要素、<b>平稳性</b>、白噪声与 ACF、MA、AR、ARMA 识别、<b>ACF/PACF</b>、<b>ARIMA 五步</b>、预测、趋势模型、<b>随机游走</b>、<b>ADF 与伪回归</b>、季节性</td></tr>
+        <tr><td class="week">Part 4</td><td>波动率、状态与因子：波动率为何重要、三个典型事实、<b>GARCH(1,1)</b>、已实现波动率、状态切换、VAR、<b>协整与配对价差</b>、CAPM、多因子、alpha 衰减、<b>因子暴露</b></td></tr>
+        <tr><td class="week">Part 5</td><td>组合、交易与回测：<b>均值—方差与有效前沿</b>、风险预算、信号到仓位、<b>交易成本与容量</b>、回测五件事、<b>诚实的回测器</b>、<b>净值与回撤</b>、业绩评价、<b>七个陷阱</b>、事件研究</td></tr>
+        <tr><td class="week">Part 6</td><td>文本、信用与 2026：<b>文本情绪</b>、PD/LGD/EAD、<b>违约预测与贡献分解</b>、<b>评分卡与通过率</b>、<b>反欺诈为何是图</b>、<b>GNN 反欺诈</b>、<b>LLM 与 RAG</b>、<b>Deflated Sharpe</b>、<b>模型治理</b>、常见错误</td></tr>
+        <tr><td class="week">Part 7</td><td>工具、术语与结语：工具栈、<b>术语表两帧（82 条）</b>、参考资料、一页纸回顾、结语</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（15 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>债券定价与久期</b>：现金流贴现、YTM、数值久期（<code>l13_01</code>）；</li>
+      <li><b>BS 与隐含波动率</b>：数值求根反解 IV（<code>l13_02</code>）；</li>
+      <li><b>数据抓取与清洗</b>：复权、缺失、跳空、时区（<code>l13_01</code>）；</li>
+      <li><b>ACF/PACF</b>：三种过程的识别（<code>l13_02</code>）；</li>
+      <li><b>ARIMA</b>：定阶、估计、Ljung-Box 诊断（<code>l13_02</code>）；</li>
+      <li><b>ADF 与伪回归</b>：价格/差分/收益三种检验（<code>l13_03</code>）；</li>
+      <li><b>GARCH(1,1)</b>：scipy 手写极大似然、持续性与半衰期（<code>l13_04</code>）；</li>
+      <li><b>VAR 与协整</b>：Engle-Granger 两步法、配对价差（<code>l13_05</code>）；</li>
+      <li><b>因子回归</b>：alpha/beta 与暴露（<code>l13_06</code>）；</li>
+      <li><b>有效前沿</b>：scipy 二次规划、约束（<code>l13_06</code>）；</li>
+      <li><b>诚实的回测器</b>：shift、成本、回撤（<code>l13_07</code>）；</li>
+      <li><b>违约预测</b>：逻辑回归、贡献分解、评分卡（<code>l13_08</code>）；</li>
+      <li><b>GNN 反欺诈</b>：numpy 消息传递与预算召回（<code>l13_09</code>）；</li>
+      <li><b>RAG 财报解析</b>：检索、作答、引用校验（<code>l13_10</code>）；</li>
+      <li><b>Deflated Sharpe</b>：多重检验修正（<code>l13_10</code>）。</li>
+    </ul>
+
+    <h3 id="glossary13">术语表 Glossary（82 条中英对照）</h3>
+    <p class="note">按课件顺序分六组；每条含中文、English、符号与公式、一句话解释。
+       可下载 <a href="files/L13-glossary.docx">Word</a> / <a href="files/L13-glossary.xlsx">Excel</a>；
+       机器可读版本：<code>data/lecture13/l13_glossary.csv</code>。
+       跨讲复习见 <a href="files/Glossary-L6-L10.docx">L6–L10 合并术语表（381 条）</a>，本讲单独成表。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>中文</th><th>English</th><th>符号 / 公式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、金融资产与数据类型 Assets</td></tr>
+<tr><td class="lec">资产类别</td><td><span lang="en">asset class</span></td><td class="num"></td><td>股票/债券/衍生品/另类</td></tr>
+<tr><td class="lec">固定收益</td><td><span lang="en">fixed income</span></td><td class="num"></td><td>现金流确定的资产</td></tr>
+<tr><td class="lec">到期收益率</td><td><span lang="en">yield to maturity (YTM)</span></td><td class="num">$y$</td><td>使现值等于价格的贴现率</td></tr>
+<tr><td class="lec">久期</td><td><span lang="en">duration</span></td><td class="num">$D$ $-\frac{1}{P}\frac{\partial P}{\partial y}$</td><td>价格对利率的敏感度</td></tr>
+<tr><td class="lec">凸性</td><td><span lang="en">convexity</span></td><td class="num"></td><td>久期本身也随利率变化</td></tr>
+<tr><td class="lec">收益率曲线</td><td><span lang="en">yield curve</span></td><td class="num"></td><td>不同期限的收益率</td></tr>
+<tr><td class="lec">倒挂</td><td><span lang="en">inverted yield curve</span></td><td class="num"></td><td>短端高于长端，常被视为衰退信号</td></tr>
+<tr><td class="lec">总回报</td><td><span lang="en">total return</span></td><td class="num"></td><td>含分红与拆股的收益</td></tr>
+<tr><td class="lec">对数收益率</td><td><span lang="en">log return</span></td><td class="num">$r_t=\ln(P_t/P_{t-1})$</td><td>可加、近似百分比</td></tr>
+<tr><td class="lec">厚尾</td><td><span lang="en">fat tails</span></td><td class="num"></td><td>极端值比正态多</td></tr>
+<tr><td class="lec">峰度</td><td><span lang="en">kurtosis</span></td><td class="num"></td><td>尾部厚薄的度量</td></tr>
+<tr><td class="lec">远期</td><td><span lang="en">forward</span></td><td class="num"></td><td>场外约定未来交割</td></tr>
+<tr><td class="lec">期货</td><td><span lang="en">futures</span></td><td class="num"></td><td>交易所标准化合约，逐日盯市</td></tr>
+<tr><td class="lec">期权</td><td><span lang="en">option</span></td><td class="num"></td><td>买方有权利无义务</td></tr>
+<tr><td class="lec">隐含波动率</td><td><span lang="en">implied volatility</span></td><td class="num">$\sigma_{IV}$</td><td>由期权价格反解的波动率</td></tr>
+<tr><td class="lec">波动率微笑</td><td><span lang="en">volatility smile</span></td><td class="num"></td><td>IV 随行权价呈 U 形</td></tr>
+<tr><td class="lec">另类投资</td><td><span lang="en">alternative investment</span></td><td class="num"></td><td>私募、房地产、大宗商品</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、数据来源与获取 Data</td></tr>
+<tr><td class="lec">复权</td><td><span lang="en">adjusted price</span></td><td class="num"></td><td>剔除分红与拆股影响的连续价格</td></tr>
+<tr><td class="lec">时间戳对齐</td><td><span lang="en">timestamp alignment</span></td><td class="num"></td><td>跨市场对齐，避免未来信息</td></tr>
+<tr><td class="lec">前视偏差</td><td><span lang="en">look-ahead bias</span></td><td class="num"></td><td>用了当时还拿不到的信息</td></tr>
+<tr><td class="lec">幸存者偏差</td><td><span lang="en">survivorship bias</span></td><td class="num"></td><td>只用活下来的样本</td></tr>
+<tr><td class="lec">另类数据</td><td><span lang="en">alternative data</span></td><td class="num"></td><td>卫星、信用卡、招聘等</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、时间序列建模 Time Series</td></tr>
+<tr><td class="lec">平稳性</td><td><span lang="en">stationarity</span></td><td class="num"></td><td>均值方差不随时间变</td></tr>
+<tr><td class="lec">白噪声</td><td><span lang="en">white noise</span></td><td class="num"></td><td>无自相关的随机序列</td></tr>
+<tr><td class="lec">自相关</td><td><span lang="en">autocorrelation</span></td><td class="num">$\rho_k$</td><td>序列与自身滞后项的相关</td></tr>
+<tr><td class="lec">ACF</td><td><span lang="en">autocorrelation function</span></td><td class="num"></td><td>自相关随滞后的曲线</td></tr>
+<tr><td class="lec">PACF</td><td><span lang="en">partial autocorrelation function</span></td><td class="num"></td><td>剔除中间滞后后的相关</td></tr>
+<tr><td class="lec">移动平均过程</td><td><span lang="en">moving average process</span></td><td class="num">MA(q)</td><td>当前值由过去的冲击决定</td></tr>
+<tr><td class="lec">自回归过程</td><td><span lang="en">autoregressive process</span></td><td class="num">AR(p)</td><td>当前值由过去的值决定</td></tr>
+<tr><td class="lec">ARIMA</td><td><span lang="en">ARIMA(p,d,q)</span></td><td class="num"></td><td>差分后的 ARMA 模型</td></tr>
+<tr><td class="lec">AIC/BIC</td><td><span lang="en">information criteria</span></td><td class="num"></td><td>兼顾拟合与复杂度的模型选择</td></tr>
+<tr><td class="lec">趋势模型</td><td><span lang="en">trend model</span></td><td class="num"></td><td>确定性时间趋势</td></tr>
+<tr><td class="lec">随机游走</td><td><span lang="en">random walk</span></td><td class="num"></td><td>差分是白噪声，方差随时间线性增长</td></tr>
+<tr><td class="lec">单位根</td><td><span lang="en">unit root</span></td><td class="num"></td><td>非平稳的一种，AR 系数为 1</td></tr>
+<tr><td class="lec">ADF 检验</td><td><span lang="en">augmented Dickey-Fuller test</span></td><td class="num"></td><td>检验是否存在单位根</td></tr>
+<tr><td class="lec">差分</td><td><span lang="en">differencing</span></td><td class="num"></td><td>用变化量代替水平值</td></tr>
+<tr><td class="lec">季节性</td><td><span lang="en">seasonality</span></td><td class="num"></td><td>固定周期的波动</td></tr>
+<tr><td class="lec">STL 分解</td><td><span lang="en">STL decomposition</span></td><td class="num"></td><td>趋势-季节-残差分解</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、波动率、状态与因子 Risk</td></tr>
+<tr><td class="lec">GARCH</td><td><span lang="en">GARCH(1,1)</span></td><td class="num">$\sigma_t^2=\omega+\alpha r_{t-1}^2+\beta\sigma_{t-1}^2$</td><td>波动率聚类模型</td></tr>
+<tr><td class="lec">波动聚集</td><td><span lang="en">volatility clustering</span></td><td class="num"></td><td>大波动后跟大波动</td></tr>
+<tr><td class="lec">持续性</td><td><span lang="en">persistence</span></td><td class="num">$\alpha+\beta$</td><td>波动冲击的持久程度</td></tr>
+<tr><td class="lec">半衰期</td><td><span lang="en">half-life</span></td><td class="num">$\ln 0.5/\ln(\alpha+\beta)$</td><td>冲击衰减一半所需时间</td></tr>
+<tr><td class="lec">已实现波动率</td><td><span lang="en">realised volatility</span></td><td class="num"></td><td>用高频收益平方和估计</td></tr>
+<tr><td class="lec">状态切换</td><td><span lang="en">regime switching</span></td><td class="num"></td><td>牛市/熊市两状态模型</td></tr>
+<tr><td class="lec">VAR</td><td><span lang="en">vector autoregression</span></td><td class="num"></td><td>多变量自回归</td></tr>
+<tr><td class="lec">协整</td><td><span lang="en">cointegration</span></td><td class="num"></td><td>非平稳序列的长期均衡关系</td></tr>
+<tr><td class="lec">配对交易</td><td><span lang="en">pairs trading</span></td><td class="num"></td><td>用价差均值回复做多空</td></tr>
+<tr><td class="lec">CAPM</td><td><span lang="en">capital asset pricing model</span></td><td class="num"></td><td>单因子资产定价</td></tr>
+<tr><td class="lec">alpha</td><td><span lang="en">alpha</span></td><td class="num">$\alpha$</td><td>超出风险补偿的收益</td></tr>
+<tr><td class="lec">beta</td><td><span lang="en">beta</span></td><td class="num">$\beta$</td><td>对市场因子的暴露</td></tr>
+<tr><td class="lec">因子模型</td><td><span lang="en">factor model</span></td><td class="num"></td><td>多因子解释收益</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、组合、交易与回测 Portfolio</td></tr>
+<tr><td class="lec">有效前沿</td><td><span lang="en">efficient frontier</span></td><td class="num"></td><td>给定风险的最高收益组合</td></tr>
+<tr><td class="lec">均值—方差</td><td><span lang="en">mean-variance</span></td><td class="num"></td><td>Markowitz 的二次规划</td></tr>
+<tr><td class="lec">风险平价</td><td><span lang="en">risk parity</span></td><td class="num"></td><td>让每个资产的-risk贡献相等</td></tr>
+<tr><td class="lec">换手率</td><td><span lang="en">turnover</span></td><td class="num"></td><td>组合权重的日变化</td></tr>
+<tr><td class="lec">滑点</td><td><span lang="en">slippage</span></td><td class="num"></td><td>成交价与预期价的差</td></tr>
+<tr><td class="lec">回测</td><td><span lang="en">backtest</span></td><td class="num"></td><td>用历史数据模拟策略</td></tr>
+<tr><td class="lec">Sharpe 比率</td><td><span lang="en">Sharpe ratio</span></td><td class="num">$\frac{\mu-r_f}{\sigma}$</td><td>单位风险的超额收益</td></tr>
+<tr><td class="lec">Sortino 比率</td><td><span lang="en">Sortino ratio</span></td><td class="num"></td><td>只用下行风险做分母</td></tr>
+<tr><td class="lec">最大回撤</td><td><span lang="en">maximum drawdown</span></td><td class="num"></td><td>从峰值到谷底的最大跌幅</td></tr>
+<tr><td class="lec">回测过拟合</td><td><span lang="en">backtest overfitting</span></td><td class="num"></td><td>试太多次后挑出的最优结果不可信</td></tr>
+<tr><td class="lec">Deflated Sharpe</td><td><span lang="en">deflated Sharpe ratio</span></td><td class="num"></td><td>对多重试验做修正的 Sharpe</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、文本、信用与 2026 Risk Control</td></tr>
+<tr><td class="lec">情绪因子</td><td><span lang="en">sentiment factor</span></td><td class="num"></td><td>用文本情绪构造的信号</td></tr>
+<tr><td class="lec">信用风险</td><td><span lang="en">credit risk</span></td><td class="num"></td><td>对手方不履约的风险</td></tr>
+<tr><td class="lec">违约概率</td><td><span lang="en">probability of default (PD)</span></td><td class="num"></td><td>一年内违约的概率</td></tr>
+<tr><td class="lec">LGD</td><td><span lang="en">loss given default</span></td><td class="num"></td><td>违约后的损失比例</td></tr>
+<tr><td class="lec">评分卡</td><td><span lang="en">scorecard</span></td><td class="num"></td><td>把概率映射成分数</td></tr>
+<tr><td class="lec">可解释性</td><td><span lang="en">interpretability</span></td><td class="num"></td><td>能说清为什么给这个分</td></tr>
+<tr><td class="lec">反欺诈</td><td><span lang="en">fraud detection</span></td><td class="num"></td><td>识别团伙与异常交易</td></tr>
+<tr><td class="lec">图神经网络</td><td><span lang="en">graph neural network (GNN)</span></td><td class="num"></td><td>在关系图上做消息传递</td></tr>
+<tr><td class="lec">消息传递</td><td><span lang="en">message passing</span></td><td class="num">$h_i=\phi(Wx_i+\sum_j h_j)$</td><td>聚合邻居信息</td></tr>
+<tr><td class="lec">检索增强生成</td><td><span lang="en">retrieval-augmented generation (RAG)</span></td><td class="num"></td><td>先检索再生成，带引用</td></tr>
+<tr><td class="lec">引用溯源</td><td><span lang="en">citation tracing</span></td><td class="num"></td><td>答案标注来源</td></tr>
+<tr><td class="lec">模型治理</td><td><span lang="en">model governance</span></td><td class="num"></td><td>模型卡、监控、漂移与审计</td></tr>
+<tr><td class="lec">概念漂移</td><td><span lang="en">concept drift</span></td><td class="num"></td><td>数据分布随时间变化</td></tr>
+<tr><td class="lec">信噪比</td><td><span lang="en">signal-to-noise ratio</span></td><td class="num"></td><td>金融数据里通常极低</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、组合、交易与回测 Portfolio</td></tr>
+<tr><td class="lec">交易成本</td><td><span lang="en">transaction cost</span></td><td class="num"></td><td>佣金、价差、冲击成本</td></tr>
+<tr><td class="lec">容量</td><td><span lang="en">capacity</span></td><td class="num"></td><td>策略能容纳的资金规模</td></tr>
+<tr><td class="lec">风格漂移</td><td><span lang="en">style drift</span></td><td class="num"></td><td>组合的风险暴露悄悄改变</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、波动率、状态与因子 Risk</td></tr>
+<tr><td class="lec">CVaR</td><td><span lang="en">conditional value at risk</span></td><td class="num"></td><td>尾部平均损失</td></tr>
+<tr><td class="lec">在险价值</td><td><span lang="en">value at risk (VaR)</span></td><td class="num"></td><td>给定置信度的最大损失</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、文本、信用与 2026 Risk Control</td></tr>
+<tr><td class="lec">压力测试</td><td><span lang="en">stress testing</span></td><td class="num"></td><td>极端情景下的损失</td></tr>
+</tbody></table></div>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L13-finance.pdf" title="Lecture 13 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
+          <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
+          <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
+          <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
+          <li><a href="lecture-13.html">第十三章课件（Lecture 13 Big Data in Finance）</a></li>
+          <li><a href="lecture-14.html">第十四章课件（Lecture 14 Big Data in International Trade）</a></li>
+          <li><a href="lecture-15.html">第十五章课件（Lecture 15 Big Data in Marketing）</a></li>
+          <li><a href="projects.html">课程项目指南与评分规则</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.docx">项目指南 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.pdf">项目指南 PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>
