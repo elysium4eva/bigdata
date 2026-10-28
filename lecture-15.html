@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 15 Big Data in Marketing · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="projects.html">课程项目</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第十五章</p>
+    <h1 class="doc-title">Lecture 15　Big Data in Marketing</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L15-marketing.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-ghost" href="files/L15-glossary.docx">术语表 Word</a>
+      <a class="btn btn-ghost" href="files/L15-glossary.xlsx">术语表 Excel</a>
+      <a class="btn btn-ghost" href="code.html#lecture15">样本、程序与术语表</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>14</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>85</strong> 条中英对照</div></div>
+    </div>
+    <p class="note">本讲讲的是<b>一条链</b>：<b>属性 → 价值 → 选择 → 反应 → 客户价值</b>，最后用实验验证这条链。
+       测量（构念、量表、信度效度）→ 选择（联合分析、条件 logit、IIA）→ 反应（hedonic、响应曲线、adstock）→
+       客户（点击流、RFM、旅程、四种归因、隐私约束）→ 推荐与定价（矩阵分解与 ALS、价格弹性、最优定价、促销）→
+       价值与实验（流失与期望损失、CLV 与折现、A/B 与功效、CUPED、增量与 MMM）→ 2026（生成式内容、品牌安全、对话式商务、多模态）。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L1–L10 的衔接、输出物、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>营销数据与测量：四类营销问题、五类数据源、<b>构念→题项</b>、题项类型与措辞陷阱、抽样与样本量、<b>模式效应</b>、<b>信度（α）</b>、<b>五种效度</b>、测量误差与共同方法偏差、非响应与加权、误差链</td></tr>
+        <tr><td class="week">Part 2</td><td>联合分析与离散选择：conjoint 的取舍逻辑、<b>四步设计</b>、设计类型、<b>效应编码与 part-worth</b>、个体层与 HB、<b>随机效用与 logit 推导</b>、二元/多项 logit、<b>IIA 与红蓝巴士</b>、嵌套与混合 logit、<b>新能源车政策例子</b>、选择集设计</td></tr>
+        <tr><td class="week">Part 3</td><td>特征价格与响应模型：hedonic 隐含价格、<b>半弹性</b>、分位数回归、三个用途、<b>响应模型四种形式</b>、<b>adstock</b>、促销基线与增量、三模型统一视角</td></tr>
+        <tr><td class="week">Part 4</td><td>消费者数据与归因：<b>点击流结构</b>、<b>RFM</b>、旅程五阶段、<b>四种归因规则</b>、末次点击偏差、<b>Shapley 与马尔可夫归因</b>、<b>cookie 退场</b>、身份解析与 PET</td></tr>
+        <tr><td class="week">Part 5</td><td>推荐、定价与促销：precision@k 与 NDCG、协同过滤、<b>矩阵分解与 ALS</b>、冷启动、深度/序列推荐、<b>价格弹性</b>、<b>最优定价</b>、促销三工具、价格歧视与合规</td></tr>
+        <tr><td class="week">Part 6</td><td>流失、CLV 与实验：流失定义与窗口、<b>期望损失阈值</b>、CLV 三种算法、<b>留存曲线+折现</b>、价值×流失矩阵、<b>A/B 设计</b>、<b>功效与 CUPED</b>、增量与 uplift、<b>MMM</b>、2026 四件事</td></tr>
+        <tr><td class="week">Part 7</td><td>工具、术语与结语：工具栈、合规清单、常见错误 Top 10、项目衔接、<b>术语表两帧（85 条）</b>、参考资料、一页纸回顾、自检十问</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>信度与效度</b>：Cronbach α、EFA 载荷、区分效度（<code>l15_01</code>）；</li>
+      <li><b>联合分析</b>：平衡设计、效应编码、part-worth 与重要性（<code>l15_02</code>）；</li>
+      <li><b>条件 logit</b>：极大似然、数值 Hessian 标准误、IIA 演示（<code>l15_03</code>）；</li>
+      <li><b>hedonic 与响应</b>：OLS + 稳健标准误 + 分位数回归 + adstock（<code>l15_04</code>）；</li>
+      <li><b>漏斗与归因</b>：会话漏斗、四种归因规则（<code>l15_05</code>）；</li>
+      <li><b>矩阵分解</b>：numpy 手写 ALS + precision@k + 冷启动（<code>l15_06</code>）；</li>
+      <li><b>价格弹性</b>：对数-对数回归 + 利润最大化 + 促销分解（<code>l15_07</code>）；</li>
+      <li><b>流失</b>：逻辑回归/GBDT + 期望损失阈值（<code>l15_08</code>）；</li>
+      <li><b>CLV</b>：留存曲线 + 折现 + 分层（<code>l15_09</code>）；</li>
+      <li><b>A/B 与功效</b>：两比例检验 + 功效曲线 + CUPED（<code>l15_10</code>）。</li>
+    </ul>
+
+    <h3 id="glossary15">术语表 Glossary（85 条中英对照）</h3>
+    <p class="note">按课件顺序分六组；每条含中文、English、符号与公式、一句话解释。
+       可下载 <a href="files/L15-glossary.docx">Word</a> / <a href="files/L15-glossary.xlsx">Excel</a>；
+       机器可读版本：<code>data/lecture15/l15_glossary.csv</code>。
+       跨讲复习见 <a href="files/Glossary-L6-L10.docx">L6–L10 合并术语表（381 条）</a>，本讲单独成表。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>中文</th><th>English</th><th>符号 / 公式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、营销数据与测量 Measurement</td></tr>
+<tr><td class="lec">构念</td><td><span lang="en">construct</span></td><td class="num"></td><td>要测但不可直接观测的概念</td></tr>
+<tr><td class="lec">操作化</td><td><span lang="en">operationalisation</span></td><td class="num"></td><td>把构念变成可测量的题项</td></tr>
+<tr><td class="lec">李克特量表</td><td><span lang="en">Likert scale</span></td><td class="num"></td><td>1-5 或 1-7 的同意程度</td></tr>
+<tr><td class="lec">信度</td><td><span lang="en">reliability</span></td><td class="num"></td><td>重复测量的一致性</td></tr>
+<tr><td class="lec">克隆巴赫 α</td><td><span lang="en">Cronbach's alpha</span></td><td class="num">$\alpha$ $\frac{k}{k-1}(1-\frac{\sum\sigma_i^2}{\sigma_T^2})$</td><td>内部一致性系数</td></tr>
+<tr><td class="lec">效度</td><td><span lang="en">validity</span></td><td class="num"></td><td>测到的确实是构念</td></tr>
+<tr><td class="lec">内容效度</td><td><span lang="en">content validity</span></td><td class="num"></td><td>题项覆盖构念的全部维度</td></tr>
+<tr><td class="lec">收敛效度</td><td><span lang="en">convergent validity</span></td><td class="num"></td><td>同构念的不同测量应高度相关</td></tr>
+<tr><td class="lec">区分效度</td><td><span lang="en">discriminant validity</span></td><td class="num"></td><td>不同构念的测量应低相关</td></tr>
+<tr><td class="lec">探索性因子分析</td><td><span lang="en">exploratory factor analysis (EFA)</span></td><td class="num"></td><td>用降维找潜在维度</td></tr>
+<tr><td class="lec">抽样框</td><td><span lang="en">sampling frame</span></td><td class="num"></td><td>抽样的名单</td></tr>
+<tr><td class="lec">分层抽样</td><td><span lang="en">stratified sampling</span></td><td class="num"></td><td>按层分别抽样再合并</td></tr>
+<tr><td class="lec">配额抽样</td><td><span lang="en">quota sampling</span></td><td class="num"></td><td>按比例凑样本，非概率</td></tr>
+<tr><td class="lec">无回答偏差</td><td><span lang="en">non-response bias</span></td><td class="num"></td><td>回答者与不回答者系统不同</td></tr>
+<tr><td class="lec">模式效应</td><td><span lang="en">mode effect</span></td><td class="num"></td><td>访问方式改变答案分布</td></tr>
+<tr><td class="lec">共同方法偏差</td><td><span lang="en">common method bias</span></td><td class="num"></td><td>同一测量方式带来的系统性偏差</td></tr>
+<tr><td class="lec">测量误差</td><td><span lang="en">measurement error</span></td><td class="num"></td><td>观测值 = 真值 + 误差</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、联合分析与离散选择 Choice</td></tr>
+<tr><td class="lec">联合分析</td><td><span lang="en">conjoint analysis</span></td><td class="num"></td><td>评价属性组合而非单个属性</td></tr>
+<tr><td class="lec">属性</td><td><span lang="en">attribute</span></td><td class="num"></td><td>产品的可比较维度</td></tr>
+<tr><td class="lec">水平</td><td><span lang="en">level</span></td><td class="num"></td><td>属性的具体取值</td></tr>
+<tr><td class="lec">正交设计</td><td><span lang="en">orthogonal design</span></td><td class="num"></td><td>各属性水平不相关，减少轮廓数</td></tr>
+<tr><td class="lec">部分因子设计</td><td><span lang="en">fractional factorial design</span></td><td class="num"></td><td>只取全因子的一部分</td></tr>
+<tr><td class="lec">D-最优设计</td><td><span lang="en">D-optimal design</span></td><td class="num"></td><td>按信息矩阵优化设计</td></tr>
+<tr><td class="lec">效用</td><td><span lang="en">utility (part-worth)</span></td><td class="num">$u_{jl}$</td><td>某一属性水平的边际价值</td></tr>
+<tr><td class="lec">属性重要性</td><td><span lang="en">attribute importance</span></td><td class="num">$\frac{\max u-\min u}{\sum(\max u-\min u)}$</td><td>效用极差占比</td></tr>
+<tr><td class="lec">离散选择模型</td><td><span lang="en">discrete choice model</span></td><td class="num"></td><td>在有限方案中选择</td></tr>
+<tr><td class="lec">随机效用</td><td><span lang="en">random utility</span></td><td class="num">$U=V+\varepsilon$</td><td>可观测效用加随机项</td></tr>
+<tr><td class="lec">logit 模型</td><td><span lang="en">logit model</span></td><td class="num">$P_j=\frac{e^{V_j}}{\sum_k e^{V_k}}$</td><td>Gumbel 误差下的闭式解</td></tr>
+<tr><td class="lec">probit 模型</td><td><span lang="en">probit model</span></td><td class="num"></td><td>正态误差下的选择模型</td></tr>
+<tr><td class="lec">无关选项独立性</td><td><span lang="en">independence of irrelevant alternatives (IIA)</span></td><td class="num"></td><td>加入新选项按比例分走份额</td></tr>
+<tr><td class="lec">嵌套 logit</td><td><span lang="en">nested logit</span></td><td class="num"></td><td>允许组内相关的方法</td></tr>
+<tr><td class="lec">混合 logit</td><td><span lang="en">mixed logit</span></td><td class="num"></td><td>随机系数的 logit</td></tr>
+<tr><td class="lec">选择集</td><td><span lang="en">choice set</span></td><td class="num"></td><td>消费者实际考虑的方案集合</td></tr>
+<tr><td class="lec">边际效应</td><td><span lang="en">marginal effect</span></td><td class="num">$\partial P_j/\partial x$</td><td>某属性变化对概率的影响</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、特征价格与响应模型 Response</td></tr>
+<tr><td class="lec">特征价格</td><td><span lang="en">hedonic pricing</span></td><td class="num">$\ln p=\beta_0+\sum\beta_kx_k$</td><td>把价格拆成属性价值</td></tr>
+<tr><td class="lec">半弹性</td><td><span lang="en">semi-elasticity</span></td><td class="num">$e^{\beta}-1$</td><td>对数-线性模型里属性的百分比影响</td></tr>
+<tr><td class="lec">分位数回归</td><td><span lang="en">quantile regression</span></td><td class="num"></td><td>看不同价位上的属性价值</td></tr>
+<tr><td class="lec">响应模型</td><td><span lang="en">response model</span></td><td class="num"></td><td>营销投入与销量的关系</td></tr>
+<tr><td class="lec">饱和效应</td><td><span lang="en">saturation</span></td><td class="num"></td><td>投入越多边际效果越小</td></tr>
+<tr><td class="lec">adstock</td><td><span lang="en">adstock</span></td><td class="num">$A_t=S_t+\lambda A_{t-1}$</td><td>广告的滞后与衰减</td></tr>
+<tr><td class="lec">结转率</td><td><span lang="en">carryover rate</span></td><td class="num">$\lambda$</td><td>上一期效果的保留比例</td></tr>
+<tr><td class="lec">基线销量</td><td><span lang="en">baseline sales</span></td><td class="num"></td><td>没有营销活动时的销量</td></tr>
+<tr><td class="lec">增量</td><td><span lang="en">increment</span></td><td class="num"></td><td>活动带来的超出基线的部分</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、消费者数据与归因 Customer</td></tr>
+<tr><td class="lec">点击流</td><td><span lang="en">clickstream</span></td><td class="num"></td><td>用户在页面上的点击序列</td></tr>
+<tr><td class="lec">会话</td><td><span lang="en">session</span></td><td class="num"></td><td>一次连续访问</td></tr>
+<tr><td class="lec">漏斗</td><td><span lang="en">funnel</span></td><td class="num"></td><td>分阶段的转化路径</td></tr>
+<tr><td class="lec">转化率</td><td><span lang="en">conversion rate</span></td><td class="num"></td><td>完成目标行为的比例</td></tr>
+<tr><td class="lec">RFM</td><td><span lang="en">recency, frequency, monetary (RFM)</span></td><td class="num"></td><td>最近/频次/金额的客户打分</td></tr>
+<tr><td class="lec">客户旅程</td><td><span lang="en">customer journey</span></td><td class="num"></td><td>从认知到复购的全过程</td></tr>
+<tr><td class="lec">归因</td><td><span lang="en">attribution</span></td><td class="num"></td><td>把转化功劳分给各触点</td></tr>
+<tr><td class="lec">末次点击</td><td><span lang="en">last-click attribution</span></td><td class="num"></td><td>全部功劳给最后一次触点</td></tr>
+<tr><td class="lec">线性归因</td><td><span lang="en">linear attribution</span></td><td class="num"></td><td>各触点平分功劳</td></tr>
+<tr><td class="lec">时间衰减归因</td><td><span lang="en">time-decay attribution</span></td><td class="num"></td><td>越近的触点权重越高</td></tr>
+<tr><td class="lec">数据驱动归因</td><td><span lang="en">data-driven attribution</span></td><td class="num"></td><td>用模型分摊贡献</td></tr>
+<tr><td class="lec">夏普利值</td><td><span lang="en">Shapley value</span></td><td class="num"></td><td>博弈论的分摊方法</td></tr>
+<tr><td class="lec">马尔可夫归因</td><td><span lang="en">Markov attribution</span></td><td class="num"></td><td>用吸收态马尔可夫链分摊</td></tr>
+<tr><td class="lec">围墙花园</td><td><span lang="en">walled garden</span></td><td class="num"></td><td>平台内闭环、数据不外流</td></tr>
+<tr><td class="lec">身份解析</td><td><span lang="en">identity resolution</span></td><td class="num"></td><td>把多设备多来源的 ID 打通</td></tr>
+<tr><td class="lec">隐私增强技术</td><td><span lang="en">privacy-enhancing technology (PET)</span></td><td class="num"></td><td>差分隐私、联邦学习、可信执行环境</td></tr>
+<tr><td class="lec">一方数据</td><td><span lang="en">first-party data</span></td><td class="num"></td><td>企业自己收集的数据</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、推荐、定价与促销 Recommenders &amp; Pricing</td></tr>
+<tr><td class="lec">协同过滤</td><td><span lang="en">collaborative filtering</span></td><td class="num"></td><td>用相似用户/物品做推荐</td></tr>
+<tr><td class="lec">矩阵分解</td><td><span lang="en">matrix factorisation</span></td><td class="num">$R\approx UV^\top$</td><td>把评分矩阵拆成隐因子</td></tr>
+<tr><td class="lec">交替最小二乘</td><td><span lang="en">alternating least squares (ALS)</span></td><td class="num"></td><td>轮流固定一侧求解另一侧</td></tr>
+<tr><td class="lec">冷启动</td><td><span lang="en">cold start</span></td><td class="num"></td><td>新用户/新物品缺少历史</td></tr>
+<tr><td class="lec">精确率@k</td><td><span lang="en">precision@k</span></td><td class="num"></td><td>前 k 个推荐里命中的比例</td></tr>
+<tr><td class="lec">NDCG</td><td><span lang="en">normalised discounted cumulative gain</span></td><td class="num"></td><td>考虑排序位置的命中质量</td></tr>
+<tr><td class="lec">双塔模型</td><td><span lang="en">two-tower model</span></td><td class="num"></td><td>用户塔与物品塔分别编码</td></tr>
+<tr><td class="lec">价格弹性</td><td><span lang="en">price elasticity</span></td><td class="num">$\varepsilon$ $\frac{\partial\ln q}{\partial\ln p}$</td><td>价格变动 1% 时需求变动的百分比</td></tr>
+<tr><td class="lec">交叉弹性</td><td><span lang="en">cross-price elasticity</span></td><td class="num"></td><td>另一商品价格变化的影响</td></tr>
+<tr><td class="lec">加成定价</td><td><span lang="en">markup pricing</span></td><td class="num">$p^*=\frac{c\varepsilon}{1+\varepsilon}$</td><td>由弹性推出的最优价</td></tr>
+<tr><td class="lec">边际成本</td><td><span lang="en">marginal cost</span></td><td class="num">$c$</td><td>多卖一件增加的成本</td></tr>
+<tr><td class="lec">促销增量</td><td><span lang="en">promotion uplift</span></td><td class="num"></td><td>促销带来的额外销量</td></tr>
+<tr><td class="lec">价格歧视</td><td><span lang="en">price discrimination</span></td><td class="num"></td><td>对不同人定不同价（有法律边界）</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、流失、CLV 与实验 Experiments</td></tr>
+<tr><td class="lec">流失</td><td><span lang="en">churn</span></td><td class="num"></td><td>客户停止使用或离开</td></tr>
+<tr><td class="lec">期望损失</td><td><span lang="en">expected loss</span></td><td class="num"></td><td>把概率换算成钱的决策准则</td></tr>
+<tr><td class="lec">客户终身价值</td><td><span lang="en">customer lifetime value (CLV)</span></td><td class="num">$\sum r^t s_t m_t$</td><td>折现后的未来贡献</td></tr>
+<tr><td class="lec">留存曲线</td><td><span lang="en">retention curve</span></td><td class="num">$s_t$</td><td>第 t 期仍留下的比例</td></tr>
+<tr><td class="lec">折现率</td><td><span lang="en">discount rate</span></td><td class="num">$r$</td><td>未来一块钱折成现在的价值</td></tr>
+<tr><td class="lec">A/B 实验</td><td><span lang="en">A/B test</span></td><td class="num"></td><td>随机分组的对照实验</td></tr>
+<tr><td class="lec">统计功效</td><td><span lang="en">statistical power</span></td><td class="num"></td><td>真有效应时能检出的概率</td></tr>
+<tr><td class="lec">最小可检测效应</td><td><span lang="en">minimum detectable effect (MDE)</span></td><td class="num"></td><td>给定样本量能稳定检出的最小差异</td></tr>
+<tr><td class="lec">CUPED</td><td><span lang="en">controlled-experiment using pre-experiment data</span></td><td class="num"></td><td>用前期协变量降方差</td></tr>
+<tr><td class="lec">增量实验</td><td><span lang="en">incrementality test</span></td><td class="num"></td><td>测广告带来的真实增量</td></tr>
+<tr><td class="lec">提升模型</td><td><span lang="en">uplift model</span></td><td class="num"></td><td>估计个体层面的处理效应</td></tr>
+<tr><td class="lec">营销组合模型</td><td><span lang="en">marketing mix model (MMM)</span></td><td class="num"></td><td>用回归分解各渠道贡献</td></tr>
+</tbody></table></div>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L15-marketing.pdf" title="Lecture 15 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
+          <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
+          <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
+          <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
+          <li><a href="lecture-15.html">第十五章课件（Lecture 15 Big Data in Marketing）</a></li>
+          <li><a href="projects.html">课程项目指南与评分规则</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.docx">项目指南 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.pdf">项目指南 PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

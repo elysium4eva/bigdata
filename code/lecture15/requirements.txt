@@ -1,0 +1,7 @@
+numpy>=1.24          # arrays and the hand-written ALS / conditional logit
+pandas>=2.1          # tables and the glossary
+matplotlib>=3.7      # every static figure in the deck
+scipy>=1.10          # optimisation, distributions and the A/B test
+statsmodels>=0.14    # OLS, quantile regression and robust standard errors
+scikit-learn>=1.3    # PCA, logistic regression, gradient boosting, metrics
+pillow>=9.0          # image back end for matplotlib

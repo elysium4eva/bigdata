@@ -1,0 +1,4 @@
+﻿term,coef,se
+Intercept,10.169,0.6113
+log_price,-1.8418,0.1667
+promo,0.2964,0.0509
