@@ -52,6 +52,7 @@
       <a class="btn btn-primary" href="#lecture14">Lecture 14 · 国际贸易中的大数据</a>
       <a class="btn btn-primary" href="#lecture13">Lecture 13 · 金融中的大数据</a>
       <a class="btn btn-primary" href="#lecture12">Lecture 12 · 因果推断</a>
+      <a class="btn btn-primary" href="#lecture11">Lecture 11 · 大语言模型</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
       <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
@@ -1279,6 +1280,81 @@
 
 
 
+
+    <h3 id="lecture11">Lecture 11 · 大语言模型样本（11 个程序，全部离线可跑）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture11/requirements.txt</code> →
+       <code>cd code/lecture11 &amp;&amp; python run_all.py</code>；
+       数据写入 <code>data/lecture11/</code>，图片写入 <code>figures/lecture11/</code>。
+       <b>不需要 API Key、不需要联网</b>：<code>_common_l11.py</code> 里的 <code>LocalChatModel</code>
+       模仿 OpenAI 的消息结构，把 <code>model=</code> 换成真模型即接真实 API。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>帧</th><th>主题</th><th>程序</th><th>数据</th></tr></thead>
+      <tbody>
+        <tr><td class="num">12</td><td>GPT 谱系与缩放定律 Lineage and scaling</td><td><code>l11_01_tokenize.py</code></td><td><code>l11_gpt_lineage.csv</code> <code>l11_token_counts.csv</code></td></tr>
+        <tr><td class="num">19</td><td>温度与上下文窗口 Temperature and context</td><td><code>l11_02_temperature.py</code></td><td><code>l11_temperature.csv</code> <code>l11_next_token.csv</code></td></tr>
+        <tr><td class="num">27</td><td>四阶段流水线与 DPO</td><td><code>l11_03_dpo.py</code></td><td><code>l11_preference.csv</code> <code>l11_dpo_curve.csv</code></td></tr>
+        <tr><td class="num">32</td><td>测试时计算 Test-time compute</td><td><code>l11_03_dpo.py</code></td><td><code>l11_test_time.csv</code></td></tr>
+        <tr><td class="num">36</td><td>评测：同样的准确率</td><td><code>l11_04_eval.py</code></td><td><code>l11_eval.csv</code> <code>l11_eval_profiles.csv</code></td></tr>
+        <tr><td class="num">44</td><td>少样本、长文档与文案 A/B</td><td><code>l11_05_prompt.py</code></td><td><code>l11_fewshot.csv</code> <code>l11_longdoc.csv</code> <code>l11_copy_ab.csv</code></td></tr>
+        <tr><td class="num">49</td><td>写步骤 vs 多采样</td><td><code>l11_06_cot.py</code></td><td><code>l11_cot_detail.csv</code> <code>l11_selfconsistency.csv</code></td></tr>
+        <tr><td class="num">60</td><td>一次 Agent 轨迹 Agent trace</td><td><code>l11_07_tools.py</code></td><td><code>l11_agent_trace.csv</code></td></tr>
+        <tr><td class="num">67</td><td>检索质量决定回答</td><td><code>l11_08_rag.py</code></td><td><code>l11_rag_results.csv</code> <code>l11_rag_curve.csv</code></td></tr>
+        <tr><td class="num">70</td><td>两种检索与成本前沿</td><td><code>l11_09_hybrid.py</code></td><td><code>l11_retrieval_summary.csv</code> <code>l11_cost.csv</code></td></tr>
+        <tr><td class="num">85</td><td>成本与选型矩阵 Cost and model choice</td><td><code>l11_09_hybrid.py</code></td><td><code>l11_cost.csv</code> <code>l11_model_choice.csv</code></td></tr>
+        <tr><td class="num">92</td><td>护栏是权衡 Guardrail trade-off</td><td><code>l11_10_hallucination.py</code></td><td><code>l11_hallucination.csv</code> <code>l11_guardrail.csv</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 11 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_gpt_lineage.png"><img src="figures/lecture11/fig_gpt_lineage.png" alt="GPT 谱系与缩放定律 Lineage and scaling 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 12 帧 · GPT 谱系与缩放定律 Lineage and scaling · 程序 <a href="code/lecture11/l11_01_tokenize.py">l11_01_tokenize.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_context.png"><img src="figures/lecture11/fig_context.png" alt="温度与上下文窗口 Temperature and context 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 19 帧 · 温度与上下文窗口 Temperature and context · 程序 <a href="code/lecture11/l11_02_temperature.py">l11_02_temperature.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_rlhf.png"><img src="figures/lecture11/fig_rlhf.png" alt="四阶段流水线与 DPO 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 27 帧 · 四阶段流水线与 DPO · 程序 <a href="code/lecture11/l11_03_dpo.py">l11_03_dpo.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_test_time.png"><img src="figures/lecture11/fig_test_time.png" alt="测试时计算 Test-time compute 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 32 帧 · 测试时计算 Test-time compute · 程序 <a href="code/lecture11/l11_03_dpo.py">l11_03_dpo.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_eval.png"><img src="figures/lecture11/fig_eval.png" alt="评测：同样的准确率 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 36 帧 · 评测：同样的准确率 · 程序 <a href="code/lecture11/l11_04_eval.py">l11_04_eval.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_fewshot.png"><img src="figures/lecture11/fig_fewshot.png" alt="少样本、长文档与文案 A/B 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 44 帧 · 少样本、长文档与文案 A/B · 程序 <a href="code/lecture11/l11_05_prompt.py">l11_05_prompt.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_cot.png"><img src="figures/lecture11/fig_cot.png" alt="写步骤 vs 多采样 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 49 帧 · 写步骤 vs 多采样 · 程序 <a href="code/lecture11/l11_06_cot.py">l11_06_cot.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_agent.png"><img src="figures/lecture11/fig_agent.png" alt="一次 Agent 轨迹 Agent trace 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 60 帧 · 一次 Agent 轨迹 Agent trace · 程序 <a href="code/lecture11/l11_07_tools.py">l11_07_tools.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_rag_quality.png"><img src="figures/lecture11/fig_rag_quality.png" alt="检索质量决定回答 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 67 帧 · 检索质量决定回答 · 程序 <a href="code/lecture11/l11_08_rag.py">l11_08_rag.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_retrieval.png"><img src="figures/lecture11/fig_retrieval.png" alt="两种检索与成本前沿 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 70 帧 · 两种检索与成本前沿 · 程序 <a href="code/lecture11/l11_09_hybrid.py">l11_09_hybrid.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_cost.png"><img src="figures/lecture11/fig_cost.png" alt="成本与选型矩阵 Cost and model choice 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 85 帧 · 成本与选型矩阵 Cost and model choice · 程序 <a href="code/lecture11/l11_09_hybrid.py">l11_09_hybrid.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture11/fig_guardrail.png"><img src="figures/lecture11/fig_guardrail.png" alt="护栏是权衡 Guardrail trade-off 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 92 帧 · 护栏是权衡 Guardrail trade-off · 程序 <a href="code/lecture11/l11_10_hallucination.py">l11_10_hallucination.py</a></figcaption>
+      </figure>
+
     <h3 id="lecture12">Lecture 12 · 因果推断样本（11 个程序，逐行英文注释）</h3>
     <p class="note">运行方式：<code>pip install -r code/lecture12/requirements.txt</code> →
        <code>cd code/lecture12 &amp;&amp; python run_all.py</code>；
@@ -1514,8 +1590,12 @@ python run_all.py
 
 # 12) Lecture 12：因果推断样本（逐行英文注释）
 cd ../lecture12
+python run_all.py
+
+# 11) Lecture 11：大语言模型样本（离线可跑，无需 Key）
+cd ../lecture11
 python run_all.py</code></pre>
-    <p class="note">八个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909、L9 为 20261010、L10 为 20261111、L15 为 20261216、L14 为 20270113、L13 为 20270220、L12 为 20270301），
+    <p class="note">八个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909、L9 为 20261010、L10 为 20261111、L15 为 20261216、L14 为 20270113、L13 为 20270220、L12 为 20270301、L11 为 20270210），
        因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 5 的梯度提升同时使用 XGBoost 与 LightGBM；
        若未安装这两个包，程序会打印提示并跳过对应模型，其余流程不受影响。</p>
 
@@ -1544,7 +1624,10 @@ python run_all.py</code></pre>
           Lecture 13 的金融程序同样是<b>逐行英文注释</b>，术语见
           <a href="lecture-13.html#glossary13">Lecture 13 术语表（82 条）</a>；
           Lecture 12 的因果程序同样是<b>逐行英文注释</b>，术语见
-          <a href="lecture-12.html#glossary12">Lecture 12 术语表（84 条）</a>；</li>
+          <a href="lecture-12.html#glossary12">Lecture 12 术语表（84 条）</a>；
+          Lecture 11 的大模型程序<b>不需要 API Key</b>（本地 <code>LocalChatModel</code>），术语见
+          <a href="lecture-11.html#glossary11">Lecture 11 术语表（81 条）</a>；
+          全课合并版见 <a href="files/Glossary-L6-L15.docx">L6–L15 跨讲总表（797 条）</a>。</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -1575,6 +1658,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
           <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
           <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
+          <li><a href="lecture-11.html">第十一章课件（Lecture 11 ChatGPT and LLMs）</a></li>
           <li><a href="lecture-12.html">第十二章课件（Lecture 12 Causal Inference）</a></li>
           <li><a href="lecture-13.html">第十三章课件（Lecture 13 Big Data in Finance）</a></li>
           <li><a href="lecture-14.html">第十四章课件（Lecture 14 Big Data in International Trade）</a></li>

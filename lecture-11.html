@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 11 ChatGPT and LLMs · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="projects.html">课程项目</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第十一章</p>
+    <h1 class="doc-title">Lecture 11　Introduction to ChatGPT and Large Language Models</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L11-chatgpt-llm.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-ghost" href="files/L11-glossary.docx">术语表 Word</a>
+      <a class="btn btn-ghost" href="files/L11-glossary.xlsx">术语表 Excel</a>
+      <a class="btn btn-ghost" href="files/Glossary-L6-L15.docx">跨讲总表（797 条）</a>
+      <a class="btn btn-ghost" href="code.html#lecture11">样本、程序与术语表</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（离线可跑）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>12</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>81</strong> 条中英对照</div></div>
+    </div>
+    <p class="note"><b>本讲不用 API Key、不联网</b>：共享模块里的 <code>LocalChatModel</code> 模仿 OpenAI 的消息结构
+       （<code>messages</code>、<code>temperature</code>、<code>max_tokens</code>），内部是 n-gram 语言模型，
+       所以每一个例子都可离线复现，而且<b>概率是可看的</b>。把 <code>model=</code> 换成真模型即可接真实 API。</p>
+    <p class="note">一条主线：<b>词 → 概率 → 对齐 → 提示 → 工具 → 检索 → 应用 → 风险</b>。
+       <b>从词到概率</b>（分词、embedding、注意力、缩放定律、上下文窗口、温度与采样、幻觉的结构性原因）→
+       <b>训练与对齐</b>（SFT、RLHF、DPO、RLVR、推理模型与测试时计算、蒸馏、对齐税、评测与数据污染）→
+       <b>提示工程</b>（五要素、结构化输出与 schema 校验、少样本、CoT、自洽投票、反思、长文档、提示注入与防御）→
+       <b>工具·Agent·RAG</b>（函数调用、四件套、MCP、六步流水线、切分、混合检索、评测）→
+       <b>六个应用场景</b>（内容创作、写作办公、学术写作与引用校验、编程、电商文案、跨境电商）→
+       <b>风险与 2026</b>（三类幻觉、三层护栏、伦理与内容标识）。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、<b>本讲约定（不用 Key、不联网）</b>、路线图、输出物、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>它为什么能写：一句话原理、GPT 谱系、三层用户、<b>分词与 token</b>、词向量、Transformer 与 <b>注意力</b>、预训练、<b>上下文窗口</b>、温度与采样、<b>幻觉的结构性原因</b>、三条能力边界</td></tr>
+        <tr><td class="week">Part 2</td><td>训练与对齐：<b>SFT</b>、<b>RLHF</b>、<b>DPO</b>、<b>RLVR</b>、<b>推理模型与测试时计算</b>、蒸馏、对齐税、<b>评测</b>、数据污染、开源与闭源</td></tr>
+        <tr><td class="week">Part 3</td><td>提示工程：<b>五要素</b>、结构化输出与 <b>schema 校验</b>、少样本、<b>CoT</b>、<b>自洽投票</b>、反思、长文档三策略、<b>提示注入与防御</b>、四个反模式</td></tr>
+        <tr><td class="week">Part 4</td><td>工具·Agent·RAG：<b>函数调用与白名单</b>、<b>Agent 四件套</b>、工具设计原则、<b>MCP</b>、<b>RAG 六步</b>、切分、<b>混合检索</b>、多智能体、RAG 评测</td></tr>
+        <tr><td class="week">Part 5</td><td>六个应用场景：场景地图、内容创作流水线、写作与办公、<b>学术写作与引用校验</b>、编程的正确用法与三个风险、电商文案、跨境电商、<b>API 最小示例</b>、本地部署、<b>成本与选型</b>、AI 是放大器</td></tr>
+        <tr><td class="week">Part 6</td><td>风险与 2026：三类幻觉、<b>三层护栏</b>、自洽性与引用核验、<b>漏检与误拒的权衡</b>、伦理与内容标识、十个常见错误</td></tr>
+        <tr><td class="week">Part 7</td><td>工具、术语与结语：工具栈、<b>术语表两帧（81 条）</b>、参考资料、一页纸回顾、结语</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，全部离线可跑）Code Walkthroughs</h3>
+    <ul>
+      <li><b>分词与 token 计数</b>：中英对比 + 成本估算（<code>l11_01</code>）；</li>
+      <li><b>下一词分布与温度</b>：softmax、熵、top-p（<code>l11_02</code>）；</li>
+      <li><b>DPO 与 RLHF</b>：同一份偏好数据上的两种目标（<code>l11_03</code>）；</li>
+      <li><b>最小评测脚本</b>：准确率 / 拒答率 / 格式合规（<code>l11_04</code>）；</li>
+      <li><b>模板 + schema 校验</b>：生成 → 校验 → 重试（<code>l11_05</code>）；</li>
+      <li><b>三步模板与多数投票</b>：CoT 的真实收益与陷阱（<code>l11_06</code>）；</li>
+      <li><b>函数调用与白名单</b>：参数校验 + 注入拦截 + Agent 循环（<code>l11_07</code>）；</li>
+      <li><b>RAG 流水线</b>：切分、TF-IDF 检索、带引用的回答（<code>l11_08</code>）；</li>
+      <li><b>混合检索与成本</b>：关键词 + 向量、延迟-质量前沿（<code>l11_09</code>）；</li>
+      <li><b>幻觉检测</b>：自洽投票 + 引用核验 + 阈值权衡（<code>l11_10</code>）。</li>
+    </ul>
+
+    <h3 id="glossary11">术语表 Glossary（81 条中英对照）</h3>
+    <p class="note">按课件顺序分六组；每条含中文、English、符号与公式、一句话解释。
+       可下载 <a href="files/L11-glossary.docx">Word</a> / <a href="files/L11-glossary.xlsx">Excel</a>；
+       机器可读版本：<code>data/lecture11/l11_glossary.csv</code>。
+       全课合并版：<a href="files/Glossary-L6-L15.docx">L6–L15 跨讲总表（797 条，10 讲）</a>。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>中文</th><th>English</th><th>符号 / 公式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、它为什么能写 Principles</td></tr>
+<tr><td class="lec">大语言模型</td><td><span lang="en">large language model (LLM)</span></td><td class="num"></td><td>用海量文本训练的下一个词预测器</td></tr>
+<tr><td class="lec">token</td><td><span lang="en">token</span></td><td class="num"></td><td>模型处理的最小单位</td></tr>
+<tr><td class="lec">分词</td><td><span lang="en">tokenisation</span></td><td class="num"></td><td>把文本切成 token 的过程</td></tr>
+<tr><td class="lec">BPE</td><td><span lang="en">byte-pair encoding</span></td><td class="num"></td><td>常用子词切分算法</td></tr>
+<tr><td class="lec">词向量</td><td><span lang="en">embedding</span></td><td class="num">$e(w)\in\mathbb{R}^d$</td><td>把词映射成向量</td></tr>
+<tr><td class="lec">Transformer</td><td><span lang="en">transformer</span></td><td class="num"></td><td>靠注意力堆叠的序列模型</td></tr>
+<tr><td class="lec">注意力</td><td><span lang="en">attention</span></td><td class="num">$\mathrm{softmax}(QK^\top/\sqrt{d})V$</td><td>按相关性加权取信息</td></tr>
+<tr><td class="lec">logits</td><td><span lang="en">logits</span></td><td class="num"></td><td>softmax 之前的原始分数</td></tr>
+<tr><td class="lec">softmax</td><td><span lang="en">softmax</span></td><td class="num">$p_i=e^{z_i}/\sum_j e^{z_j}$</td><td>把分数变成概率</td></tr>
+<tr><td class="lec">温度</td><td><span lang="en">temperature</span></td><td class="num">$T$ $z_i/T$</td><td>越高越随机</td></tr>
+<tr><td class="lec">top-p 采样</td><td><span lang="en">nucleus sampling</span></td><td class="num"></td><td>只在累积概率 p 内采样</td></tr>
+<tr><td class="lec">上下文窗口</td><td><span lang="en">context window</span></td><td class="num"></td><td>模型一次能看到的 token 数</td></tr>
+<tr><td class="lec">预训练</td><td><span lang="en">pretraining</span></td><td class="num"></td><td>在海量文本上学下一个词</td></tr>
+<tr><td class="lec">缩放定律</td><td><span lang="en">scaling law</span></td><td class="num">$L\propto N^{-\alpha}$</td><td>loss 随规模幂律下降</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、提示工程 Prompting</td></tr>
+<tr><td class="lec">零样本</td><td><span lang="en">zero-shot</span></td><td class="num"></td><td>不给例子直接做</td></tr>
+<tr><td class="lec">少样本</td><td><span lang="en">few-shot</span></td><td class="num"></td><td>给几个例子再做</td></tr>
+<tr><td class="lec">提示工程</td><td><span lang="en">prompt engineering</span></td><td class="num"></td><td>把任务写清楚并给出格式</td></tr>
+<tr><td class="lec">系统提示</td><td><span lang="en">system prompt</span></td><td class="num"></td><td>设定角色与规则的前置指令</td></tr>
+<tr><td class="lec">结构化输出</td><td><span lang="en">structured output</span></td><td class="num"></td><td>要求 JSON/表格等固定格式</td></tr>
+<tr><td class="lec">思维链</td><td><span lang="en">chain-of-thought (CoT)</span></td><td class="num"></td><td>先写步骤再给结论</td></tr>
+<tr><td class="lec">自洽投票</td><td><span lang="en">self-consistency</span></td><td class="num"></td><td>多次采样取多数</td></tr>
+<tr><td class="lec">反思</td><td><span lang="en">reflexion</span></td><td class="num"></td><td>让模型检查并修改自己的输出</td></tr>
+<tr><td class="lec">提示注入</td><td><span lang="en">prompt injection</span></td><td class="num"></td><td>文档里的指令劫持模型</td></tr>
+<tr><td class="lec">角色扮演</td><td><span lang="en">role prompting</span></td><td class="num"></td><td>让模型扮演某个身份作答</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、训练与对齐 Alignment</td></tr>
+<tr><td class="lec">监督微调</td><td><span lang="en">supervised fine-tuning (SFT)</span></td><td class="num"></td><td>用示范答案教它照做</td></tr>
+<tr><td class="lec">人类反馈强化学习</td><td><span lang="en">RLHF</span></td><td class="num"></td><td>奖励模型 + 策略优化</td></tr>
+<tr><td class="lec">奖励模型</td><td><span lang="en">reward model</span></td><td class="num"></td><td>学人类偏好打分的模型</td></tr>
+<tr><td class="lec">PPO</td><td><span lang="en">proximal policy optimisation</span></td><td class="num"></td><td>常用的策略优化算法</td></tr>
+<tr><td class="lec">直接偏好优化</td><td><span lang="en">DPO</span></td><td class="num"></td><td>跳过奖励模型直接优化偏好</td></tr>
+<tr><td class="lec">可验证奖励</td><td><span lang="en">RLVR</span></td><td class="num"></td><td>用答案对错当奖励</td></tr>
+<tr><td class="lec">推理模型</td><td><span lang="en">reasoning model</span></td><td class="num"></td><td>先想再答的模型</td></tr>
+<tr><td class="lec">测试时计算</td><td><span lang="en">test-time compute</span></td><td class="num"></td><td>推理时多花算力</td></tr>
+<tr><td class="lec">蒸馏</td><td><span lang="en">distillation</span></td><td class="num"></td><td>用大模型教小模型</td></tr>
+<tr><td class="lec">对齐税</td><td><span lang="en">alignment tax</span></td><td class="num"></td><td>对齐带来的能力损失</td></tr>
+<tr><td class="lec">数据污染</td><td><span lang="en">data contamination</span></td><td class="num"></td><td>测试集混进了训练集</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、工具·Agent·RAG Engineering</td></tr>
+<tr><td class="lec">函数调用</td><td><span lang="en">function calling</span></td><td class="num"></td><td>模型输出要调用什么工具</td></tr>
+<tr><td class="lec">工具调用</td><td><span lang="en">tool use</span></td><td class="num"></td><td>让模型使用外部能力</td></tr>
+<tr><td class="lec">智能体</td><td><span lang="en">agent</span></td><td class="num"></td><td>模型 + 工具 + 循环</td></tr>
+<tr><td class="lec">规划</td><td><span lang="en">planning</span></td><td class="num"></td><td>把任务拆成步骤</td></tr>
+<tr><td class="lec">记忆</td><td><span lang="en">memory</span></td><td class="num"></td><td>跨轮次保存的上下文</td></tr>
+<tr><td class="lec">MCP</td><td><span lang="en">model context protocol</span></td><td class="num"></td><td>工具接入的标准协议</td></tr>
+<tr><td class="lec">检索增强生成</td><td><span lang="en">retrieval-augmented generation (RAG)</span></td><td class="num"></td><td>先检索再生成</td></tr>
+<tr><td class="lec">切分</td><td><span lang="en">chunking</span></td><td class="num"></td><td>把长文档切成小块</td></tr>
+<tr><td class="lec">向量数据库</td><td><span lang="en">vector database</span></td><td class="num"></td><td>存向量并做相似检索</td></tr>
+<tr><td class="lec">重排</td><td><span lang="en">reranking</span></td><td class="num"></td><td>对召回结果再排序</td></tr>
+<tr><td class="lec">混合检索</td><td><span lang="en">hybrid retrieval</span></td><td class="num"></td><td>关键词 + 向量一起用</td></tr>
+<tr><td class="lec">BM25</td><td><span lang="en">BM25</span></td><td class="num"></td><td>经典关键词打分</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、风险与护栏 Risk</td></tr>
+<tr><td class="lec">幻觉</td><td><span lang="en">hallucination</span></td><td class="num"></td><td>编造看似合理但不真实的内容</td></tr>
+<tr><td class="lec">护栏</td><td><span lang="en">guardrail</span></td><td class="num"></td><td>生成之后的校验与拦截</td></tr>
+<tr><td class="lec">评测集</td><td><span lang="en">evaluation set</span></td><td class="num"></td><td>用来打分的固定题目</td></tr>
+<tr><td class="lec">准确率</td><td><span lang="en">accuracy</span></td><td class="num"></td><td>答对的比率</td></tr>
+<tr><td class="lec">拒答率</td><td><span lang="en">refusal rate</span></td><td class="num"></td><td>不知道时说不知道的比率</td></tr>
+<tr><td class="lec">格式合规率</td><td><span lang="en">format compliance</span></td><td class="num"></td><td>输出符合 schema 的比率</td></tr>
+<tr><td class="lec">LLM 裁判</td><td><span lang="en">LLM-as-judge</span></td><td class="num"></td><td>用模型给模型打分</td></tr>
+<tr><td class="lec">内容标识</td><td><span lang="en">content provenance</span></td><td class="num"></td><td>标注 AI 生成内容</td></tr>
+<tr><td class="lec">深度伪造</td><td><span lang="en">deepfake</span></td><td class="num"></td><td>合成的音视频</td></tr>
+<tr><td class="lec">版权</td><td><span lang="en">copyright</span></td><td class="num"></td><td>训练与生成内容的权利问题</td></tr>
+<tr><td class="lec">隐私</td><td><span lang="en">privacy</span></td><td class="num"></td><td>输入里的个人信息</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、落地与治理 Deployment</td></tr>
+<tr><td class="lec">成本</td><td><span lang="en">token cost</span></td><td class="num"></td><td>按 token 计价的费用</td></tr>
+<tr><td class="lec">延迟</td><td><span lang="en">latency</span></td><td class="num"></td><td>从请求到首字的时间</td></tr>
+<tr><td class="lec">并发</td><td><span lang="en">throughput</span></td><td class="num"></td><td>单位时间能处理的请求数</td></tr>
+<tr><td class="lec">流式输出</td><td><span lang="en">streaming</span></td><td class="num"></td><td>边生成边返回</td></tr>
+<tr><td class="lec">本地部署</td><td><span lang="en">on-premise deployment</span></td><td class="num"></td><td>把模型放在自己机房</td></tr>
+<tr><td class="lec">微调</td><td><span lang="en">fine-tuning</span></td><td class="num"></td><td>在自己的数据上继续训练</td></tr>
+<tr><td class="lec">LoRA</td><td><span lang="en">low-rank adaptation</span></td><td class="num"></td><td>低成本微调方法</td></tr>
+<tr><td class="lec">量化</td><td><span lang="en">quantisation</span></td><td class="num"></td><td>用更低位宽压缩模型</td></tr>
+<tr><td class="lec">蒸馏部署</td><td><span lang="en">distilled deployment</span></td><td class="num"></td><td>用小模型上线</td></tr>
+<tr><td class="lec">A/B 测试</td><td><span lang="en">A/B test</span></td><td class="num"></td><td>用实验比较两个方案</td></tr>
+<tr><td class="lec">增量测量</td><td><span lang="en">incremental measurement</span></td><td class="num"></td><td>只看 AI 带来的净增量</td></tr>
+<tr><td class="lec">人机协同</td><td><span lang="en">human-in-the-loop</span></td><td class="num"></td><td>关键环节保留人工</td></tr>
+<tr><td class="lec">模型卡</td><td><span lang="en">model card</span></td><td class="num"></td><td>记录模型能力与限制</td></tr>
+<tr><td class="lec">提示模板</td><td><span lang="en">prompt template</span></td><td class="num"></td><td>可复用的提示骨架</td></tr>
+<tr><td class="lec">上下文工程</td><td><span lang="en">context engineering</span></td><td class="num"></td><td>管理塞进窗口的内容</td></tr>
+<tr><td class="lec">评测驱动开发</td><td><span lang="en">eval-driven development</span></td><td class="num"></td><td>先写评测再改系统</td></tr>
+<tr><td class="lec">沙箱</td><td><span lang="en">sandbox</span></td><td class="num"></td><td>限制工具权限的执行环境</td></tr>
+<tr><td class="lec">白名单</td><td><span lang="en">allowlist</span></td><td class="num"></td><td>只允许约定的输入与工具</td></tr>
+<tr><td class="lec">可追溯</td><td><span lang="en">traceability</span></td><td class="num"></td><td>每一步都能回放</td></tr>
+<tr><td class="lec">失效开关</td><td><span lang="en">kill switch</span></td><td class="num"></td><td>出问题时能立刻停用</td></tr>
+<tr><td class="lec">基线</td><td><span lang="en">baseline</span></td><td class="num"></td><td>先做简单版本再比</td></tr>
+<tr><td class="lec">别用 LLM 做算术</td><td><span lang="en">do not let an LLM do arithmetic</span></td><td class="num"></td><td>交给工具</td></tr>
+<tr><td class="lec">AI 是放大器</td><td><span lang="en">AI is an amplifier</span></td><td class="num"></td><td>放大你的判断，不替代它</td></tr>
+</tbody></table></div>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L11-chatgpt-llm.pdf" title="Lecture 11 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
+          <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
+          <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
+          <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
+          <li><a href="lecture-11.html">第十一章课件（Lecture 11 ChatGPT and LLMs）</a></li>
+          <li><a href="lecture-12.html">第十二章课件（Lecture 12 Causal Inference）</a></li>
+          <li><a href="lecture-13.html">第十三章课件（Lecture 13 Big Data in Finance）</a></li>
+          <li><a href="lecture-14.html">第十四章课件（Lecture 14 Big Data in International Trade）</a></li>
+          <li><a href="lecture-15.html">第十五章课件（Lecture 15 Big Data in Marketing）</a></li>
+          <li><a href="projects.html">课程项目指南与评分规则</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.docx">项目指南 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.pdf">项目指南 PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

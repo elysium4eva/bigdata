@@ -1,0 +1,6 @@
+numpy>=1.24          # arrays and the sampler
+pandas>=2.1          # tables and the glossary
+matplotlib>=3.7      # every static figure in the deck
+scipy>=1.10          # numerics used in a few examples
+scikit-learn>=1.3    # TF-IDF retrieval and similarity
+pillow>=9.0          # image back end for matplotlib

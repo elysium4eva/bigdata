@@ -1,0 +1,10 @@
+﻿step,type,detail
+1,思考,任务需要两步：先查汇率，再做乘法
+2,工具调用,lookup_rate(currency='USD')
+3,观察,1 USD = 7.10 CNY
+4,工具调用,calculator(expression='120*7.10')
+5,观察,120 美元 = 852.0 元
+6,思考,还需要 token 数，调用第三个工具
+7,工具调用,count_tokens(text='...')
+8,观察,约 9 tokens
+9,回答,120 美元 = 852.0 元；文本约 9 tokens

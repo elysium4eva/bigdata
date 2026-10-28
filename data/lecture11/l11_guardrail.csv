@@ -1,0 +1,4 @@
+﻿strategy,correct_rate,miss_rate,extra_cost
+不检查,0.75,0.25,1
+自洽投票 k=5,0.833,0.167,5
+引用核验,0.5,0.5,1
