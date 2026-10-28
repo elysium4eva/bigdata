@@ -1,0 +1,7 @@
+numpy>=1.24          # arrays and the hand-written estimators
+pandas>=2.1          # tables and the glossary
+matplotlib>=3.7      # every static figure in the deck
+scipy>=1.10          # distributions and optimisation
+statsmodels>=0.14    # OLS, DID, 2SLS pieces and cluster-robust inference
+scikit-learn>=1.3    # propensity scores, matching, GBDT and random forests
+pillow>=9.0          # image back end for matplotlib

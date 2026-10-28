@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 12 Causal Inference · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="projects.html">课程项目</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第十二章</p>
+    <h1 class="doc-title">Lecture 12　Causal Inference</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L12-causal-inference.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-ghost" href="files/L12-glossary.docx">术语表 Word</a>
+      <a class="btn btn-ghost" href="files/L12-glossary.xlsx">术语表 Excel</a>
+      <a class="btn btn-ghost" href="code.html#lecture12">样本、程序与术语表</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>14</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>84</strong> 条中英对照</div></div>
+    </div>
+    <p class="note">一条主线：<b>问题 → 反事实 → 识别 → 估计 → 检验</b>。
+       <b>相关与因果</b>（DAG 三种结构、遗漏变量偏差、混杂、后门准则、对撞点、辛普森悖论、吸烟与肺癌的 Cornfield 不等式）→
+       <b>潜在结果与识别</b>（ATE/ATT/ATU、根本问题、无混杂/重叠/SUTVA、完美医生、倾向得分、四种分配机制）→
+       <b>随机实验与 A/B</b>（功效与 MDE、序贯检验、多重比较、聚类随机、实验平台、决策）→
+       <b>四大识别策略</b>（匹配与 PSM、DID 与事件研究、IV 与弱工具、RD 与带宽、合成控制、敏感性分析）→
+       <b>不依从与选择偏差</b>（四类人、LATE、单调性、五种选择偏差、对撞点与叶酸案例）→
+       <b>异质性与 2026</b>（CATE、DML、因果森林、uplift、合规与伦理）。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、<b>「全课程方法底座」</b>、输出物、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>相关与因果：三个因果问题、<b>反事实</b>、<b>DAG 三种结构</b>、Gauss-Markov 的局限、<b>遗漏变量偏差</b>、<b>混杂三例</b>、COVID 三偏差、<b>后门准则</b>、<b>控制什么/别控制什么</b>、<b>对撞点</b>、<b>辛普森悖论</b>、<b>Cornfield 不等式</b></td></tr>
+        <tr><td class="week">Part 2</td><td>潜在结果与识别：<b>ATE/ATT/ATU</b>、三种估计量、识别≠估计、<b>根本问题</b>、三个识别假设、<b>选择偏差分解</b>、一致性、溢出、<b>完美医生</b>、<b>无混杂分配与倾向得分</b></td></tr>
+        <tr><td class="week">Part 3</td><td>随机实验与 A/B：金标准、四个设计决定、<b>功效与 MDE</b>、<b>序贯检验</b>、<b>多重比较</b>、四种设计、伦理、外部有效性、实验平台、从证据到决策</td></tr>
+        <tr><td class="week">Part 4</td><td>四大识别策略：<b>匹配与 PSM</b>、<b>DID 与事件研究</b>、<b>IV 与弱工具</b>、<b>RD 与带宽</b>、合成控制、策略对照表、<b>敏感性分析（E-value）</b></td></tr>
+        <tr><td class="week">Part 5</td><td>不依从与选择偏差：不依从、<b>LATE 的 Wald 估计</b>、单调性、四类人、<b>五种选择偏差</b>、<b>对撞点 DAG</b>、<b>叶酸案例</b></td></tr>
+        <tr><td class="week">Part 6</td><td>异质性与 2026：<b>CATE</b>、亚组陷阱、<b>DML</b>、<b>因果森林</b>、uplift 四象限、合规伦理、十个常见错误</td></tr>
+        <tr><td class="week">Part 7</td><td>工具、术语与结语：工具栈、<b>术语表两帧（84 条）</b>、参考资料、一页纸回顾、结语</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>辛普森悖论</b>：合并 vs 分层的两个回归（<code>l12_01</code>）；</li>
+      <li><b>潜在结果</b>：造混杂数据、分解选择偏差、完美医生表（<code>l12_02</code>）；</li>
+      <li><b>A/B 功效</b>：解析公式 + 模拟验证 + 多重比较（<code>l12_03</code>）；</li>
+      <li><b>倾向得分匹配</b>：logistic + 最近邻 + 平衡表（<code>l12_04</code>）；</li>
+      <li><b>DID</b>：两向固定效应 + 事件研究（<code>l12_05</code>）；</li>
+      <li><b>2SLS</b>：手工两阶段 + 第一阶段 F + 弱工具模拟（<code>l12_06</code>）；</li>
+      <li><b>断点回归</b>：局部线性 + 带宽敏感性（<code>l12_07</code>）；</li>
+      <li><b>不依从 LATE</b>：四类人 + Wald 估计 + 对撞点（<code>l12_08</code>）；</li>
+      <li><b>双重机器学习</b>：交叉拟合 + 残差回归（<code>l12_09</code>）；</li>
+      <li><b>因果森林</b>：honest 分半 + CATE 定向（<code>l12_10</code>）。</li>
+    </ul>
+
+    <h3 id="glossary12">术语表 Glossary（84 条中英对照）</h3>
+    <p class="note">按课件顺序分六组；每条含中文、English、符号与公式、一句话解释。
+       可下载 <a href="files/L12-glossary.docx">Word</a> / <a href="files/L12-glossary.xlsx">Excel</a>；
+       机器可读版本：<code>data/lecture12/l12_glossary.csv</code>。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>中文</th><th>English</th><th>符号 / 公式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、相关与因果 Concepts</td></tr>
+<tr><td class="lec">相关</td><td><span lang="en">association</span></td><td class="num"></td><td>两个变量一起变，不代表一个导致另一个</td></tr>
+<tr><td class="lec">因果</td><td><span lang="en">causation</span></td><td class="num"></td><td>干预一个变量会改变另一个</td></tr>
+<tr><td class="lec">反事实</td><td><span lang="en">counterfactual</span></td><td class="num"></td><td>如果没有做这件事，结果会怎样</td></tr>
+<tr><td class="lec">潜在结果</td><td><span lang="en">potential outcome</span></td><td class="num">$Y_i(z)$</td><td>同一单位在不同处理下的结果</td></tr>
+<tr><td class="lec">处理</td><td><span lang="en">treatment</span></td><td class="num">$Z$</td><td>被研究的干预</td></tr>
+<tr><td class="lec">混杂</td><td><span lang="en">confounder</span></td><td class="num">$U$</td><td>同时影响处理与结果的变量</td></tr>
+<tr><td class="lec">中介</td><td><span lang="en">mediator</span></td><td class="num"></td><td>位于处理与结果之间、传递效应的变量</td></tr>
+<tr><td class="lec">对撞点</td><td><span lang="en">collider</span></td><td class="num"></td><td>被两个变量共同影响的变量</td></tr>
+<tr><td class="lec">因果图</td><td><span lang="en">directed acyclic graph (DAG)</span></td><td class="num"></td><td>用箭头表示因果假设的图</td></tr>
+<tr><td class="lec">后门准则</td><td><span lang="en">back-door criterion</span></td><td class="num"></td><td>找一组变量切断所有后门路径</td></tr>
+<tr><td class="lec">前门准则</td><td><span lang="en">front-door criterion</span></td><td class="num"></td><td>用中介识别因果的另一条路</td></tr>
+<tr><td class="lec">辛普森悖论</td><td><span lang="en">Simpson's paradox</span></td><td class="num"></td><td>合并与分层的结论相反</td></tr>
+<tr><td class="lec">生态谬误</td><td><span lang="en">ecological fallacy</span></td><td class="num"></td><td>用群体结论推断个体</td></tr>
+<tr><td class="lec">Cornfield 不等式</td><td><span lang="en">Cornfield inequality</span></td><td class="num">$RR_{ZU}\ge RR_{ZY}$</td><td>混杂必须多强才能解释掉关联</td></tr>
+<tr><td class="lec">关联强度</td><td><span lang="en">risk ratio</span></td><td class="num">$RR$</td><td>两组风险之比</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、潜在结果与识别 Identification</td></tr>
+<tr><td class="lec">识别</td><td><span lang="en">identification</span></td><td class="num"></td><td>在什么假设下因果量可被数据确定</td></tr>
+<tr><td class="lec">识别假设</td><td><span lang="en">identifying assumption</span></td><td class="num"></td><td>把不可观测量变成可观测量所依赖的假设</td></tr>
+<tr><td class="lec">无混杂</td><td><span lang="en">unconfoundedness</span></td><td class="num">$Z\perp Y(z)\mid X$</td><td>控制 X 后处理与潜在结果独立</td></tr>
+<tr><td class="lec">重叠</td><td><span lang="en">overlap</span></td><td class="num"></td><td>每种协变量取值下都有处理与对照</td></tr>
+<tr><td class="lec">SUTVA</td><td><span lang="en">stable unit treatment value assumption</span></td><td class="num"></td><td>一个人的处理不影响别人</td></tr>
+<tr><td class="lec">一致性</td><td><span lang="en">consistency</span></td><td class="num">$Y=Y(Z)$</td><td>观测结果等于对应处理下的潜在结果</td></tr>
+<tr><td class="lec">分配机制</td><td><span lang="en">assignment mechanism</span></td><td class="num">$p(Z\mid X,Y(0),Y(1))$</td><td>决定谁被处理的概率规则</td></tr>
+<tr><td class="lec">倾向得分</td><td><span lang="en">propensity score</span></td><td class="num">$e(X)=p(Z=1\mid X)$</td><td>给定协变量被处理的概率</td></tr>
+<tr><td class="lec">平均处理效应</td><td><span lang="en">average treatment effect (ATE)</span></td><td class="num">$E[Y(1)-Y(0)]$</td><td>全体的平均因果效应</td></tr>
+<tr><td class="lec">处理组平均效应</td><td><span lang="en">average treatment effect on the treated (ATT)</span></td><td class="num"></td><td>对实际被处理者的效应</td></tr>
+<tr><td class="lec">未处理组平均效应</td><td><span lang="en">ATU</span></td><td class="num"></td><td>对未被处理者的效应</td></tr>
+<tr><td class="lec">局部平均处理效应</td><td><span lang="en">local average treatment effect (LATE)</span></td><td class="num"></td><td>顺从者的平均效应</td></tr>
+<tr><td class="lec">条件平均处理效应</td><td><span lang="en">conditional average treatment effect (CATE)</span></td><td class="num">$\tau(x)$</td><td>给定特征的效应</td></tr>
+<tr><td class="lec">根本问题</td><td><span lang="en">fundamental problem of causal inference</span></td><td class="num"></td><td>同一单位只能观测到一种结果</td></tr>
+<tr><td class="lec">完美医生</td><td><span lang="en">perfect doctor</span></td><td class="num"></td><td>分配依赖潜在结果，差值估计失效</td></tr>
+<tr><td class="lec">选择偏差</td><td><span lang="en">selection bias</span></td><td class="num"></td><td>进入样本的方式造成的偏差</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、四大识别策略 Strategies</td></tr>
+<tr><td class="lec">平行趋势</td><td><span lang="en">parallel trends</span></td><td class="num"></td><td>没有处理时两组走势相同</td></tr>
+<tr><td class="lec">双重差分</td><td><span lang="en">difference-in-differences (DID)</span></td><td class="num">$E[Y_{1}-Y_{0}\mid T]-E[Y_{1}-Y_{0}\mid C]$</td><td>用时间换识别</td></tr>
+<tr><td class="lec">事件研究</td><td><span lang="en">event study</span></td><td class="num"></td><td>逐期估计处理前后的效应</td></tr>
+<tr><td class="lec">匹配</td><td><span lang="en">matching</span></td><td class="num"></td><td>给处理组找可比的对照组</td></tr>
+<tr><td class="lec">标准化差异</td><td><span lang="en">standardised difference</span></td><td class="num"></td><td>平衡性的常用度量，小于 0.1 为好</td></tr>
+<tr><td class="lec">共同支撑域</td><td><span lang="en">common support</span></td><td class="num"></td><td>处理组与对照组倾向得分的重叠区间</td></tr>
+<tr><td class="lec">工具变量</td><td><span lang="en">instrumental variable (IV)</span></td><td class="num">$Z$</td><td>只通过处理影响结果的外生变量</td></tr>
+<tr><td class="lec">相关性条件</td><td><span lang="en">relevance</span></td><td class="num"></td><td>工具必须影响处理</td></tr>
+<tr><td class="lec">排他性</td><td><span lang="en">exclusion restriction</span></td><td class="num"></td><td>工具只能通过处理影响结果</td></tr>
+<tr><td class="lec">两阶段最小二乘</td><td><span lang="en">two-stage least squares (2SLS)</span></td><td class="num"></td><td>先预测处理，再回归结果</td></tr>
+<tr><td class="lec">弱工具</td><td><span lang="en">weak instrument</span></td><td class="num"></td><td>第一阶段太弱，估计偏且不稳</td></tr>
+<tr><td class="lec">第一阶段 F</td><td><span lang="en">first-stage F</span></td><td class="num"></td><td>弱工具的常用检验，$F&lt;10$ 要警惕</td></tr>
+<tr><td class="lec">断点回归</td><td><span lang="en">regression discontinuity (RD)</span></td><td class="num"></td><td>用门槛附近的跳跃识别</td></tr>
+<tr><td class="lec">运行变量</td><td><span lang="en">running variable</span></td><td class="num"></td><td>决定是否跨过门槛的变量</td></tr>
+<tr><td class="lec">带宽</td><td><span lang="en">bandwidth</span></td><td class="num"></td><td>断点两侧取多宽的窗口</td></tr>
+<tr><td class="lec">合成控制</td><td><span lang="en">synthetic control</span></td><td class="num"></td><td>用加权组合构造反事实</td></tr>
+<tr><td class="lec">敏感性分析</td><td><span lang="en">sensitivity analysis</span></td><td class="num"></td><td>需要多强的混杂才能推翻结论</td></tr>
+<tr><td class="lec">E 值</td><td><span lang="en">E-value</span></td><td class="num"></td><td>推翻结论所需的最小关联强度</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、随机实验与 A/B Experiments</td></tr>
+<tr><td class="lec">随机实验</td><td><span lang="en">randomised experiment</span></td><td class="num"></td><td>随机化切断所有指向处理的箭头</td></tr>
+<tr><td class="lec">A/B 测试</td><td><span lang="en">A/B test</span></td><td class="num"></td><td>两组随机的对照实验</td></tr>
+<tr><td class="lec">统计功效</td><td><span lang="en">statistical power</span></td><td class="num">$1-\beta$</td><td>真有效应时能检出的概率</td></tr>
+<tr><td class="lec">最小可检测效应</td><td><span lang="en">minimum detectable effect (MDE)</span></td><td class="num"></td><td>给定样本量能稳定检出的效应</td></tr>
+<tr><td class="lec">第一类错误</td><td><span lang="en">type I error</span></td><td class="num">$\alpha$</td><td>原假设为真却拒绝</td></tr>
+<tr><td class="lec">序贯检验</td><td><span lang="en">sequential testing</span></td><td class="num"></td><td>边做边看要校正阈值</td></tr>
+<tr><td class="lec">多重比较</td><td><span lang="en">multiple comparisons</span></td><td class="num"></td><td>指标越多，假阳性越多</td></tr>
+<tr><td class="lec">Bonferroni 校正</td><td><span lang="en">Bonferroni correction</span></td><td class="num">$\alpha/m$</td><td>把显著性阈值除以检验次数</td></tr>
+<tr><td class="lec">错误发现率</td><td><span lang="en">false discovery rate (FDR)</span></td><td class="num"></td><td>被拒绝的假设中假的比例</td></tr>
+<tr><td class="lec">聚类随机</td><td><span lang="en">cluster randomisation</span></td><td class="num"></td><td>按群（城市/门店）随机化</td></tr>
+<tr><td class="lec">AA 测试</td><td><span lang="en">AA test</span></td><td class="num"></td><td>两组都给旧方案，检查分流是否均衡</td></tr>
+<tr><td class="lec">外部有效性</td><td><span lang="en">external validity</span></td><td class="num"></td><td>实验结论能否推广到别处</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、不依从与 LATE Compliance</td></tr>
+<tr><td class="lec">不依从</td><td><span lang="en">non-compliance</span></td><td class="num"></td><td>分配的处理没有被真正接受</td></tr>
+<tr><td class="lec">顺从者</td><td><span lang="en">complier</span></td><td class="num"></td><td>分配才接受的人</td></tr>
+<tr><td class="lec">从不接受者</td><td><span lang="en">never-taker</span></td><td class="num"></td><td>无论分配都不接受的人</td></tr>
+<tr><td class="lec">始终接受者</td><td><span lang="en">always-taker</span></td><td class="num"></td><td>无论分配都接受的人</td></tr>
+<tr><td class="lec">反抗者</td><td><span lang="en">defier</span></td><td class="num"></td><td>分配才不接受的人；单调性假设排除</td></tr>
+<tr><td class="lec">单调性</td><td><span lang="en">monotonicity</span></td><td class="num"></td><td>没有反抗者</td></tr>
+<tr><td class="lec">意向性治疗</td><td><span lang="en">intention-to-treat (ITT)</span></td><td class="num"></td><td>按分配而非接受来比较</td></tr>
+<tr><td class="lec">Wald 估计</td><td><span lang="en">Wald estimator</span></td><td class="num">$\frac{ITT}{\text{take-up}}$</td><td>LATE 的比值形式</td></tr>
+<tr><td class="lec">信息性删失</td><td><span lang="en">informative censoring</span></td><td class="num"></td><td>失访与结果相关</td></tr>
+<tr><td class="lec">健康工人效应</td><td><span lang="en">healthy worker bias</span></td><td class="num"></td><td>在职者本身更健康</td></tr>
+<tr><td class="lec">自选择</td><td><span lang="en">self-selection</span></td><td class="num"></td><td>自己决定是否进入样本/处理</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">六、异质性与 2026 Frontier</td></tr>
+<tr><td class="lec">双重机器学习</td><td><span lang="en">double machine learning (DML)</span></td><td class="num"></td><td>正交化 + 交叉拟合</td></tr>
+<tr><td class="lec">交叉拟合</td><td><span lang="en">cross-fitting</span></td><td class="num"></td><td>分折估计 nuisance 再预测留出折</td></tr>
+<tr><td class="lec">正交化</td><td><span lang="en">orthogonalisation</span></td><td class="num"></td><td>用残差对残差去掉 nuisance 偏差</td></tr>
+<tr><td class="lec">Neyman 正交</td><td><span lang="en">Neyman orthogonality</span></td><td class="num"></td><td>对 nuisance 的一阶导为零</td></tr>
+<tr><td class="lec">因果森林</td><td><span lang="en">causal forest</span></td><td class="num"></td><td>用森林估 CATE，需要 honest 切分</td></tr>
+<tr><td class="lec">诚实切分</td><td><span lang="en">honest splitting</span></td><td class="num"></td><td>估计效应与选分裂用不同子样本</td></tr>
+<tr><td class="lec">T-learner</td><td><span lang="en">T-learner</span></td><td class="num"></td><td>分别对处理组与对照组建模型再相减</td></tr>
+<tr><td class="lec">增量模型</td><td><span lang="en">uplift model</span></td><td class="num"></td><td>直接预测个体处理效应</td></tr>
+<tr><td class="lec">异质性处理效应</td><td><span lang="en">heterogeneous treatment effect</span></td><td class="num"></td><td>效应因人而异</td></tr>
+<tr><td class="lec">亚组分析</td><td><span lang="en">subgroup analysis</span></td><td class="num"></td><td>按特征分组估计效应，注意多重比较</td></tr>
+<tr><td class="lec">模型治理</td><td><span lang="en">model governance</span></td><td class="num"></td><td>模型卡、监控、漂移与审计</td></tr>
+<tr><td class="lec">知情同意</td><td><span lang="en">informed consent</span></td><td class="num"></td><td>实验参与者的知情与自愿</td></tr>
+</tbody></table></div>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L12-causal-inference.pdf" title="Lecture 12 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
+          <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
+          <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
+          <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
+          <li><a href="lecture-12.html">第十二章课件（Lecture 12 Causal Inference）</a></li>
+          <li><a href="lecture-13.html">第十三章课件（Lecture 13 Big Data in Finance）</a></li>
+          <li><a href="lecture-14.html">第十四章课件（Lecture 14 Big Data in International Trade）</a></li>
+          <li><a href="lecture-15.html">第十五章课件（Lecture 15 Big Data in Marketing）</a></li>
+          <li><a href="projects.html">课程项目指南与评分规则</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.docx">项目指南 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.pdf">项目指南 PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

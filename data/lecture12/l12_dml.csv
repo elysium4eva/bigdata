@@ -1,0 +1,6 @@
+﻿estimator,estimate
+朴素差值,3.766
+OLS 调整,1.949
+ML plug-in,2.085
+DML (cross-fitting),1.927
+真值,2.0
