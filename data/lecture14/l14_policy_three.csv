@@ -1,0 +1,4 @@
+﻿model,effect_pct,assumption
+PTI 局部均衡,-10.5,"pass-through 0.8, GE multiplier 1.00"
+MTI 贸易条件,-5.66,"pass-through 0.6, GE multiplier 0.70"
+GETI 全球一般均衡,-3.07,"pass-through 0.5, GE multiplier 0.45"

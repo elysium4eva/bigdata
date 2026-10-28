@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 14 Big Data in International Trade · 大数据分析［2026 国际商务］</title>
+<meta name="description" content="深圳大学《大数据分析［2026 国际商务］》课程主页：大纲、教学进度、章节课件与考核要求。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/szu-logo.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/szu-logo.jpg" alt="深圳大学校徽">
+      <span>大数据分析 · Big Data Analytics</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#info">课程信息</a>
+      <a href="index.html#schedule">教学进度</a>
+      <a href="index.html#lectures">章节与课件</a>
+      <a href="code.html">样本与代码</a>
+      <a href="index.html#assessment">考核</a>
+      <a href="projects.html">课程项目</a>
+      <a href="index.html#reading">参考</a>
+      <a href="https://elysium4eva.github.io/project/" target="_blank" rel="noopener">往期项目</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a class="cta" href="lecture-01.html">第一章课件</a>
+    </div>
+  </div>
+</nav>
+
+<main class="doc">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">课程主页</a> › <a href="index.html#lectures">章节与课件</a> › 第十四章</p>
+    <h1 class="doc-title">Lecture 14　Big Data in International Trade</h1>
+    <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
+
+    <div class="hero-actions no-print">
+      <a class="btn btn-primary" href="files/L14-international-trade.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-ghost" href="files/L14-glossary.docx">术语表 Word</a>
+      <a class="btn btn-ghost" href="files/L14-glossary.xlsx">术语表 Excel</a>
+      <a class="btn btn-ghost" href="code.html#lecture14">样本、程序与术语表</a>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:22px">
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>10</strong> 页（逐行英文注释）</div></div>
+      <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>15</strong> 页样本与可视化</div></div>
+      <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>84</strong> 条中英对照</div></div>
+    </div>
+    <p class="note">一条主线：<b>层级 → 模型 → 识别 → 网络 → 新数据</b>。
+       <b>三层数据</b>（CEPII/Comtrade、BACI/WIOD、工企库+海关库与匹配率）→
+       <b>引力模型</b>（三个经验事实、四个估计坑、三种固定效应、多边阻力与结构引力、<b>PPML 与零贸易</b>、关税等价、元分析九行表）→
+       <b>识别</b>（DID 与平行趋势、事件研究、合成控制、<b>PTI/MTI/GETI 三口径</b>、福利、关税传递、TPU）→
+       <b>网络与 GVC</b>（邻接矩阵、中心性、社区发现、前向/后向参与度、冲击传导、<b>GNN 消息传递</b>）→
+       <b>2026</b>（AIS 与卫星、供应链韧性、跨境电商、数字贸易、报关文本抽取、地缘政治风险指数、合规边界）。</p>
+
+    <h3>本讲结构 Outline</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L5–L10 衔接、输出物、全讲导览</td></tr>
+        <tr><td class="week">Part 1</td><td>贸易数据的三个层级：三层数据、<b>CEPII</b>、<b>Comtrade 三个坑</b>、<b>BACI 的调和</b>、<b>WIOD/WIOT</b>、<b>工企库</b>、<b>海关库</b>、<b>两库匹配与幸存者偏差</b>、抓取代码、单位/汇率/HS、质量检查八项、<b>转口贸易</b></td></tr>
+        <tr><td class="week">Part 2</td><td>引力模型：牛顿到 Tinbergen、<b>三个经验事实</b>、对数化、<b>四个坑</b>、<b>三种固定效应</b>、<b>OLS vs FE</b>、多边阻力与结构引力、贸易成本、<b>θ 与 σ</b>、<b>PPML 与零贸易</b>、关税等价、<b>元分析</b></td></tr>
+        <tr><td class="week">Part 3</td><td>识别与政策效应：三类冲击、<b>DID 与平行趋势</b>、<b>事件研究</b>、动态效应、DID 代码、<b>处理组内生性</b>、合成控制、<b>PTI/MTI/GETI</b>、福利分解、六个常见错误、关税传递、协定异质性、<b>TPU</b></td></tr>
+        <tr><td class="week">Part 4</td><td>网络、GVC 与 GNN：为什么用网络、邻接矩阵/有向/加权、<b>贸易网络</b>、五类网络指标、networkx 代码、<b>中心性</b>、社区发现与模块度、<b>GVC 前向/后向参与度</b>、冲击传导、<b>GNN 为什么适合</b>、消息传递代码</td></tr>
+        <tr><td class="week">Part 5</td><td>2026 新数据：<b>AIS 与航运</b>、卫星、<b>供应链韧性三层指标</b>、跨境电商、<b>数字贸易四种模式</b>、<b>报关单字段抽取</b>、<b>GPR 风险指数</b>、合规边界、五个判断、三种用法</td></tr>
+        <tr><td class="week">Part 6</td><td>工具、术语与结语：工具栈、数据源清单、API/HS/镜像三坑、复现清单、常见错误 Top 10、项目衔接、<b>方法地图</b>、<b>术语表两帧（84 条）</b>、参考资料、一页纸回顾、自检十问、全讲压缩</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>代码示例（10 页，逐行英文注释）Code Walkthroughs</h3>
+    <ul>
+      <li><b>三层数据与匹配</b>：面板、企业、报关记录、匹配率与幸存者偏差（<code>l14_01</code>）；</li>
+      <li><b>引力方程</b>：混合 OLS、国家+年份 FE、聚类标准误、贸易成本反解（<code>l14_02</code>）；</li>
+      <li><b>PPML</b>：GLM 泊松 vs 对数 OLS、零贸易偏差曲线（<code>l14_03</code>）；</li>
+      <li><b>DID 与事件研究</b>：两向 FE、逐期系数、三口径（<code>l14_04</code>）；</li>
+      <li><b>网络指标</b>：networkx 的度/强度/中介中心性/社区（<code>l14_05</code>）；</li>
+      <li><b>GVC 分解</b>：WIOT 的附加值出口与前向/后向参与度（<code>l14_06</code>）；</li>
+      <li><b>GNN</b>：numpy 手写一层消息传递，与引力对比（<code>l14_07</code>）；</li>
+      <li><b>韧性</b>：HHI、可替代性、港口关闭情景（<code>l14_08</code>）；</li>
+      <li><b>文本抽取</b>：报关单字段正则抽取与字段级准确率（<code>l14_09</code>）；</li>
+      <li><b>风险指数</b>：关键词计数、标准化、回归验证（<code>l14_10</code>）。</li>
+    </ul>
+
+    <h3 id="glossary14">术语表 Glossary（84 条中英对照）</h3>
+    <p class="note">按课件顺序分五组；每条含中文、English、符号与公式、一句话解释。
+       可下载 <a href="files/L14-glossary.docx">Word</a> / <a href="files/L14-glossary.xlsx">Excel</a>；
+       机器可读版本：<code>data/lecture14/l14_glossary.csv</code>。
+       跨讲复习见 <a href="files/Glossary-L6-L10.docx">L6–L10 合并术语表（381 条）</a>，本讲单独成表。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>中文</th><th>English</th><th>符号 / 公式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、贸易数据的三个层级 Data Layers</td></tr>
+<tr><td class="lec">国别层数据</td><td><span lang="en">country-level data</span></td><td class="num"></td><td>国家-国家-年，引力回归的标配</td></tr>
+<tr><td class="lec">CEPII</td><td><span lang="en">CEPII</span></td><td class="num"></td><td>距离、语言、殖民关系等引力变量</td></tr>
+<tr><td class="lec">UN Comtrade</td><td><span lang="en">UN Comtrade</span></td><td class="num"></td><td>最全的双边贸易数据库</td></tr>
+<tr><td class="lec">镜像数据</td><td><span lang="en">mirror data</span></td><td class="num"></td><td>出口国报告与进口国报告不一致</td></tr>
+<tr><td class="lec">HS 编码</td><td><span lang="en">Harmonized System code</span></td><td class="num"></td><td>商品分类，版本会换</td></tr>
+<tr><td class="lec">CIF/FOB</td><td><span lang="en">CIF and FOB</span></td><td class="num"></td><td>到岸价与离岸价的差额</td></tr>
+<tr><td class="lec">行业层数据</td><td><span lang="en">industry-level data</span></td><td class="num"></td><td>国家-行业-年</td></tr>
+<tr><td class="lec">BACI</td><td><span lang="en">BACI</span></td><td class="num"></td><td>调和后的双边贸易数据</td></tr>
+<tr><td class="lec">投入产出表</td><td><span lang="en">input-output table</span></td><td class="num"></td><td>行业间的中间投入关系</td></tr>
+<tr><td class="lec">WIOD</td><td><span lang="en">World Input-Output Database</span></td><td class="num"></td><td>跨国投入产出数据库</td></tr>
+<tr><td class="lec">企业层数据</td><td><span lang="en">firm-level data</span></td><td class="num"></td><td>企业-产品-国家-月</td></tr>
+<tr><td class="lec">工业企业数据库</td><td><span lang="en">Chinese Industrial Enterprises Database</span></td><td class="num"></td><td>规模以上工业企业</td></tr>
+<tr><td class="lec">海关数据库</td><td><span lang="en">customs transaction data</span></td><td class="num"></td><td>逐笔报关记录</td></tr>
+<tr><td class="lec">两库匹配</td><td><span lang="en">firm-customs matching</span></td><td class="num"></td><td>名称/电话/邮编连接两套数据</td></tr>
+<tr><td class="lec">匹配率</td><td><span lang="en">match rate</span></td><td class="num"></td><td>可匹配记录占比</td></tr>
+<tr><td class="lec">幸存者偏差</td><td><span lang="en">survivorship bias</span></td><td class="num"></td><td>匹配上的样本系统性偏大</td></tr>
+<tr><td class="lec">转口贸易</td><td><span lang="en">entrepôt trade</span></td><td class="num"></td><td>经第三地中转，扭曲双边统计</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、引力模型 Gravity</td></tr>
+<tr><td class="lec">引力方程</td><td><span lang="en">gravity equation</span></td><td class="num">$X_{ij}=G\frac{Y_iY_j}{D_{ij}}$</td><td>贸易与规模正比、与距离反比</td></tr>
+<tr><td class="lec">贸易弹性</td><td><span lang="en">trade elasticity</span></td><td class="num">$\theta$</td><td>贸易成本对贸易量的弹性</td></tr>
+<tr><td class="lec">替代弹性</td><td><span lang="en">substitution elasticity</span></td><td class="num">$\sigma$</td><td>消费者对品种的替代程度</td></tr>
+<tr><td class="lec">多边阻力</td><td><span lang="en">multilateral resistance</span></td><td class="num"></td><td>对所有贸易伙伴的平均阻力</td></tr>
+<tr><td class="lec">结构引力</td><td><span lang="en">structural gravity</span></td><td class="num"></td><td>与理论一致的引力设定</td></tr>
+<tr><td class="lec">固定效应</td><td><span lang="en">fixed effects</span></td><td class="num"></td><td>用虚拟变量吸收国家层面因素</td></tr>
+<tr><td class="lec">PPML</td><td><span lang="en">Poisson pseudo-maximum likelihood</span></td><td class="num"></td><td>能处理零贸易的估计方法</td></tr>
+<tr><td class="lec">零贸易</td><td><span lang="en">zero trade</span></td><td class="num"></td><td>没记录到的双边贸易</td></tr>
+<tr><td class="lec">边界效应</td><td><span lang="en">border effect</span></td><td class="num"></td><td>同一国家内部贸易远高于跨境</td></tr>
+<tr><td class="lec">元分析</td><td><span lang="en">meta-analysis</span></td><td class="num"></td><td>汇总大量估计的中位数</td></tr>
+<tr><td class="lec">贸易成本</td><td><span lang="en">trade cost</span></td><td class="num"></td><td>距离、关税、语言等综合成本</td></tr>
+<tr><td class="lec">关税等价</td><td><span lang="en">tariff equivalent</span></td><td class="num">$e^{\beta/\theta}-1$</td><td>把系数换算成关税当量</td></tr>
+<tr><td class="lec">RTA</td><td><span lang="en">regional trade agreement</span></td><td class="num"></td><td>区域贸易协定</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">三、识别与政策效应 Identification</td></tr>
+<tr><td class="lec">DID</td><td><span lang="en">difference-in-differences</span></td><td class="num"></td><td>处理组与对照组的双重差分</td></tr>
+<tr><td class="lec">事件研究</td><td><span lang="en">event study</span></td><td class="num"></td><td>逐期估计处理效应</td></tr>
+<tr><td class="lec">平行趋势</td><td><span lang="en">parallel trends</span></td><td class="num"></td><td>处理前两组走势应相同</td></tr>
+<tr><td class="lec">合成控制</td><td><span lang="en">synthetic control</span></td><td class="num"></td><td>构造一个加权对照组</td></tr>
+<tr><td class="lec">PTI</td><td><span lang="en">partial trade impact</span></td><td class="num"></td><td>局部均衡的贸易效应</td></tr>
+<tr><td class="lec">MTI</td><td><span lang="en">modelled trade impact</span></td><td class="num"></td><td>含贸易条件的效应</td></tr>
+<tr><td class="lec">GETI</td><td><span lang="en">general equilibrium trade impact</span></td><td class="num"></td><td>全球一般均衡的效应</td></tr>
+<tr><td class="lec">福利效应</td><td><span lang="en">welfare effect</span></td><td class="num"></td><td>消费者剩余与贸易条件之和</td></tr>
+<tr><td class="lec">贸易政策不确定性</td><td><span lang="en">trade policy uncertainty</span></td><td class="num"></td><td>威胁加税也会影响贸易</td></tr>
+<tr><td class="lec">关税传递</td><td><span lang="en">tariff pass-through</span></td><td class="num"></td><td>关税由进口商还是消费者承担</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、网络、GVC 与 GNN Networks</td></tr>
+<tr><td class="lec">网络</td><td><span lang="en">network</span></td><td class="num"></td><td>节点与边构成的图</td></tr>
+<tr><td class="lec">邻接矩阵</td><td><span lang="en">adjacency matrix</span></td><td class="num">$A$</td><td>有边为 1 或权重，无边为 0</td></tr>
+<tr><td class="lec">有向图</td><td><span lang="en">directed graph</span></td><td class="num"></td><td>边有方向（出口→进口）</td></tr>
+<tr><td class="lec">加权图</td><td><span lang="en">weighted graph</span></td><td class="num"></td><td>边带贸易额权重</td></tr>
+<tr><td class="lec">度</td><td><span lang="en">degree</span></td><td class="num"></td><td>与节点相连的边数</td></tr>
+<tr><td class="lec">强度</td><td><span lang="en">strength</span></td><td class="num"></td><td>边的权重之和</td></tr>
+<tr><td class="lec">中介中心性</td><td><span lang="en">betweenness centrality</span></td><td class="num"></td><td>有多少最短路经过该节点</td></tr>
+<tr><td class="lec">社区发现</td><td><span lang="en">community detection</span></td><td class="num"></td><td>把网络分成相对紧密的块</td></tr>
+<tr><td class="lec">模块度</td><td><span lang="en">modularity</span></td><td class="num">$Q$</td><td>社区划分的好坏</td></tr>
+<tr><td class="lec">全球价值链</td><td><span lang="en">global value chain (GVC)</span></td><td class="num"></td><td>跨国的生产分工链条</td></tr>
+<tr><td class="lec">前向参与度</td><td><span lang="en">forward participation</span></td><td class="num"></td><td>出口中被他国用作中间品的份额</td></tr>
+<tr><td class="lec">后向参与度</td><td><span lang="en">backward participation</span></td><td class="num"></td><td>出口中包含的国外增加值份额</td></tr>
+<tr><td class="lec">附加值</td><td><span lang="en">value added</span></td><td class="num">$VA$</td><td>产出减去中间投入</td></tr>
+<tr><td class="lec">微笑曲线</td><td><span lang="en">smile curve</span></td><td class="num"></td><td>两端（研发/品牌）附加值高</td></tr>
+<tr><td class="lec">生产网络</td><td><span lang="en">production network</span></td><td class="num"></td><td>行业间的投入产出网络</td></tr>
+<tr><td class="lec">冲击传导</td><td><span lang="en">shock propagation</span></td><td class="num"></td><td>一个环节断供会传多远</td></tr>
+<tr><td class="lec">图神经网络</td><td><span lang="en">graph neural network (GNN)</span></td><td class="num"></td><td>在图上做消息传递的模型</td></tr>
+<tr><td class="lec">消息传递</td><td><span lang="en">message passing</span></td><td class="num">$h_i=\phi(Wx_i+\sum_j h_j)$</td><td>聚合邻居信息</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">五、2026 新数据 New Data</td></tr>
+<tr><td class="lec">AIS</td><td><span lang="en">automatic identification system</span></td><td class="num"></td><td>船舶定位数据</td></tr>
+<tr><td class="lec">港口拥堵</td><td><span lang="en">port congestion</span></td><td class="num"></td><td>船等泊位的时间</td></tr>
+<tr><td class="lec">卫星数据</td><td><span lang="en">satellite data</span></td><td class="num"></td><td>夜光、船舶探测等</td></tr>
+<tr><td class="lec">供应链韧性</td><td><span lang="en">supply-chain resilience</span></td><td class="num"></td><td>受冲击后恢复的能力</td></tr>
+<tr><td class="lec">HHI</td><td><span lang="en">Herfindahl-Hirschman index</span></td><td class="num">$\sum s_i^2$</td><td>集中度指标</td></tr>
+<tr><td class="lec">可替代性</td><td><span lang="en">substitutability</span></td><td class="num">$1-\mathrm{HHI}$</td><td>供应商越分散越可替代</td></tr>
+<tr><td class="lec">跨境电商</td><td><span lang="en">cross-border e-commerce</span></td><td class="num"></td><td>B2C 包裹与平台数据</td></tr>
+<tr><td class="lec">数字贸易</td><td><span lang="en">digital trade</span></td><td class="num"></td><td>可数字交付的服务贸易</td></tr>
+<tr><td class="lec">服务贸易模式</td><td><span lang="en">modes of supply</span></td><td class="num"></td><td>跨境交付/境外消费/商业存在/自然人移动</td></tr>
+<tr><td class="lec">报关单</td><td><span lang="en">customs declaration</span></td><td class="num"></td><td>逐笔申报文件</td></tr>
+<tr><td class="lec">字段抽取</td><td><span lang="en">field extraction</span></td><td class="num"></td><td>从文本中抽结构化字段</td></tr>
+<tr><td class="lec">地缘政治风险</td><td><span lang="en">geopolitical risk</span></td><td class="num"></td><td>冲突、制裁等风险</td></tr>
+<tr><td class="lec">GPR 指数</td><td><span lang="en">geopolitical risk index</span></td><td class="num"></td><td>基于新闻关键词的月度指数</td></tr>
+<tr><td class="lec">出口管制</td><td><span lang="en">export controls</span></td><td class="num"></td><td>对特定技术与产品的出口限制</td></tr>
+<tr><td class="lec">制裁</td><td><span lang="en">sanctions</span></td><td class="num"></td><td>对实体或国家的贸易限制</td></tr>
+<tr><td class="lec">合规边界</td><td><span lang="en">compliance boundary</span></td><td class="num"></td><td>海关数据的保密与聚合要求</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">二、引力模型 Gravity</td></tr>
+<tr><td class="lec">引力残差</td><td><span lang="en">gravity residual</span></td><td class="num"></td><td>回归残差可当贸易成本代理</td></tr>
+<tr><td class="lec">多边阻力项</td><td><span lang="en">outward multilateral resistance</span></td><td class="num">$\Pi_i$</td><td>出口国的对外阻力</td></tr>
+<tr><td class="lec">内向多边阻力</td><td><span lang="en">inward multilateral resistance</span></td><td class="num">$P_j$</td><td>进口国的对外阻力</td></tr>
+<tr><td class="lec">泊松回归</td><td><span lang="en">Poisson regression</span></td><td class="num"></td><td>计数/水平数据的回归</td></tr>
+<tr><td class="lec">聚类标准误</td><td><span lang="en">clustered standard errors</span></td><td class="num"></td><td>按国家对或国家聚类</td></tr>
+<tr><td class="lec">弹性解释</td><td><span lang="en">elasticity interpretation</span></td><td class="num"></td><td>对数-对数模型的系数即弹性</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">四、网络、GVC 与 GNN Networks</td></tr>
+<tr><td class="lec">网络密度</td><td><span lang="en">network density</span></td><td class="num"></td><td>实际边数/可能边数</td></tr>
+<tr><td class="lec">核心-边缘</td><td><span lang="en">core-periphery</span></td><td class="num"></td><td>少数大国连得多，多数小国连得少</td></tr>
+<tr><td colspan="4" style="background:#f7f3f2;font-weight:700;color:#8a0c3c">一、贸易数据的三个层级 Data Layers</td></tr>
+<tr><td class="lec">面板数据</td><td><span lang="en">panel data</span></td><td class="num"></td><td>同一批个体多年观测</td></tr>
+<tr><td class="lec">口径变化</td><td><span lang="en">definition change</span></td><td class="num"></td><td>统计口径调整导致的断点</td></tr>
+</tbody></table></div>
+
+    <h3>在线预览 Preview</h3>
+    <p class="note no-print">若浏览器未显示预览，请使用上方按钮下载 PDF。</p>
+    <iframe class="pdf-frame no-print" src="files/L14-international-trade.pdf" title="Lecture 14 courseware"></iframe>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>大数据分析［2026 国际商务］</h5>
+        <p style="margin:.3em 0;color:#c9d2dc">Big Data Analytics · 2026 秋季学期</p>
+        <p style="margin:.3em 0;color:#c9d2dc">深圳大学 Shenzhen University</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <ul>
+          <li><a href="syllabus.html">课程大纲 Syllabus</a></li>
+          <li><a href="lecture-01.html">第一章课件（Lecture 1）</a></li>
+          <li><a href="lecture-02.html">第二章课件（Lecture 2 Data Sourcing）</a></li>
+          <li><a href="lecture-03.html">第三章课件（Lecture 3 Data Preparation）</a></li>
+          <li><a href="lecture-04.html">第四章课件（Lecture 4 Data Description and Visualization）</a></li>
+          <li><a href="lecture-05.html">第五章课件（Lecture 5 Introduction to Machine Learning）</a></li>
+          <li><a href="lecture-06.html">第六章课件（Lecture 6 Logistic Regression and Linear Classifier）</a></li>
+          <li><a href="lecture-07.html">第七章课件（Lecture 7 Supervised Learning Algorithms）</a></li>
+          <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
+          <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
+          <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
+          <li><a href="lecture-14.html">第十四章课件（Lecture 14 Big Data in International Trade）</a></li>
+          <li><a href="lecture-15.html">第十五章课件（Lecture 15 Big Data in Marketing）</a></li>
+          <li><a href="projects.html">课程项目指南与评分规则</a></li>
+          <li><a href="code.html">样本数据与可视化程序</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.pdf">大纲 PDF</a></li>
+          <li><a href="files/Syllabus-Big-Data-Analytics-2026.docx">大纲 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.docx">项目指南 Word</a></li>
+          <li><a href="files/Course-Projects-2026-Guidelines.pdf">项目指南 PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系 Contact</h5>
+        <ul>
+          <li>戴谢尔 (Xieer Dai, David)</li>
+          <li><a href="mailto:Xieer.dai@szu.edu.cn">Xieer.dai@szu.edu.cn</a></li>
+          <li>办公室：1310 明德楼（答疑预约制）</li>
+          <li>上课：星期四 11–12 节 · 四方楼南 209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
+      GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
+      课件采用 LaTeX Beamer（深圳大学主题）制作 ·
+      最后更新 2026-09-23
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -49,6 +49,7 @@
       <a class="btn btn-primary" href="#lecture09">Lecture 9 · 深度学习</a>
       <a class="btn btn-primary" href="#lecture10">Lecture 10 · 文本与 NLP</a>
       <a class="btn btn-primary" href="#lecture15">Lecture 15 · 营销中的大数据</a>
+      <a class="btn btn-primary" href="#lecture14">Lecture 14 · 国际贸易中的大数据</a>
       <a class="btn btn-ghost" href="files/L02-data-sourcing.pdf">课件 PDF（L2）</a>
       <a class="btn btn-ghost" href="files/L03-data-preparation.pdf">课件 PDF（L3）</a>
       <a class="btn btn-ghost" href="files/L04-description-visualization.pdf">课件 PDF（L4）</a>
@@ -1188,6 +1189,92 @@
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 87 帧 · 功效曲线与 MDE Power curve · 程序 <a href="code/lecture15/l15_10_experiment.py">l15_10_experiment.py</a></figcaption>
       </figure>
 
+
+    <h3 id="lecture14">Lecture 14 · 国际贸易中的大数据样本（11 个程序，逐行英文注释）</h3>
+    <p class="note">运行方式：<code>pip install -r code/lecture14/requirements.txt</code> →
+       <code>cd code/lecture14 &amp;&amp; python run_all.py</code>；
+       数据写入 <code>data/lecture14/</code>，图片写入 <code>figures/lecture14/</code>。
+       本讲<b>不新增依赖</b>（networkx / statsmodels / scipy / scikit-learn 已装）；
+       GNN 用 numpy 手写一层消息传递，PPML 用 <code>GLM(Poisson)</code>。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>帧</th><th>主题</th><th>程序</th><th>数据</th></tr></thead>
+      <tbody>
+        <tr><td class="num">10</td><td>三层数据一览 Three data layers</td><td><code>l14_01_data_sources.py</code></td><td><code>l14_country_panel.csv</code> <code>l14_firms.csv</code> <code>l14_customs.csv</code></td></tr>
+        <tr><td class="num">18</td><td>工企×海关匹配与幸存者偏差 Match rate</td><td><code>l14_01_data_sources.py</code></td><td><code>l14_match_by_year.csv</code> <code>l14_match_by_size.csv</code> <code>l14_match_summary.csv</code></td></tr>
+        <tr><td class="num">25</td><td>GDP—距离的两张散点 Gravity scatter</td><td><code>l14_02_gravity_ols.py</code></td><td><code>l14_trade_flows.csv</code></td></tr>
+        <tr><td class="num">29</td><td>朴素 OLS 与固定效应 OLS vs FE</td><td><code>l14_02_gravity_ols.py</code></td><td><code>l14_gravity_compare.csv</code></td></tr>
+        <tr><td class="num">33</td><td>从 FE 反解贸易成本 Implied trade cost</td><td><code>l14_02_gravity_ols.py</code></td><td><code>l14_trade_cost.csv</code></td></tr>
+        <tr><td class="num">37</td><td>零贸易与四种估计 Zero trade</td><td><code>l14_03_ppml.py</code></td><td><code>l14_ppml_compare.csv</code> <code>l14_zero_bias.csv</code></td></tr>
+        <tr><td class="num">43</td><td>事件研究：处理前应无趋势 Event study</td><td><code>l14_04_did_event.py</code></td><td><code>l14_event_study.csv</code></td></tr>
+        <tr><td class="num">49</td><td>同一冲击，三种口径 PTI/MTI/GETI</td><td><code>l14_04_did_event.py</code></td><td><code>l14_policy_three.csv</code></td></tr>
+        <tr><td class="num">59</td><td>贸易网络 Trade network</td><td><code>l14_05_network.py</code></td><td><code>l14_network_metrics.csv</code></td></tr>
+        <tr><td class="num">62</td><td>中心性：谁在中间 Centrality</td><td><code>l14_05_network.py</code></td><td><code>l14_network_metrics.csv</code></td></tr>
+        <tr><td class="num">66</td><td>GVC 参与度与位置 GVC participation</td><td><code>l14_06_gvc.py</code></td><td><code>l14_gvc_decomposition.csv</code> <code>l14_gvc_position.csv</code></td></tr>
+        <tr><td class="num">73</td><td>AIS 港口网络与延误 AIS ports</td><td><code>l14_08_resilience.py</code></td><td><code>l14_ais.csv</code> <code>l14_resilience_indicators.csv</code></td></tr>
+        <tr><td class="num">79</td><td>报关单字段抽取 Text extraction</td><td><code>l14_09_text_extract.py</code></td><td><code>l14_declarations.csv</code> <code>l14_extracted.csv</code> <code>l14_field_accuracy.csv</code> <code>l14_kappa.csv</code></td></tr>
+        <tr><td class="num">82</td><td>地缘政治风险与贸易 GPR index</td><td><code>l14_10_gpr.py</code></td><td><code>l14_gpr.csv</code> <code>l14_gpr_regression.csv</code></td></tr>
+        <tr><td class="num">13</td><td>WIOT 怎么读 Reading a WIOT</td><td><code>l14_06_gvc.py</code></td><td>—</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Lecture 14 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_data_layers.png"><img src="figures/lecture14/fig_data_layers.png" alt="三层数据一览 Three data layers 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 10 帧 · 三层数据一览 Three data layers · 程序 <a href="code/lecture14/l14_01_data_sources.py">l14_01_data_sources.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_firm_match.png"><img src="figures/lecture14/fig_firm_match.png" alt="工企×海关匹配与幸存者偏差 Match rate 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 18 帧 · 工企×海关匹配与幸存者偏差 Match rate · 程序 <a href="code/lecture14/l14_01_data_sources.py">l14_01_data_sources.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_gravity_scatter.png"><img src="figures/lecture14/fig_gravity_scatter.png" alt="GDP—距离的两张散点 Gravity scatter 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 25 帧 · GDP—距离的两张散点 Gravity scatter · 程序 <a href="code/lecture14/l14_02_gravity_ols.py">l14_02_gravity_ols.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_fe_compare.png"><img src="figures/lecture14/fig_fe_compare.png" alt="朴素 OLS 与固定效应 OLS vs FE 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 29 帧 · 朴素 OLS 与固定效应 OLS vs FE · 程序 <a href="code/lecture14/l14_02_gravity_ols.py">l14_02_gravity_ols.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_trade_cost.png"><img src="figures/lecture14/fig_trade_cost.png" alt="从 FE 反解贸易成本 Implied trade cost 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 33 帧 · 从 FE 反解贸易成本 Implied trade cost · 程序 <a href="code/lecture14/l14_02_gravity_ols.py">l14_02_gravity_ols.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_zero_trade.png"><img src="figures/lecture14/fig_zero_trade.png" alt="零贸易与四种估计 Zero trade 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 37 帧 · 零贸易与四种估计 Zero trade · 程序 <a href="code/lecture14/l14_03_ppml.py">l14_03_ppml.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_event_study.png"><img src="figures/lecture14/fig_event_study.png" alt="事件研究：处理前应无趋势 Event study 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 43 帧 · 事件研究：处理前应无趋势 Event study · 程序 <a href="code/lecture14/l14_04_did_event.py">l14_04_did_event.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_policy_three.png"><img src="figures/lecture14/fig_policy_three.png" alt="同一冲击，三种口径 PTI/MTI/GETI 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 49 帧 · 同一冲击，三种口径 PTI/MTI/GETI · 程序 <a href="code/lecture14/l14_04_did_event.py">l14_04_did_event.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_trade_network.png"><img src="figures/lecture14/fig_trade_network.png" alt="贸易网络 Trade network 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 59 帧 · 贸易网络 Trade network · 程序 <a href="code/lecture14/l14_05_network.py">l14_05_network.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_centrality.png"><img src="figures/lecture14/fig_centrality.png" alt="中心性：谁在中间 Centrality 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 62 帧 · 中心性：谁在中间 Centrality · 程序 <a href="code/lecture14/l14_05_network.py">l14_05_network.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_gvc.png"><img src="figures/lecture14/fig_gvc.png" alt="GVC 参与度与位置 GVC participation 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 66 帧 · GVC 参与度与位置 GVC participation · 程序 <a href="code/lecture14/l14_06_gvc.py">l14_06_gvc.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_ais_ports.png"><img src="figures/lecture14/fig_ais_ports.png" alt="AIS 港口网络与延误 AIS ports 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 73 帧 · AIS 港口网络与延误 AIS ports · 程序 <a href="code/lecture14/l14_08_resilience.py">l14_08_resilience.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_text_extract.png"><img src="figures/lecture14/fig_text_extract.png" alt="报关单字段抽取 Text extraction 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 79 帧 · 报关单字段抽取 Text extraction · 程序 <a href="code/lecture14/l14_09_text_extract.py">l14_09_text_extract.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture14/fig_gpr.png"><img src="figures/lecture14/fig_gpr.png" alt="地缘政治风险与贸易 GPR index 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 82 帧 · 地缘政治风险与贸易 GPR index · 程序 <a href="code/lecture14/l14_10_gpr.py">l14_10_gpr.py</a></figcaption>
+      </figure>
+
     <h3>如何运行 How to Run</h3>
     <pre style="background:#f7f3f2;border:1px solid #e3e6ea;border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px"><code># 1) 安装依赖（Python 3.8+；本课程用 3.9 实测）
 pip install -r code/requirements.txt
@@ -1233,8 +1320,12 @@ python run_all.py
 
 # 15) Lecture 15：营销中的大数据样本（逐行英文注释）
 cd ../lecture15
+python run_all.py
+
+# 14) Lecture 14：国际贸易中的大数据样本（逐行英文注释）
+cd ../lecture14
 python run_all.py</code></pre>
-    <p class="note">八个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909、L9 为 20261010、L10 为 20261111、L15 为 20261216），
+    <p class="note">八个讲次的随机种子都固定（L2 为 20260917、L3 为 20260317、L4 为 20260417、L5 为 20260506、L6 为 20260603、L7 为 20260708、L8 为 20260909、L9 为 20261010、L10 为 20261111、L15 为 20261216、L14 为 20270113），
        因此每次运行得到<b>完全相同</b>的样本与图片。Lecture 5 的梯度提升同时使用 XGBoost 与 LightGBM；
        若未安装这两个包，程序会打印提示并跳过对应模型，其余流程不受影响。</p>
 
@@ -1257,7 +1348,9 @@ python run_all.py</code></pre>
           <a href="lecture-10.html#glossary10">Lecture 10 术语表（81 条）</a>与
           <a href="files/Glossary-L6-L10.docx">L6–L10 合并术语总表（381 条）</a>；
           Lecture 15 的营销程序同样是<b>逐行英文注释</b>，术语见
-          <a href="lecture-15.html#glossary15">Lecture 15 术语表（85 条）</a>；</li>
+          <a href="lecture-15.html#glossary15">Lecture 15 术语表（85 条）</a>；
+          Lecture 14 的贸易程序同样是<b>逐行英文注释</b>，术语见
+          <a href="lecture-14.html#glossary14">Lecture 14 术语表（84 条）</a>；</li>
       <li><b>数据来源</b>：全部样本由程序<b>合成</b>（模拟订单、客户、收入、城市面板、语料、网络等），不包含任何真实个人数据，可自由用于教学与项目 1；</li>
       <li><b>与课件对应</b>：L2 图片对应第 10、12、13、15–20、23 帧；L3 图片对应第 15、22、29、30、38、41、46、52、57、62、68、72 帧；</li>
       <li><b>拓展建议</b>：把 <code>l3_01_quality_profile.py</code> 的数据源换成你自己的表，即可直接得到项目 1 所需的数据质量报告。</li>
@@ -1288,6 +1381,7 @@ python run_all.py</code></pre>
           <li><a href="lecture-08.html">第八章课件（Lecture 8 Unsupervised Learning）</a></li>
           <li><a href="lecture-09.html">第九章课件（Lecture 9 Deep Learning in Business Analytics）</a></li>
           <li><a href="lecture-10.html">第十章课件（Lecture 10 Text Data and Natural Language Processing）</a></li>
+          <li><a href="lecture-14.html">第十四章课件（Lecture 14 Big Data in International Trade）</a></li>
           <li><a href="lecture-15.html">第十五章课件（Lecture 15 Big Data in Marketing）</a></li>
           <li><a href="projects.html">课程项目指南与评分规则</a></li>
           <li><a href="code.html">样本数据与可视化程序</a></li>

@@ -1,0 +1,8 @@
+numpy>=1.24          # arrays and the hand-written message passing
+pandas>=2.1          # tables and the glossary
+matplotlib>=3.7      # every static figure in the deck
+scipy>=1.10          # distributions and optimisation
+statsmodels>=0.14    # OLS, GLM Poisson (PPML), clustered standard errors
+scikit-learn>=1.3    # metrics and the kappa agreement
+networkx>=3.0        # the trade and port networks
+pillow>=9.0          # image back end for matplotlib
