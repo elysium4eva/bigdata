@@ -521,12 +521,62 @@
 
     <h3 id="lecture05">Lecture 5 · 机器学习入门样本（12 个程序，逐行英文注释）</h3>
     <p class="note">运行方式：<code>pip install -r code/lecture05/requirements.txt</code> → <code>cd code/lecture05 &amp;&amp; python run_all.py</code>；
-       样本写入 <code>data/lecture05/</code>，图片写入 <code>figures/lecture05/</code>，
+       样本写入 <code>data/lecture05/</code>，图片写入 <code>figures/lecture05/</code>；
+       新增的四张解释性图由 <code>tools_figs_l5.py</code> 生成（偏差-方差靶心、维度灾难、泛化差距、混淆矩阵），
+       五张课堂素材图（scikit-learn 估计器地图、欠拟合/过拟合、算法性能、品牌策略）放在同一目录，
        模型卡与运行记录写入 <code>data/lecture05/artifacts/</code>。
        随机种子固定 20260506，每次运行结果完全一致；示例使用 scikit-learn、XGBoost 与 LightGBM。</p>
     <div class="table-wrap"><table>
       <thead><tr><th>课件页</th><th>机器学习主题</th><th>程序（逐行英文注释）</th><th>样本数据 / 模型卡</th></tr></thead>
       <tbody>
+        <tr>
+          <td class="week">第 45 帧</td>
+          <td><b>欠拟合与过拟合长什么样 Underfit vs overfit</b><br><span class="note">同一条真实关系的三种拟合：太简单（偏差大）、恰当、穿过每个点（方差大）。判据是「换一批数据还稳不稳」。</span></td>
+          <td><a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="week">第 47 帧</td>
+          <td><b>商业案例：营销与品牌 Marketing case</b><br><span class="note">品牌与营销是机器学习最常见的商业落点；但框架是业务逻辑不是模型——判断仍然在人。</span></td>
+          <td><a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="week">第 70 帧</td>
+          <td><b>算法性能的定性对照 Algorithm performance</b><br><span class="note">给的是相对位置：线性模型在强解释性场景最稳，树与集成在中等样本非线性时更强，深度模型要大样本。</span></td>
+          <td><a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="week">第 25 帧</td>
+          <td><b>scikit-learn 估计器地图 Estimator map</b><br><span class="note">官方「该用哪个估计器」流程图：先问有无标签，再问分类还是回归，最后问样本量与线性程度。</span></td>
+          <td><a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="week">第 62 帧</td>
+          <td><b>偏差-方差靶心图 Bias-variance target</b><br><span class="note">四张靶：偏（瞄不准）与散（手抖）是两个独立问题；欠拟合偏而集中，过拟合准而散。</span></td>
+          <td><a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="week">第 64 帧</td>
+          <td><b>混淆矩阵与五个指标 Confusion metrics</b><br><span class="note">同一张矩阵：准确率 0.864，但召回率只有 0.591——「看起来不错」和「真的管用」是两件事。</span></td>
+          <td><a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="week">第 66 帧</td>
+          <td><b>维度灾难 Curse of dimensionality</b><br><span class="note">d=20 时约 88% 的体积贴在边界薄层；维度越高最近邻与最远邻越分不开——KNN 在高维失效的原因。</span></td>
+          <td><a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="week">第 67 帧</td>
+          <td><b>泛化差距 Generalisation gap</b><br><span class="note">训练误差降到接近 0，测试误差先降后升；两者之差就是泛化差距，随复杂度单调变大。</span></td>
+          <td><a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></td>
+          <td></td>
+        </tr>
         <tr>
           <td class="week">第 28 帧</td>
           <td><b>端到端流水线与基线 Pipeline and baseline</b><br><span class="note">3,000 笔账户、正类 26.7%：多数类基线准确率 73.3% 但 ROC-AUC 只有 0.500；逻辑回归测试集 AUC 0.840、准确率 80.8%。</span></td>
@@ -615,6 +665,38 @@
     </table></div>
 
     <h4>Lecture 5 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/img_underfit_overfit.png"><img src="figures/lecture05/img_underfit_overfit.png" alt="欠拟合与过拟合长什么样 Underfit vs overfit 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 45 帧 · 欠拟合与过拟合长什么样 Underfit vs overfit · 程序 <a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/img_branding_strategy.png"><img src="figures/lecture05/img_branding_strategy.png" alt="商业案例：营销与品牌 Marketing case 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 47 帧 · 商业案例：营销与品牌 Marketing case · 程序 <a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/img_algo_performance.png"><img src="figures/lecture05/img_algo_performance.png" alt="算法性能的定性对照 Algorithm performance 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 70 帧 · 算法性能的定性对照 Algorithm performance · 程序 <a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/img_sklearn_map1.png"><img src="figures/lecture05/img_sklearn_map1.png" alt="scikit-learn 估计器地图 Estimator map 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 25 帧 · scikit-learn 估计器地图 Estimator map · 程序 <a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_bias_variance_target.png"><img src="figures/lecture05/fig_bias_variance_target.png" alt="偏差-方差靶心图 Bias-variance target 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 62 帧 · 偏差-方差靶心图 Bias-variance target · 程序 <a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_confusion_metrics.png"><img src="figures/lecture05/fig_confusion_metrics.png" alt="混淆矩阵与五个指标 Confusion metrics 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 64 帧 · 混淆矩阵与五个指标 Confusion metrics · 程序 <a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_curse_dimensionality.png"><img src="figures/lecture05/fig_curse_dimensionality.png" alt="维度灾难 Curse of dimensionality 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 66 帧 · 维度灾难 Curse of dimensionality · 程序 <a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture05/fig_generalization_gap.png"><img src="figures/lecture05/fig_generalization_gap.png" alt="泛化差距 Generalisation gap 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 67 帧 · 泛化差距 Generalisation gap · 程序 <a href="code/lecture05/tools_figs_l5.py">tools_figs_l5.py</a></figcaption>
+      </figure>
       <figure style="margin:0 0 26px">
         <a href="figures/lecture05/fig_ml_pipeline.png"><img src="figures/lecture05/fig_ml_pipeline.png" alt="端到端流水线与基线 Pipeline and baseline 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 28 帧 · 端到端流水线与基线 Pipeline and baseline · 程序 <a href="code/lecture05/l5_01_pipeline_baseline.py">l5_01_pipeline_baseline.py</a></figcaption>
