@@ -1,0 +1,4 @@
+﻿metric,value
+OLS 系数平均标准差,1.319
+Ridge 系数平均标准差,0.956
+Lasso alpha,0.243

@@ -1,0 +1,4 @@
+﻿model,rmse,max_abs_coef,n_nonzero
+OLS,9.77,4.637,13
+Ridge,9.736,3.831,13
+Lasso,9.632,3.807,6

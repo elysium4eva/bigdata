@@ -39,7 +39,7 @@
     <p class="doc-sub">大数据分析［2026 国际商务］ · Big Data Analytics · 2026 秋季学期</p>
 
     <div class="hero-actions no-print">
-      <a class="btn btn-primary" href="files/L06-logistic-regression-2026.pdf">下载课件（2026 版 · 100 页）</a>
+      <a class="btn btn-primary" href="files/L06-logistic-regression-2026.pdf">下载课件（2026 版 · 111 页）</a>
       <a class="btn btn-ghost" href="files/L06-glossary.docx">术语表 Word</a>
       <a class="btn btn-ghost" href="files/L06-glossary.xlsx">术语表 Excel</a>
       <a class="btn btn-ghost" href="code.html#lecture06">样本、程序与术语表</a>
@@ -47,7 +47,7 @@
     </div>
 
     <div class="grid grid-4" style="margin-top:22px">
-      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>100</strong> 帧 · 16:9 详版</div></div>
+      <div class="card"><div class="k">篇幅 Format</div><div class="v"><strong>111</strong> 帧 · 16:9 详版</div></div>
       <div class="card"><div class="k">代码页 Code</div><div class="v"><strong>11</strong> 页（逐行英文注释）</div></div>
       <div class="card"><div class="k">样本页 Samples</div><div class="v"><strong>22</strong> 页样本与可视化</div></div>
       <div class="card"><div class="k">术语 Glossary</div><div class="v"><strong>79</strong> 条中英对照</div></div>
@@ -72,12 +72,13 @@
     <div class="table-wrap"><table>
       <tbody>
         <tr><td class="week">Part 0</td><td>封面与导航：学习目标、路线图、与 L5 衔接、本讲输出物（四条推导 + 手写梯度下降对账 + 术语表）、全讲导览</td></tr>
-        <tr><td class="week">Part 1</td><td>从任务到数学形式：三类任务与核心术语、图像分类与多分类、聚类、颜色直方图到特征向量、<b>形式化六步</b>（假设类 → 同分布 → i.i.d. → 期望损失 → 0-1/l₂ 损失 → 经验损失）、泛化差距、机器学习 1-2-3、表征学习、1-2-3 的边界与非 i.i.d.</td></tr>
-        <tr><td class="week">Part 2</td><td>线性回归与正规方程：前列腺数据、假设类与 MSE、矩阵形式、<b>正规方程推导</b>、投影几何样本页、增广技巧、三种实现代码页、为什么是 l₂、共线性与条件数、数值稳定样本页与代码页（lstsq / QR / 伪逆）、评估与外推</td></tr>
-        <tr><td class="week">Part 3</td><td>极大似然与损失函数：分布族与参数、似然与联合似然、对数似然、负对数似然、条件似然（判别式 vs 生成式）、<b>l₂ ＝ 高斯 ＋ MLE 推导</b>、伯努利似然样本页、交叉熵与 KL 散度、一维 NLL 曲面样本页、MLE 代码页、下溢与 log-sum-exp 样本/代码页</td></tr>
-        <tr><td class="week">Part 4</td><td>线性分类与逻辑回归：超平面与间隔、step ＋ 0-1 损失的三重困难（NP-hard）、回归当分类的缺陷、离群点样本页、三条曲线样本页、<b>sigmoid 三性质与推导</b>、sigmoid 样本页、<b>逻辑回归＝sigmoid＋MLE</b>、对数几率与几率比、无闭式解、<b>梯度推导</b>、手写梯度下降代码页、收敛与学习率样本页、PyTorch 自动求导代码页、优化器与早停、标准化、softmax 与代码页、softmax 区域样本页、类别不平衡样本页、阈值与代价、校准与 ROC/PR 样本页</td></tr>
-        <tr><td class="week">Part 5</td><td>正则化与监督学习结构：为什么正则化、惩罚回归、LASSO / Ridge / Elastic Net、正则化路径样本页、交叉验证代码页、1-SE 规则、偏差-方差分解、近似-过拟合样本页、预测问题统一框架、<b>计量经济学 vs 机器学习术语对照</b>、平方误差案例、混淆矩阵与 ROC 代码页、监督学习者三要素、线性模型家族</td></tr>
-        <tr><td class="week">Part 6</td><td>工具、术语与结语：工具栈分工、statsmodels 推断代码页（系数/标准误/p 值/区间/几率比）、<b>术语表三帧（79 条）</b>、常见错误 Top 10、与 L7/L9/L12 的衔接、三句话讲清一个线性模型</td></tr>
+        <tr><td class="week">Part 1</td><td>从任务到数学形式：三类任务与核心术语、<b>室内/室外两张图看懂特征</b>、图像分类与多分类、聚类、颜色直方图到特征向量、<b>形式化六步</b>（假设类 → 同分布 → i.i.d. → 期望损失 → 0-1/l₂ 损失 → 经验损失）、泛化差距、机器学习 1-2-3、表征学习、1-2-3 的边界与非 i.i.d.</td></tr>
+        <tr><td class="week">Part 2</td><td>线性回归与正规方程：<b>前列腺数据样本页</b>、假设类与 MSE、矩阵形式、<b>正规方程推导</b>、投影几何样本页、增广技巧、三种实现代码页、为什么是 l₂、共线性与条件数、数值稳定样本页与代码页（lstsq / QR / 伪逆）、评估与外推</td></tr>
+        <tr><td class="week">Part 3</td><td>最小二乘的性质与推断：<b>五个假设（A1–A5）</b>、<b>无偏性与方差 σ²(X'X)⁻¹</b>、<b>Gauss-Markov 定理与 BLUE</b>（含证明思路）、<b>残差正交性与方差分解 / R²</b>、<b>标准误、t 与 F 检验、置信区间</b>、假设不成立时的五种对策（异方差/自相关/共线/内生/设定错误）</td></tr>
+        <tr><td class="week">Part 4</td><td>极大似然与损失函数：分布族与参数、似然与联合似然、对数似然、负对数似然、条件似然（判别式 vs 生成式）、<b>l₂ ＝ 高斯 ＋ MLE 推导</b>、伯努利似然样本页、交叉熵与 KL 散度、一维 NLL 曲面样本页、MLE 代码页、下溢与 log-sum-exp 样本/代码页</td></tr>
+        <tr><td class="week">Part 5</td><td>线性分类与逻辑回归：超平面与间隔、step ＋ 0-1 损失的三重困难（NP-hard）、回归当分类的缺陷、离群点样本页、三条曲线样本页、<b>sigmoid 三性质与推导</b>、sigmoid 样本页、<b>逻辑回归＝sigmoid＋MLE</b>、对数几率与几率比、无闭式解、<b>梯度推导</b>、手写梯度下降代码页、收敛与学习率样本页、PyTorch 自动求导代码页、优化器与早停、标准化、softmax 与代码页、softmax 区域样本页、类别不平衡样本页、阈值与代价、校准与 ROC/PR 样本页</td></tr>
+        <tr><td class="week">Part 6</td><td>正则化与监督学习结构：为什么正则化、惩罚回归、LASSO / Ridge / Elastic Net、正则化路径样本页、<b>正则化的几何示意</b>、<b>商业案例 I：13 个投放渠道只有 4 个真有效</b>（共线 0.94、Lasso 选 6 个、RMSE 9.63）、<b>商业案例 II：四种业务场景选型</b>、交叉验证代码页、1-SE 规则、偏差-方差分解、近似-过拟合样本页、预测问题统一框架、<b>计量经济学 vs 机器学习术语对照</b>、平方误差案例、混淆矩阵与 ROC 代码页、监督学习者三要素、线性模型家族</td></tr>
+        <tr><td class="week">Part 7</td><td>工具、术语与结语：工具栈分工、statsmodels 推断代码页（系数/标准误/p 值/区间/几率比）、<b>术语表三帧（79 条）</b>、常见错误 Top 10、与 L7/L9/L12 的衔接、三句话讲清一个线性模型</td></tr>
       </tbody>
     </table></div>
 
