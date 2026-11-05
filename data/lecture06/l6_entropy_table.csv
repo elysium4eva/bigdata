@@ -1,0 +1,5 @@
+﻿distribution,H_nats,H_bits
+"one-hot (0,1)",-0.0,-0.0
+"skewed (0.9,0.1)",0.3251,0.469
+"fair coin (0.5,0.5)",0.6931,1.0
+uniform over 4,1.3863,2.0
