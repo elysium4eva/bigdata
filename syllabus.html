@@ -139,9 +139,10 @@
 <li>工具与数据：scikit-learn、statsmodels、PyTorch（自动求导实现梯度下降）。</li>
 </ul><h4 id="s-TGVjdHVyZSA3">Lecture 7　Supervised Learning Algorithms</h4>
 <ul>
-<li>目标：掌握 SVM、KNN、CART、随机森林与梯度提升的原理、实现与调参。</li>
-<li>内容：最大间隔与线性 SVM、核技巧与非线性边界；KNN 与距离度量、k 的选择与维度灾难；CART 分裂准则与剪枝；Bagging、随机森林与梯度提升（XGBoost/LightGBM/CatBoost）；类别不平衡与代价敏感学习；超参数搜索；2026 更新：GBDT 作为表格基线、嵌入+分类头与微调的对比、SHAP 解释与合规审计。</li>
-<li>工具与数据：scikit-learn、XGBoost/LightGBM、Optuna、SHAP。</li>
+<li>目标：掌握 SVM、KNN、CART、随机森林与梯度提升的原理与调参，能按数据选算法，并讲清每个参数的来历。</li>
+<li>内容：共同框架与算法地图（六族算法的优缺点与适用数据对照、按数据选算法的五条判据）；SVM（最大间隔、软间隔里 C 的位置与对偶约束 0≤α≤C、C 与间隔宽度的关系、核技巧、三维空间可视化）；KNN（k 的选择、距离度量、维度灾难）；CART（分裂准则、剪枝、新模拟的 1,200 客户流失数据集）；Bagging、随机森林与梯度提升（单树 vs 森林、XGBoost/LightGBM/CatBoost）；调参纪律、SHAP 解释与代价敏感阈值。</li>
+<li>2026 更新：监督学习的新进展——表格基础模型（小样本免调参）、神经表格模型（何时值得）、预训练+分类头（标签少时的标准做法）、AutoML 与贝叶斯优化、共形预测与因果 ML；结论是 GBDT 仍是表格基线。</li>
+<li>工具与数据：scikit-learn、XGBoost/LightGBM、Optuna、SHAP；数据含前列腺、贫困瞄准与新模拟流失集；课件含 8 张课堂素材图与 2 段动画（KNN 决策面、k-means 对照）。</li>
 </ul><h4 id="s-TGVjdHVyZSA4">Lecture 8　Unsupervised Learning</h4>
 <ul>
 <li>目标：掌握降维、因子分析、聚类与异常检测的基本方法与适用条件。</li>
@@ -320,7 +321,7 @@
       课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
       GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
       课件采用 LaTeX Beamer（深圳大学主题）制作 ·
-      最后更新 2026-09-23
+      最后更新 2026-11-12
     </div>
   </div>
 </footer>
