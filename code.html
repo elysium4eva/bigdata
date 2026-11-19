@@ -984,6 +984,10 @@
     <div class="table-wrap"><table>
       <thead><tr><th>帧</th><th>主题</th><th>程序</th><th>数据</th></tr></thead>
       <tbody>
+        <tr><td class="num">123</td><td>二维平面上的扩散模型：字母生成</td><td><code>l8_15_diffusion_letters.py</code></td><td><code>l8_diffusion_points.csv</code> <code>l8_diffusion_trace.csv</code></td></tr>
+        <tr><td class="num">31</td><td>三维空间里怎么选主成分</td><td><code>l8_16_pca_3d.py</code></td><td><code>l8_pca_3d.csv</code> <code>l8_pca_3d_vectors.csv</code></td></tr>
+        <tr><td class="num">56</td><td>真实数据：Fama–French 对照 PCA</td><td><code>l8_18_ff_pca_compare.py</code></td><td><code>l8_ff_pca_variance.csv</code> <code>l8_ff_pca_loadings.csv</code> <code>l8_ff_regression.csv</code> <code>l8_ff_pc_on_factors.csv</code></td></tr>
+        <tr><td class="num">82</td><td>真实案例：178 瓶葡萄酒的树与簇画像</td><td><code>l8_17_hier_real.py</code></td><td><code>l8_hier_real_labels.csv</code> <code>l8_hier_real_linkage.csv</code> <code>l8_hier_real_profile.csv</code></td></tr>
         <tr><td class="num">27</td><td>二维 PCA：手机的两个主成分</td><td><code>l8_01_pca_basics.py</code></td><td><code>l8_smartphone.csv</code> <code>l8_pca_variance.csv</code></td></tr>
         <tr><td class="num">30</td><td>标准化前后：主成分方向完全不同</td><td><code>l8_01_pca_basics.py</code></td><td><code>l8_pca_variance.csv</code></td></tr>
         <tr><td class="num">33</td><td>碎石图与累计方差</td><td><code>l8_01_pca_basics.py</code></td><td><code>l8_pca_variance.csv</code></td></tr>
@@ -1004,6 +1008,22 @@
     </table></div>
 
     <h4>Lecture 8 示例图片 Figures</h4>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_diffusion_letters.png"><img src="figures/lecture08/fig_diffusion_letters.png" alt="二维平面上的扩散模型：字母生成 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 123 帧 · 二维平面上的扩散模型：字母生成 · 程序 <a href="code/lecture08/l8_15_diffusion_letters.py">l8_15_diffusion_letters.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_pca_3d.png"><img src="figures/lecture08/fig_pca_3d.png" alt="三维空间里怎么选主成分 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 31 帧 · 三维空间里怎么选主成分 · 程序 <a href="code/lecture08/l8_16_pca_3d.py">l8_16_pca_3d.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_ff_vs_pca.png"><img src="figures/lecture08/fig_ff_vs_pca.png" alt="真实数据：Fama–French 对照 PCA 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 56 帧 · 真实数据：Fama–French 对照 PCA · 程序 <a href="code/lecture08/l8_18_ff_pca_compare.py">l8_18_ff_pca_compare.py</a></figcaption>
+      </figure>
+      <figure style="margin:0 0 26px">
+        <a href="figures/lecture08/fig_hier_real.png"><img src="figures/lecture08/fig_hier_real.png" alt="真实案例：178 瓶葡萄酒的树与簇画像 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
+        <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 82 帧 · 真实案例：178 瓶葡萄酒的树与簇画像 · 程序 <a href="code/lecture08/l8_17_hier_real.py">l8_17_hier_real.py</a></figcaption>
+      </figure>
       <figure style="margin:0 0 26px">
         <a href="figures/lecture08/fig_pca_2d.png"><img src="figures/lecture08/fig_pca_2d.png" alt="二维 PCA：手机的两个主成分 可视化" style="width:100%;border:1px solid #e3e6ea;border-radius:8px;background:#fff"></a>
         <figcaption style="margin-top:8px;font-size:14px;color:#66717d">第 27 帧 · 二维 PCA：手机的两个主成分 · 程序 <a href="code/lecture08/l8_01_pca_basics.py">l8_01_pca_basics.py</a></figcaption>
@@ -1817,7 +1837,7 @@ python run_all.py</code></pre>
       课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
       GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
       课件采用 LaTeX Beamer（深圳大学主题）制作 ·
-      最后更新 2026-11-12
+      最后更新 2026-11-19
     </div>
   </div>
 </footer>

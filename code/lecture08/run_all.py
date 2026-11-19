@@ -25,6 +25,10 @@ SCRIPTS = [                                                        # execution o
     "l8_12_faiss_ann.py",                                          # approximate nearest neighbours
     "l8_13_topics.py",                                             # NMF and LDA topic models
     "l8_14_glossary.py",                                           # the bilingual glossary
+    "l8_15_diffusion_letters.py",                                   # a tiny diffusion model on 2-D letters
+    "l8_16_pca_3d.py",                                             # the 3-D principal-component picture
+    "l8_17_hier_real.py",                                          # hierarchical clustering on real wine data
+    "l8_18_ff_pca_compare.py",                                     # Fama-French versus PCA on real returns
 ]                                                                  # end of the run list
 for name in SCRIPTS:                                               # run each example as a main program
     started = time.time()                                          # start the timer

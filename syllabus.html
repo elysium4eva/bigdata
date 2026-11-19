@@ -145,9 +145,10 @@
 <li>工具与数据：scikit-learn、XGBoost/LightGBM、Optuna、SHAP；数据含前列腺、贫困瞄准与新模拟流失集；课件含 8 张课堂素材图与 2 段动画（KNN 决策面、k-means 对照）。</li>
 </ul><h4 id="s-TGVjdHVyZSA4">Lecture 8　Unsupervised Learning</h4>
 <ul>
-<li>目标：掌握降维、因子分析、聚类与异常检测的基本方法与适用条件。</li>
-<li>内容：PCA 与方差解释、图像压缩示例；因子分析与提取方法、Fama–French 三因子模型；聚类（k-means、层次、DBSCAN、GMM）与内部/外部评价指标；异常检测与关联规则；2026 更新：UMAP/t-SNE 嵌入可视化、向量检索与近似最近邻、BERTopic 主题建模、自监督与对比学习。</li>
-<li>工具与数据：scikit-learn、umap-learn、BERTopic、FAISS。</li>
+<li>目标：掌握降维、因子分析、聚类、异常检测与嵌入的基本方法与适用条件，能说清每种方法「保住什么、代价是什么」，并为每个算法讲出商业与科技场景。</li>
+<li>内容：先讲大数据里降维与升维的思想、主流降维方法地图与指数构建（等权／PCA 权重／熵权法／TOPSIS）；PCA 的四步推导（协方差矩阵 → 特征方程与 p=2 算例 → 投影方差＝特征值 → 椭圆主轴的几何），配三维主成分选取与图像压缩；因子分析与 Fama–French，并用真实股票数据把 FF3 与 PCA 对照；聚类四族（k-means／层次／DBSCAN／GMM）各配应用与取舍，层次聚类用 178 瓶葡萄酒的真实案例；评估指标、异常检测与关联规则；t-SNE/UMAP、向量检索、主题建模与词嵌入（含 AIGC）。</li>
+<li>2026 更新：无监督从「降维给人看」走向「生成」——自编码器、VAE 到扩散模型；含扩散模型的直觉、训练与推理流程图，以及一个在二维平面生成字母的小型 DDPM（含动画）。</li>
+<li>工具与数据：scikit-learn、SciPy、statsmodels、umap-learn、FAISS；数据含手机参数、真实 UCI 葡萄酒与 Ken French 真实股票收益；课件含 4 张课堂素材图与 2 段动画。</li>
 </ul><h4 id="s-TGVjdHVyZSA5">Lecture 9　Deep Learning in Business Analytics</h4>
 <ul>
 <li>目标：理解神经网络与反向传播；掌握 CNN、序列模型与 Transformer；能完成一次训练与微调。</li>
@@ -321,7 +322,7 @@
       课程主页 <a href="https://elysium4eva.github.io/bigdata">elysium4eva.github.io/bigdata</a> ·
       GitHub <a href="https://github.com/elysium4eva">@elysium4eva</a> ·
       课件采用 LaTeX Beamer（深圳大学主题）制作 ·
-      最后更新 2026-11-12
+      最后更新 2026-11-19
     </div>
   </div>
 </footer>
